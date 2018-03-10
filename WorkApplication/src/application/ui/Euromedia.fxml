@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EuromediaController">
+	<children>
+		<Label graphicTextGap="15.0" text="Euromedia" textFill="#f0f0f0" AnchorPane.leftAnchor="25.0">
+			<font>
+				<Font size="24.0" />
+			</font>
+			<graphic>
+				<FontAwesomeIconView fill="#f0f0f0" glyphName="EURO" size="24" />
+			</graphic>
+		</Label>
+		<JFXListView fx:id="listView" layoutX="29.0" layoutY="64.0" prefHeight="384.0" prefWidth="203.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="64.0" />
+		<JFXButton fx:id="importButton" buttonType="RAISED" layoutX="265.0" layoutY="184.0" onAction="#handleImportButtonAction" prefHeight="104.0" prefWidth="184.0" text="Importuj dodací listy" textFill="#f0f0f0">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</JFXButton>
+		<HBox alignment="CENTER" layoutX="265.0" layoutY="64.0">
+			<children>
+				<Label fx:id="messageLabel" prefHeight="80.0" prefWidth="112.0" text="Počet dodacích listů:" textFill="#f0f0f0" />
+				<ComboBox fx:id="comboBox" prefHeight="25.0" prefWidth="57.0" />
+			</children>
+		</HBox>
+      <ProgressBar fx:id="progress" layoutX="257.0" layoutY="332.0" prefHeight="69.0" prefWidth="200.0" progress="0.0" />
+	</children>
+</AnchorPane>

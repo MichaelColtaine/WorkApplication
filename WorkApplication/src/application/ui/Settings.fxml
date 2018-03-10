@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="500.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.SettingsController">
+	<children>
+		<Label graphicTextGap="15.0" layoutX="25.0" prefHeight="35.0" prefWidth="143.0" text="Nastavení" textFill="#f0f0f0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="0.0">
+			<font>
+				<Font size="24.0" />
+			</font>
+			<graphic>
+				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" />
+			</graphic>
+		</Label>
+		<JFXTabPane fx:id="tagPane" layoutX="18.0" layoutY="54.0" prefHeight="421.0" prefWidth="460.0">
+			<tabs>
+				<Tab text="Euromedia">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+							<children>
+								<VBox fx:id="root" layoutY="49.0" prefHeight="289.0" prefWidth="460.0" spacing="30.0" styleClass="jfx-textfield" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+									<children>
+										<HBox>
+											<VBox.margin>
+												<Insets />
+											</VBox.margin>
+											<children>
+												<JFXTextField fx:id="pathInput" labelFloat="true" prefHeight="30.0" prefWidth="344.0" promptText="Vlož cestu k cílové složce" styleClass="jfx-textfield">
+													<font>
+														<Font size="14.0" />
+													</font>
+													<padding>
+														<Insets left="30.0" right="30.0" />
+													</padding>
+												</JFXTextField>
+												<JFXButton fx:id="findPathButton" buttonType="RAISED" onAction="#handleFindPathButton" prefHeight="50.0" prefWidth="110.0" text="Procházet" textFill="#f0f0f0">
+													<font>
+														<Font size="18.0" />
+													</font>
+												</JFXButton>
+											</children>
+										</HBox>
+										<JFXTextField fx:id="emailInput" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož email k loginu" styleClass="jfx-textfield">
+											<font>
+												<Font size="14.0" />
+											</font>
+											<padding>
+												<Insets left="30.0" right="30.0" />
+											</padding>
+										</JFXTextField>
+										<JFXPasswordField fx:id="passwordInput" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož Heslo" styleClass="jfx-textfield">
+											<font>
+												<Font size="14.0" />
+											</font>
+											<padding>
+												<Insets left="30.0" right="30.0" />
+											</padding>
+										</JFXPasswordField>
+										<HBox alignment="CENTER" spacing="100.0">
+											<children>
+												<JFXButton fx:id="saveButton" buttonType="RAISED" onAction="#handleSaveButton" prefHeight="50.0" prefWidth="110.0" text="Uložit" textFill="#f0f0f0">
+													<font>
+														<Font size="18.0" />
+													</font>
+													<HBox.margin>
+														<Insets top="50.0" />
+													</HBox.margin>
+												</JFXButton>
+											</children>
+										</HBox>
+									</children>
+								</VBox>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="Beta">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="460.0" />
+					</content>
+				</Tab>
+			</tabs>
+		</JFXTabPane>
+	</children>
+</AnchorPane>
