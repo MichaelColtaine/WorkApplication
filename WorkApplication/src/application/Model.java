@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Pref.Settings;
 import application.calculator.RabatCalculator;
+import application.euromedia.Euromedia;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
