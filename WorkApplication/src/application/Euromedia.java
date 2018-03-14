@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,6 +24,7 @@ public class Euromedia {
 		this.websiteUrl = "https://vo.knizniweb.cz/";
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 		this.rowCount = 0;
+
 	}
 
 	public void start() {
@@ -32,12 +34,8 @@ public class Euromedia {
 		login();
 		openMyDocuments();
 		downloadFiles();
-		try {
-			Thread.sleep(1000);
-			endDriver();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		pause();
+		endDriver();
 	}
 
 	private void openBrowser() {
@@ -46,6 +44,7 @@ public class Euromedia {
 		changeOptions();
 		driver = new ChromeDriver(options);
 		driver.manage().window().setPosition(new Point(-2000, 0));
+//		driver.manage().window().setSize(new Dimension(100, 100));
 	}
 
 	private void changeOptions() {
@@ -83,7 +82,8 @@ public class Euromedia {
 	private void login() {
 		driver.findElement(By.id("loginId")).sendKeys(loginId);
 		driver.findElement(By.id("passwd")).sendKeys(loginPassword);
-		driver.findElement(By.id("submitLoginBtn")).click();
+		click(driver, By.id("submitLoginBtn"));
+		
 	}
 
 	private void openMyDocuments() {
@@ -97,19 +97,23 @@ public class Euromedia {
 		}
 	}
 
-	private void endDriver() {
-		driver.close();
-		driver.quit();
-	}
-
 	private void click(WebDriver driver, By location) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(location));
 		driver.findElement(location).click();
 	}
 
-	public void setWebsite(String websiteUrl) {
-		this.websiteUrl = websiteUrl;
+	private void pause() {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	private void endDriver() {
+		driver.close();
+		driver.quit();
 	}
 
 	public void setLoginInfo(String loginId, String loginPassword) {

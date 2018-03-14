@@ -21,6 +21,9 @@ public class SettingsController implements Initializable {
 	private VBox root;
 
 	@FXML
+	private VBox rootKosmas;
+
+	@FXML
 	private JFXTextField pathInput;
 
 	@FXML
@@ -35,23 +38,35 @@ public class SettingsController implements Initializable {
 	@FXML
 	private JFXButton findPathButton;
 
+	@FXML
+	private JFXTextField pathInputKosmas;
+
+	@FXML
+	private JFXButton findPathButtonKosmas;
+
+	@FXML
+	private JFXTextField emailInputKosmas;
+
+	@FXML
+	private JFXPasswordField passwordImputKosmas;
+
+	@FXML
+	private JFXButton saveButtonKosmas;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		pathInput.setText(Model.getInstance().getSettigns().getPath());
-		emailInput.setText(Model.getInstance().getSettigns().getId());
-		passwordInput.setText(Model.getInstance().getSettigns().getPassword());
+		emailInput.setText(Model.getInstance().getSettigns().getEuroId());
+		passwordInput.setText(Model.getInstance().getSettigns().getEuroPassword());
 
 	}
-	
 
 	@FXML
 	void handleSaveButton(ActionEvent event) {
 		Model.getInstance().saveEuroSettings(pathInput.getText(), emailInput.getText(), passwordInput.getText());
 		JFXSnackbar snackbar = new JFXSnackbar(root);
 		snackbar.setPrefWidth(100);
-
 		snackbar.show("Uloženo", 2000);
-
 	}
 
 	@FXML
@@ -64,4 +79,13 @@ public class SettingsController implements Initializable {
 		}
 	}
 
+	@FXML
+	void handleFindPathButtonKosmas(ActionEvent event) {
+
+	}
+
+	@FXML
+	void handleSaveButtonKosmas(ActionEvent event) {
+
+	}
 }

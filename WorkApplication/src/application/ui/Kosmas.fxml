@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.KosmasController">
+   <children>
+      <JFXButton fx:id="importButton" layoutX="178.0" layoutY="125.0" onAction="#handleImportButton" prefHeight="92.0" prefWidth="144.0" text="Importuj dodací listy" textFill="#f0f0f0" />
+      <Label graphicTextGap="15.0" layoutY="6.0" text="Kosmas" textFill="#f0f0f0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/icons8_K_52px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <ProgressIndicator fx:id="progress" layoutX="182.0" layoutY="248.0" prefHeight="133.0" prefWidth="137.0" visible="false" />
+   </children>
+</AnchorPane>

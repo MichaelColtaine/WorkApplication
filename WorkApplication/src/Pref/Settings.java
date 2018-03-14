@@ -18,11 +18,11 @@ public class Settings {
 		prefs.put("path", path);
 	}
 
-	public String getPassword() {
+	public String getEuroPassword() {
 		return prefs.get("password", "root");
 	}
 
-	public String getId() {
+	public String getEuroId() {
 		return prefs.get("id", "root");
 	}
 

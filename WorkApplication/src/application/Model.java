@@ -15,12 +15,14 @@ public class Model {
 	private Euromedia euromedia;
 	private Settings settings;
 	private ArrayList<String> rabatStrings;
+	private Kosmas kosmas;
 
 	public Model() {
 
 		this.euromedia = new Euromedia();
 		this.settings = new Settings();
 		this.rabatStrings = new ArrayList<>();
+		this.kosmas = new Kosmas();
 	}
 
 	public static Model getInstance() {
@@ -41,7 +43,7 @@ public class Model {
 	}
 
 	private void setLoginInfoEuro() {
-		euromedia.setLoginInfo(settings.getId(), settings.getPassword());
+		euromedia.setLoginInfo(settings.getEuroId(), settings.getEuroPassword());
 	}
 
 	public void deleteAllTempFiles() {
@@ -72,6 +74,10 @@ public class Model {
 
 	public void setAmountOfItemsToDownload(String selectedItem) {
 		euromedia.downloadAmount(Integer.parseInt(selectedItem));
+	}
+
+	public void startImportKosmas() {
+		kosmas.start();
 	}
 
 }

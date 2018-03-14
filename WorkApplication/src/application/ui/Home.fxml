@@ -38,6 +38,18 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 				</JFXButton>
+            <JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" />
+               </padding>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8_K_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
 				<JFXButton fx:id="settingsButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="20.0" onAction="#handleSettingsButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Nastavení" textFill="#f0f0f0">
 					<graphic>
 						<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24.0" />

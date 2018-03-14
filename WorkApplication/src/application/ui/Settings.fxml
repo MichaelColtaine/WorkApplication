@@ -85,9 +85,63 @@
 						</AnchorPane>
 					</content>
 				</Tab>
-				<Tab text="Beta">
+				<Tab text="Kosmas">
 					<content>
-						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="460.0" />
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="460.0">
+                     <children>
+                        <VBox fx:id="rootKosmas" layoutY="56.0" prefHeight="289.0" prefWidth="460.0" spacing="30.0" styleClass="jfx-textfield" AnchorPane.bottomAnchor="48.0" AnchorPane.topAnchor="49.0">
+                           <children>
+                              <HBox>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                    <JFXTextField fx:id="pathInputKosmas" labelFloat="true" prefHeight="30.0" prefWidth="344.0" promptText="Vlož cestu k cílové složce" styleClass="jfx-textfield">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets left="30.0" right="30.0" />
+                                       </padding>
+                                    </JFXTextField>
+                                    <JFXButton fx:id="findPathButtonKosmas" buttonType="RAISED" onAction="#handleFindPathButtonKosmas" prefHeight="50.0" prefWidth="110.0" text="Procházet" textFill="#f0f0f0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <JFXTextField fx:id="emailInputKosmas" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož email k loginu" styleClass="jfx-textfield">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="30.0" right="30.0" />
+                                 </padding>
+                              </JFXTextField>
+                              <JFXPasswordField fx:id="passwordImputKosmas" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož Heslo" styleClass="jfx-textfield">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="30.0" right="30.0" />
+                                 </padding>
+                              </JFXPasswordField>
+                              <HBox alignment="CENTER" spacing="100.0">
+                                 <children>
+                                    <JFXButton fx:id="saveButtonKosmas" buttonType="RAISED" onAction="#handleSaveButtonKosmas" prefHeight="50.0" prefWidth="110.0" text="Uložit" textFill="#f0f0f0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="50.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
 					</content>
 				</Tab>
 			</tabs>

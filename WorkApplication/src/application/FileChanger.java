@@ -51,12 +51,9 @@ public class FileChanger {
 	public static void changeAllFiles(String toDirectory) {
 		File directory = new File(FROM_DIRECTORY);
 		StringBuilder sb = new StringBuilder();
-
 		for (File source : directory.listFiles()) {
 			sb.delete(0, sb.length());
-
 			labels.add(new Label(source.getName().substring(11, 14)));
-
 			sb.append(toDirectory).append(File.separator).append(source.getName().substring(11, 14)).append(".txt");
 			File destination = new File(sb.toString());
 			try {
