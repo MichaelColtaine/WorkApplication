@@ -4,9 +4,9 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-import com.google.common.base.Objects;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 
@@ -52,8 +52,8 @@ public class EuromediaController implements Initializable {
 
 	@FXML
 	void handleImportButtonAction(ActionEvent event) {
-		if (comboBox.getSelectionModel().getSelectedItem() != null) {
-			Model.getInstance().setAmountOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
+		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
+			Model.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -62,7 +62,7 @@ public class EuromediaController implements Initializable {
 			});
 			t1.start();
 		}
-		
+
 	}
 
 	private void startImport() {

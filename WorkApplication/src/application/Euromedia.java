@@ -44,7 +44,7 @@ public class Euromedia {
 		changeOptions();
 		driver = new ChromeDriver(options);
 		driver.manage().window().setPosition(new Point(-2000, 0));
-//		driver.manage().window().setSize(new Dimension(100, 100));
+		// driver.manage().window().setSize(new Dimension(100, 100));
 	}
 
 	private void changeOptions() {
@@ -83,7 +83,7 @@ public class Euromedia {
 		driver.findElement(By.id("loginId")).sendKeys(loginId);
 		driver.findElement(By.id("passwd")).sendKeys(loginPassword);
 		click(driver, By.id("submitLoginBtn"));
-		
+
 	}
 
 	private void openMyDocuments() {

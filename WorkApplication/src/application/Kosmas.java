@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -23,7 +24,7 @@ public class Kosmas {
 	public Kosmas() {
 		this.websiteUrl = "https://firma.kosmas.cz/";
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
-		this.rowCount = 0;
+		this.rowCount = 1;
 
 	}
 
@@ -90,7 +91,8 @@ public class Kosmas {
 	}
 
 	private void downloadFiles() {
-		for (int i = 1; i < 10; i++) {
+
+		for (int i = 1; i < rowCount; i++) {
 			click(driver, By.xpath("//*[@id=\"tbl_seznam\"]/tbody/tr[" + i + "]/td[1]/a"));
 			WebElement fullText = driver
 					.findElement(By.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table"));

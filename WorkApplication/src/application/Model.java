@@ -72,8 +72,12 @@ public class Model {
 		return dc.showDialog(owner);
 	}
 
-	public void setAmountOfItemsToDownload(String selectedItem) {
+	public void setQuantityOfItemsToDownload(String selectedItem) {
 		euromedia.downloadAmount(Integer.parseInt(selectedItem));
+	}
+	
+	public void setQuantityOfItemsToDownloadKosmas(String selectedItem) {
+		kosmas.downloadAmount(Integer.parseInt(selectedItem));
 	}
 
 	public void startImportKosmas() {
