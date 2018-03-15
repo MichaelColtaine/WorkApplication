@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="318.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.euromedia.EuromediaSettingsController">
+   <children>
+      <VBox fx:id="root" layoutY="49.0" prefHeight="289.0" prefWidth="460.0" spacing="30.0" styleClass="jfx-textfield" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="49.0">
+         <children>
+            <HBox>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <JFXTextField fx:id="pathInput" labelFloat="true" prefHeight="30.0" prefWidth="344.0" promptText="Vlož cestu k cílové složce" styleClass="jfx-textfield">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXButton fx:id="findPathButton" buttonType="RAISED" onAction="#handleFindPathButton" prefHeight="50.0" prefWidth="110.0" text="Procházet" textFill="#f0f0f0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <JFXTextField fx:id="emailInput" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož email k loginu" styleClass="jfx-textfield">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </JFXTextField>
+            <JFXPasswordField fx:id="passwordInput" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož Heslo" styleClass="jfx-textfield">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </JFXPasswordField>
+            <HBox alignment="CENTER" spacing="50.0">
+               <children>
+                  <JFXButton fx:id="saveButton" buttonType="RAISED" onAction="#handleSaveButton" prefHeight="50.0" prefWidth="110.0" text="Uložit" textFill="#f0f0f0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#handleCancelButton" prefHeight="50.0" prefWidth="110.0" text="Zrušit" textFill="#f0f0f0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

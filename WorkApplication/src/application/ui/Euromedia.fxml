@@ -3,14 +3,18 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EuromediaController">
+<AnchorPane fx:id="root" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.euromedia.EuromediaController">
 	<children>
 		<Label graphicTextGap="15.0" text="Euromedia" textFill="#f0f0f0" AnchorPane.leftAnchor="25.0">
 			<font>
@@ -21,17 +25,40 @@
 			</graphic>
 		</Label>
 		<JFXListView fx:id="listView" layoutX="29.0" layoutY="64.0" prefHeight="384.0" prefWidth="203.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="64.0" />
-		<JFXButton fx:id="importButton" buttonType="RAISED" layoutX="265.0" layoutY="184.0" onAction="#handleImportButtonAction" prefHeight="104.0" prefWidth="184.0" text="Importuj dodací listy" textFill="#f0f0f0">
-			<font>
-				<Font size="14.0" />
-			</font>
-		</JFXButton>
-		<HBox alignment="CENTER" layoutX="265.0" layoutY="64.0">
-			<children>
-				<Label fx:id="messageLabel" prefHeight="80.0" prefWidth="112.0" text="Počet dodacích listů:" textFill="#f0f0f0" />
-				<ComboBox fx:id="comboBox" prefHeight="25.0" prefWidth="57.0" />
-			</children>
-		</HBox>
-      <ProgressIndicator fx:id="progress" layoutX="309.0" layoutY="317.0" prefHeight="119.0" prefWidth="96.0" visible="false" />
+      <VBox layoutX="250.0" layoutY="64.0" spacing="10.0">
+         <children>
+      		<HBox alignment="CENTER">
+      			<children>
+      				<Label fx:id="messageLabel" prefHeight="80.0" prefWidth="112.0" text="Počet dodacích listů:" textFill="#f0f0f0" />
+      				<ComboBox fx:id="comboBox" prefHeight="25.0" prefWidth="57.0" />
+      			</children>
+      		</HBox>
+      		<JFXButton fx:id="importButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" onAction="#handleImportButtonAction" prefHeight="100.0" prefWidth="200.0" text="Importuj dodací listy" textFill="#f0f0f0">
+      			<font>
+      				<Font size="14.0" />
+      			</font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8_Download_48px_2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+      		</JFXButton>
+            <JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" onAction="#handleSettingsButtonAction" prefHeight="104.0" prefWidth="200.0" text="Nastavení" textFill="#f0f0f0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
+               </graphic>
+            </JFXButton>
+      		<ProgressIndicator fx:id="progress" prefHeight="50.0" prefWidth="100.0" visible="false">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ProgressIndicator>
+         </children>
+      </VBox>
 	</children>
 </AnchorPane>

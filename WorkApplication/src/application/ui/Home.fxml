@@ -50,17 +50,6 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-				<JFXButton fx:id="settingsButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="20.0" onAction="#handleSettingsButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Nastavení" textFill="#f0f0f0">
-					<graphic>
-						<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24.0" />
-					</graphic>
-					<VBox.margin>
-						<Insets />
-					</VBox.margin>
-					<padding>
-						<Insets bottom="25.0" left="25.0" right="25.0" />
-					</padding>
-				</JFXButton>
 			</children>
 			<BorderPane.margin>
 				<Insets />

@@ -3,9 +3,9 @@ package application;
 import java.io.File;
 import java.util.ArrayList;
 
-import Pref.Settings;
 import application.calculator.RabatCalculator;
 import application.euromedia.Euromedia;
+import application.euromedia.EuroSettings;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
@@ -14,14 +14,14 @@ public class Model {
 	private static Model model;
 	private RabatCalculator rabat;
 	private Euromedia euromedia;
-	private Settings settings;
+	private EuroSettings settings;
 	private ArrayList<String> rabatStrings;
 	private Kosmas kosmas;
 
 	public Model() {
 
 		this.euromedia = new Euromedia();
-		this.settings = new Settings();
+		this.settings = new EuroSettings();
 		this.rabatStrings = new ArrayList<>();
 		this.kosmas = new Kosmas();
 	}
@@ -60,7 +60,7 @@ public class Model {
 		setLoginInfoEuro();
 	}
 
-	public Settings getSettigns() {
+	public EuroSettings getSettigns() {
 		return this.settings;
 	}
 
