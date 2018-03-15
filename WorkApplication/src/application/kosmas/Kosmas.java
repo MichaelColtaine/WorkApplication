@@ -1,4 +1,4 @@
-package application;
+package application.kosmas;
 
 import java.io.File;
 import java.util.HashMap;

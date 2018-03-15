@@ -41,7 +41,7 @@ public class EuroModel {
 	}
 
 	private void setLoginInfoEuro() {
-		euromedia.setLoginInfo(settings.getEuroId(), settings.getEuroPassword());
+		euromedia.setLoginInfo(settings.getId(), settings.getPassword());
 	}
 
 	public void deleteAllTempFiles() {
@@ -51,7 +51,7 @@ public class EuroModel {
 		}
 	}
 
-	public void saveEuroSettings(String path, String email, String password) {
+	public void saveSettings(String path, String email, String password) {
 		settings.savePath(path);
 		settings.saveLoginInfo(email, password);
 		setLoginInfoEuro();
@@ -73,6 +73,5 @@ public class EuroModel {
 	public void setQuantityOfItemsToDownload(String selectedItem) {
 		euromedia.downloadAmount(Integer.parseInt(selectedItem));
 	}
-	
-	
+
 }

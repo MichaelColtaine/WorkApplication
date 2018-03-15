@@ -3,31 +3,31 @@ package application.euromedia;
 import java.util.prefs.Preferences;
 
 public class EuroSettings {
-	Preferences prefs;
+	Preferences euroPrefs;
 
 	public EuroSettings() {
-		prefs = Preferences.userNodeForPackage(EuroSettings.class);
+		euroPrefs = Preferences.userNodeForPackage(EuroSettings.class);
 	}
 
 	public void saveLoginInfo(String id, String password) {
-		prefs.put("id", id);
-		prefs.put("password", password);
+		euroPrefs.put("id", id);
+		euroPrefs.put("password", password);
 	}
 
 	public void savePath(String path) {
-		prefs.put("path", path);
+		euroPrefs.put("path", path);
 	}
 
-	public String getEuroPassword() {
-		return prefs.get("password", "root");
+	public String getPassword() {
+		return euroPrefs.get("password", "root");
 	}
 
-	public String getEuroId() {
-		return prefs.get("id", "root");
+	public String getId() {
+		return euroPrefs.get("id", "root");
 	}
 
 	public String getPath() {
-		return prefs.get("path", "root");
+		return euroPrefs.get("path", "root");
 	}
 
 }

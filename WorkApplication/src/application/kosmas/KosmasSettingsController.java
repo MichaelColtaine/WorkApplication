@@ -1,10 +1,9 @@
-package application.euromedia;
+package application.kosmas;
 
 import java.io.File;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
@@ -12,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EuromediaSettingsController {
+public class KosmasSettingsController {
 
 	@FXML
 	private VBox root;
@@ -37,9 +36,9 @@ public class EuromediaSettingsController {
 
 	@FXML
 	void initialize() {
-		pathInput.setText(EuroModel.getInstance().getSettigns().getPath());
-		emailInput.setText(EuroModel.getInstance().getSettigns().getId());
-		passwordInput.setText(EuroModel.getInstance().getSettigns().getPassword());
+		pathInput.setText(KosmasModel.getInstance().getSettigns().getPath());
+		emailInput.setText(KosmasModel.getInstance().getSettigns().getId());
+		passwordInput.setText(KosmasModel.getInstance().getSettigns().getPassword());
 	}
 
 	@FXML
@@ -50,7 +49,7 @@ public class EuromediaSettingsController {
 	@FXML
 	void handleFindPathButton(ActionEvent event) {
 		try {
-			File path = EuroModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
+			File path = KosmasModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
 			pathInput.setText(path.getAbsolutePath());
 		} catch (Exception NullPointerException) {
 			System.out.println("NPE Žádná složka nebyla vybrána.");
@@ -59,7 +58,7 @@ public class EuromediaSettingsController {
 
 	@FXML
 	void handleSaveButton(ActionEvent event) {
-		EuroModel.getInstance().saveSettings(pathInput.getText(), emailInput.getText(), passwordInput.getText());
+		KosmasModel.getInstance().saveSettings(pathInput.getText(), emailInput.getText(), passwordInput.getText());
 		closeWindow();
 	}
 

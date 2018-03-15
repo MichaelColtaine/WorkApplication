@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import application.calculator.RabatCalculator;
 import application.euromedia.Euromedia;
+import application.kosmas.Kosmas;
 import application.euromedia.EuroSettings;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -44,7 +45,7 @@ public class Model {
 	}
 
 	private void setLoginInfoEuro() {
-		euromedia.setLoginInfo(settings.getEuroId(), settings.getEuroPassword());
+		euromedia.setLoginInfo(settings.getId(), settings.getPassword());
 	}
 
 	public void deleteAllTempFiles() {

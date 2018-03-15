@@ -84,7 +84,6 @@ public class EuromediaController implements Initializable {
 			stage.showAndWait();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
