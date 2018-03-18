@@ -3,10 +3,10 @@ package application.kosmas;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,8 +36,8 @@ public class Kosmas {
 		openDocuments();
 		downloadFiles();
 
-		// pause();
-		// endDriver();
+		pause();
+		endDriver();
 	}
 
 	private void openBrowser() {
@@ -45,7 +45,7 @@ public class Kosmas {
 		System.setProperty("webdriver.chrome.driver", chromeDirectory);
 		changeOptions();
 		driver = new ChromeDriver(options);
-		// driver.manage().window().setPosition(new Point(-2000, 0));
+		driver.manage().window().setPosition(new Point(-2000, 0));
 	}
 
 	private void changeOptions() {
@@ -81,8 +81,8 @@ public class Kosmas {
 	}
 
 	private void login() {
-		driver.findElement(By.xpath("//*[@id=\"login_id\"]")).sendKeys("T4028");
-		driver.findElement(By.xpath("//*[@id=\"login_pwd\"]")).sendKeys("vaňkovka");
+		driver.findElement(By.xpath("//*[@id=\"login_id\"]")).sendKeys(loginId);
+		driver.findElement(By.xpath("//*[@id=\"login_pwd\"]")).sendKeys(loginPassword);
 		click(driver, By.xpath("/html/body/div[3]/div[1]/form/table/tbody/tr[4]/td[2]/input"));
 	}
 
@@ -110,9 +110,9 @@ public class Kosmas {
 
 	private void downloadTwoFiles() {
 		click(driver, By
-				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[8]/td[2]/a[4]"));
-		click(driver, By
 				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[9]/td[2]/a[4]"));
+		click(driver, By
+				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[10]/td[2]/a[4]"));
 		driver.navigate().back();
 	}
 

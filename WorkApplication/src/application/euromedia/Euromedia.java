@@ -44,7 +44,6 @@ public class Euromedia {
 		changeOptions();
 		driver = new ChromeDriver(options);
 		driver.manage().window().setPosition(new Point(-2000, 0));
-		// driver.manage().window().setSize(new Dimension(100, 100));
 	}
 
 	private void changeOptions() {

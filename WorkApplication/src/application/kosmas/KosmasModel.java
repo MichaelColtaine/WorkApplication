@@ -1,22 +1,23 @@
 package application.kosmas;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import application.calculator.RabatCalculator;
-import application.euromedia.EuroSettings;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
 public class KosmasModel {
 	private static KosmasModel INSTANCE;
-	private RabatCalculator rabat;
 	private Kosmas kosmas;
 	private KosmasSettings settings;
+	private KosmasFileMover fileMover;
 
 	private KosmasModel() {
-
 		this.kosmas = new Kosmas();
 		this.settings = new KosmasSettings();
+		this.fileMover = new KosmasFileMover();
 
 	}
 
@@ -27,17 +28,29 @@ public class KosmasModel {
 		return INSTANCE;
 	}
 
-	public String calculate(String first, String second) {
-		rabat = new RabatCalculator();
-		return rabat.getResult(first, second);
+	public void setDestinantionDirectory() {
+		fileMover.setDestinantionDirectory(settings.getPath());
 	}
 
-	public void startImportEuromedia() {
-		setLoginInfoEuro();
+	public ArrayList<String> getFileNames() {
+		return fileMover.getListOfNames();
+
+	}
+
+	public void moveAndRenameFiles() {
+		try {
+			fileMover.move();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void startImportKosmas() {
+		setLoginInfo();
 		kosmas.start();
 	}
 
-	private void setLoginInfoEuro() {
+	private void setLoginInfo() {
 		kosmas.setLoginInfo(settings.getId(), settings.getPassword());
 	}
 
@@ -64,7 +77,7 @@ public class KosmasModel {
 	public void saveSettings(String path, String email, String password) {
 		settings.savePath(path);
 		settings.saveLoginInfo(email, password);
-		setLoginInfoEuro();
+		setLoginInfo();
 	}
 
 }

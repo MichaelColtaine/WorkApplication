@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXListView;
 
 import application.utils.FileChanger;
 import application.utils.NumberFinder;
-import application.utils.ParentLocation;
 import application.utils.PdfWorker;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -79,10 +78,10 @@ public class EuromediaController implements Initializable {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("EuromediaSettings.fxml"));
 			Stage stage = new Stage(StageStyle.UTILITY);
+			stage.setTitle("Nastavení Euromedia");
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.showAndWait();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +94,7 @@ public class EuromediaController implements Initializable {
 		EuroModel.getInstance().startImportEuromedia();
 		changePdfToString();
 		fillListView();
-		FileChanger.changeAllFiles(EuroModel.getInstance().getSettigns().getPath());
+		FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
 		progress.setVisible(false);
 	}
 
@@ -122,12 +121,7 @@ public class EuromediaController implements Initializable {
 		PdfWorker worker = new PdfWorker();
 		NumberFinder finder = new NumberFinder();
 		File files = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		pause();
 		for (File file : files.listFiles()) {
 			if (isPdf(file)) {
 				Double rabat = calculateRabat(finder.findNumbers(worker.getText(file.getAbsolutePath()))[1],
@@ -138,6 +132,14 @@ public class EuromediaController implements Initializable {
 		}
 		Collections.reverse(rabatStrings);
 
+	}
+
+	private void pause() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private boolean isPdf(File f) {

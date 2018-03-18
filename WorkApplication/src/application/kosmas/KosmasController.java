@@ -1,11 +1,14 @@
 package application.kosmas;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 
-import application.Model;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +22,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class KosmasController {
+
+	private ArrayList<String> listViewItems = KosmasModel.getInstance().getFileNames();
 
 	@FXML
 	private AnchorPane root;
@@ -39,7 +44,35 @@ public class KosmasController {
 	private ProgressIndicator progress;
 
 	@FXML
+	private JFXListView<String> listView;
+
+	@FXML
 	void initialize() {
+		fillCombobox();
+		listView.getItems().addAll(listViewItems);
+	}
+
+	private void fillListView() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Collections.reverse(listViewItems);
+				listView.getItems().addAll(listViewItems);
+			}
+		});
+	}
+
+	private void clearListView() {
+		listViewItems.clear();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				listView.getItems().clear();
+			}
+		});
+	}
+
+	private void fillCombobox() {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 	}
@@ -47,12 +80,16 @@ public class KosmasController {
 	@FXML
 	void handleImportButtonAction(ActionEvent event) {
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
-			Model.getInstance().setQuantityOfItemsToDownloadKosmas(comboBox.getSelectionModel().getSelectedItem());
+			KosmasModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					clearListView();
+					KosmasModel.getInstance().setDestinantionDirectory();
 					progress.setVisible(true);
-					start();
+					startImport();
+					KosmasModel.getInstance().moveAndRenameFiles();
+					fillListView();
 					progress.setVisible(false);
 				}
 			});
@@ -60,22 +97,26 @@ public class KosmasController {
 		}
 	}
 
+	private void startImport() {
+		KosmasModel.getInstance().deleteAllTempFiles();
+		progress.setVisible(true);
+		KosmasModel.getInstance().startImportKosmas();
+		progress.setVisible(false);
+	}
+
 	@FXML
 	void handleSettingsButtonAction(ActionEvent event) {
-		System.out.println("TEST");
+		System.out.println(KosmasModel.getInstance().getSettigns().getPath());
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("KosmasSettings.fxml"));
 			Stage stage = new Stage(StageStyle.UTILITY);
+			stage.setTitle("Nastavení Kosmas");
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void start() {
-		Model.getInstance().startImportKosmas();
 	}
 
 }

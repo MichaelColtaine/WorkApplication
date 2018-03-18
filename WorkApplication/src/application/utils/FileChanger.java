@@ -2,6 +2,7 @@ package application.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class FileChanger {
 	 * This method shortens file names and and moves them as .TXT file to a
 	 * directory that it takes as an argument. For example bob123 -> 123.txt
 	 */
-	public static void changeAllFiles(String toDirectory) {
+	public static void changeAllEuroFiles(String toDirectory) {
 		File directory = new File(FROM_DIRECTORY);
 		StringBuilder sb = new StringBuilder();
 		for (File source : directory.listFiles()) {
@@ -62,8 +63,26 @@ public class FileChanger {
 				System.out.println(e);
 			}
 		}
-		
-		
+	}
+
+	public static void changeAllKosmasFiles(String toDirectory) {
+		File directory = new File(FROM_DIRECTORY);
+		StringBuilder sb = new StringBuilder();
+		FileOutputStream fos;
+		for (File source : directory.listFiles()) {
+			sb.delete(0, sb.length());
+
+			sb.append(toDirectory).append(File.separator).append(source.getName());
+			File destination = new File(sb.toString());
+			try {
+				fos = new FileOutputStream(destination);
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }
