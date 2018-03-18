@@ -47,8 +47,15 @@ public class EuroModel {
 
 	public void deleteAllTempFiles() {
 		File directory = new File(System.getProperty("user.dir") + "\\temp\\");
+		createDirectoryifItDoesNotExists(directory);
 		for (File f : directory.listFiles()) {
 			f.delete();
+		}
+	}
+
+	private void createDirectoryifItDoesNotExists(File directory) {
+		if (!directory.exists()) {
+			directory.mkdirs();
 		}
 	}
 
