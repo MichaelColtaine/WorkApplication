@@ -12,13 +12,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.HomeController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="500.0" prefWidth="700.0" stylesheets="@../main.css"
+	xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controllers.HomeController">
 	<left>
-		<VBox prefHeight="500.0" prefWidth="200.0" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+		<VBox prefHeight="500.0" prefWidth="200.0" stylesheets="@../main.css"
+			BorderPane.alignment="CENTER">
 			<children>
-				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
+				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton"
+					prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu"
+					text="Kalkulačka Rabatu" textFill="#f0f0f0">
 					<graphic>
-						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="24.0" textAlignment="CENTER" />
+						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR"
+							size="24.0" textAlignment="CENTER" />
 					</graphic>
 					<VBox.margin>
 						<Insets />
@@ -27,9 +36,13 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 					</padding>
 				</JFXButton>
-				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="29.0" onAction="#handleEuromediaButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
+				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="29.0" onAction="#handleEuromediaButton"
+					prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu"
+					text="Euromedia" textFill="#f0f0f0">
 					<graphic>
-						<FontAwesomeIconView fill="#f0f0f0" glyphName="EURO" size="24.0" textAlignment="CENTER" />
+						<FontAwesomeIconView fill="#f0f0f0" glyphName="EURO"
+							size="24.0" textAlignment="CENTER" />
 					</graphic>
 					<VBox.margin>
 						<Insets />
@@ -38,31 +51,54 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 				</JFXButton>
-            <JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
-               <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" />
-               </padding>
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons8_K_52px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
+				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton"
+					prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu"
+					text="Kosmas" textFill="#f0f0f0">
+					<padding>
+						<Insets bottom="25.0" left="25.0" right="25.0" />
+					</padding>
+					<graphic>
+						<ImageView fitHeight="24.0" fitWidth="23.0"
+							pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../images/icons8_K_52px.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</JFXButton>
+				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="22.0" layoutX="10.0"
+					layoutY="154.0" onAction="#handleBetaButton" prefHeight="69.0"
+					prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta"
+					textFill="#f0f0f0">
+					<padding>
+						<Insets bottom="25.0" left="25.0" right="25.0" />
+					</padding>
+					<graphic>
+						<ImageView fitHeight="24.0" fitWidth="23.0"
+							pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../images/icons8_B_52px_1.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</JFXButton>
 			</children>
 			<BorderPane.margin>
 				<Insets />
 			</BorderPane.margin>
-         <styleClass>
-            <String fx:value="tab-header-background" />
-            <String fx:value="background" />
-            <String fx:value="left-background" />
-         </styleClass>
+			<styleClass>
+				<String fx:value="tab-header-background" />
+				<String fx:value="background" />
+				<String fx:value="left-background" />
+			</styleClass>
 		</VBox>
 	</left>
 	<center>
-		<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+		<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+			prefHeight="473.0" prefWidth="500.0" styleClass="right-background"
+			stylesheets="@../main.css" BorderPane.alignment="CENTER">
 			<BorderPane.margin>
 				<Insets />
 			</BorderPane.margin>
@@ -71,25 +107,31 @@
 	<top>
 		<HBox prefHeight="25.0" prefWidth="700.0" BorderPane.alignment="CENTER">
 			<children>
-				<Pane prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #263238;" styleClass="left-background" stylesheets="@../main.css" />
-            <AnchorPane prefHeight="25.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css">
-               <children>
-                  <HBox alignment="CENTER" layoutX="435.0" layoutY="8.0" spacing="2.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="5.0">
-                     <children>
-                        <ImageView fx:id="minimize" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
-                           <image>
-                              <Image url="@../../images/icons8_Minimize_Window_64px.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="close" fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
-                           <image>
-                              <Image url="@../../images/icons8_Close_Window_64px.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-               </children>
-            </AnchorPane>
+				<Pane prefHeight="25.0" prefWidth="200.0"
+					style="-fx-background-color: #263238;" styleClass="left-background"
+					stylesheets="@../main.css" />
+				<AnchorPane prefHeight="25.0" prefWidth="500.0"
+					styleClass="right-background" stylesheets="@../main.css">
+					<children>
+						<HBox alignment="CENTER" layoutX="435.0" layoutY="8.0"
+							spacing="2.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="5.0">
+							<children>
+								<ImageView fx:id="minimize" fitHeight="25.0" fitWidth="25.0"
+									pickOnBounds="true" preserveRatio="true" styleClass="imageview">
+									<image>
+										<Image url="@../../images/icons8_Minimize_Window_64px.png" />
+									</image>
+								</ImageView>
+								<ImageView fx:id="close" fitHeight="23.0" fitWidth="23.0"
+									pickOnBounds="true" preserveRatio="true" styleClass="imageview">
+									<image>
+										<Image url="@../../images/icons8_Close_Window_64px.png" />
+									</image>
+								</ImageView>
+							</children>
+						</HBox>
+					</children>
+				</AnchorPane>
 			</children>
 		</HBox>
 	</top>

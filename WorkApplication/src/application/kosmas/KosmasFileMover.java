@@ -40,7 +40,7 @@ public class KosmasFileMover {
 		} else {
 			sb.append(fullName.substring(5));
 		}
-		fileNames.add(sb.toString());
+		fileNames.add(fullName.toUpperCase().replaceAll(".TXT", " -->  ") + " " + sb.toString());
 		return sb.toString();
 	}
 

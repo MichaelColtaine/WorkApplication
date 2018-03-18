@@ -70,6 +70,11 @@ public class HomeController {
 	void handleKosmasButton(ActionEvent event) {
 		loadScene("/application/ui/Kosmas.fxml");
 	}
+	
+	@FXML
+	void handleBetaButton(ActionEvent event) {
+		loadScene("/application/ui/Beta.fxml");
+	}
 
 	private void loadScene(String sceneName) {
 		Parent root = null;

@@ -106,7 +106,6 @@ public class KosmasController {
 
 	@FXML
 	void handleSettingsButtonAction(ActionEvent event) {
-		System.out.println(KosmasModel.getInstance().getSettigns().getPath());
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("KosmasSettings.fxml"));
 			Stage stage = new Stage(StageStyle.UTILITY);
