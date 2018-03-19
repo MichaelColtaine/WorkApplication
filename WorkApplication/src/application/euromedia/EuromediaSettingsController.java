@@ -4,11 +4,12 @@ import java.io.File;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 
+import application.utils.AppUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -36,6 +37,9 @@ public class EuromediaSettingsController {
 	private JFXButton cancelButton;
 
 	@FXML
+	private Label errorLabel;
+
+	@FXML
 	void initialize() {
 		pathInput.setText(EuroModel.getInstance().getSettigns().getPath());
 		emailInput.setText(EuroModel.getInstance().getSettigns().getId());
@@ -53,14 +57,21 @@ public class EuromediaSettingsController {
 			File path = EuroModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
 			pathInput.setText(path.getAbsolutePath());
 		} catch (Exception NullPointerException) {
-			System.out.println("NPE ��dn� slo�ka nebyla vybr�na.");
+			System.out.println("NPE Žádná složka nebyla vybrána.");
 		}
 	}
 
 	@FXML
 	void handleSaveButton(ActionEvent event) {
-		EuroModel.getInstance().saveSettings(pathInput.getText(), emailInput.getText(), passwordInput.getText());
-		closeWindow();
+		if (AppUtils.isInvalidInput(pathInput) || AppUtils.isInvalidInput(emailInput)
+				|| AppUtils.isInvalidInput(passwordInput)) {
+			errorLabel.setText("Pole musí být vyplněné");
+		} else if (!AppUtils.isDirectory(pathInput.getText())) {
+			errorLabel.setText("Složka neexistuje");
+		} else {
+			EuroModel.getInstance().saveSettings(pathInput.getText(), emailInput.getText(), passwordInput.getText());
+			closeWindow();
+		}
 	}
 
 	private void closeWindow() {
