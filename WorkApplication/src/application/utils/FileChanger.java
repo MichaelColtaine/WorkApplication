@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 public class FileChanger {
 
 	private static String FROM_DIRECTORY = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
-	public static List<Label> labels = new ArrayList<>();
+//	public static List<Label> labels = new ArrayList<>();
 
 	public FileChanger() {
 
@@ -54,8 +54,13 @@ public class FileChanger {
 		StringBuilder sb = new StringBuilder();
 		for (File source : directory.listFiles()) {
 			sb.delete(0, sb.length());
-			labels.add(new Label(source.getName().substring(11, 14)));
-			sb.append(toDirectory).append(File.separator).append(source.getName().substring(11, 14)).append(".txt");
+
+			if (source.getName().toLowerCase().contains("vyk")) {
+				sb.append(toDirectory).append(File.separator).append(source.getName().substring(12, 15)).append(".txt");
+			} else {
+				sb.append(toDirectory).append(File.separator).append(source.getName().substring(11, 14)).append(".txt");
+			}
+
 			File destination = new File(sb.toString());
 			try {
 				unzip(source, destination);
@@ -63,26 +68,6 @@ public class FileChanger {
 				System.out.println(e);
 			}
 		}
-	}
-
-	public static void changeAllKosmasFiles(String toDirectory) {
-		File directory = new File(FROM_DIRECTORY);
-		StringBuilder sb = new StringBuilder();
-		FileOutputStream fos;
-		for (File source : directory.listFiles()) {
-			sb.delete(0, sb.length());
-
-			sb.append(toDirectory).append(File.separator).append(source.getName());
-			File destination = new File(sb.toString());
-			try {
-				fos = new FileOutputStream(destination);
-				fos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 }
