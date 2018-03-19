@@ -22,13 +22,13 @@ public class EuromediaSettingsController {
 	private JFXTextField pathInput;
 
 	@FXML
-	private JFXButton findPathButton;
-
-	@FXML
 	private JFXTextField emailInput;
 
 	@FXML
 	private JFXPasswordField passwordInput;
+
+	@FXML
+	private JFXButton findPathButton;
 
 	@FXML
 	private JFXButton saveButton;
@@ -47,11 +47,6 @@ public class EuromediaSettingsController {
 	}
 
 	@FXML
-	void handleCancelButton(ActionEvent event) {
-		closeWindow();
-	}
-
-	@FXML
 	void handleFindPathButton(ActionEvent event) {
 		try {
 			File path = EuroModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
@@ -59,6 +54,11 @@ public class EuromediaSettingsController {
 		} catch (Exception NullPointerException) {
 			System.out.println("NPE Žádná složka nebyla vybrána.");
 		}
+	}
+
+	@FXML
+	void handleCancelButton(ActionEvent event) {
+		closeWindow();
 	}
 
 	@FXML
