@@ -63,7 +63,6 @@ public class BetaController {
 
 	public boolean isFolderEmpty() {
 		File file = new File(BetaModel.getInstance().getFromPath());
-		System.out.println(file.listFiles().length);
 		return file.listFiles().length == 0;
 	}
 

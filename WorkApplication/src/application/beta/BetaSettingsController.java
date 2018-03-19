@@ -1,13 +1,12 @@
 package application.beta;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import application.euromedia.EuroModel;
+import application.utils.AppUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -28,13 +27,19 @@ public class BetaSettingsController {
 	private JFXTextField fromInput;
 
 	@FXML
-	private JFXButton findFromPath;
-
-	@FXML
 	private JFXTextField toInput;
 
 	@FXML
+	private JFXButton findFromPath;
+
+	@FXML
 	private JFXButton findToPath;
+
+	@FXML
+	void initialize() {
+		this.toInput.setText(BetaModel.getInstance().getToPath());
+		this.fromInput.setText(BetaModel.getInstance().getFromPath());
+	}
 
 	@FXML
 	void handleFromPathButton(ActionEvent event) {
@@ -44,12 +49,6 @@ public class BetaSettingsController {
 	@FXML
 	void handleToPathButton(ActionEvent event) {
 		selectDirectory(toInput, findToPath);
-	}
-
-	@FXML
-	void initialize() {
-		this.toInput.setText(BetaModel.getInstance().getToPath());
-		this.fromInput.setText(BetaModel.getInstance().getFromPath());
 	}
 
 	private void selectDirectory(JFXTextField textField, JFXButton button) {
@@ -63,16 +62,14 @@ public class BetaSettingsController {
 
 	@FXML
 	void handleSaveButton(ActionEvent event) {
-		if (isInvalidInput()) {
+		if (AppUtils.isInvalidInput(fromInput) || AppUtils.isInvalidInput(toInput)) {
 			errorLabel.setText("Obě pole musí být vyplněná!");
+		} else if (!AppUtils.isDirectory(fromInput.getText()) || !AppUtils.isDirectory(toInput.getText())) {
+			errorLabel.setText("Složka neexistuje");
 		} else {
 			BetaModel.getInstance().savePaths(fromInput.getText(), toInput.getText());
 			closeWindow();
 		}
-	}
-
-	private boolean isInvalidInput() {
-		return (fromInput.getText().isEmpty() || toInput.getText().isEmpty());
 	}
 
 	@FXML
