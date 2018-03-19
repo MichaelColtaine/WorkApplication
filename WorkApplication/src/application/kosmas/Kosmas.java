@@ -35,7 +35,6 @@ public class Kosmas {
 		login();
 		openDocuments();
 		downloadFiles();
-
 		pause();
 		endDriver();
 	}
@@ -96,10 +95,20 @@ public class Kosmas {
 			click(driver, By.xpath("//*[@id=\"tbl_seznam\"]/tbody/tr[" + i + "]/td[1]/a"));
 			WebElement fullText = driver
 					.findElement(By.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table"));
-			if (!containsTwoFiles(fullText)) {
-				downloadOneFile();
+			if (fullText.getText().contains("Datum doručení")) {
+
+				if (!containsTwoFiles(fullText)) {
+					downloadOneDeliveredFile();
+				} else {
+					downloadTwoFiles();
+				}
 			} else {
-				downloadTwoFiles();
+				if (!containsTwoFiles(fullText)) {
+					downloadOneUndeliveredFile();
+				} else {
+					downloadTwoUndeliveredFiles();
+				}
+
 			}
 		}
 	}
@@ -116,9 +125,24 @@ public class Kosmas {
 		driver.navigate().back();
 	}
 
-	private void downloadOneFile() {
+	private void downloadOneDeliveredFile() {
 		click(driver, By
 				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[8]/td[2]/a[4]"));
+		driver.navigate().back();
+	}
+
+	private void downloadOneUndeliveredFile() {
+		click(driver, By
+				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[7]/td[2]/a[4]"));
+
+		driver.navigate().back();
+	}
+
+	private void downloadTwoUndeliveredFiles() {
+		click(driver, By
+				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[8]/td[2]/a[4]"));
+		click(driver, By
+				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[9]/td[2]/a[4]"));
 		driver.navigate().back();
 	}
 
