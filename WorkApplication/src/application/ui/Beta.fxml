@@ -44,7 +44,7 @@
          </graphic>
       </JFXButton>
       <ProgressIndicator fx:id="progress" layoutX="200.0" layoutY="363.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
-      <Label fx:id="doneLabel" layoutX="214.0" layoutY="372.0" textFill="#f0f0f0">
+      <Label fx:id="doneLabel" layoutX="162.0" layoutY="372.0" textFill="#f0f0f0">
          <font>
             <Font size="22.0" />
          </font>

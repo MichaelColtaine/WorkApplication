@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 public class FileChanger {
 
 	private static String FROM_DIRECTORY = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
-//	public static List<Label> labels = new ArrayList<>();
+	// public static List<Label> labels = new ArrayList<>();
 
 	public FileChanger() {
 

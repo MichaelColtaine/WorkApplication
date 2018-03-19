@@ -1,10 +1,10 @@
 package application.beta;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
 
-import application.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,12 +50,21 @@ public class BetaController {
 	@FXML
 
 	void handleMoveButton() {
-		
+		if (isFolderEmpty()) {
+			doneLabel.setText("Složka je prázdná!");
+		} else {
 			progress.setVisible(true);
 			BetaModel.getInstance().moveAndRename();
 			progress.setVisible(false);
 			doneLabel.setText("Hotovo");
-		
+		}
+
+	}
+
+	public boolean isFolderEmpty() {
+		File file = new File(BetaModel.getInstance().getFromPath());
+		System.out.println(file.listFiles().length);
+		return file.listFiles().length == 0;
 	}
 
 }
