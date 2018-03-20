@@ -14,6 +14,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import application.infobar.InfoModel;
+
 public class Kosmas {
 
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
@@ -29,10 +31,13 @@ public class Kosmas {
 	}
 
 	public void start() {
+		InfoModel.getInstance().updateInfo("Otevírám prohližeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
+		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky kosmasu");
 		login();
+		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
 		openDocuments();
 		downloadFiles();
 		pause();
@@ -95,14 +100,16 @@ public class Kosmas {
 			click(driver, By.xpath("//*[@id=\"tbl_seznam\"]/tbody/tr[" + i + "]/td[1]/a"));
 			WebElement fullText = driver
 					.findElement(By.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table"));
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.");
 			if (fullText.getText().contains("Datum doručení")) {
-
+				InfoModel.getInstance().updateInfo("Stahuji dodací listy...");
 				if (!containsTwoFiles(fullText)) {
 					downloadOneDeliveredFile();
 				} else {
 					downloadTwoFiles();
 				}
 			} else {
+				InfoModel.getInstance().updateInfo("Stahuji dodací listy...");
 				if (!containsTwoFiles(fullText)) {
 					downloadOneUndeliveredFile();
 				} else {
@@ -110,6 +117,7 @@ public class Kosmas {
 				}
 
 			}
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy....");
 		}
 	}
 

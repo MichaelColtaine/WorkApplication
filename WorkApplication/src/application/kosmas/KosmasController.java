@@ -8,6 +8,7 @@ import java.util.Objects;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 
+import application.infobar.InfoModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,6 +91,7 @@ public class KosmasController {
 					startImport();
 					KosmasModel.getInstance().moveAndRenameFiles();
 					fillListView();
+					InfoModel.getInstance().updateInfo("Hotovo");
 					progress.setVisible(false);
 				}
 			});

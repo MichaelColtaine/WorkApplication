@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.infobar.InfoModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -36,9 +38,13 @@ public class HomeController {
 	private JFXButton settingsButton;
 
 	@FXML
+	private Label infoLabel;
+
+	@FXML
 	private void initialize() {
 		close.setOnMouseClicked(event -> closeWindow());
 		minimize.setOnMouseClicked(event -> minimizeWindow());
+		InfoModel.getInstance().bindLabelToInfo(infoLabel);
 	}
 
 	private void closeWindow() {
@@ -62,21 +68,17 @@ public class HomeController {
 	}
 
 	@FXML
-	void handleSettingsButton(ActionEvent event) {
-		loadScene("/application/ui/Settings.fxml");
-	}
-
-	@FXML
 	void handleKosmasButton(ActionEvent event) {
 		loadScene("/application/ui/Kosmas.fxml");
 	}
-	
+
 	@FXML
 	void handleBetaButton(ActionEvent event) {
 		loadScene("/application/ui/Beta.fxml");
 	}
 
 	private void loadScene(String sceneName) {
+		InfoModel.getInstance().updateInfo("");
 		Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource(sceneName));
@@ -85,7 +87,5 @@ public class HomeController {
 		}
 		borderpane.setCenter(root);
 	}
-	
-	
 
 }

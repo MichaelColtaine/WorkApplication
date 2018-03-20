@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 import application.Model;
 import application.calculator.RabatCalculator;
+import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
 public class EuroModel {
 
 	private static EuroModel INSTANCE;
-	private RabatCalculator rabat;
 	private Euromedia euromedia;
 	private EuroSettings settings;
 	private ArrayList<String> rabatStrings;
@@ -29,11 +29,6 @@ public class EuroModel {
 			INSTANCE = new EuroModel();
 		}
 		return INSTANCE;
-	}
-
-	public String calculate(String first, String second) {
-		rabat = new RabatCalculator();
-		return rabat.getResult(first, second);
 	}
 
 	public void startImportEuromedia() {

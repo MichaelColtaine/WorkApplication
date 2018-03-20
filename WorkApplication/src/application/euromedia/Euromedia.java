@@ -13,6 +13,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import application.infobar.InfoModel;
+
 public class Euromedia {
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
 	private WebDriver driver;
@@ -78,6 +80,7 @@ public class Euromedia {
 	}
 
 	private void login() {
+		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky Euromedie");
 		driver.findElement(By.id("loginId")).sendKeys(loginId);
 		driver.findElement(By.id("passwd")).sendKeys(loginPassword);
 		click(driver, By.id("submitLoginBtn"));
@@ -85,13 +88,17 @@ public class Euromedia {
 	}
 
 	private void openMyDocuments() {
+		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		driver.findElement(By.id("nav-dokumenty")).click();
 	}
 
 	private void downloadFiles() {
 		for (int i = 2; i <= rowCount; i++) {
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.");
 			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[9]"));
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy...");
 			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[11]"));
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.....");
 		}
 	}
 

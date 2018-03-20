@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 
+import application.infobar.InfoModel;
 import application.utils.FileChanger;
 import application.utils.NumberFinder;
 import application.utils.PdfWorker;
@@ -78,7 +79,7 @@ public class EuromediaController implements Initializable {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("EuromediaSettings.fxml"));
 			Stage stage = new Stage(StageStyle.UTILITY);
-			stage.setTitle("Nastaven� Euromedia");
+			stage.setTitle("Nastavení Euromedia");
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.showAndWait();
@@ -124,6 +125,7 @@ public class EuromediaController implements Initializable {
 		pause();
 		for (File file : files.listFiles()) {
 			if (isPdf(file)) {
+				InfoModel.getInstance().updateInfo("Vypočítávám rabat pro " + file.getName());
 				Double rabat = calculateRabat(finder.findNumbers(worker.getText(file.getAbsolutePath()))[1],
 						finder.findNumbers(worker.getText(file.getAbsolutePath()))[0]);
 				rabatStrings.add(getFilenameAndRabat(file, rabat));
@@ -131,7 +133,7 @@ public class EuromediaController implements Initializable {
 			}
 		}
 		Collections.reverse(rabatStrings);
-
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private void pause() {

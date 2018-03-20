@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
@@ -39,6 +40,7 @@ public class KosmasModel {
 
 	public void moveAndRenameFiles() {
 		try {
+			InfoModel.getInstance().updateInfo("Přesouvám  a přejmenovávám soubory");
 			fileMover.move();
 		} catch (IOException e) {
 			e.printStackTrace();
