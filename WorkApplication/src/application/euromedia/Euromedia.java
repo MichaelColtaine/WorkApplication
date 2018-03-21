@@ -29,10 +29,13 @@ public class Euromedia {
 	}
 
 	public void start() {
+		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
+		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky Euromedie");
 		login();
+		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
 		downloadFiles();
 		pause();
@@ -88,7 +91,6 @@ public class Euromedia {
 	}
 
 	private void openMyDocuments() {
-		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		driver.findElement(By.id("nav-dokumenty")).click();
 	}
 

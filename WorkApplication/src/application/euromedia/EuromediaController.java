@@ -133,7 +133,7 @@ public class EuromediaController implements Initializable {
 			}
 		}
 		Collections.reverse(rabatStrings);
-		InfoModel.getInstance().updateInfo("Hotovo!");
+		InfoModel.getInstance().updateInfo("Hotovo");
 	}
 
 	private void pause() {

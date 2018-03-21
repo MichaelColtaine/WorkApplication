@@ -110,7 +110,10 @@
 		<HBox prefHeight="17.0" prefWidth="200.0" spacing="200.0" styleClass="right-background" BorderPane.alignment="CENTER">
 			<children>
 				<Pane prefHeight="200.0" prefWidth="200.0" styleClass="left-background" />
-            <Label fx:id="infoLabel" textFill="#f0f0f0" />
+            <Label fx:id="infoLabel" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="17.0" prefWidth="287.0" text="TEST" textFill="#f0f0f0">
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding></Label>
 			</children>
 		</HBox>
 	</bottom>
