@@ -89,9 +89,16 @@ public class KosmasController {
 					KosmasModel.getInstance().setDestinantionDirectory();
 					progress.setVisible(true);
 					startImport();
-					KosmasModel.getInstance().moveAndRenameFiles();
-					fillListView();
-					InfoModel.getInstance().updateInfo("Hotovo");
+					KosmasModel.getInstance().login();
+					System.out.println(KosmasModel.getInstance().hasSuccessfulyLoggedIn());
+					if (KosmasModel.getInstance().hasSuccessfulyLoggedIn()) {
+						KosmasModel.getInstance().downloadFiles();
+						KosmasModel.getInstance().moveAndRenameFiles();
+						InfoModel.getInstance().updateInfo("Hotovo");
+						fillListView();
+					} else {
+						KosmasModel.getInstance().end();
+					}
 					progress.setVisible(false);
 				}
 			});
@@ -102,8 +109,7 @@ public class KosmasController {
 	private void startImport() {
 		KosmasModel.getInstance().deleteAllTempFiles();
 		progress.setVisible(true);
-		KosmasModel.getInstance().startImportKosmas();
-		progress.setVisible(false);
+		KosmasModel.getInstance().start();
 	}
 
 	@FXML

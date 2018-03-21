@@ -22,6 +22,7 @@ public class Kosmas {
 	private WebDriver driver;
 	private ChromeOptions options;
 	private int rowCount;
+	private boolean success = true;
 
 	public Kosmas() {
 		this.websiteUrl = "https://firma.kosmas.cz/";
@@ -30,18 +31,26 @@ public class Kosmas {
 
 	}
 
+
+	
 	public void start() {
 		InfoModel.getInstance().updateInfo("Otevírám prohližeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
-		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky kosmasu");
-		login();
-		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
+	}
+	
+	public void doDownloading() {
 		openDocuments();
+		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
 		downloadFiles();
 		pause();
 		endDriver();
+	}
+	
+	public void tryLogin() {
+		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky kosmasu");
+		login();
 	}
 
 	private void openBrowser() {
@@ -82,12 +91,19 @@ public class Kosmas {
 
 	private void fetchURL() {
 		driver.get(websiteUrl);
+
 	}
 
 	private void login() {
 		driver.findElement(By.xpath("//*[@id=\"login_id\"]")).sendKeys(loginId);
 		driver.findElement(By.xpath("//*[@id=\"login_pwd\"]")).sendKeys(loginPassword);
 		click(driver, By.xpath("/html/body/div[3]/div[1]/form/table/tbody/tr[4]/td[2]/input"));
+		success = true;
+		if (!driver.getTitle().contains("Kosmas s.r.o. - objednávkový systém pro knihkupce")) {
+			success = false;
+			InfoModel.getInstance().updateInfo("Nepodařilo se zalogovat");
+		}
+
 	}
 
 	private void openDocuments() {
@@ -168,7 +184,7 @@ public class Kosmas {
 		}
 	}
 
-	private void endDriver() {
+	public void endDriver() {
 		driver.close();
 		driver.quit();
 	}
@@ -182,4 +198,7 @@ public class Kosmas {
 		this.rowCount = amount + 1;
 	}
 
+	public boolean hasLoggedIn() {
+		return this.success;
+	}
 }

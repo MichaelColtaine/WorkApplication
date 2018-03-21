@@ -47,9 +47,24 @@ public class KosmasModel {
 		}
 	}
 
-	public void startImportKosmas() {
+	public void start() {
 		setLoginInfo();
 		kosmas.start();
+	}
+	
+	public void login() {
+		kosmas.tryLogin();
+	}
+	
+	public void downloadFiles() {
+		kosmas.doDownloading();
+	}
+	
+	public boolean hasSuccessfulyLoggedIn() {
+		return kosmas.hasLoggedIn();
+	}
+	public void end() {
+		kosmas.endDriver();
 	}
 
 	private void setLoginInfo() {

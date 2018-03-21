@@ -68,11 +68,12 @@ public class KosmasSettingsController {
 			errorLabel.setText("Pole musí být vyplněné");
 		} else if (!AppUtils.isDirectory(pathInput.getText())) {
 			errorLabel.setText("Složka neexistuje");
+		} else if (AppUtils.isInvalidLength(emailInput)) {
+			errorLabel.setText("ID může mít maximalně 5 znaků");
 		} else {
 			KosmasModel.getInstance().saveSettings(pathInput.getText(), emailInput.getText(), passwordInput.getText());
 			closeWindow();
 		}
-
 	}
 
 	private void closeWindow() {

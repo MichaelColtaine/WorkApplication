@@ -14,5 +14,9 @@ public class AppUtils {
 	public static boolean isInvalidInput(TextField input) {
 		return input.getText().isEmpty();
 	}
+	
+	public static boolean isInvalidLength(TextField input) {
+		return input.getText().length() > 5;
+	}
 
 }
