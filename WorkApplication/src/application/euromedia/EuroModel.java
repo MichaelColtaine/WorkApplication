@@ -36,6 +36,10 @@ public class EuroModel {
 		euromedia.start();
 	}
 
+	public boolean hasLoggedIn() {
+		return euromedia.hasLoggedIn();
+	}
+
 	private void setLoginInfoEuro() {
 		euromedia.setLoginInfo(settings.getId(), settings.getPassword());
 	}
@@ -75,6 +79,18 @@ public class EuroModel {
 
 	public void setQuantityOfItemsToDownload(String selectedItem) {
 		euromedia.downloadAmount(Integer.parseInt(selectedItem));
+	}
+
+	public void tryLogin() {
+		euromedia.tryToLogin();
+	}
+
+	public void end() {
+		euromedia.end();
+	}
+
+	public void downloadFiles() {
+		euromedia.download();
 	}
 
 }

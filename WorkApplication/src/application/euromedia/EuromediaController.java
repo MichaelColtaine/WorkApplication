@@ -93,9 +93,13 @@ public class EuromediaController implements Initializable {
 		progress.setVisible(true);
 		clearListView();
 		EuroModel.getInstance().startImportEuromedia();
-		changePdfToString();
-		fillListView();
-		FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
+		EuroModel.getInstance().tryLogin();
+		if (EuroModel.getInstance().hasLoggedIn()) {
+			EuroModel.getInstance().downloadFiles();
+			changePdfToString();
+			fillListView();
+			FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
+		}
 		progress.setVisible(false);
 	}
 

@@ -20,6 +20,7 @@ public class Euromedia {
 	private WebDriver driver;
 	private ChromeOptions options;
 	private int rowCount;
+	private boolean hasLoggedIn;
 
 	public Euromedia() {
 		this.websiteUrl = "https://vo.knizniweb.cz/";
@@ -33,11 +34,30 @@ public class Euromedia {
 		openBrowser();
 		manageBrowser();
 		fetchURL();
-		InfoModel.getInstance().updateInfo("Přihlašuju se do portálu Euromedia");
+	}
+
+	public boolean hasLoggedIn() {
+		return hasLoggedIn;
+	}
+
+	public void tryToLogin() {
+		hasLoggedIn = true;
 		login();
+		if (!driver.getTitle().contains("Knižní web | Úvodní stránka")) {
+			hasLoggedIn = false;
+			InfoModel.getInstance().updateInfo("Nepodařilo se zalogovat");
+			driver.close();
+			driver.quit();
+		}
+	}
+
+	public void download() {
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
 		downloadFiles();
+	}
+
+	public void end() {
 		pause();
 		endDriver();
 	}
@@ -83,11 +103,19 @@ public class Euromedia {
 	}
 
 	private void login() {
+		click(driver, By.xpath("//*[@id=\"login-link\"]/a"));
+		driver.findElement(By.xpath("//*[@id=\"login-id\"]")).sendKeys(loginId);
+		driver.findElement(By.xpath("//*[@id=\"passwd\"]")).sendKeys(loginPassword);
+		click(driver, By.xpath("//*[@id=\"content-main\"]/form/table/tbody/tr[3]/td[2]/button"));
+	}
 
-		driver.findElement(By.id("loginId")).sendKeys(loginId);
-		driver.findElement(By.id("passwd")).sendKeys(loginPassword);
-		click(driver, By.id("submitLoginBtn"));
-
+	private boolean existsElement(String id) {
+		try {
+			driver.findElement(By.id(id));
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	private void openMyDocuments() {
