@@ -57,7 +57,7 @@ public class KosmasModel {
 	}
 	
 	public void downloadFiles() {
-		kosmas.doDownloading();
+		kosmas.download();
 	}
 	
 	public boolean hasSuccessfulyLoggedIn() {

@@ -31,26 +31,11 @@ public class Kosmas {
 
 	}
 
-
-	
 	public void start() {
-		InfoModel.getInstance().updateInfo("Otevírám prohližeč");
+		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
-	}
-	
-	public void doDownloading() {
-		openDocuments();
-		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
-		downloadFiles();
-		pause();
-		endDriver();
-	}
-	
-	public void tryLogin() {
-		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky kosmasu");
-		login();
 	}
 
 	private void openBrowser() {
@@ -94,6 +79,11 @@ public class Kosmas {
 
 	}
 
+	public void tryLogin() {
+		InfoModel.getInstance().updateInfo("Přihlašuji do portálu Kosmas");
+		login();
+	}
+
 	private void login() {
 		driver.findElement(By.xpath("//*[@id=\"login_id\"]")).sendKeys(loginId);
 		driver.findElement(By.xpath("//*[@id=\"login_pwd\"]")).sendKeys(loginPassword);
@@ -106,6 +96,14 @@ public class Kosmas {
 
 	}
 
+	public void download() {
+		openDocuments();
+		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
+		downloadFiles();
+		pause();
+		endDriver();
+	}
+
 	private void openDocuments() {
 		click(driver, By.xpath("/html/body/div[1]/div[1]/ul/li[8]/a"));
 	}
@@ -116,16 +114,16 @@ public class Kosmas {
 			click(driver, By.xpath("//*[@id=\"tbl_seznam\"]/tbody/tr[" + i + "]/td[1]/a"));
 			WebElement fullText = driver
 					.findElement(By.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table"));
-			InfoModel.getInstance().updateInfo("Stahuji dodací listy.");
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.   ");
 			if (fullText.getText().contains("Datum doručení")) {
-				InfoModel.getInstance().updateInfo("Stahuji dodací listy...");
+				InfoModel.getInstance().updateInfo("Stahuji dodací listy..  ");
 				if (!containsTwoFiles(fullText)) {
 					downloadOneDeliveredFile();
 				} else {
 					downloadTwoFiles();
 				}
 			} else {
-				InfoModel.getInstance().updateInfo("Stahuji dodací listy...");
+				InfoModel.getInstance().updateInfo("Stahuji dodací listy... ");
 				if (!containsTwoFiles(fullText)) {
 					downloadOneUndeliveredFile();
 				} else {

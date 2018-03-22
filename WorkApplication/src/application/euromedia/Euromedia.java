@@ -33,7 +33,7 @@ public class Euromedia {
 		openBrowser();
 		manageBrowser();
 		fetchURL();
-		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky Euromedie");
+		InfoModel.getInstance().updateInfo("Přihlašuju se do portálu Euromedia");
 		login();
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
@@ -83,7 +83,7 @@ public class Euromedia {
 	}
 
 	private void login() {
-		InfoModel.getInstance().updateInfo("Přihlašuji se na stránky Euromedie");
+
 		driver.findElement(By.id("loginId")).sendKeys(loginId);
 		driver.findElement(By.id("passwd")).sendKeys(loginPassword);
 		click(driver, By.id("submitLoginBtn"));
@@ -96,9 +96,9 @@ public class Euromedia {
 
 	private void downloadFiles() {
 		for (int i = 2; i <= rowCount; i++) {
-			InfoModel.getInstance().updateInfo("Stahuji dodací listy.");
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.    ");
 			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[9]"));
-			InfoModel.getInstance().updateInfo("Stahuji dodací listy...");
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy...  ");
 			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[11]"));
 			InfoModel.getInstance().updateInfo("Stahuji dodací listy.....");
 		}

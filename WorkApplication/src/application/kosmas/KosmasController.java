@@ -53,26 +53,6 @@ public class KosmasController {
 		listView.getItems().addAll(listViewItems);
 	}
 
-	private void fillListView() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				Collections.reverse(listViewItems);
-				listView.getItems().addAll(listViewItems);
-			}
-		});
-	}
-
-	private void clearListView() {
-		listViewItems.clear();
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				listView.getItems().clear();
-			}
-		});
-	}
-
 	private void fillCombobox() {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
@@ -90,11 +70,8 @@ public class KosmasController {
 					progress.setVisible(true);
 					startImport();
 					KosmasModel.getInstance().login();
-					System.out.println(KosmasModel.getInstance().hasSuccessfulyLoggedIn());
 					if (KosmasModel.getInstance().hasSuccessfulyLoggedIn()) {
-						KosmasModel.getInstance().downloadFiles();
-						KosmasModel.getInstance().moveAndRenameFiles();
-						InfoModel.getInstance().updateInfo("Hotovo");
+						startDownloadingMovingAndRenaming();
 						fillListView();
 					} else {
 						KosmasModel.getInstance().end();
@@ -110,6 +87,32 @@ public class KosmasController {
 		KosmasModel.getInstance().deleteAllTempFiles();
 		progress.setVisible(true);
 		KosmasModel.getInstance().start();
+	}
+
+	private void clearListView() {
+		listViewItems.clear();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				listView.getItems().clear();
+			}
+		});
+	}
+
+	private void startDownloadingMovingAndRenaming() {
+		KosmasModel.getInstance().downloadFiles();
+		KosmasModel.getInstance().moveAndRenameFiles();
+		InfoModel.getInstance().updateInfo("Hotovo");
+	}
+
+	private void fillListView() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Collections.reverse(listViewItems);
+				listView.getItems().addAll(listViewItems);
+			}
+		});
 	}
 
 	@FXML
