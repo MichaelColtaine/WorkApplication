@@ -109,15 +109,6 @@ public class Euromedia {
 		click(driver, By.xpath("//*[@id=\"content-main\"]/form/table/tbody/tr[3]/td[2]/button"));
 	}
 
-	private boolean existsElement(String id) {
-		try {
-			driver.findElement(By.id(id));
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
-	}
-
 	private void openMyDocuments() {
 		driver.findElement(By.id("nav-dokumenty")).click();
 	}
@@ -147,7 +138,7 @@ public class Euromedia {
 	}
 
 	private void endDriver() {
-		driver.close();
+		// driver.close();
 		driver.quit();
 	}
 

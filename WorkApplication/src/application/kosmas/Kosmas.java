@@ -183,7 +183,7 @@ public class Kosmas {
 	}
 
 	public void endDriver() {
-		driver.close();
+		// driver.close();
 		driver.quit();
 	}
 
