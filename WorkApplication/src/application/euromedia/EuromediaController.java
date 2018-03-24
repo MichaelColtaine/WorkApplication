@@ -97,8 +97,11 @@ public class EuromediaController implements Initializable {
 		if (EuroModel.getInstance().hasLoggedIn()) {
 			EuroModel.getInstance().downloadFiles();
 			changePdfToString();
-			fillListView();
 			FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
+			InfoModel.getInstance().updateInfo("Hotovo!");
+			fillListView();
+			EuroModel.getInstance().end();
+
 		}
 		progress.setVisible(false);
 	}
@@ -137,7 +140,6 @@ public class EuromediaController implements Initializable {
 			}
 		}
 		Collections.reverse(rabatStrings);
-		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private void pause() {
