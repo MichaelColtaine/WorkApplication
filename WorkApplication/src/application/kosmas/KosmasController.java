@@ -73,10 +73,12 @@ public class KosmasController {
 					if (KosmasModel.getInstance().hasSuccessfulyLoggedIn()) {
 						startDownloadingMovingAndRenaming();
 						fillListView();
+						progress.setVisible(false);
+						KosmasModel.getInstance().end();
 					} else {
+						progress.setVisible(false);
 						KosmasModel.getInstance().end();
 					}
-					progress.setVisible(false);
 				}
 			});
 			t1.start();
@@ -85,7 +87,6 @@ public class KosmasController {
 
 	private void startImport() {
 		KosmasModel.getInstance().deleteAllTempFiles();
-		progress.setVisible(true);
 		KosmasModel.getInstance().start();
 	}
 

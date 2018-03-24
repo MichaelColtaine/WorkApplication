@@ -3,7 +3,6 @@ package application.kosmas;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
@@ -51,18 +50,19 @@ public class KosmasModel {
 		setLoginInfo();
 		kosmas.start();
 	}
-	
+
 	public void login() {
 		kosmas.tryLogin();
 	}
-	
+
 	public void downloadFiles() {
 		kosmas.download();
 	}
-	
+
 	public boolean hasSuccessfulyLoggedIn() {
 		return kosmas.hasLoggedIn();
 	}
+
 	public void end() {
 		kosmas.endDriver();
 	}

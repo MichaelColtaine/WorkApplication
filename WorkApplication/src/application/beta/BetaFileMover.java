@@ -3,8 +3,6 @@ package application.beta;
 import java.io.File;
 import java.io.IOException;
 
-import application.infobar.InfoModel;
-
 public class BetaFileMover {
 
 	private String fromDirectory, toDirectory;

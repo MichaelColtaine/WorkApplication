@@ -3,9 +3,6 @@ package application.kosmas;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-
-import com.google.common.collect.Lists;
 
 public class KosmasFileMover {
 

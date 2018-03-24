@@ -3,9 +3,6 @@ package application.euromedia;
 import java.io.File;
 import java.util.ArrayList;
 
-import application.Model;
-import application.calculator.RabatCalculator;
-import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 

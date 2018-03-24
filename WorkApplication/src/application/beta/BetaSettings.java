@@ -1,6 +1,5 @@
 package application.beta;
 
-import java.io.File;
 import java.util.prefs.Preferences;
 
 import application.kosmas.KosmasSettings;

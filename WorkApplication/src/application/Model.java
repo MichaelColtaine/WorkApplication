@@ -4,9 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import application.calculator.RabatCalculator;
-import application.euromedia.Euromedia;
-import application.kosmas.Kosmas;
-import application.euromedia.EuroSettings;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
@@ -47,7 +44,5 @@ public class Model {
 		DirectoryChooser dc = new DirectoryChooser();
 		return dc.showDialog(owner);
 	}
-
-	
 
 }

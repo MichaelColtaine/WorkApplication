@@ -100,8 +100,8 @@ public class EuromediaController implements Initializable {
 			FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
 			InfoModel.getInstance().updateInfo("Hotovo!");
 			fillListView();
+			progress.setVisible(false);
 			EuroModel.getInstance().end();
-
 		}
 		progress.setVisible(false);
 	}

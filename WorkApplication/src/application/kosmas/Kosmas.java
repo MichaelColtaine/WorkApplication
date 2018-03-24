@@ -28,7 +28,6 @@ public class Kosmas {
 		this.websiteUrl = "https://firma.kosmas.cz/";
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 		this.rowCount = 1;
-
 	}
 
 	public void start() {
@@ -101,7 +100,7 @@ public class Kosmas {
 		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
 		downloadFiles();
 		pause();
-		endDriver();
+//		endDriver();
 	}
 
 	private void openDocuments() {

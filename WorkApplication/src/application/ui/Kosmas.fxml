@@ -31,7 +31,7 @@
 		<HBox layoutX="35.0" layoutY="74.0" spacing="25.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="64.0">
 			<children>
 				<JFXListView fx:id="listView" prefHeight="384.0" prefWidth="203.0" />
-				<VBox spacing="10.0">
+				<VBox spacing="40.0">
 					<children>
 						<HBox alignment="CENTER">
 							<children>
@@ -61,7 +61,7 @@
 						</JFXButton>
 						<ProgressIndicator fx:id="progress" prefHeight="50.0" prefWidth="100.0" visible="false">
 							<VBox.margin>
-								<Insets top="20.0" />
+								<Insets />
 							</VBox.margin>
 						</ProgressIndicator>
 					</children>
