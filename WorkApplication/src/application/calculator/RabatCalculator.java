@@ -6,7 +6,6 @@ public class RabatCalculator {
 	}
 
 	public String getResult(String priceAsString, String priceWithTaxesAsString) {
-
 		if (isLegitInput(priceAsString.trim()) && isLegitInput(priceWithTaxesAsString.trim())) {
 			Double price = changeComma(priceAsString);
 			Double priceWithTax = changeComma(priceWithTaxesAsString);
