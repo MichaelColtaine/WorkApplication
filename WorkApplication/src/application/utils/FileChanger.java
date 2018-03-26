@@ -10,11 +10,6 @@ import java.util.zip.ZipInputStream;
 public class FileChanger {
 
 	private static String FROM_DIRECTORY = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
-	// public static List<Label> labels = new ArrayList<>();
-
-	public FileChanger() {
-
-	}
 
 	/*
 	 * This method unzips files so that they can be renamed and moved via the

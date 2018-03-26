@@ -96,6 +96,8 @@ public class EuromediaController implements Initializable {
 		EuroModel.getInstance().tryLogin();
 		if (EuroModel.getInstance().hasLoggedIn()) {
 			EuroModel.getInstance().downloadFiles();
+			pause();
+			waitForFilesToBeDownloaded();
 			changePdfToString();
 			FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
 			InfoModel.getInstance().updateInfo("Hotovo!");
@@ -115,6 +117,14 @@ public class EuromediaController implements Initializable {
 		});
 	}
 
+	private void waitForFilesToBeDownloaded() {
+		if (new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator)
+				.listFiles().length == 0) {
+			System.out.println("Prazdno");
+			pause();
+		}
+	}
+
 	private void clearListView() {
 		rabatStrings.clear();
 		Platform.runLater(new Runnable() {
@@ -128,6 +138,7 @@ public class EuromediaController implements Initializable {
 	private void changePdfToString() {
 		PdfWorker worker = new PdfWorker();
 		NumberFinder finder = new NumberFinder();
+		pause();
 		File files = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
 		pause();
 		for (File file : files.listFiles()) {

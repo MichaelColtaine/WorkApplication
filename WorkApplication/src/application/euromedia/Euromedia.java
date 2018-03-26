@@ -46,7 +46,6 @@ public class Euromedia {
 		if (!driver.getTitle().contains("Knižní web | Úvodní stránka")) {
 			hasLoggedIn = false;
 			InfoModel.getInstance().updateInfo("Nepodařilo se zalogovat");
-			// driver.close();
 			driver.quit();
 		}
 	}
