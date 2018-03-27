@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +24,7 @@ public class MainApplication extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("/application/main.css");
 			primaryStage.setTitle("Skladový pomocník");
+			primaryStage.getIcons().add(new Image("/images/icons8_Trolley_52px.png"));
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);

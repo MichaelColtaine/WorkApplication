@@ -18,7 +18,21 @@
 	<left>
 		<VBox prefHeight="500.0" prefWidth="200.0" stylesheets="@../main.css" BorderPane.alignment="CENTER">
 			<children>
-            <Pane prefHeight="55.0" prefWidth="200.0" />
+            <Pane prefHeight="55.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="66.0" layoutY="1.0" text="SP" textFill="#f0f0f0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons8_Trolley_52px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children></Pane>
 				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
 					<graphic>
 						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="24.0" textAlignment="CENTER" />
