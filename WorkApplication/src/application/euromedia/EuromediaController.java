@@ -97,7 +97,7 @@ public class EuromediaController implements Initializable {
 		if (EuroModel.getInstance().hasLoggedIn()) {
 			EuroModel.getInstance().downloadFiles();
 			pause();
-			waitForFilesToBeDownloaded();
+			
 			changePdfToString();
 			FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
 			InfoModel.getInstance().updateInfo("Hotovo!");
@@ -121,6 +121,7 @@ public class EuromediaController implements Initializable {
 		if (new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator)
 				.listFiles().length == 0) {
 			System.out.println("Prazdno");
+			InfoModel.getInstance().updateInfo("Čekám na soubor!");
 			pause();
 		}
 	}
@@ -140,6 +141,7 @@ public class EuromediaController implements Initializable {
 		NumberFinder finder = new NumberFinder();
 		pause();
 		File files = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
+		waitForFilesToBeDownloaded();
 		pause();
 		for (File file : files.listFiles()) {
 			if (isPdf(file)) {
@@ -170,7 +172,10 @@ public class EuromediaController implements Initializable {
 	}
 
 	private String getFilenameAndRabat(File file, Double rabat) {
-		return String.format("%s    RABAT: -%.2f", getFileName(file), rabat);
+		if(getFileName(file).contains("VYK")) {
+			return String.format("%s    RABAT: -%.2f", getFileName(file), rabat);	
+		}
+		return String.format("%s      RABAT: -%.2f", getFileName(file), rabat);
 
 	}
 

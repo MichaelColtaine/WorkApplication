@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.euromedia.EuroModel;
 import application.infobar.InfoModel;
+import application.kosmas.KosmasModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -75,6 +77,11 @@ public class HomeController {
 	@FXML
 	void handleBetaButton(ActionEvent event) {
 		loadScene("/application/ui/Beta.fxml");
+	}
+
+	@FXML
+	void handleInfoButton(ActionEvent event) {
+		loadScene("/application/ui/Info.fxml");
 	}
 
 	private void loadScene(String sceneName) {

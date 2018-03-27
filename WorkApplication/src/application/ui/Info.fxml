@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="543.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="147.0" layoutY="97.0" text="Skladový pomocník" textFill="#f0f0f0" AnchorPane.leftAnchor="147.0" AnchorPane.topAnchor="97.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="194.0" layoutY="151.0" text="Verze 1.0.1" textFill="#f0f0f0" AnchorPane.bottomAnchor="357.0" AnchorPane.rightAnchor="194.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="187.0" layoutY="198.0" text="(c) 2018, Michal Trojek " textFill="#f0f0f0" />
+      <Label layoutX="163.0" layoutY="226.0" text="Email: MichalTrojek1@gmail.com" textFill="#f0f0f0" />
+   </children>
+</AnchorPane>
