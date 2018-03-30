@@ -33,7 +33,7 @@
                      </graphic>
                   </Label>
                </children></Pane>
-				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
+				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
 					<graphic>
 						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="24.0" textAlignment="CENTER" />
 					</graphic>
@@ -44,7 +44,7 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 					</padding>
 				</JFXButton>
-				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="29.0" onAction="#handleEuromediaButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
+				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="29.0" onAction="#handleEuromediaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
 					<graphic>
 						<FontAwesomeIconView fill="#f0f0f0" glyphName="EURO" size="24.0" textAlignment="CENTER" />
 					</graphic>
@@ -55,7 +55,7 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 				</JFXButton>
-				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
+				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
@@ -67,7 +67,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" layoutX="10.0" layoutY="154.0" onAction="#handleBetaButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta" textFill="#f0f0f0">
+				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" layoutX="10.0" layoutY="154.0" onAction="#handleBetaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
@@ -79,6 +79,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
+            <Pane prefHeight="115.0" prefWidth="200.0" />
             <JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleInfoButton" prefHeight="69.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" />

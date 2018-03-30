@@ -49,6 +49,8 @@
 	-jfx-unfocus-color: #f0f0f0;
 	-jfx-focus-color: #f0f0f0;
 	-fx-prompt-text-fill: #f0f0f0;
+	-fx-highlight-fill: #f0f0f0;
+	-fx-text-fill:#f0f0f0;
 }
 
 .imageview:hover{
