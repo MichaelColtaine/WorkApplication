@@ -79,7 +79,7 @@ public class Kosmas {
 	}
 
 	public void tryLogin() {
-		InfoModel.getInstance().updateInfo("Přihlašuji do portálu Kosmas");
+		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Kosmas");
 		login();
 	}
 
@@ -100,7 +100,6 @@ public class Kosmas {
 		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
 		downloadFiles();
 		pause();
-//		endDriver();
 	}
 
 	private void openDocuments() {
@@ -115,14 +114,19 @@ public class Kosmas {
 					.findElement(By.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table"));
 			InfoModel.getInstance().updateInfo("Stahuji dodací listy.   ");
 			if (fullText.getText().contains("Datum doručení")) {
+
 				InfoModel.getInstance().updateInfo("Stahuji dodací listy..  ");
 				if (!containsTwoFiles(fullText)) {
 					downloadOneDeliveredFile();
 				} else {
 					downloadTwoFiles();
 				}
+			} else if (fullText.getText().contains("Neevidujeme")) {
+				downloadReturnFiles();
 			} else {
+
 				InfoModel.getInstance().updateInfo("Stahuji dodací listy... ");
+
 				if (!containsTwoFiles(fullText)) {
 					downloadOneUndeliveredFile();
 				} else {
@@ -164,6 +168,12 @@ public class Kosmas {
 				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[8]/td[2]/a[4]"));
 		click(driver, By
 				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[9]/td[2]/a[4]"));
+		driver.navigate().back();
+	}
+
+	private void downloadReturnFiles() {
+		click(driver, By
+				.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table/tbody/tr[6]/td[2]/a[4]"));
 		driver.navigate().back();
 	}
 

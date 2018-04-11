@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.infobar.InfoModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +32,6 @@ public class BetaController {
 	private ProgressIndicator progress;
 
 	@FXML
-	private Label doneLabel;
-
-	@FXML
 	void handleSettingsButtonAction(ActionEvent event) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("BetaSettings.fxml"));
@@ -51,12 +49,12 @@ public class BetaController {
 
 	void handleMoveButton() {
 		if (isFolderEmpty()) {
-			doneLabel.setText("Složka je prázdná!");
+			InfoModel.getInstance().updateInfo("Složka je prázdná!");
 		} else {
 			progress.setVisible(true);
 			BetaModel.getInstance().moveAndRename();
 			progress.setVisible(false);
-			doneLabel.setText("Hotovo");
+			InfoModel.getInstance().updateInfo("Hotovo!");
 		}
 
 	}
