@@ -20,13 +20,6 @@
 			<font>
 				<Font size="24.0" />
 			</font>
-			<graphic>
-				<ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../images/icons8_K_52px.png" />
-					</image>
-				</ImageView>
-			</graphic>
 		</Label>
 		<HBox layoutX="35.0" layoutY="74.0" spacing="25.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="64.0">
 			<children>

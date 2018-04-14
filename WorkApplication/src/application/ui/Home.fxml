@@ -20,23 +20,23 @@
 			<children>
             <Pane prefHeight="55.0" prefWidth="200.0">
                <children>
-                  <HBox layoutX="16.0" layoutY="1.0" prefHeight="35.0" prefWidth="182.0">
+                  <HBox layoutX="12.0" layoutY="1.0" prefHeight="35.0" prefWidth="186.0">
                      <children>
                         <Label text="S" textFill="#f0f0f0" underline="true">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
                            <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../images/icons8_Trolley_52px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="48.0" text="kladový " textFill="#f0f0f0">
+                        <Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="56.0" text="kladový " textFill="#f0f0f0">
                            <font>
-                              <Font name="System Bold Italic" size="12.0" />
+                              <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
                         <Label text="P" textFill="#f0f0f0" underline="true">
@@ -46,15 +46,16 @@
                         </Label>
                         <Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="58.0" text="omocník" textFill="#f0f0f0">
                            <font>
-                              <Font name="System Bold Italic" size="12.0" />
+                              <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
+                  <Pane layoutX="-4.0" layoutY="40.0" prefHeight="2.0" prefWidth="208.0" style="-fx-background-color: #37474F;" />
                </children></Pane>
 				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
 					<graphic>
-						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="24.0" textAlignment="CENTER" />
+						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="20.0" textAlignment="CENTER" />
 					</graphic>
 					<VBox.margin>
 						<Insets />
@@ -71,7 +72,7 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/icons8_E_52px.png" />
                      </image>
@@ -83,7 +84,7 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 					<graphic>
-						<ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../../images/icons8_K_52px.png" />
 							</image>
@@ -95,7 +96,7 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 					<graphic>
-						<ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../../images/icons8_B_52px_1.png" />
 							</image>
@@ -107,7 +108,7 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" />
                </padding>
                <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/icons8_D_52px_2.png" />
                      </image>
@@ -120,7 +121,7 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" />
                </padding>
                <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/icons8_Info_50px.png" />
                      </image>

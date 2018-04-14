@@ -1,8 +1,7 @@
-package application.kosmas;
+package application.albatros;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -12,29 +11,67 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import application.infobar.InfoModel;
-
-public class Kosmas {
-
+public class Albatros {
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
 	private WebDriver driver;
 	private ChromeOptions options;
-	private int rowCount = 1;
-	private boolean success = true;
+	private int rowCount;
+	private boolean hasLoggedIn;
 
-	public Kosmas() {
-		this.websiteUrl = "https://firma.kosmas.cz/";
+	public Albatros() {
+		this.websiteUrl = "https://www.distri.cz/Account/Login?ReturnUrl=%2F";
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
+		this.rowCount = 0;
+
+	}
+
+	public static void main(String args[]) {
+		new Albatros().start();
 	}
 
 	public void start() {
-		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
+		// InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
+
+		
+		try {
+			tryToLogin();
+			openMyDocuments();
+			downloadFiles();
+		} catch (Exception e) {
+			System.out.println("Failed to log in");
+			System.out.println(e);
+			hasLoggedIn = false;
+			driver.quit();
+		}
+		driver.quit();
+
+	}
+
+	public boolean hasLoggedIn() {
+		return hasLoggedIn;
+	}
+
+	public void tryToLogin() {
+		hasLoggedIn = true;
+		login();
+	}
+
+	public void download() {
+		// InfoModel.getInstance().updateInfo("Otevírám dokumenty");
+		openMyDocuments();
+		
+	}
+
+	public void end() {
+		pause();
+		endDriver();
 	}
 
 	private void openBrowser() {
@@ -75,82 +112,46 @@ public class Kosmas {
 
 	private void fetchURL() {
 		driver.get(websiteUrl);
-
-	}
-
-	public void tryLogin() {
-		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Kosmas");
-		login();
 	}
 
 	private void login() {
-		insertLoginInformationAndPressOk();
-		success = true;
-		if (!driver.getTitle().contains("Kosmas s.r.o. - objednávkový systém pro knihkupce")) {
-			success = false;
-			InfoModel.getInstance().updateInfo("Nepodařilo se zalogovat");
-		}
-
+		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys("dis06958pv");
+		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys("vankovka");
+		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
 
-	private void insertLoginInformationAndPressOk() {
-		driver.findElement(By.xpath("//*[@id=\"login_id\"]")).sendKeys(loginId);
-		driver.findElement(By.xpath("//*[@id=\"login_pwd\"]")).sendKeys(loginPassword);
-		click(driver, By.xpath("/html/body/div[3]/div[1]/form/table/tbody/tr[4]/td[2]/input"));
-	}
-
-	public void download() {
-		openDocuments();
-		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
-		downloadFiles();
-		pause();
-	}
-
-	private void openDocuments() {
-		click(driver, By.xpath("/html/body/div[1]/div[1]/ul/li[8]/a"));
+	private void openMyDocuments() {
+//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/button/div/div/div/span[1]"));
+//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/ul/li[2]/a"));
+		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
+		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));
+	
+		
 	}
 
 	private void downloadFiles() {
-		for (int i = 1; i < rowCount; i++) {
-			openDeliveryNote(i);
-			waitUntilVisible();
-			List<WebElement> elements = getSourceText().findElements(By.linkText("SBK"));
-			if (elements.size() == 3) {
-				downloadTwoFiles(elements);
-			} else {
-				downloadOneFile(elements);
+		WebElement table = driver.findElement(By.xpath("//*[@id=\"deliveryNotes\"]/tbody"));
+		int lowerBound = 1, upperBound = 5;	
+		for (WebElement row : table.findElements(By.xpath(".//tr"))) {
+			// System.out.println(row.getAttribute("id"));
+			if(lowerBound > upperBound) {
+				break;
 			}
-			goBack();
+			String id = row.getAttribute("id");
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("//*[@id=").append("\"").append(id).append("\"").append("]/td[1]/a[1]");
+			System.out.println(sb.toString());
+//			System.out.println("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]");
+			Actions actions = new Actions(driver);
+
+			actions.moveToElement(row.findElement(By.xpath(sb.toString()))).click().perform();
+//			row.findElement(By.xpath(sb.toString())).click();
+			// row.findElement(By.xpath("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]")).click();
+			lowerBound++;
 		}
-	}
 
-	private void openDeliveryNote(int index) {
-		click(driver, By.xpath("//*[@id=\"tbl_seznam\"]/tbody/tr[" + index + "]/td[1]/a"));
-	}
-
-	private WebElement getSourceText() {
-		return driver.findElement(By.xpath("/html/body/div[3]/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td/table"));
-	}
-
-	private void waitUntilVisible() {
-		InfoModel.getInstance().updateInfo("Stahuji dodací listy.   ");
-		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("SBK")));
-	}
-
-	private void downloadTwoFiles(List<WebElement> elements) {
-		InfoModel.getInstance().updateInfo("Stahuji dodací listy..  ");
-		elements.get(1).click();
-		elements.get(2).click();
-	}
-
-	private void downloadOneFile(List<WebElement> elements) {
-		InfoModel.getInstance().updateInfo("Stahuji dodací listy..  ");
-		elements.get(0).click();
-	}
-
-	private void goBack() {
-		driver.navigate().back();
-		InfoModel.getInstance().updateInfo("Stahuji dodací listy....");
+	
 	}
 
 	private void click(WebDriver driver, By location) {
@@ -167,7 +168,8 @@ public class Kosmas {
 		}
 	}
 
-	public void endDriver() {
+	private void endDriver() {
+		// driver.close();
 		driver.quit();
 	}
 
@@ -180,7 +182,4 @@ public class Kosmas {
 		this.rowCount = amount + 1;
 	}
 
-	public boolean hasLoggedIn() {
-		return this.success;
-	}
 }

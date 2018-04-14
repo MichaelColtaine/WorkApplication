@@ -20,7 +20,6 @@ public class KosmasFileMover {
 			System.out.println(toDirectory);
 			File newFile = new File(toDirectory + renameFile(f.getName()));
 			if (newFile.exists()) {
-				System.out.println("File exists and is being removed and replaced");
 				newFile.delete();
 			}
 			f.renameTo(newFile);

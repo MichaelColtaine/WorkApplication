@@ -68,7 +68,7 @@ public class HomeController {
 	
 	@FXML
 	void handleAlbatrosButton(ActionEvent event) {
-		
+		loadScene("/application/ui/Albatros.fxml");
 	}
 
 	@FXML

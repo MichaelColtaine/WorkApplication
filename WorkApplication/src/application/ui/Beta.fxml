@@ -15,13 +15,6 @@
 			<font>
 				<Font size="24.0" />
 			</font>
-			<graphic>
-				<ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../images/icons8_B_52px_1.png" />
-					</image>
-				</ImageView>
-			</graphic>
 		</Label>
 		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="228.0" onAction="#handleSettingsButtonAction" prefHeight="104.0" prefWidth="200.0" text="Nastavení" textFill="#f0f0f0">
 			<font>
