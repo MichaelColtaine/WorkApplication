@@ -34,9 +34,7 @@
 						</JFXButton>
 					</children>
 				</HBox>
-				<JFXTextField fx:id="emailInput" labelFloat="true"
-	prefHeight="30.0" prefWidth="423.0" promptText="Vlož email k loginu"
-	styleClass="jfx-textfield">
+				<JFXTextField fx:id="idInput" labelFloat="true" prefHeight="30.0" prefWidth="423.0" promptText="Vlož ID k loginu" styleClass="jfx-textfield">
 					<font>
 						<Font size="14.0" />
 					</font>

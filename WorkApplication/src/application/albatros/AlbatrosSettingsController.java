@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import application.euromedia.EuroModel;
+import application.utils.AppUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -25,7 +26,7 @@ public class AlbatrosSettingsController {
 	private JFXButton findPathButton;
 
 	@FXML
-	private JFXTextField emailInput;
+	private JFXTextField idInput;
 
 	@FXML
 	private JFXPasswordField passwordInput;
@@ -40,6 +41,13 @@ public class AlbatrosSettingsController {
 	private Label errorLabel;
 
 	@FXML
+	void initialize() {
+		this.pathInput.setText(AlbatrosModel.getInstance().getSettings().getPath());
+		this.idInput.setText(AlbatrosModel.getInstance().getSettings().getId());
+		this.passwordInput.setText(AlbatrosModel.getInstance().getSettings().getPassword());
+	}
+
+	@FXML
 	void handleCancelButton(ActionEvent event) {
 		closeWindow();
 	}
@@ -50,15 +58,23 @@ public class AlbatrosSettingsController {
 			File path = EuroModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
 			pathInput.setText(path.getAbsolutePath());
 		} catch (Exception NullPointerException) {
-			System.out.println("NPE ��dn� slo�ka nebyla vybr�na.");
+			System.out.println("NPE Žádná složka nebyla vybrána.");
 		}
 	}
 
 	@FXML
 	void handleSaveButton(ActionEvent event) {
-
+		if (AppUtils.isInvalidInput(pathInput) || AppUtils.isInvalidInput(idInput)
+				|| AppUtils.isInvalidInput(passwordInput)) {
+			errorLabel.setText("Pole musí být vyplněné");
+		} else if (!AppUtils.isDirectory(pathInput.getText())) {
+			errorLabel.setText("Složka neexistuje");
+		} else {
+			AlbatrosModel.getInstance().saveSettings(pathInput.getText(), idInput.getText(), passwordInput.getText());
+			closeWindow();
+		}
 	}
-	
+
 	private void closeWindow() {
 		Stage stage = (Stage) root.getScene().getWindow();
 		stage.close();

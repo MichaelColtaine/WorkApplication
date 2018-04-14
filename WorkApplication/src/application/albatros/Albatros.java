@@ -39,7 +39,6 @@ public class Albatros {
 		manageBrowser();
 		fetchURL();
 
-		
 		try {
 			tryToLogin();
 			openMyDocuments();
@@ -66,7 +65,7 @@ public class Albatros {
 	public void download() {
 		// InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
-		
+
 	}
 
 	public void end() {
@@ -115,26 +114,27 @@ public class Albatros {
 	}
 
 	private void login() {
-		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys("dis06958pv");
-		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys("vankovka");
+		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys("loginId");
+		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys("loginPassword");
 		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
 
 	private void openMyDocuments() {
-//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/button/div/div/div/span[1]"));
-//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/ul/li[2]/a"));
+		// click(driver,
+		// By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/button/div/div/div/span[1]"));
+		// click(driver,
+		// By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/ul/li[2]/a"));
 		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
 		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));
-	
-		
+
 	}
 
 	private void downloadFiles() {
 		WebElement table = driver.findElement(By.xpath("//*[@id=\"deliveryNotes\"]/tbody"));
-		int lowerBound = 1, upperBound = 5;	
+		int lowerBound = 1, upperBound = 5;
 		for (WebElement row : table.findElements(By.xpath(".//tr"))) {
 			// System.out.println(row.getAttribute("id"));
-			if(lowerBound > upperBound) {
+			if (lowerBound > upperBound) {
 				break;
 			}
 			String id = row.getAttribute("id");
@@ -142,16 +142,15 @@ public class Albatros {
 
 			sb.append("//*[@id=").append("\"").append(id).append("\"").append("]/td[1]/a[1]");
 			System.out.println(sb.toString());
-//			System.out.println("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]");
+			// System.out.println("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]");
 			Actions actions = new Actions(driver);
 
 			actions.moveToElement(row.findElement(By.xpath(sb.toString()))).click().perform();
-//			row.findElement(By.xpath(sb.toString())).click();
+			// row.findElement(By.xpath(sb.toString())).click();
 			// row.findElement(By.xpath("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]")).click();
 			lowerBound++;
 		}
 
-	
 	}
 
 	private void click(WebDriver driver, By location) {

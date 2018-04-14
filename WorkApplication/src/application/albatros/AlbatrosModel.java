@@ -27,7 +27,7 @@ public class AlbatrosModel {
 	}
 
 	public void startImportEuromedia() {
-		setLoginInfoEuro();
+		setLoginInfo();
 		albatros.start();
 	}
 
@@ -35,7 +35,7 @@ public class AlbatrosModel {
 		return albatros.hasLoggedIn();
 	}
 
-	private void setLoginInfoEuro() {
+	private void setLoginInfo() {
 		albatros.setLoginInfo(settings.getId(), settings.getPassword());
 	}
 
@@ -56,10 +56,10 @@ public class AlbatrosModel {
 	public void saveSettings(String path, String email, String password) {
 		settings.savePath(path);
 		settings.saveLoginInfo(email, password);
-		setLoginInfoEuro();
+		setLoginInfo();
 	}
 
-	public AlbatrosSettings getSettigns() {
+	public AlbatrosSettings getSettings() {
 		return this.settings;
 	}
 
