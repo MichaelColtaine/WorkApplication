@@ -1,9 +1,11 @@
 package application.albatros;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.infobar.InfoModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +33,17 @@ public class AlbatrosController {
 	private ProgressIndicator progress;
 
 	@FXML
-	private ComboBox<?> comboBox;
+	private ComboBox<String> comboBox;
 
 	@FXML
 	private Label messageLabel;
+
+	@FXML
+	void initialize() {
+		comboBox.getItems().removeAll(comboBox.getItems());
+		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+				"16", "17", "18", "19", "20");
+	}
 
 	@FXML
 	void handleSettingsButtonAction(ActionEvent event) {
@@ -52,7 +61,19 @@ public class AlbatrosController {
 
 	@FXML
 	void importButton(ActionEvent event) {
-
+		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
+			AlbatrosModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
+			Thread t1 = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					progress.setVisible(true);
+					AlbatrosModel.getInstance().startAlbatrosImport();
+					progress.setVisible(false);
+					InfoModel.getInstance().updateInfo("");
+				}
+			});
+			t1.start();
+		}
 	}
 
 }

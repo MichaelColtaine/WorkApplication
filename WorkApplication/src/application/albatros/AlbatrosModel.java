@@ -1,7 +1,6 @@
 package application.albatros;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -10,12 +9,10 @@ public class AlbatrosModel {
 	private static AlbatrosModel INSTANCE;
 	private Albatros albatros;
 	private AlbatrosSettings settings;
-	private ArrayList<String> rabatStrings;
 
 	private AlbatrosModel() {
 		this.albatros = new Albatros();
 		this.settings = new AlbatrosSettings();
-		this.rabatStrings = new ArrayList<>();
 
 	}
 
@@ -26,45 +23,23 @@ public class AlbatrosModel {
 		return INSTANCE;
 	}
 
-	public void startImportEuromedia() {
+	public void startAlbatrosImport() {
+		albatros.setDownloadDirecotry(AlbatrosModel.getInstance().getSettings().getPath());
 		setLoginInfo();
 		albatros.start();
-	}
-
-	public boolean hasLoggedIn() {
-		return albatros.hasLoggedIn();
 	}
 
 	private void setLoginInfo() {
 		albatros.setLoginInfo(settings.getId(), settings.getPassword());
 	}
 
-	public void deleteAllTempFiles() {
-		File directory = new File(System.getProperty("user.dir") + "\\temp\\");
-		createDirectoryifItDoesNotExists(directory);
-		for (File f : directory.listFiles()) {
-			f.delete();
-		}
-	}
-
-	private void createDirectoryifItDoesNotExists(File directory) {
-		if (!directory.exists()) {
-			directory.mkdirs();
-		}
-	}
-
 	public void saveSettings(String path, String email, String password) {
 		settings.savePath(path);
 		settings.saveLoginInfo(email, password);
-		setLoginInfo();
 	}
 
 	public AlbatrosSettings getSettings() {
 		return this.settings;
-	}
-
-	public ArrayList<String> getRabatStrings() {
-		return this.rabatStrings;
 	}
 
 	public File chooseDirectory(Window owner) {
@@ -76,15 +51,4 @@ public class AlbatrosModel {
 		albatros.downloadAmount(Integer.parseInt(selectedItem));
 	}
 
-	public void tryLogin() {
-		albatros.tryToLogin();
-	}
-
-	public void end() {
-		albatros.end();
-	}
-
-	public void downloadFiles() {
-		albatros.download();
-	}
 }

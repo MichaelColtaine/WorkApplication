@@ -55,7 +55,7 @@ public class AlbatrosSettingsController {
 	@FXML
 	void handleFindPathButton(ActionEvent event) {
 		try {
-			File path = EuroModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
+			File path = AlbatrosModel.getInstance().chooseDirectory(findPathButton.getScene().getWindow());
 			pathInput.setText(path.getAbsolutePath());
 		} catch (Exception NullPointerException) {
 			System.out.println("NPE Žádná složka nebyla vybrána.");

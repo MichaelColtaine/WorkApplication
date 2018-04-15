@@ -2,6 +2,7 @@ package application.albatros;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import application.infobar.InfoModel;
+
 public class Albatros {
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
 	private WebDriver driver;
@@ -24,33 +27,25 @@ public class Albatros {
 
 	public Albatros() {
 		this.websiteUrl = "https://www.distri.cz/Account/Login?ReturnUrl=%2F";
-		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 		this.rowCount = 0;
-
-	}
-
-	public static void main(String args[]) {
-		new Albatros().start();
 	}
 
 	public void start() {
-		// InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
+		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
-
-		try {
-			tryToLogin();
+		tryToLogin();
+		if (hasLoggedIn) {
 			openMyDocuments();
 			downloadFiles();
-		} catch (Exception e) {
-			System.out.println("Failed to log in");
-			System.out.println(e);
-			hasLoggedIn = false;
 			driver.quit();
 		}
-		driver.quit();
 
+	}
+
+	public void setDownloadDirecotry(String path) {
+		this.downloadDirectory = path;
 	}
 
 	public boolean hasLoggedIn() {
@@ -60,12 +55,11 @@ public class Albatros {
 	public void tryToLogin() {
 		hasLoggedIn = true;
 		login();
-	}
-
-	public void download() {
-		// InfoModel.getInstance().updateInfo("Otevírám dokumenty");
-		openMyDocuments();
-
+		if (driver.getPageSource().contains("Neplatné přihlašovací údaje.")) {
+			InfoModel.getInstance().updateInfo("Nepodařilo se přihlásit");
+			hasLoggedIn = false;
+			driver.quit();
+		}
 	}
 
 	public void end() {
@@ -114,43 +108,35 @@ public class Albatros {
 	}
 
 	private void login() {
-		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys("loginId");
-		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys("loginPassword");
+		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Distri");
+		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(loginId);
+		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys(loginPassword);
 		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
 
 	private void openMyDocuments() {
-		// click(driver,
-		// By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/button/div/div/div/span[1]"));
-		// click(driver,
-		// By.xpath("/html/body/div[4]/div/div/div[2]/div[2]/ul/li[2]/a"));
+		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
 		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));
 
 	}
 
 	private void downloadFiles() {
-		WebElement table = driver.findElement(By.xpath("//*[@id=\"deliveryNotes\"]/tbody"));
-		int lowerBound = 1, upperBound = 5;
-		for (WebElement row : table.findElements(By.xpath(".//tr"))) {
-			// System.out.println(row.getAttribute("id"));
-			if (lowerBound > upperBound) {
-				break;
-			}
-			String id = row.getAttribute("id");
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("//*[@id=").append("\"").append(id).append("\"").append("]/td[1]/a[1]");
-			System.out.println(sb.toString());
-			// System.out.println("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]");
-			Actions actions = new Actions(driver);
-
-			actions.moveToElement(row.findElement(By.xpath(sb.toString()))).click().perform();
-			// row.findElement(By.xpath(sb.toString())).click();
-			// row.findElement(By.xpath("//*[@id=\"deliveryNotes_row_47784255\"]/td[1]/a[1]")).click();
-			lowerBound++;
+		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat dle nastavení']"));
+		Actions actions = new Actions(driver);
+		agreeToCookies();
+		for (int i = 0; i < rowCount; i++) {
+			InfoModel.getInstance().updateInfo("Stahuji soubory.   ");
+			actions.moveToElement(elements.get(i)).click().perform();
+			InfoModel.getInstance().updateInfo("Stahuji soubory..  ");
+			pause();
+			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
 		}
 
+	}
+
+	private void agreeToCookies() {
+		click(driver, By.xpath("/html/body/div[1]/button"));
 	}
 
 	private void click(WebDriver driver, By location) {
@@ -161,14 +147,13 @@ public class Albatros {
 
 	private void pause() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
 	private void endDriver() {
-		// driver.close();
 		driver.quit();
 	}
 
@@ -178,7 +163,7 @@ public class Albatros {
 	}
 
 	public void downloadAmount(int amount) {
-		this.rowCount = amount + 1;
+		this.rowCount = amount;
 	}
 
 }
