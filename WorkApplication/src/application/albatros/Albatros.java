@@ -127,9 +127,13 @@ public class Albatros {
 		agreeToCookies();
 		for (int i = 0; i < rowCount; i++) {
 			InfoModel.getInstance().updateInfo("Stahuji soubory.   ");
+			// elements.get(i).click();
+
 			actions.moveToElement(elements.get(i)).click().perform();
 			InfoModel.getInstance().updateInfo("Stahuji soubory..  ");
 			pause();
+
+			// pause();
 			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
 		}
 
@@ -147,7 +151,7 @@ public class Albatros {
 
 	private void pause() {
 		try {
-			Thread.sleep(100);
+			Thread.sleep(1000);
 		} catch (Exception e) {
 			System.out.println(e);
 		}

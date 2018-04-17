@@ -137,7 +137,6 @@ public class Euromedia {
 	}
 
 	private void endDriver() {
-		// driver.close();
 		driver.quit();
 	}
 

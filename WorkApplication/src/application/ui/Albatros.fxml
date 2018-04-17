@@ -25,14 +25,14 @@
             <FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="importButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="132.0" onAction="#importButton" prefHeight="104.0" prefWidth="200.0" text="Stáhnout dodací listy" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true">
+      <JFXButton fx:id="importButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="132.0" onAction="#importButton" prefHeight="104.0" prefWidth="200.0" text="Importovat dodací listy" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true">
          <font>
             <Font size="14.0" />
          </font>
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/icons8_Data_Transfer_50px.png" />
+                  <Image url="@../../images/icons8_Download_48px_2.png" />
                </image>
             </ImageView>
          </graphic>
