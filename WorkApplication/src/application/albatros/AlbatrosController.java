@@ -66,8 +66,10 @@ public class AlbatrosController {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					AlbatrosModel.getInstance().deleteAllTempFiles();
 					progress.setVisible(true);
 					AlbatrosModel.getInstance().startAlbatrosImport();
+					AlbatrosModel.getInstance().changeAndMoveFile();
 					progress.setVisible(false);
 					InfoModel.getInstance().updateInfo("");
 				}

@@ -28,6 +28,7 @@ public class Albatros {
 	public Albatros() {
 		this.websiteUrl = "https://www.distri.cz/Account/Login?ReturnUrl=%2F";
 		this.rowCount = 0;
+		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 	}
 
 	public void start() {

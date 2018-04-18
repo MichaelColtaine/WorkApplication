@@ -2,6 +2,7 @@ package application.albatros;
 
 import java.io.File;
 
+import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
@@ -9,10 +10,12 @@ public class AlbatrosModel {
 	private static AlbatrosModel INSTANCE;
 	private Albatros albatros;
 	private AlbatrosSettings settings;
+	private FileChanger fileChanger;
 
 	private AlbatrosModel() {
 		this.albatros = new Albatros();
 		this.settings = new AlbatrosSettings();
+		this.fileChanger = new FileChanger();
 
 	}
 
@@ -24,9 +27,34 @@ public class AlbatrosModel {
 	}
 
 	public void startAlbatrosImport() {
-		albatros.setDownloadDirecotry(AlbatrosModel.getInstance().getSettings().getPath());
+		// albatros.setDownloadDirecotry(AlbatrosModel.getInstance().getSettings().getPath());
 		setLoginInfo();
 		albatros.start();
+	}
+
+	public void changeAndMoveFile() {
+		String downloadPath = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
+		File directory = new File(downloadPath);
+		fileChanger.setOuputDirectory(AlbatrosModel.getInstance().getSettings().getPath());
+		for (File f : directory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Přejmenovávám soubory");
+			String name = f.getName().substring(f.getName().length() - 7);
+			fileChanger.changeFile(f, name);
+		}
+	}
+
+	public void deleteAllTempFiles() {
+		File directory = new File(System.getProperty("user.dir") + "\\temp\\");
+		createDirectoryifItDoesNotExists(directory);
+		for (File f : directory.listFiles()) {
+			f.delete();
+		}
+	}
+
+	private void createDirectoryifItDoesNotExists(File directory) {
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
 	}
 
 	private void setLoginInfo() {
