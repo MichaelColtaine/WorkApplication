@@ -1,9 +1,11 @@
 package application.albatros;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 
 import application.infobar.InfoModel;
 import javafx.event.ActionEvent;
@@ -19,6 +21,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class AlbatrosController {
+
+	private List<String> listOfNames = AlbatrosModel.getInstance().getListOfNames();
+
+	@FXML
+	private JFXListView<String> listView;
 
 	@FXML
 	private AnchorPane root;
@@ -43,6 +50,7 @@ public class AlbatrosController {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
 				"16", "17", "18", "19", "20");
+		listView.getItems().addAll(listOfNames);
 	}
 
 	@FXML
@@ -60,7 +68,7 @@ public class AlbatrosController {
 	}
 
 	@FXML
-	void importButton(ActionEvent event) {
+	void handleImportButtonAction(ActionEvent event) {
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
 			AlbatrosModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
 			Thread t1 = new Thread(new Runnable() {
@@ -72,6 +80,7 @@ public class AlbatrosController {
 					AlbatrosModel.getInstance().changeAndMoveFile();
 					progress.setVisible(false);
 					InfoModel.getInstance().updateInfo("");
+					listView.getItems().addAll(listOfNames);
 				}
 			});
 			t1.start();

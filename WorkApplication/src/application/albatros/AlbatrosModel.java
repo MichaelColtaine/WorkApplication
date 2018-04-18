@@ -1,6 +1,8 @@
 package application.albatros;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
@@ -11,6 +13,7 @@ public class AlbatrosModel {
 	private Albatros albatros;
 	private AlbatrosSettings settings;
 	private FileChanger fileChanger;
+	private List<String> listOfNames = new ArrayList<>();
 
 	private AlbatrosModel() {
 		this.albatros = new Albatros();
@@ -32,13 +35,20 @@ public class AlbatrosModel {
 		albatros.start();
 	}
 
+	public List<String> getListOfNames() {
+		return this.listOfNames;
+	}
+
 	public void changeAndMoveFile() {
 		String downloadPath = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 		File directory = new File(downloadPath);
 		fileChanger.setOuputDirectory(AlbatrosModel.getInstance().getSettings().getPath());
 		for (File f : directory.listFiles()) {
+			StringBuilder sb = new StringBuilder();
 			InfoModel.getInstance().updateInfo("Přejmenovávám soubory");
 			String name = f.getName().substring(f.getName().length() - 7);
+			sb.append(f.getName().substring(6, 17)).append(" --> ").append(name);
+			listOfNames.add(sb.toString());
 			fileChanger.changeFile(f, name);
 		}
 	}

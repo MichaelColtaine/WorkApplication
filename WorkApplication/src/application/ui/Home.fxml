@@ -64,6 +64,18 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 					</padding>
 				</JFXButton>
+            <JFXButton fx:id="albatrosButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleAlbatrosButton" prefHeight="77.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Distri/Albatros" textFill="#f0f0f0">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" />
+               </padding>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8_D_52px_2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
 				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="16.0" onAction="#handleEuromediaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
 					<VBox.margin>
 						<Insets />
@@ -103,18 +115,6 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-            <JFXButton fx:id="albatrosButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleAlbatrosButton" prefHeight="77.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Distri/Albatros" textFill="#f0f0f0">
-               <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" />
-               </padding>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons8_D_52px_2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
             <Pane prefHeight="59.0" prefWidth="200.0" />
             <JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleInfoButton" prefHeight="76.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
                <padding>
