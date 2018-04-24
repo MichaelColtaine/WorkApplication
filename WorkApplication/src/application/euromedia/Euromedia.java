@@ -66,7 +66,7 @@ public class Euromedia {
 		System.setProperty("webdriver.chrome.driver", chromeDirectory);
 		changeOptions();
 		driver = new ChromeDriver(options);
-		driver.manage().window().setPosition(new Point(-2000, 0));
+//		driver.manage().window().setPosition(new Point(-2000, 0));
 	}
 
 	private void changeOptions() {

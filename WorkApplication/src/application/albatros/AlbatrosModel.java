@@ -2,6 +2,7 @@ package application.albatros;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import application.infobar.InfoModel;
@@ -36,7 +37,9 @@ public class AlbatrosModel {
 	}
 
 	public List<String> getListOfNames() {
-		return this.listOfNames;
+		
+		
+		return listOfNames;
 	}
 
 	public void changeAndMoveFile() {

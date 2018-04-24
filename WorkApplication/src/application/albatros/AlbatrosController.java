@@ -1,6 +1,7 @@
 package application.albatros;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 
 import application.infobar.InfoModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,6 +73,7 @@ public class AlbatrosController {
 	void handleImportButtonAction(ActionEvent event) {
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
 			AlbatrosModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
+			clearListView();
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -80,11 +83,31 @@ public class AlbatrosController {
 					AlbatrosModel.getInstance().changeAndMoveFile();
 					progress.setVisible(false);
 					InfoModel.getInstance().updateInfo("");
-					listView.getItems().addAll(listOfNames);
+					Collections.reverse(listOfNames);
+					fillListView();
 				}
 			});
 			t1.start();
 		}
+	}
+
+	private void clearListView() {
+		listOfNames.clear();
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				listView.getItems().clear();
+			}
+		});
+	}
+
+	private void fillListView() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				listView.getItems().addAll(listOfNames);
+			}
+		});
 	}
 
 }
