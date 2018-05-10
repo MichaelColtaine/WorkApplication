@@ -14,7 +14,6 @@ public class EuroModel {
 	private ArrayList<String> rabatStrings;
 
 	private EuroModel() {
-
 		this.euromedia = new Euromedia();
 		this.settings = new EuroSettings();
 		this.rabatStrings = new ArrayList<>();

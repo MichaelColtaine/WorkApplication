@@ -55,8 +55,7 @@ public class EuromediaController implements Initializable {
 
 	private void fillCombobox() {
 		comboBox.getItems().removeAll(comboBox.getItems());
-		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-				"16", "17", "18", "19", "20");
+		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 	}
 
 	@FXML
@@ -172,9 +171,9 @@ public class EuromediaController implements Initializable {
 
 	private String getFilenameAndRabat(File file, Double rabat) {
 		if (getFileName(file).contains("VYK")) {
-			return String.format("%s    RABAT: -%.2f", getFileName(file), rabat);
+			return String.format("%s -> %s.txt,  RABAT: -%.2f", getFileName(file), getFileName(file).substring(getFileName(file).length()-3), rabat);
 		}
-		return String.format("%s      RABAT: -%.2f", getFileName(file), rabat);
+		return String.format("%s -> %s.txt,  RABAT: -%.2f", getFileName(file), getFileName(file).substring(getFileName(file).length()-3), rabat);
 
 	}
 

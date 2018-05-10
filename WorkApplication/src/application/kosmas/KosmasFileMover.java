@@ -36,7 +36,7 @@ public class KosmasFileMover {
 		} else {
 			sb.append(fullName.substring(5));
 		}
-		fileNames.add(fullName.toUpperCase().replaceAll(".TXT", " -->  ") + " " + sb.toString());
+		fileNames.add(fullName.toUpperCase().replaceAll(".TXT", " ->  ") + " " + sb.toString() + ", RABAT: -38");
 		return sb.toString();
 	}
 

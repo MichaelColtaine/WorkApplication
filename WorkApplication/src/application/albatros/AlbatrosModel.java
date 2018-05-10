@@ -2,7 +2,6 @@ package application.albatros;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import application.infobar.InfoModel;
@@ -50,7 +49,7 @@ public class AlbatrosModel {
 			StringBuilder sb = new StringBuilder();
 			InfoModel.getInstance().updateInfo("Přejmenovávám soubory");
 			String name = f.getName().substring(f.getName().length() - 7);
-			sb.append(f.getName().substring(6, 17)).append(" --> ").append(name);
+			sb.append(f.getName().substring(6, 17)).append(" -> ").append(name).append(", RABAT: -38");
 			listOfNames.add(sb.toString());
 			fileChanger.changeFile(f, name);
 		}
