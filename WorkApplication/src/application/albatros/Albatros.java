@@ -116,7 +116,7 @@ public class Albatros {
 	}
 
 	private void openMyDocuments() {
-		
+
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
 		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));

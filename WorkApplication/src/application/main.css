@@ -53,6 +53,10 @@
 	-fx-text-fill:#f0f0f0;
 }
 
+.table-cell {
+-fx-alignment: BASELINE_CENTER;
+}
+
 .imageview:hover{
 	-fx-opacity:0.5;
 }

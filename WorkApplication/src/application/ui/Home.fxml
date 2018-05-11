@@ -14,48 +14,67 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.HomeController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="600.0" prefWidth="700.0" stylesheets="@../main.css"
+	xmlns="http://javafx.com/javafx/8.0.141"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controllers.HomeController">
 	<left>
-		<VBox prefHeight="500.0" prefWidth="200.0" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+		<VBox prefHeight="500.0" prefWidth="200.0"
+			stylesheets="@../main.css" BorderPane.alignment="CENTER">
 			<children>
-            <Pane prefHeight="55.0" prefWidth="200.0">
-               <children>
-                  <HBox layoutX="12.0" layoutY="1.0" prefHeight="35.0" prefWidth="186.0">
-                     <children>
-                        <Label text="S" textFill="#f0f0f0" underline="true">
-                           <font>
-                              <Font name="System Italic" size="24.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/icons8_Trolley_52px.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Label>
-                        <Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="56.0" text="kladový " textFill="#f0f0f0">
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label text="P" textFill="#f0f0f0" underline="true">
-                           <font>
-                              <Font name="System Italic" size="24.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="58.0" text="omocník" textFill="#f0f0f0">
-                           <font>
-                              <Font name="System Bold Italic" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Pane layoutX="-4.0" layoutY="40.0" prefHeight="2.0" prefWidth="208.0" style="-fx-background-color: #37474F;" />
-               </children></Pane>
-				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
+				<Pane prefHeight="55.0" prefWidth="200.0">
+					<children>
+						<HBox layoutX="12.0" layoutY="1.0" prefHeight="35.0"
+							prefWidth="186.0">
+							<children>
+								<Label text="S" textFill="#f0f0f0" underline="true">
+									<font>
+										<Font name="System Italic" size="24.0" />
+									</font>
+									<graphic>
+										<ImageView fitHeight="32.0" fitWidth="25.0"
+											pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../../images/icons8_Trolley_52px.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Label>
+								<Label alignment="BOTTOM_LEFT" graphicTextGap="0.0"
+									prefHeight="30.0" prefWidth="56.0" text="kladový "
+									textFill="#f0f0f0">
+									<font>
+										<Font name="System Bold Italic" size="14.0" />
+									</font>
+								</Label>
+								<Label text="P" textFill="#f0f0f0" underline="true">
+									<font>
+										<Font name="System Italic" size="24.0" />
+									</font>
+								</Label>
+								<Label alignment="BOTTOM_LEFT" graphicTextGap="0.0"
+									prefHeight="30.0" prefWidth="58.0" text="omocník"
+									textFill="#f0f0f0">
+									<font>
+										<Font name="System Bold Italic" size="14.0" />
+									</font>
+								</Label>
+							</children>
+						</HBox>
+						<Pane layoutX="-4.0" layoutY="40.0" prefHeight="2.0"
+							prefWidth="208.0" style="-fx-background-color: #37474F;" />
+					</children>
+				</Pane>
+				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="15.0"
+					onAction="#handleRabatButton" prefHeight="75.0" prefWidth="200.0"
+					styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu"
+					textFill="#f0f0f0">
 					<graphic>
-						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="20.0" textAlignment="CENTER" />
+						<FontAwesomeIconView fill="#f0f0f0"
+							glyphName="CALCULATOR" size="20.0" textAlignment="CENTER" />
 					</graphic>
 					<VBox.margin>
 						<Insets />
@@ -64,70 +83,94 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 					</padding>
 				</JFXButton>
-            <JFXButton fx:id="albatrosButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleAlbatrosButton" prefHeight="77.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Distri/Albatros" textFill="#f0f0f0">
-               <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" />
-               </padding>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons8_D_52px_2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="16.0" onAction="#handleEuromediaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
+				<JFXButton fx:id="albatrosButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="22.0"
+					onAction="#handleAlbatrosButton" prefHeight="77.0"
+					prefWidth="200.0" styleClass="jfx-button-leftmenu"
+					text="Distri/Albatros" textFill="#f0f0f0">
+					<padding>
+						<Insets bottom="25.0" left="25.0" right="25.0" />
+					</padding>
+					<graphic>
+						<ImageView fitHeight="20.0" fitWidth="20.0"
+							pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../images/icons8_D_52px_2.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</JFXButton>
+				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="16.0"
+					onAction="#handleEuromediaButton" prefHeight="75.0"
+					prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia"
+					textFill="#f0f0f0">
 					<VBox.margin>
 						<Insets />
 					</VBox.margin>
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons8_E_52px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+					<graphic>
+						<ImageView fitHeight="20.0" fitWidth="20.0"
+							pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../images/icons8_E_52px.png" />
+							</image>
+						</ImageView>
+					</graphic>
 				</JFXButton>
-				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
+				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="22.0"
+					onAction="#handleKosmasButton" prefHeight="75.0" prefWidth="200.0"
+					styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 					<graphic>
-						<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="20.0" fitWidth="20.0"
+							pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../../images/icons8_K_52px.png" />
 							</image>
 						</ImageView>
 					</graphic>
 				</JFXButton>
-				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" layoutX="10.0" layoutY="154.0" onAction="#handleBetaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta" textFill="#f0f0f0">
+				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="22.0" layoutX="10.0"
+					layoutY="154.0" onAction="#handleBetaButton" prefHeight="75.0"
+					prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta"
+					textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
 					<graphic>
-						<ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="20.0" fitWidth="20.0"
+							pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@../../images/icons8_B_52px_1.png" />
 							</image>
 						</ImageView>
 					</graphic>
 				</JFXButton>
-            <Pane prefHeight="59.0" prefWidth="200.0" />
-            <JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleInfoButton" prefHeight="76.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
-               <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" />
-               </padding>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/icons8_Info_50px.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
+				<Pane prefHeight="59.0" prefWidth="200.0" />
+				<JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT"
+					focusTraversable="false" graphicTextGap="22.0"
+					onAction="#handleInfoButton" prefHeight="76.0" prefWidth="200.0"
+					styleClass="jfx-button-leftmenu" text="O Programu"
+					textFill="#f0f0f0">
+					<padding>
+						<Insets bottom="25.0" left="25.0" right="25.0" />
+					</padding>
+					<graphic>
+						<ImageView fitHeight="20.0" fitWidth="20.0"
+							pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../images/icons8_Info_50px.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</JFXButton>
 			</children>
 			<BorderPane.margin>
 				<Insets />
@@ -140,26 +183,40 @@
 		</VBox>
 	</left>
 	<center>
-		<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" BorderPane.alignment="CENTER">
+		<AnchorPane maxHeight="1.7976931348623157E308"
+			maxWidth="1.7976931348623157E308" prefHeight="473.0"
+			prefWidth="500.0" styleClass="right-background"
+			stylesheets="@../main.css" BorderPane.alignment="CENTER">
 			<BorderPane.margin>
 				<Insets />
 			</BorderPane.margin>
 		</AnchorPane>
 	</center>
 	<top>
-		<HBox prefHeight="25.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+		<HBox prefHeight="25.0" prefWidth="700.0"
+			BorderPane.alignment="CENTER">
 			<children>
-				<Pane prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #263238;" styleClass="left-background" stylesheets="@../main.css" />
-				<AnchorPane prefHeight="25.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css">
+				<Pane prefHeight="25.0" prefWidth="200.0"
+					style="-fx-background-color: #263238;" styleClass="left-background"
+					stylesheets="@../main.css" />
+				<AnchorPane prefHeight="25.0" prefWidth="500.0"
+					styleClass="right-background" stylesheets="@../main.css">
 					<children>
-						<HBox alignment="CENTER" layoutX="435.0" layoutY="8.0" spacing="2.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="5.0">
+						<HBox alignment="CENTER" layoutX="435.0" layoutY="8.0"
+							spacing="2.0" AnchorPane.rightAnchor="6.0"
+							AnchorPane.topAnchor="5.0">
 							<children>
-								<ImageView fx:id="minimize" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
+								<ImageView fx:id="minimize" fitHeight="25.0"
+									fitWidth="25.0" pickOnBounds="true" preserveRatio="true"
+									styleClass="imageview">
 									<image>
-										<Image url="@../../images/icons8_Minimize_Window_64px.png" />
+										<Image
+											url="@../../images/icons8_Minimize_Window_64px.png" />
 									</image>
 								</ImageView>
-								<ImageView fx:id="close" fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
+								<ImageView fx:id="close" fitHeight="23.0"
+									fitWidth="23.0" pickOnBounds="true" preserveRatio="true"
+									styleClass="imageview">
 									<image>
 										<Image url="@../../images/icons8_Close_Window_64px.png" />
 									</image>
@@ -172,13 +229,18 @@
 		</HBox>
 	</top>
 	<bottom>
-		<HBox prefHeight="17.0" prefWidth="200.0" spacing="200.0" styleClass="right-background" BorderPane.alignment="CENTER">
+		<HBox prefHeight="17.0" prefWidth="200.0" spacing="200.0"
+			styleClass="right-background" BorderPane.alignment="CENTER">
 			<children>
-				<Pane prefHeight="200.0" prefWidth="200.0" styleClass="left-background" />
-            <Label fx:id="infoLabel" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="17.0" prefWidth="287.0" textFill="#f0f0f0">
-               <padding>
-                  <Insets bottom="5.0" />
-               </padding></Label>
+				<Pane prefHeight="200.0" prefWidth="200.0"
+					styleClass="left-background" />
+				<Label fx:id="infoLabel" alignment="TOP_RIGHT"
+					contentDisplay="BOTTOM" prefHeight="17.0" prefWidth="287.0"
+					textFill="#f0f0f0">
+					<padding>
+						<Insets bottom="5.0" />
+					</padding>
+				</Label>
 			</children>
 		</HBox>
 	</bottom>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.RowRecord;
 import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -13,7 +14,7 @@ public class AlbatrosModel {
 	private Albatros albatros;
 	private AlbatrosSettings settings;
 	private FileChanger fileChanger;
-	private List<String> listOfNames = new ArrayList<>();
+	private List<RowRecord> listOfNames = new ArrayList<>();
 
 	private AlbatrosModel() {
 		this.albatros = new Albatros();
@@ -35,9 +36,8 @@ public class AlbatrosModel {
 		albatros.start();
 	}
 
-	public List<String> getListOfNames() {
-		
-		
+	public List<RowRecord> getListOfNames() {
+
 		return listOfNames;
 	}
 
@@ -46,12 +46,12 @@ public class AlbatrosModel {
 		File directory = new File(downloadPath);
 		fileChanger.setOuputDirectory(AlbatrosModel.getInstance().getSettings().getPath());
 		for (File f : directory.listFiles()) {
-			StringBuilder sb = new StringBuilder();
+
 			InfoModel.getInstance().updateInfo("Přejmenovávám soubory");
-			String name = f.getName().substring(f.getName().length() - 7);
-			sb.append(f.getName().substring(6, 17)).append(" -> ").append(name).append(", RABAT: -38");
-			listOfNames.add(sb.toString());
-			fileChanger.changeFile(f, name);
+			String fileName = f.getName().substring(f.getName().length() - 7);
+			String name = f.getName().substring(6, f.getName().length() - 4);
+			listOfNames.add(new RowRecord(name, fileName, "-38%"));
+			fileChanger.changeFile(f, fileName);
 		}
 	}
 

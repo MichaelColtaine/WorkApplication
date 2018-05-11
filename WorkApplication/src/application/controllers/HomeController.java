@@ -35,8 +35,9 @@ public class HomeController {
 
 	@FXML
 	private JFXButton kosmasButton;
-	
-	@FXML JFXButton albatrosButton;
+
+	@FXML
+	JFXButton albatrosButton;
 
 	@FXML
 	private JFXButton settingsButton;
@@ -65,7 +66,7 @@ public class HomeController {
 	void handleEuromediaButton(ActionEvent event) {
 		loadScene("/application/ui/Euromedia.fxml");
 	}
-	
+
 	@FXML
 	void handleAlbatrosButton(ActionEvent event) {
 		loadScene("/application/ui/Albatros.fxml");

@@ -2,14 +2,15 @@ package application.albatros;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 
+import application.RowRecord;
 import application.infobar.InfoModel;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +19,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class AlbatrosController {
 
-	private List<String> listOfNames = AlbatrosModel.getInstance().getListOfNames();
+	// private List<String> listOfNames =
+	// AlbatrosModel.getInstance().getListOfNames();
+
+	private ObservableList<RowRecord> data = FXCollections.observableArrayList();
 
 	@FXML
-	private JFXListView<String> listView;
+	private TableView<RowRecord> tableView;
 
 	@FXML
 	private AnchorPane root;
@@ -51,7 +57,8 @@ public class AlbatrosController {
 	void initialize() {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
-		listView.getItems().addAll(listOfNames);
+		tableView.setPlaceholder(new Label(""));
+		fillListViewData();
 	}
 
 	@FXML
@@ -82,7 +89,6 @@ public class AlbatrosController {
 					AlbatrosModel.getInstance().changeAndMoveFile();
 					progress.setVisible(false);
 					InfoModel.getInstance().updateInfo("");
-					Collections.reverse(listOfNames);
 					fillListView();
 				}
 			});
@@ -91,11 +97,11 @@ public class AlbatrosController {
 	}
 
 	private void clearListView() {
-		listOfNames.clear();
+		// listOfNames.clear();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				listView.getItems().clear();
+				tableView.getItems().clear();
 			}
 		});
 	}
@@ -104,9 +110,17 @@ public class AlbatrosController {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				listView.getItems().addAll(listOfNames);
+				fillListViewData();
 			}
 		});
 	}
 
+	private void fillListViewData() {
+		data = FXCollections.observableArrayList(AlbatrosModel.getInstance().getListOfNames());
+		Collections.reverse(data);
+		tableView.getItems().addAll(data);
+		tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("deliveryNote"));
+		tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fileName"));
+		tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("rabat"));
+	}
 }
