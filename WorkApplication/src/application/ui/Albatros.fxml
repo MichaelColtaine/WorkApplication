@@ -26,9 +26,9 @@
 			<children>
             <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="230.0">
               <columns>
-                <TableColumn editable="false" prefWidth="89.0" resizable="false" sortable="false" text="Dodací list" />
-                <TableColumn editable="false" prefWidth="77.0" resizable="false" sortable="false" text="Soubor" />
-                  <TableColumn editable="false" prefWidth="65.0" resizable="false" sortable="false" text="Rabat" />
+                <TableColumn editable="false" maxWidth="103.0" minWidth="70.0" prefWidth="92.0" resizable="false" sortable="false" text="Dodací list" />
+                <TableColumn editable="false" maxWidth="81.0" minWidth="40.0" prefWidth="51.0" resizable="false" sortable="false" text="Soubor" />
+                  <TableColumn editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="85.0" resizable="false" sortable="false" text="Rabat" />
               </columns>
             </TableView>
 				<VBox spacing="40.0">

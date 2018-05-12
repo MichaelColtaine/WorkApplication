@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import application.RowRecord;
+
 public class KosmasFileMover {
 
 	private String fromDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 	private String toDirectory;
-	private ArrayList<String> fileNames = new ArrayList<>();
+	private ArrayList<RowRecord> fileNames = new ArrayList<>();
 
 	public KosmasFileMover() {
 
@@ -28,23 +30,29 @@ public class KosmasFileMover {
 
 	private String renameFile(String fullName) {
 		StringBuilder sb = new StringBuilder();
+		String temp = fullName.toUpperCase().replace(".TXT", "");
 		fullName = fullName.toLowerCase().replace("-", "");
 		if (fullName.contains("f")) {
 			sb.append(fullName.substring(6));
+			fullName = fullName.substring(6);
 		} else if (fullName.contains("k")) {
 			sb.append(fullName.substring(6));
+			fullName = fullName.substring(6);
 		} else {
 			sb.append(fullName.substring(5));
+			fullName = fullName.substring(5);
 		}
-		fileNames.add(fullName.toUpperCase().replaceAll(".TXT", " ->  ") + " " + sb.toString() + ", RABAT: -38");
+//		fileNames.add(fullName.toUpperCase().replaceAll(".TXT", " ->  ") + " " + sb.toString() + ", RABAT: -38");
+		fileNames.add(new RowRecord(temp, sb.toString(), "-38,00%"));
 		return sb.toString();
 	}
+	
 
 	public void setDestinantionDirectory(String toDirectory) {
 		this.toDirectory = toDirectory + File.separator;
 	}
 
-	public ArrayList<String> getListOfNames() {
+	public ArrayList<RowRecord> getListOfNames() {
 		return fileNames;
 	}
 

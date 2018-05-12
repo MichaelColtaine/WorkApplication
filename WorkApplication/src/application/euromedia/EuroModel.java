@@ -3,6 +3,7 @@ package application.euromedia;
 import java.io.File;
 import java.util.ArrayList;
 
+import application.RowRecord;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
@@ -11,12 +12,12 @@ public class EuroModel {
 	private static EuroModel INSTANCE;
 	private Euromedia euromedia;
 	private EuroSettings settings;
-	private ArrayList<String> rabatStrings;
+	private ArrayList<RowRecord> records;
 
 	private EuroModel() {
 		this.euromedia = new Euromedia();
 		this.settings = new EuroSettings();
-		this.rabatStrings = new ArrayList<>();
+		this.records = new ArrayList<>();
 
 	}
 
@@ -64,8 +65,8 @@ public class EuroModel {
 		return this.settings;
 	}
 
-	public ArrayList<String> getRabatStrings() {
-		return this.rabatStrings;
+	public ArrayList<RowRecord> getRecords() {
+		return this.records;
 	}
 
 	public File chooseDirectory(Window owner) {

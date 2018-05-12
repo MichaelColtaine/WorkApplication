@@ -27,9 +27,6 @@ import javafx.stage.StageStyle;
 
 public class AlbatrosController {
 
-	// private List<String> listOfNames =
-	// AlbatrosModel.getInstance().getListOfNames();
-
 	private ObservableList<RowRecord> data = FXCollections.observableArrayList();
 
 	@FXML
@@ -66,7 +63,7 @@ public class AlbatrosController {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("AlbatrosSettings.fxml"));
 			Stage stage = new Stage(StageStyle.UTILITY);
-			stage.setTitle("Nastaven� Albatros");
+			stage.setTitle("Nastavení Albatros");
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.showAndWait();
@@ -83,13 +80,18 @@ public class AlbatrosController {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					AlbatrosModel.getInstance().deleteAllTempFiles();
-					progress.setVisible(true);
-					AlbatrosModel.getInstance().startAlbatrosImport();
-					AlbatrosModel.getInstance().changeAndMoveFile();
-					progress.setVisible(false);
-					InfoModel.getInstance().updateInfo("");
-					fillListView();
+					try {
+						AlbatrosModel.getInstance().deleteAllTempFiles();
+						progress.setVisible(true);
+						AlbatrosModel.getInstance().startAlbatrosImport();
+						AlbatrosModel.getInstance().changeAndMoveFile();
+						progress.setVisible(false);
+						InfoModel.getInstance().updateInfo("");
+						fillListView();
+					} catch (Exception E) {
+						InfoModel.getInstance().updateInfo("Import se nezdařil");
+						progress.setVisible(false);
+					}
 				}
 			});
 			t1.start();
@@ -97,7 +99,8 @@ public class AlbatrosController {
 	}
 
 	private void clearListView() {
-		// listOfNames.clear();
+		data.clear();
+		AlbatrosModel.getInstance().getListOfNames().clear();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

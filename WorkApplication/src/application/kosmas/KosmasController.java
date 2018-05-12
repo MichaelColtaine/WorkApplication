@@ -1,15 +1,16 @@
 package application.kosmas;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 
+import application.RowRecord;
 import application.infobar.InfoModel;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,13 +19,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class KosmasController {
 
-	private ArrayList<String> listViewItems = KosmasModel.getInstance().getFileNames();
+	private ObservableList<RowRecord> data = FXCollections
+			.observableArrayList(KosmasModel.getInstance().getFileNames());
 
 	@FXML
 	private AnchorPane root;
@@ -45,17 +49,28 @@ public class KosmasController {
 	private ProgressIndicator progress;
 
 	@FXML
-	private JFXListView<String> listView;
+	private TableView<RowRecord> tableView;
 
 	@FXML
 	void initialize() {
+		tableView.setPlaceholder(new Label(""));
 		fillCombobox();
-		listView.getItems().addAll(listViewItems);
+		// listView.getItems().addAll(listViewItems);
+		refreshData();
 	}
 
 	private void fillCombobox() {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+	}
+
+	private void refreshData() {
+		data = FXCollections.observableArrayList(KosmasModel.getInstance().getFileNames());
+		Collections.reverse(data);
+		tableView.getItems().addAll(data);
+		tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("deliveryNote"));
+		tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fileName"));
+		tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("rabat"));
 	}
 
 	@FXML
@@ -65,6 +80,7 @@ public class KosmasController {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					try {
 					clearListView();
 					KosmasModel.getInstance().setDestinantionDirectory();
 					progress.setVisible(true);
@@ -79,6 +95,10 @@ public class KosmasController {
 						progress.setVisible(false);
 						KosmasModel.getInstance().end();
 					}
+					} catch (Exception e) {
+						progress.setVisible(false);
+						InfoModel.getInstance().updateInfo("Import se nezdařil");
+					}
 				}
 			});
 			t1.start();
@@ -91,11 +111,14 @@ public class KosmasController {
 	}
 
 	private void clearListView() {
-		listViewItems.clear();
+		// listViewItems.clear();
+		KosmasModel.getInstance().getFileNames().clear();
+		data.clear();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				listView.getItems().clear();
+				// listView.getItems().clear();
+				tableView.getItems().clear();
 			}
 		});
 	}
@@ -110,8 +133,9 @@ public class KosmasController {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				Collections.reverse(listViewItems);
-				listView.getItems().addAll(listViewItems);
+				// Collections.reverse(listViewItems);
+				// listView.getItems().addAll(listViewItems);
+				refreshData();
 			}
 		});
 	}
@@ -121,7 +145,7 @@ public class KosmasController {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("KosmasSettings.fxml"));
 			Stage stage = new Stage(StageStyle.UTILITY);
-			stage.setTitle("Nastaven� Kosmas");
+			stage.setTitle("Nastavení Kosmas");
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.showAndWait();

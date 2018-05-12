@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import application.RowRecord;
 import application.infobar.InfoModel;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -32,7 +33,7 @@ public class KosmasModel {
 		fileMover.setDestinantionDirectory(settings.getPath());
 	}
 
-	public ArrayList<String> getFileNames() {
+	public ArrayList<RowRecord> getFileNames() {
 		return fileMover.getListOfNames();
 
 	}

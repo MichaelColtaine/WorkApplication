@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,7 +24,13 @@
 		</Label>
 		<HBox layoutX="35.0" layoutY="74.0" spacing="25.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="64.0">
 			<children>
-				<JFXListView fx:id="listView" prefHeight="384.0" prefWidth="261.0" />
+            <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="230.0">
+               <columns>
+                  <TableColumn editable="false" maxWidth="103.0" minWidth="70.0" prefWidth="92.0" resizable="false" sortable="false" text="Dodací list" />
+                  <TableColumn editable="false" maxWidth="81.0" minWidth="40.0" prefWidth="51.0" resizable="false" sortable="false" text="Soubor" />
+                  <TableColumn editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="85.0" resizable="false" sortable="false" text="Rabat" />
+               </columns>
+            </TableView>
 				<VBox spacing="40.0">
 					<children>
 						<HBox alignment="CENTER">

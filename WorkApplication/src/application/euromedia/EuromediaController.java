@@ -3,19 +3,20 @@ package application.euromedia;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 
+import application.RowRecord;
 import application.infobar.InfoModel;
 import application.utils.FileChanger;
 import application.utils.NumberFinder;
 import application.utils.PdfWorker;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,16 +24,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class EuromediaController implements Initializable {
 
-	private ArrayList<String> rabatStrings = EuroModel.getInstance().getRabatStrings();
+	private ObservableList<RowRecord> data = FXCollections.observableArrayList();
 
+	// @FXML
+	// private JFXListView<String> listView;
 	@FXML
-	private JFXListView<String> listView;
+	private TableView<RowRecord> tableView;
 
 	@FXML
 	private JFXButton settingsButton;
@@ -49,8 +56,18 @@ public class EuromediaController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		fillCombobox();
-		listView.getItems().addAll(rabatStrings);
+		tableView.setPlaceholder(new Label(" "));
+		refreshData();
 
+	}
+
+	private void refreshData() {
+		data.addAll(EuroModel.getInstance().getRecords());
+		Collections.reverse(data);
+		tableView.getItems().addAll(data);
+		tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("deliveryNote"));
+		tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fileName"));
+		tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("rabat"));
 	}
 
 	private void fillCombobox() {
@@ -65,7 +82,12 @@ public class EuromediaController implements Initializable {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					startImport();
+					try {
+						startImport();
+					} catch (Exception e) {
+						InfoModel.getInstance().updateInfo("Import se nezdařil");
+						progress.setVisible(false);
+					}
 				}
 			});
 			t1.start();
@@ -110,7 +132,7 @@ public class EuromediaController implements Initializable {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				listView.getItems().addAll(rabatStrings);
+				refreshData();
 			}
 		});
 	}
@@ -125,11 +147,12 @@ public class EuromediaController implements Initializable {
 	}
 
 	private void clearListView() {
-		rabatStrings.clear();
+		EuroModel.getInstance().getRecords().clear();
+		data.clear();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				listView.getItems().clear();
+				tableView.getItems().clear();
 			}
 		});
 	}
@@ -146,11 +169,10 @@ public class EuromediaController implements Initializable {
 				InfoModel.getInstance().updateInfo("Vypočítávám rabat pro " + file.getName());
 				Double rabat = calculateRabat(finder.findNumbers(worker.getText(file.getAbsolutePath()))[1],
 						finder.findNumbers(worker.getText(file.getAbsolutePath()))[0]);
-				rabatStrings.add(getFilenameAndRabat(file, rabat));
+				EuroModel.getInstance().getRecords().add(getFilenameAndRabat(file, rabat));
 
 			}
 		}
-		Collections.reverse(rabatStrings);
 	}
 
 	private void pause() {
@@ -169,12 +191,9 @@ public class EuromediaController implements Initializable {
 		return (first - second) / (first * 0.01);
 	}
 
-	private String getFilenameAndRabat(File file, Double rabat) {
-		if (getFileName(file).contains("VYK")) {
-			return String.format("%s -> %s.txt,  RABAT: -%.2f", getFileName(file), getFileName(file).substring(getFileName(file).length()-3), rabat);
-		}
-		return String.format("%s -> %s.txt,  RABAT: -%.2f", getFileName(file), getFileName(file).substring(getFileName(file).length()-3), rabat);
-
+	private RowRecord getFilenameAndRabat(File file, Double rabat) {
+		return new RowRecord(getFileName(file), getFileName(file).substring(getFileName(file).length() - 3) + ".txt",
+				String.format("-%.2f", rabat) + "%");
 	}
 
 	private String getFileName(File file) {

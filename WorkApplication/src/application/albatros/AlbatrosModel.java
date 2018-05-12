@@ -50,7 +50,7 @@ public class AlbatrosModel {
 			InfoModel.getInstance().updateInfo("Přejmenovávám soubory");
 			String fileName = f.getName().substring(f.getName().length() - 7);
 			String name = f.getName().substring(6, f.getName().length() - 4);
-			listOfNames.add(new RowRecord(name, fileName, "-38%"));
+			listOfNames.add(new RowRecord(name, fileName, "-38.00%"));
 			fileChanger.changeFile(f, fileName);
 		}
 	}
