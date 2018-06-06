@@ -25,9 +25,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -53,8 +54,15 @@ public class EuromediaController implements Initializable {
 	@FXML
 	private ComboBox<String> comboBox;
 
+	@FXML
+	private RadioButton ssbButton;
+
+	@FXML
+	private ToggleGroup system;
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+
 		fillCombobox();
 		tableView.setPlaceholder(new Label(" "));
 		refreshData();
@@ -72,7 +80,7 @@ public class EuromediaController implements Initializable {
 
 	private void fillCombobox() {
 		comboBox.getItems().removeAll(comboBox.getItems());
-		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15");
 	}
 
 	@FXML
@@ -110,6 +118,14 @@ public class EuromediaController implements Initializable {
 	}
 
 	private void startImport() {
+		if (ssbButton.isSelected()) {
+			startSSB();
+		} else {
+
+		}
+	}
+
+	private void startSSB() {
 		EuroModel.getInstance().deleteAllTempFiles();
 		progress.setVisible(true);
 		clearListView();

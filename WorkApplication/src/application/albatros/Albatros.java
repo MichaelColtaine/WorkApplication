@@ -107,43 +107,49 @@ public class Albatros {
 	private void fetchURL() {
 		driver.get(websiteUrl);
 	}
-
+	
+	
 	private void login() {
 		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Distri");
 		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(loginId);
 		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys(loginPassword);
 		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
+	
 
 	private void openMyDocuments() {
-
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
-		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
-		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));
+		driver.get("https://www.distri.cz/Customer/Detail");
 
 	}
+
+//	private void login() {
+//		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Distri");
+//		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(loginId);
+//		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys(loginPassword);
+//		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
+//	}
+//
+//	private void openMyDocuments() {
+//		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
+//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
+//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));
+//
+//	}
 
 	private void downloadFiles() {
 		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat dle nastavení']"));
 		Actions actions = new Actions(driver);
-		agreeToCookies();
 		for (int i = 0; i < rowCount; i++) {
 			InfoModel.getInstance().updateInfo("Stahuji soubory.   ");
-			// elements.get(i).click();
-
 			actions.moveToElement(elements.get(i)).click().perform();
 			InfoModel.getInstance().updateInfo("Stahuji soubory..  ");
 			pause();
-
-			// pause();
 			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
 		}
 
 	}
 
-	private void agreeToCookies() {
-		click(driver, By.xpath("/html/body/div[1]/button"));
-	}
 
 	private void click(WebDriver driver, By location) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -155,7 +161,7 @@ public class Albatros {
 		try {
 			Thread.sleep(1000);
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 

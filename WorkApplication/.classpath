@@ -25,5 +25,12 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-io-2.6/commons-io-2.6-test-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/phantomjsdriver-1.4.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-examples-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-excelant-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-scratchpad-3.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

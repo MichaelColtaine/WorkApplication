@@ -88,9 +88,10 @@ public class AlbatrosController {
 						progress.setVisible(false);
 						InfoModel.getInstance().updateInfo("");
 						fillListView();
-					} catch (Exception E) {
+					} catch (Exception e) {
 						InfoModel.getInstance().updateInfo("Import se nezdařil");
 						progress.setVisible(false);
+						e.printStackTrace();
 					}
 				}
 			});
