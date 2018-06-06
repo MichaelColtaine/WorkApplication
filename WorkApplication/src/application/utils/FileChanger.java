@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import application.euromedia.EuroModel;
+
 public class FileChanger {
 
 	private static String FROM_DIRECTORY = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
+	private static ExcelUtils excel = new ExcelUtils();
 
 	/*
 	 * This method unzips files so that they can be renamed and moved via the
@@ -39,7 +42,7 @@ public class FileChanger {
 	 * This method shortens file names and and moves them as .TXT file to a
 	 * directory that it takes as an argument. For example bob123 -> 123.txt
 	 */
-	public static void changeAllEuroFiles(String toDirectory) {
+	public static void changeAllEuroFilesSSB(String toDirectory) {
 		File directory = new File(FROM_DIRECTORY);
 		StringBuilder sb = new StringBuilder();
 		for (File source : directory.listFiles()) {
@@ -58,6 +61,34 @@ public class FileChanger {
 				System.out.println(e);
 			}
 		}
+	}
+	
+	public static void changeAllEuroFilesFlores(String toDirectory) {
+		File directory = new File(FROM_DIRECTORY);
+		StringBuilder sb = new StringBuilder();
+		for (File source : directory.listFiles()) {
+			sb.delete(0, sb.length());
+
+			if (source.getName().toLowerCase().contains("vyk")) {
+				sb.append(FROM_DIRECTORY).append(File.separator).append(source.getName().substring(0, 15)).append(".xls");
+			} else {
+				sb.append(FROM_DIRECTORY).append(File.separator).append(source.getName().substring(0, 14)).append(".xls");
+			}
+
+			File destination = new File(sb.toString());
+			try {
+				unzip(source, destination);
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+		}
+		for(File f : directory.listFiles()) {
+			if(f.getName().contains(".zip")) {
+				f.delete();
+				System.out.println(f.getName());
+			}
+		}
+		excel.euromediaExcel(FROM_DIRECTORY, EuroModel.getInstance().getSettigns().getPath());
 	}
 
 }

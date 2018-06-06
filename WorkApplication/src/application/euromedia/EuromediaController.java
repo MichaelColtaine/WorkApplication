@@ -118,31 +118,34 @@ public class EuromediaController implements Initializable {
 	}
 
 	private void startImport() {
-		if (ssbButton.isSelected()) {
-			startSSB();
-		} else {
-
-		}
-	}
-
-	private void startSSB() {
 		EuroModel.getInstance().deleteAllTempFiles();
 		progress.setVisible(true);
 		clearListView();
 		EuroModel.getInstance().startImportEuromedia();
 		EuroModel.getInstance().tryLogin();
 		if (EuroModel.getInstance().hasLoggedIn()) {
-			EuroModel.getInstance().downloadFiles();
-			pause();
-			changePdfToString();
-			FileChanger.changeAllEuroFiles(EuroModel.getInstance().getSettigns().getPath());
-			InfoModel.getInstance().updateInfo("Hotovo!");
-			fillListView();
-			progress.setVisible(false);
-			EuroModel.getInstance().end();
+			if (ssbButton.isSelected()) {
+				EuroModel.getInstance().downloadFilesSSB();
+				pause();
+				changePdfToString();
+				FileChanger.changeAllEuroFilesSSB(EuroModel.getInstance().getSettigns().getPath());
+				
+			} else {
+				EuroModel.getInstance().downloadFilesFlores();
+				pause();
+				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettigns().getPath());
+			
+			}
+
 		}
+		InfoModel.getInstance().updateInfo("Hotovo!");
+		fillListView();
+		EuroModel.getInstance().end();
 		progress.setVisible(false);
+		EuroModel.getInstance().deleteAllTempFiles();
 	}
+
+
 
 	private void fillListView() {
 		Platform.runLater(new Runnable() {

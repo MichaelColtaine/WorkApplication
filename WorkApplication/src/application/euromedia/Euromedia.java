@@ -50,10 +50,16 @@ public class Euromedia {
 		}
 	}
 
-	public void download() {
+	public void downloadSSB() {
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
-		downloadFiles();
+		downloadFilesSSB();
+	}
+
+	public void downloadFlores() {
+		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
+		openMyDocuments();
+		downloadFilesFlores();
 	}
 
 	public void end() {
@@ -112,12 +118,20 @@ public class Euromedia {
 		driver.findElement(By.id("nav-dokumenty")).click();
 	}
 
-	private void downloadFiles() {
+	private void downloadFilesSSB() {
 		for (int i = 2; i <= rowCount; i++) {
 			InfoModel.getInstance().updateInfo("Stahuji dodací listy.    ");
 			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[9]"));
 			InfoModel.getInstance().updateInfo("Stahuji dodací listy...  ");
 			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[11]"));
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.....");
+		}
+	}
+
+	private void downloadFilesFlores() {
+		for (int i = 2; i <= rowCount; i++) {
+			InfoModel.getInstance().updateInfo("Stahuji dodací listy.    ");
+			click(driver, By.xpath("//*[@id=\"content-main\"]/table/tbody/tr[" + i + "]/td[6]/a"));
 			InfoModel.getInstance().updateInfo("Stahuji dodací listy.....");
 		}
 	}

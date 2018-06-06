@@ -14,18 +14,25 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import application.RowRecord;
+import application.euromedia.EuroModel;
+
 public class ExcelUtils {
 
 	private File fromDirectory, toDirectory;
 
 	public void euromediaExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
+
 		for (File f : fromDirectory.listFiles()) {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(0, f.getName().length() - 3))
 					.append("xlsx");
+			EuroModel.getInstance().getRecords().add(new RowRecord(sb.toString().substring(4, sb.toString().length()-5), "", ""));
 			writeFile(readFile(f), toDirectoryPath, sb.toString());
 		}
+		
 	}
+	
 
 	private void createDirectoriesIfDontExist(String fromDirectoryPath, String toDirectoryPath) {
 		fromDirectory = new File(fromDirectoryPath);
@@ -52,12 +59,13 @@ public class ExcelUtils {
 				String amountAsString = String.valueOf(convertAmountToInt);
 				records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString));
 			}
+			wb.close();
 
 		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
 				| IOException e) {
+			System.out.println("readFile in ExcelUtils");
 			e.printStackTrace();
 		}
-
 		return records;
 	}
 
@@ -78,7 +86,7 @@ public class ExcelUtils {
 		}
 
 		try {
-			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + fileName);
+			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName);
 			workbook.write(fileOut);
 			fileOut.close();
 			workbook.close();
