@@ -1,7 +1,10 @@
 package application.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import application.RowRecord;
+import application.beta.BetaModel;
 import application.euromedia.EuroModel;
 
 public class ExcelUtils {
@@ -27,12 +31,44 @@ public class ExcelUtils {
 		for (File f : fromDirectory.listFiles()) {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(0, f.getName().length() - 3))
 					.append("xlsx");
-			EuroModel.getInstance().getRecords().add(new RowRecord(sb.toString().substring(4, sb.toString().length()-5), "", ""));
+			EuroModel.getInstance().getRecords()
+					.add(new RowRecord(sb.toString().substring(4, sb.toString().length() - 5), "", ""));
 			writeFile(readFile(f), toDirectoryPath, sb.toString());
 		}
-		
+
 	}
-	
+
+	public void betaExcel() {
+		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+		File directory = new File(BetaModel.getInstance().getFromPath());
+		for (File f : directory.listFiles()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+				String line;
+				String ean = "", amount = "";
+				while ((line = br.readLine()) != null) {
+					if (line.contains("Ks")) {
+						amount = line.substring(56, 59);
+					}
+					if (line.contains("0.09")) {
+						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
+					}
+					if (!amount.isEmpty() && !ean.isEmpty()) {
+						records.add(new ExcelRecord(ean, amount));
+						ean = "";
+						amount = "";
+					}
+				}
+				writeFile(records, BetaModel.getInstance().getToPath(),
+						f.getName().substring(0, f.getName().length() - 3) + "xlsx");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			records.clear();
+			f.delete();
+		}
+	}
 
 	private void createDirectoriesIfDontExist(String fromDirectoryPath, String toDirectoryPath) {
 		fromDirectory = new File(fromDirectoryPath);

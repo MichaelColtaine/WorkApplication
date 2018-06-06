@@ -6,13 +6,15 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 
 import application.infobar.InfoModel;
+import application.utils.ExcelUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,6 +32,12 @@ public class BetaController {
 
 	@FXML
 	private ProgressIndicator progress;
+	
+    @FXML
+    private RadioButton ssbButton;
+
+    @FXML
+    private ToggleGroup system;
 
 	@FXML
 	void handleSettingsButtonAction(ActionEvent event) {
@@ -48,15 +56,24 @@ public class BetaController {
 	@FXML
 
 	void handleMoveButton() {
+		
+		ExcelUtils exel = new ExcelUtils();
+	
+		
 		if (isFolderEmpty()) {
 			InfoModel.getInstance().updateInfo("Složka je prázdná!");
 		} else {
+			if(ssbButton.isSelected()) {
 			progress.setVisible(true);
 			BetaModel.getInstance().moveAndRename();
 			progress.setVisible(false);
-			InfoModel.getInstance().updateInfo("Hotovo!");
+			
+			} else {
+				exel.betaExcel();
+				
+			}
 		}
-
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	public boolean isFolderEmpty() {
