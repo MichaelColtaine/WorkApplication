@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 
 import application.RowRecord;
 import application.infobar.InfoModel;
+import application.utils.ExcelUtils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -37,6 +40,12 @@ public class AlbatrosController {
 
 	@FXML
 	private JFXButton settingsButton;
+
+	@FXML
+	private RadioButton ssbButton;
+
+	@FXML
+	private ToggleGroup system;
 
 	@FXML
 	private JFXButton importButton;
@@ -83,11 +92,18 @@ public class AlbatrosController {
 					try {
 						AlbatrosModel.getInstance().deleteAllTempFiles();
 						progress.setVisible(true);
-						AlbatrosModel.getInstance().startAlbatrosImport();
-						AlbatrosModel.getInstance().changeAndMoveFile();
+						if (ssbButton.isSelected()) {
+							AlbatrosModel.getInstance().startAlbatrosImport();
+							AlbatrosModel.getInstance().changeAndMoveFile();
+						} else {
+							ExcelUtils exel = new ExcelUtils();
+							AlbatrosModel.getInstance().startAlbatrosImportFlores();
+							exel.albatrosExcel();
+						}
 						progress.setVisible(false);
 						InfoModel.getInstance().updateInfo("");
 						fillListView();
+
 					} catch (Exception e) {
 						InfoModel.getInstance().updateInfo("Import se nezdařil");
 						progress.setVisible(false);

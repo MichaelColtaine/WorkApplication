@@ -31,9 +31,13 @@ public class AlbatrosModel {
 	}
 
 	public void startAlbatrosImport() {
-		// albatros.setDownloadDirecotry(AlbatrosModel.getInstance().getSettings().getPath());
 		setLoginInfo();
-		albatros.start();
+		albatros.startSSB();
+	}
+	
+	public void startAlbatrosImportFlores() {
+		setLoginInfo();
+		albatros.startFlores();
 	}
 
 	public List<RowRecord> getListOfNames() {

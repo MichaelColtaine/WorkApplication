@@ -31,7 +31,7 @@ public class Albatros {
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 	}
 
-	public void start() {
+	public void startSSB() {
 		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
@@ -39,7 +39,21 @@ public class Albatros {
 		tryToLogin();
 		if (hasLoggedIn) {
 			openMyDocuments();
-			downloadFiles();
+			downloadFilesSSB();
+			driver.quit();
+		}
+
+	}
+	
+	public void startFlores() {
+		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
+		openBrowser();
+		manageBrowser();
+		fetchURL();
+		tryToLogin();
+		if (hasLoggedIn) {
+			openMyDocuments();
+			downloadFilesFlores();
 			driver.quit();
 		}
 
@@ -137,7 +151,7 @@ public class Albatros {
 //
 //	}
 
-	private void downloadFiles() {
+	private void downloadFilesSSB() {
 		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat dle nastavení']"));
 		Actions actions = new Actions(driver);
 		for (int i = 0; i < rowCount; i++) {
@@ -147,7 +161,18 @@ public class Albatros {
 			pause();
 			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
 		}
-
+	}
+	
+	private void downloadFilesFlores() {
+		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat do Excelu']"));
+		Actions actions = new Actions(driver);
+		for (int i = 0; i < rowCount; i++) {
+			InfoModel.getInstance().updateInfo("Stahuji soubory.   ");
+			actions.moveToElement(elements.get(i)).click().perform();
+			InfoModel.getInstance().updateInfo("Stahuji soubory..  ");
+			pause();
+			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
+		}
 	}
 
 
