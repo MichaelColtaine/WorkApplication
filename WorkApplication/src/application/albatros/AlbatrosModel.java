@@ -11,13 +11,13 @@ import javafx.stage.Window;
 
 public class AlbatrosModel {
 	private static AlbatrosModel INSTANCE;
-	private Albatros albatros;
+	private AlbatrosDownloader albatros;
 	private AlbatrosSettings settings;
 	private FileChanger fileChanger;
 	private List<RowRecord> listOfNames = new ArrayList<>();
 
 	private AlbatrosModel() {
-		this.albatros = new Albatros();
+		this.albatros = new AlbatrosDownloader();
 		this.settings = new AlbatrosSettings();
 		this.fileChanger = new FileChanger();
 

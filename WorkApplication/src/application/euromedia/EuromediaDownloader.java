@@ -15,14 +15,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import application.infobar.InfoModel;
 
-public class Euromedia {
+public class EuromediaDownloader {
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
 	private WebDriver driver;
 	private ChromeOptions options;
 	private int rowCount;
 	private boolean hasLoggedIn;
 
-	public Euromedia() {
+	public EuromediaDownloader() {
 		this.websiteUrl = "https://vo.knizniweb.cz/";
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 		this.rowCount = 0;

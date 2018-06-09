@@ -32,12 +32,12 @@ public class BetaController {
 
 	@FXML
 	private ProgressIndicator progress;
-	
-    @FXML
-    private RadioButton ssbButton;
 
-    @FXML
-    private ToggleGroup system;
+	@FXML
+	private RadioButton ssbButton;
+
+	@FXML
+	private ToggleGroup system;
 
 	@FXML
 	void handleSettingsButtonAction(ActionEvent event) {
@@ -56,21 +56,20 @@ public class BetaController {
 	@FXML
 
 	void handleMoveButton() {
-		
+
 		ExcelUtils exel = new ExcelUtils();
-	
-		
+
 		if (isFolderEmpty()) {
 			InfoModel.getInstance().updateInfo("Složka je prázdná!");
 		} else {
-			if(ssbButton.isSelected()) {
-			progress.setVisible(true);
-			BetaModel.getInstance().moveAndRename();
-			progress.setVisible(false);
-			
+			if (ssbButton.isSelected()) {
+				progress.setVisible(true);
+				BetaModel.getInstance().moveAndRename();
+				progress.setVisible(false);
+
 			} else {
 				exel.betaExcel();
-				
+
 			}
 		}
 		InfoModel.getInstance().updateInfo("Hotovo!");

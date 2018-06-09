@@ -11,17 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import application.Model;
 import application.RowRecord;
 import application.albatros.AlbatrosModel;
 import application.beta.BetaModel;
 import application.euromedia.EuroModel;
+import application.kosmas.KosmasModel;
 
 public class ExcelUtils {
 
@@ -42,10 +43,34 @@ public class ExcelUtils {
 		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
 		for (File f : directory.listFiles()) {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
-			System.out.println(sb.toString().substring(6, sb.toString().length() - 5));
 			AlbatrosModel.getInstance().getListOfNames()
 					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
 			writeFile(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(), sb.toString());
+		}
+	}
+
+	public void kosmasExcel() {
+		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
+		for (File f : directory.listFiles()) {
+			List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+				String line;
+				while ((line = br.readLine()) != null) {
+					int index = line.indexOf("ks");
+					String amount = line.substring(index + 9, index + 16);
+					amount = amount.substring(0, amount.indexOf("."));
+					String ean = line.substring(index + 81, index + 94);
+					records.add(new ExcelRecord(ean, amount));
+					writeFile(records, KosmasModel.getInstance().getSettings().getPath(),
+							f.getName().replaceAll(".txt", ".xlsx"));
+				}
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			KosmasModel.getInstance().getFileNames().add(new RowRecord(f.getName().replace(".txt", ""), "", ""));
 		}
 	}
 
@@ -87,7 +112,8 @@ public class ExcelUtils {
 						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
 					}
 					if (!amount.isEmpty() && !ean.isEmpty()) {
-						records.add(new ExcelRecord(ean, amount));
+
+						records.add(new ExcelRecord(ean, amount.replace(".0", "")));
 						ean = "";
 						amount = "";
 					}

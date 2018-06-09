@@ -10,13 +10,13 @@ import javafx.stage.Window;
 public class EuroModel {
 
 	private static EuroModel INSTANCE;
-	private Euromedia euromedia;
+	private EuromediaDownloader euromedia;
 	private EuroSettings settings;
 	private ArrayList<RowRecord> records;
 
 
 	private EuroModel() {
-		this.euromedia = new Euromedia();
+		this.euromedia = new EuromediaDownloader();
 		this.settings = new EuroSettings();
 		this.records = new ArrayList<>();
 	

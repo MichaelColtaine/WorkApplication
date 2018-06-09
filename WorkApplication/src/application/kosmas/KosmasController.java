@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 
 import application.RowRecord;
 import application.infobar.InfoModel;
+import application.utils.ExcelUtils;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -46,6 +49,12 @@ public class KosmasController {
 	private JFXButton settingsButton;
 
 	@FXML
+	private RadioButton ssbButton;
+
+	@FXML
+	private ToggleGroup system;
+
+	@FXML
 	private ProgressIndicator progress;
 
 	@FXML
@@ -55,7 +64,6 @@ public class KosmasController {
 	void initialize() {
 		tableView.setPlaceholder(new Label(""));
 		fillCombobox();
-		// listView.getItems().addAll(listViewItems);
 		refreshData();
 	}
 
@@ -81,20 +89,24 @@ public class KosmasController {
 				@Override
 				public void run() {
 					try {
-					clearListView();
-					KosmasModel.getInstance().setDestinantionDirectory();
-					progress.setVisible(true);
-					startImport();
-					KosmasModel.getInstance().login();
-					if (KosmasModel.getInstance().hasSuccessfulyLoggedIn()) {
-						startDownloadingMovingAndRenaming();
-						fillListView();
-						progress.setVisible(false);
-						KosmasModel.getInstance().end();
-					} else {
-						progress.setVisible(false);
-						KosmasModel.getInstance().end();
-					}
+						clearListView();
+						KosmasModel.getInstance().setDestinantionDirectory();
+						progress.setVisible(true);
+						startImport();
+						KosmasModel.getInstance().login();
+						if (KosmasModel.getInstance().hasSuccessfulyLoggedIn()) {
+							if (ssbButton.isSelected()) {
+								startDownloadingMovingAndRenamingSSB();
+							} else {
+								startDownloadingMovingAndRenamingFlores();
+							}
+							fillListView();
+							progress.setVisible(false);
+							KosmasModel.getInstance().end();
+						} else {
+							progress.setVisible(false);
+							KosmasModel.getInstance().end();
+						}
 					} catch (Exception e) {
 						progress.setVisible(false);
 						InfoModel.getInstance().updateInfo("Import se nezdařil");
@@ -123,18 +135,29 @@ public class KosmasController {
 		});
 	}
 
-	private void startDownloadingMovingAndRenaming() {
-		KosmasModel.getInstance().downloadFiles();
+	private void startDownloadingMovingAndRenamingSSB() {
+		KosmasModel.getInstance().downloadFilesSSB();
 		KosmasModel.getInstance().moveAndRenameFiles();
 		InfoModel.getInstance().updateInfo("Hotovo");
+	}
+
+	private void startDownloadingMovingAndRenamingFlores() {
+//		KosmasModel.getInstance().downloadFilesFlores();
+		KosmasModel.getInstance().downloadFilesSSB();
+		moveFilesFlores();
+		InfoModel.getInstance().updateInfo("Hotovo");
+	}
+	
+	private void moveFilesFlores() {
+		InfoModel.getInstance().updateInfo("Přesouvám  a přejmenovávám soubory");
+		ExcelUtils excel = new ExcelUtils();
+		excel.kosmasExcel();
 	}
 
 	private void fillListView() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				// Collections.reverse(listViewItems);
-				// listView.getItems().addAll(listViewItems);
 				refreshData();
 			}
 		});

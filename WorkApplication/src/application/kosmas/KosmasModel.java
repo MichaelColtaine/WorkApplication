@@ -11,12 +11,12 @@ import javafx.stage.Window;
 
 public class KosmasModel {
 	private static KosmasModel INSTANCE;
-	private Kosmas kosmas;
+	private KosmasDownloader kosmas;
 	private KosmasSettings settings;
 	private KosmasFileMover fileMover;
 
 	private KosmasModel() {
-		this.kosmas = new Kosmas();
+		this.kosmas = new KosmasDownloader();
 		this.settings = new KosmasSettings();
 		this.fileMover = new KosmasFileMover();
 
@@ -56,8 +56,12 @@ public class KosmasModel {
 		kosmas.tryLogin();
 	}
 
-	public void downloadFiles() {
-		kosmas.download();
+	public void downloadFilesSSB() {
+		kosmas.downloadSSB();
+	}
+	
+	public void downloadFilesFlores() {
+		kosmas.downloadFlores();
 	}
 
 	public boolean hasSuccessfulyLoggedIn() {
@@ -95,7 +99,7 @@ public class KosmasModel {
 		kosmas.downloadAmount(Integer.parseInt(selectedItem));
 	}
 
-	public KosmasSettings getSettigns() {
+	public KosmasSettings getSettings() {
 		return this.settings;
 	}
 

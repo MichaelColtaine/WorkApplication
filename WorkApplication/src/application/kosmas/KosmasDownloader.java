@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import application.infobar.InfoModel;
 
-public class Kosmas {
+public class KosmasDownloader {
 
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
 	private WebDriver driver;
@@ -25,7 +25,7 @@ public class Kosmas {
 	private int rowCount = 1;
 	private boolean success = true;
 
-	public Kosmas() {
+	public KosmasDownloader() {
 		this.websiteUrl = "https://firma.kosmas.cz/";
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 	}
@@ -99,18 +99,38 @@ public class Kosmas {
 		click(driver, By.xpath("/html/body/div[3]/div[1]/form/table/tbody/tr[4]/td[2]/input"));
 	}
 
-	public void download() {
+	public void downloadSSB() {
 		openDocuments();
 		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
-		downloadFiles();
+		downloadFilesSSB();
 		pause();
 	}
-
+	
+	public void downloadFlores() {
+		openDocuments();
+		InfoModel.getInstance().updateInfo("Otevírám dodací listy");
+		downloadFilesFlores();
+		pause();
+	}
+	
 	private void openDocuments() {
 		click(driver, By.xpath("/html/body/div[1]/div[1]/ul/li[8]/a"));
 	}
+	private void downloadFilesFlores() {
+		for (int i = 1; i < rowCount; i++) {
+			openDeliveryNote(i);
+			waitUntilVisible();
+			List<WebElement> elements = getSourceText().findElements(By.linkText("XLS"));
+			if (elements.size() == 3) {
+				downloadTwoFiles(elements);
+			} else {
+				downloadOneFile(elements);
+			}
+			goBack();
+		}
+	}
 
-	private void downloadFiles() {
+	private void downloadFilesSSB() {
 		for (int i = 1; i < rowCount; i++) {
 			openDeliveryNote(i);
 			waitUntilVisible();

@@ -18,14 +18,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import application.infobar.InfoModel;
 
-public class Albatros {
+public class AlbatrosDownloader {
 	private String loginId, loginPassword, websiteUrl, downloadDirectory;
 	private WebDriver driver;
 	private ChromeOptions options;
 	private int rowCount;
 	private boolean hasLoggedIn;
 
-	public Albatros() {
+	public AlbatrosDownloader() {
 		this.websiteUrl = "https://www.distri.cz/Account/Login?ReturnUrl=%2F";
 		this.rowCount = 0;
 		this.downloadDirectory = System.getProperty("user.dir") + File.separator + "temp" + File.separator;

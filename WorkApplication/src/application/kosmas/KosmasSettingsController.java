@@ -41,9 +41,9 @@ public class KosmasSettingsController {
 
 	@FXML
 	void initialize() {
-		pathInput.setText(KosmasModel.getInstance().getSettigns().getPath());
-		emailInput.setText(KosmasModel.getInstance().getSettigns().getId());
-		passwordInput.setText(KosmasModel.getInstance().getSettigns().getPassword());
+		pathInput.setText(KosmasModel.getInstance().getSettings().getPath());
+		emailInput.setText(KosmasModel.getInstance().getSettings().getId());
+		passwordInput.setText(KosmasModel.getInstance().getSettings().getPassword());
 	}
 
 	@FXML
