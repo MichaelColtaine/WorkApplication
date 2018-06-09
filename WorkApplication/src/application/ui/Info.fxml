@@ -12,7 +12,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="194.0" layoutY="151.0" text="Verze 1.0.1" textFill="#f0f0f0" AnchorPane.bottomAnchor="357.0" AnchorPane.rightAnchor="194.0">
+      <Label layoutX="194.0" layoutY="151.0" text="Verze 1.1.1" textFill="#f0f0f0" AnchorPane.bottomAnchor="357.0" AnchorPane.rightAnchor="194.0">
          <font>
             <Font size="24.0" />
          </font>

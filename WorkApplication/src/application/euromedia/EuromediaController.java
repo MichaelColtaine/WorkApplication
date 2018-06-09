@@ -37,8 +37,6 @@ public class EuromediaController implements Initializable {
 
 	private ObservableList<RowRecord> data = FXCollections.observableArrayList();
 
-	// @FXML
-	// private JFXListView<String> listView;
 	@FXML
 	private TableView<RowRecord> tableView;
 
@@ -62,11 +60,9 @@ public class EuromediaController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
 		fillCombobox();
 		tableView.setPlaceholder(new Label(" "));
 		refreshData();
-
 	}
 
 	private void refreshData() {
@@ -129,12 +125,12 @@ public class EuromediaController implements Initializable {
 				pause();
 				changePdfToString();
 				FileChanger.changeAllEuroFilesSSB(EuroModel.getInstance().getSettigns().getPath());
-				
+
 			} else {
 				EuroModel.getInstance().downloadFilesFlores();
 				pause();
 				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettigns().getPath());
-			
+
 			}
 
 		}
@@ -144,8 +140,6 @@ public class EuromediaController implements Initializable {
 		progress.setVisible(false);
 		EuroModel.getInstance().deleteAllTempFiles();
 	}
-
-
 
 	private void fillListView() {
 		Platform.runLater(new Runnable() {

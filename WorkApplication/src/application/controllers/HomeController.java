@@ -27,20 +27,6 @@ public class HomeController {
 	@FXML
 	private ImageView minimize;
 
-	@FXML
-	private JFXButton rabatButton;
-
-	@FXML
-	private JFXButton euromediaButton;
-
-	@FXML
-	private JFXButton kosmasButton;
-
-	@FXML
-	JFXButton albatrosButton;
-
-	@FXML
-	private JFXButton settingsButton;
 
 	@FXML
 	private Label infoLabel;
@@ -90,6 +76,12 @@ public class HomeController {
 	@FXML
 	void handleInfoButton(ActionEvent event) {
 		loadScene("/application/ui/Info.fxml");
+	}
+	
+	@FXML
+	void handleOtherButton(ActionEvent event) {
+		loadScene("/application/ui/Other.fxml");
+//		System.out.println("TEST");
 	}
 
 	private void loadScene(String sceneName) {

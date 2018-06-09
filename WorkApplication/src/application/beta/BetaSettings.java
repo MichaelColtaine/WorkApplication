@@ -8,7 +8,7 @@ public class BetaSettings {
 	Preferences betaPrefs;
 
 	public BetaSettings() {
-		betaPrefs = Preferences.userNodeForPackage(KosmasSettings.class);
+		betaPrefs = Preferences.userNodeForPackage(BetaSettings.class);
 	}
 
 	public void savePaths(String from, String to) {
@@ -17,11 +17,11 @@ public class BetaSettings {
 	}
 
 	private void savePathFrom(String path) {
-		betaPrefs.put("from", path );
+		betaPrefs.put("from", path);
 	}
 
 	private void savePathTo(String path) {
-		betaPrefs.put("to", path );
+		betaPrefs.put("to", path);
 	}
 
 	public String getFromPath() {
