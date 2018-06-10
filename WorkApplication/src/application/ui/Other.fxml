@@ -47,7 +47,7 @@
 						<ToggleGroup fx:id="system" />
 					</toggleGroup>
 				</RadioButton>
-				<RadioButton mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
+				<RadioButton fx:id="marcoButton" mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
 			</children>
 		</HBox>
 	</children>

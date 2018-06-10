@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -15,14 +17,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import application.utils.ExcelRecord;
 
-public class GradaFileConverter {
-
+public class MarcoPoloFileConverter {
 	private File fromDirectory, toDirectory;
 
-	public void convertGradaDeliveryListToExcel(String fromDirectoryPath, String toDirectoryPath) {
-		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
+	public void convertMarcoDeliviryNoteToExcel(String fromPath, String toPath) {
+		createDirectoriesIfDontExist(fromPath, toPath);
 		for (File f : fromDirectory.listFiles()) {
-			writeFile(readGradaFile(f), toDirectoryPath, f.getName());
+			writeFile(readMarcoFile(f), toPath, f.getName());
 			f.delete();
 		}
 	}
@@ -39,27 +40,14 @@ public class GradaFileConverter {
 		}
 	}
 
-	private List<ExcelRecord> readGradaFile(File file) {
-		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				String ean = line.substring(0, 13);
-				String amount = line.substring(line.indexOf("KS") + 10, line.indexOf("KS") + 13);
-				records.add(new ExcelRecord(ean, amount));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return records;
-	}
-
 	private void writeFile(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet = workbook.createSheet();
+
 		createRowAndAddData(records, sheet);
 		resizeColumns(records, sheet);
-		createExcelFile(workbook, toDirectoryPath, fileName);
+		convertTXTFileToExcel(workbook, toDirectoryPath, fileName);
+
 	}
 
 	private void createRowAndAddData(List<ExcelRecord> records, Sheet sheet) {
@@ -78,16 +66,35 @@ public class GradaFileConverter {
 		}
 	}
 
-	private void createExcelFile(Workbook workbook, String toDirectoryPath, String fileName) {
+	private void convertTXTFileToExcel(Workbook workbook, String toDirectoryPath, String fileName) {
 		try {
+
 			FileOutputStream fileOut = new FileOutputStream(
-					toDirectoryPath + File.separator + fileName.replace(".txt", ".xlsx"));
+					toDirectoryPath + File.separator + fileName.toLowerCase().replace(".txt", ".xlsx"));
+
 			workbook.write(fileOut);
 			fileOut.close();
 			workbook.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private List<ExcelRecord> readMarcoFile(File file) {
+		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] splittedLine = line.split(",");
+				String ean = splittedLine[0];
+				Collections.reverse(Arrays.asList(splittedLine));
+				String amount = splittedLine[4];
+				records.add(new ExcelRecord(ean.replaceAll("\"", ""), amount.replaceAll(".0000", "")));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return records;
 	}
 
 }

@@ -37,4 +37,9 @@ public class OtherModel {
 		return settings.getToPath();
 	}
 
+	public void handleMarcoButton() {
+		MarcoPoloFileConverter marco = new MarcoPoloFileConverter();
+		marco.convertMarcoDeliviryNoteToExcel(settings.getFromPath(), settings.getToPath());
+	}
+
 }

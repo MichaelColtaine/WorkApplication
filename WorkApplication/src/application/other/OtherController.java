@@ -30,6 +30,9 @@ public class OtherController {
 	private JFXButton moveButton;
 
 	@FXML
+	private RadioButton marcoButton;
+
+	@FXML
 	private ProgressIndicator progress;
 
 	@FXML
@@ -49,6 +52,8 @@ public class OtherController {
 				} else {
 					if (gradaButton.isSelected()) {
 						handleGradaButton();
+					} else if (marcoButton.isSelected()) {
+						handleMarcoButton();
 					}
 				}
 			}
@@ -63,6 +68,11 @@ public class OtherController {
 
 	private void handleGradaButton() {
 		OtherModel.getInstance().handleGradaButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
+	}
+
+	private void handleMarcoButton() {
+		OtherModel.getInstance().handleMarcoButton();
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
