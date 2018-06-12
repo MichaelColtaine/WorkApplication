@@ -46,7 +46,9 @@ public class GradaFileConverter {
 			while ((line = br.readLine()) != null) {
 				String ean = line.substring(0, 13);
 				String amount = line.substring(line.indexOf("KS") + 10, line.indexOf("KS") + 13);
-				records.add(new ExcelRecord(ean, amount));
+				String price = line.substring(line.indexOf("KS") + 18, line.indexOf("KS")+25);
+				System.out.println(price);
+				records.add(new ExcelRecord(ean, amount, price.replace(".00", "")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -68,6 +70,7 @@ public class GradaFileConverter {
 			Row row = sheet.createRow(i);
 			row.createCell(0).setCellValue(r.getEan());
 			row.createCell(1).setCellValue(r.getAmount());
+			row.createCell(3).setCellValue(r.getPrice());
 			i++;
 		}
 	}

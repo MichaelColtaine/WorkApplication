@@ -56,6 +56,7 @@ public class MarcoPoloFileConverter {
 			Row row = sheet.createRow(i);
 			row.createCell(0).setCellValue(r.getEan());
 			row.createCell(1).setCellValue(r.getAmount());
+			row.createCell(3).setCellValue(r.getPrice());
 			i++;
 		}
 	}
@@ -89,7 +90,8 @@ public class MarcoPoloFileConverter {
 				String ean = splittedLine[0];
 				Collections.reverse(Arrays.asList(splittedLine));
 				String amount = splittedLine[4];
-				records.add(new ExcelRecord(ean.replaceAll("\"", ""), amount.replaceAll(".0000", "")));
+				String price = splittedLine[3];
+				records.add(new ExcelRecord(ean.replaceAll("\"", ""), amount.replaceAll(".0000", ""), price.replaceAll(".0000", "")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
