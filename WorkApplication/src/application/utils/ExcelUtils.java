@@ -21,6 +21,7 @@ import application.RowRecord;
 import application.albatros.AlbatrosModel;
 import application.beta.BetaModel;
 import application.euromedia.EuroModel;
+import application.infobar.InfoModel;
 import application.kosmas.KosmasModel;
 
 public class ExcelUtils {
@@ -34,7 +35,7 @@ public class ExcelUtils {
 					.append("xlsx");
 			EuroModel.getInstance().getRecords()
 					.add(new RowRecord(sb.toString().substring(4, sb.toString().length() - 5), "", ""));
-			writeFileTwoInputs(readFile(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
+			writeFileThreeInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
 		}
 	}
 
@@ -44,14 +45,14 @@ public class ExcelUtils {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
 			AlbatrosModel.getInstance().getListOfNames()
 					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
-			writeFileTwoInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(), sb.toString());
+			writeFileThreeInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(), sb.toString());
 		}
 	}
 
 	public void kosmasExcel() {
 		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
-
 		for (File f : directory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Přesouvám  a přejmenovávám soubor " + f.getName());
 			List<ExcelRecord> records = new ArrayList<ExcelRecord>();
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 				String line;
@@ -61,7 +62,6 @@ public class ExcelUtils {
 					amount = amount.substring(0, amount.indexOf("."));
 					String ean = line.substring(index + 81, index + 94);
 					String price = line.substring(index + 44, index + 55).replace(".00", "");
-					System.out.println("price is: " + price);
 					records.add(new ExcelRecord(ean, amount, price));
 					writeFileThreeInputs(records, KosmasModel.getInstance().getSettings().getPath(),
 							f.getName().replaceAll(".txt", ".xlsx"));
@@ -87,7 +87,10 @@ public class ExcelUtils {
 						.parseDouble(new BigDecimal(row.getCell(10).toString()).toPlainString());
 				Integer convertAmountToInt = convertAmountToDouble.intValue();
 				String amountAsString = String.valueOf(convertAmountToInt);
-				records.add(new ExcelRecord(new BigDecimal(row.getCell(6).toString()).toPlainString(), amountAsString));
+				String price = row.getCell(7).toString();
+				price = price.substring(0, price.length() - 2);
+
+				records.add(new ExcelRecord(new BigDecimal(row.getCell(6).toString()).toPlainString(), amountAsString, price));
 			}
 			wb.close();
 
@@ -175,7 +178,7 @@ public class ExcelUtils {
 		}
 	}
 
-	private List<ExcelRecord> readFile(File file) {
+	private List<ExcelRecord> readFileEuromedia(File file) {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
 		try {
 			Workbook wb = WorkbookFactory.create(file);
@@ -186,7 +189,11 @@ public class ExcelUtils {
 						.parseDouble(new BigDecimal(row.getCell(11).toString()).toPlainString());
 				Integer convertAmountToInt = convertAmountToDouble.intValue();
 				String amountAsString = String.valueOf(convertAmountToInt);
-				records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString));
+				String price = row.getCell(8).toString();
+				price = price.substring(0, price.length() - 2);
+
+				records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString,
+						price));
 			}
 			wb.close();
 

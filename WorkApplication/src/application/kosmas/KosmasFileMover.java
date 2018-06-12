@@ -42,7 +42,6 @@ public class KosmasFileMover {
 			sb.append(fullName.substring(5));
 			fullName = fullName.substring(5);
 		}
-//		fileNames.add(fullName.toUpperCase().replaceAll(".TXT", " ->  ") + " " + sb.toString() + ", RABAT: -38");
 		fileNames.add(new RowRecord(temp, sb.toString(), "-38,00%"));
 		return sb.toString();
 	}

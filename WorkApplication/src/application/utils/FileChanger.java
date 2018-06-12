@@ -68,13 +68,11 @@ public class FileChanger {
 		StringBuilder sb = new StringBuilder();
 		for (File source : directory.listFiles()) {
 			sb.delete(0, sb.length());
-
 			if (source.getName().toLowerCase().contains("vyk")) {
 				sb.append(FROM_DIRECTORY).append(File.separator).append(source.getName().substring(0, 15)).append(".xls");
 			} else {
 				sb.append(FROM_DIRECTORY).append(File.separator).append(source.getName().substring(0, 14)).append(".xls");
 			}
-
 			File destination = new File(sb.toString());
 		
 			try {
@@ -86,7 +84,6 @@ public class FileChanger {
 		for(File f : directory.listFiles()) {
 			if(f.getName().contains(".zip")) {
 				f.delete();
-				System.out.println(f.getName());
 			}
 		}
 		excel.euromediaExcel(FROM_DIRECTORY, EuroModel.getInstance().getSettigns().getPath());
