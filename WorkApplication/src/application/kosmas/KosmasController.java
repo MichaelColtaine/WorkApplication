@@ -142,7 +142,6 @@ public class KosmasController {
 	}
 
 	private void startDownloadingMovingAndRenamingFlores() {
-//		KosmasModel.getInstance().downloadFilesFlores();
 		KosmasModel.getInstance().downloadFilesSSB();
 		moveFilesFlores();
 		InfoModel.getInstance().updateInfo("Hotovo");

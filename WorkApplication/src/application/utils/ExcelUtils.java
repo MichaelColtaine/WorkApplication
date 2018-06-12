@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -35,7 +34,7 @@ public class ExcelUtils {
 					.append("xlsx");
 			EuroModel.getInstance().getRecords()
 					.add(new RowRecord(sb.toString().substring(4, sb.toString().length() - 5), "", ""));
-			writeFile(readFile(f), toDirectoryPath, sb.toString());
+			writeFileTwoInputs(readFile(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
 		}
 	}
 
@@ -45,12 +44,13 @@ public class ExcelUtils {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
 			AlbatrosModel.getInstance().getListOfNames()
 					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
-			writeFile(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(), sb.toString());
+			writeFileTwoInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(), sb.toString());
 		}
 	}
 
 	public void kosmasExcel() {
 		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
+
 		for (File f : directory.listFiles()) {
 			List<ExcelRecord> records = new ArrayList<ExcelRecord>();
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
@@ -60,8 +60,10 @@ public class ExcelUtils {
 					String amount = line.substring(index + 9, index + 16);
 					amount = amount.substring(0, amount.indexOf("."));
 					String ean = line.substring(index + 81, index + 94);
-					records.add(new ExcelRecord(ean, amount));
-					writeFile(records, KosmasModel.getInstance().getSettings().getPath(),
+					String price = line.substring(index + 44, index + 55).replace(".00", "");
+					System.out.println("price is: " + price);
+					records.add(new ExcelRecord(ean, amount, price));
+					writeFileThreeInputs(records, KosmasModel.getInstance().getSettings().getPath(),
 							f.getName().replaceAll(".txt", ".xlsx"));
 				}
 
@@ -98,28 +100,31 @@ public class ExcelUtils {
 	}
 
 	public void betaExcel() {
-		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+		List<ExcelRecord> records = new ArrayList<>();
 		File directory = new File(BetaModel.getInstance().getFromPath());
 		for (File f : directory.listFiles()) {
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 				String line;
-				String ean = "", amount = "";
+				String ean = "", amount = "", price = "";
 				while ((line = br.readLine()) != null) {
 					if (line.contains("Ks")) {
 						amount = line.substring(56, 59);
 					}
 					if (line.contains("0.09")) {
 						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
+						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24).replace(".00", "");
+
 					}
 					if (!amount.isEmpty() && !ean.isEmpty()) {
+						records.add(new ExcelRecord(ean, amount.replace(".0", ""), price));
 
-						records.add(new ExcelRecord(ean, amount.replace(".0", "")));
 						ean = "";
 						amount = "";
 					}
 				}
-				writeFile(records, BetaModel.getInstance().getToPath(),
-						f.getName().substring(0, f.getName().length() - 3) + "xlsx");
+				writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+						f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "")
+								+ "xlsx");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -128,6 +133,34 @@ public class ExcelUtils {
 			records.clear();
 			f.delete();
 		}
+	}
+
+	private void writeFileThreeInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
+		Workbook workbook = new XSSFWorkbook();
+		Sheet sheet1 = workbook.createSheet();
+
+		int i = 0;
+		for (ExcelRecord r : records) {
+			Row row = sheet1.createRow(i);
+			row.createCell(0).setCellValue(r.getEan());
+			row.createCell(1).setCellValue(r.getAmount());
+			row.createCell(3).setCellValue(r.getPrice());
+			i++;
+		}
+
+		for (int k = 0; k < records.size(); k++) {
+			sheet1.autoSizeColumn(k);
+		}
+
+		try {
+			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName);
+			workbook.write(fileOut);
+			fileOut.close();
+			workbook.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void createDirectoriesIfDontExist(String fromDirectoryPath, String toDirectoryPath) {
@@ -165,7 +198,7 @@ public class ExcelUtils {
 		return records;
 	}
 
-	private void writeFile(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
+	private void writeFileTwoInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet1 = workbook.createSheet();
 

@@ -27,7 +27,6 @@ public class BetaFileMover {
 	public void move() throws IOException {
 		from = new File(fromDirectory);
 		for (File f : from.listFiles()) {
-			deletePdfFiles(f);
 			File newFile = new File(toDirectory + renameFile(f.getName().replaceAll(".txt", "")));
 			if (newFile.exists()) {
 				System.out.println("File exists and is being removed and replaced");
@@ -37,12 +36,7 @@ public class BetaFileMover {
 		}
 	}
 
-	private void deletePdfFiles(File f) {
-		if (f.getName().contains(".pdf")) {
-			f.delete();
-			System.out.println(f.getName() + " deleted");
-		}
-	}
+
 
 	private String renameFile(String fullName) {
 		StringBuilder sb = new StringBuilder();

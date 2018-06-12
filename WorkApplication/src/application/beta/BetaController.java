@@ -61,9 +61,11 @@ public class BetaController {
 			@Override
 			public void run() {
 				ExcelUtils exel = new ExcelUtils();
+
 				if (isFolderEmpty()) {
 					InfoModel.getInstance().updateInfo("Složka je prázdná!");
 				} else {
+					removeAllPdf();
 					progress.setVisible(true);
 					if (ssbButton.isSelected()) {
 						BetaModel.getInstance().moveAndRename();
@@ -76,7 +78,18 @@ public class BetaController {
 			}
 		});
 		t1.start();
+	}
 
+	private void removeAllPdf() {
+		File fromDirectory = new File(BetaModel.getInstance().getFromPath());
+		for (File f : fromDirectory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Mažu PDFka.");
+			if (f.getName().toLowerCase().contains(".pdf")) {
+				f.delete();
+				InfoModel.getInstance().updateInfo("Mažu PDFka..");
+			}
+			InfoModel.getInstance().updateInfo("Mažu PDFka....");
+		}
 	}
 
 	public boolean isFolderEmpty() {

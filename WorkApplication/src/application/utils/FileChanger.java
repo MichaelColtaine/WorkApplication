@@ -76,6 +76,7 @@ public class FileChanger {
 			}
 
 			File destination = new File(sb.toString());
+		
 			try {
 				unzip(source, destination);
 			} catch (IOException e) {
