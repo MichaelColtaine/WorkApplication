@@ -59,7 +59,11 @@ public class KosmasModel {
 	public void downloadFilesSSB() {
 		kosmas.downloadSSB();
 	}
-	
+
+	public void downloadFilesFlores() {
+		kosmas.downloadFlores();
+	}
+
 	public boolean hasSuccessfulyLoggedIn() {
 		return kosmas.hasLoggedIn();
 	}

@@ -109,6 +109,7 @@ public class KosmasController {
 						}
 					} catch (Exception e) {
 						progress.setVisible(false);
+						e.printStackTrace();
 						InfoModel.getInstance().updateInfo("Import se nezdařil");
 					}
 				}
@@ -142,11 +143,11 @@ public class KosmasController {
 	}
 
 	private void startDownloadingMovingAndRenamingFlores() {
-		KosmasModel.getInstance().downloadFilesSSB();
+		KosmasModel.getInstance().downloadFilesFlores();
 		moveFilesFlores();
 		InfoModel.getInstance().updateInfo("Hotovo");
 	}
-	
+
 	private void moveFilesFlores() {
 		InfoModel.getInstance().updateInfo("Přesouvám  a přejmenovávám soubory");
 		ExcelUtils excel = new ExcelUtils();

@@ -120,7 +120,8 @@ public class KosmasDownloader {
 		for (int i = 1; i < rowCount; i++) {
 			openDeliveryNote(i);
 			waitUntilVisible();
-			List<WebElement> elements = getSourceText().findElements(By.linkText("XLS"));
+			List<WebElement> elements = getSourceText().findElements(By.linkText("CSV"));
+			
 			if (elements.size() == 3) {
 				downloadTwoFiles(elements);
 			} else {

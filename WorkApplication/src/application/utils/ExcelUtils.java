@@ -35,7 +35,7 @@ public class ExcelUtils {
 					.append("xlsx");
 			EuroModel.getInstance().getRecords()
 					.add(new RowRecord(sb.toString().substring(4, sb.toString().length() - 5), "", ""));
-			writeFileThreeInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
+			writeFileFourInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
 		}
 	}
 
@@ -45,7 +45,8 @@ public class ExcelUtils {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
 			AlbatrosModel.getInstance().getListOfNames()
 					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
-			writeFileThreeInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(), sb.toString());
+			writeFileThreeInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(),
+					sb.toString());
 		}
 	}
 
@@ -57,24 +58,56 @@ public class ExcelUtils {
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 				String line;
 				while ((line = br.readLine()) != null) {
-					int index = line.indexOf("ks");
-					String amount = line.substring(index + 9, index + 16);
-					amount = amount.substring(0, amount.indexOf("."));
-					String ean = line.substring(index + 81, index + 94);
-					String price = line.substring(index + 44, index + 55).replace(".00", "");
-					records.add(new ExcelRecord(ean, amount, price));
-					writeFileThreeInputs(records, KosmasModel.getInstance().getSettings().getPath(),
-							f.getName().replaceAll(".txt", ".xlsx"));
+					String[] data = line.split(";");
+					records.add(new ExcelRecord(data[0], data[5],
+							data[3].substring(0, data[3].length() - 3).replaceAll(" ", ""),
+							Double.parseDouble(data[7])));
 				}
-
+				writeFileFourInputs(records, KosmasModel.getInstance().getSettings().getPath(),
+						f.getName().replaceAll(".csv", ".xlsx"));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			KosmasModel.getInstance().getFileNames().add(new RowRecord(f.getName().replace(".txt", ""), "", ""));
+			KosmasModel.getInstance().getFileNames().add(new RowRecord(f.getName().toUpperCase().replace(".CSV", ""), "", ""));
 		}
 	}
+
+	// public void kosmasExcel() {
+	// File directory = new File(System.getProperty("user.dir") + File.separator +
+	// "temp" + File.separator);
+	// for (File f : directory.listFiles()) {
+	// InfoModel.getInstance().updateInfo("Přesouvám a přejmenovávám soubor " +
+	// f.getName());
+	// List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+	// try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+	// String line;
+	// while ((line = br.readLine()) != null) {
+	// int index = line.indexOf("ks");
+	// String amount = line.substring(index + 9, index + 16);
+	// amount = amount.substring(0, amount.indexOf(".")).replaceAll(" ", "");
+	// String ean = line.substring(index + 81, index + 94);
+	// String price = line.substring(index + 44, index + 55).replace(".00", "");
+	// String pricePerUnit = line.substring(index + 37, index + 47).replaceAll(" ",
+	// "");
+	// double totalPrice = Double.parseDouble(pricePerUnit) *
+	// Integer.parseInt(amount);
+	// records.add(new ExcelRecord(ean, amount, price, totalPrice));
+	// writeFileFourInputs(records,
+	// KosmasModel.getInstance().getSettings().getPath(),
+	// f.getName().replaceAll(".txt", ".xlsx"));
+	// }
+	//
+	// } catch (FileNotFoundException e) {
+	// e.printStackTrace();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// KosmasModel.getInstance().getFileNames().add(new
+	// RowRecord(f.getName().replace(".txt", ""), "", ""));
+	// }
+	// }
 
 	private List<ExcelRecord> readFileAlbatros(File file) {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
@@ -90,7 +123,8 @@ public class ExcelUtils {
 				String price = row.getCell(7).toString();
 				price = price.substring(0, price.length() - 2);
 
-				records.add(new ExcelRecord(new BigDecimal(row.getCell(6).toString()).toPlainString(), amountAsString, price));
+				records.add(new ExcelRecord(new BigDecimal(row.getCell(6).toString()).toPlainString(), amountAsString,
+						price));
 			}
 			wb.close();
 
@@ -136,6 +170,35 @@ public class ExcelUtils {
 			records.clear();
 			f.delete();
 		}
+	}
+
+	private void writeFileFourInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
+		Workbook workbook = new XSSFWorkbook();
+		Sheet sheet1 = workbook.createSheet();
+
+		int i = 0;
+		for (ExcelRecord r : records) {
+			Row row = sheet1.createRow(i);
+			row.createCell(0).setCellValue(r.getEan());
+			row.createCell(1).setCellValue(r.getAmount());
+			row.createCell(3).setCellValue(r.getPrice());
+			row.createCell(2).setCellValue(r.getTotalPrice());
+			i++;
+		}
+
+		for (int k = 0; k < records.size(); k++) {
+			sheet1.autoSizeColumn(k);
+		}
+
+		try {
+			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName);
+			workbook.write(fileOut);
+			fileOut.close();
+			workbook.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void writeFileThreeInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
@@ -191,9 +254,11 @@ public class ExcelUtils {
 				String amountAsString = String.valueOf(convertAmountToInt);
 				String price = row.getCell(8).toString();
 				price = price.substring(0, price.length() - 2);
+				double pricePerUnit = row.getCell(9).getNumericCellValue();
 
+				double totalPrice = pricePerUnit * convertAmountToInt;
 				records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString,
-						price));
+						price, totalPrice));
 			}
 			wb.close();
 
