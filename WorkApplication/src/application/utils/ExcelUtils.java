@@ -45,7 +45,7 @@ public class ExcelUtils {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
 			AlbatrosModel.getInstance().getListOfNames()
 					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
-			writeFileThreeInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(),
+			writeFileFourInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(),
 					sb.toString());
 		}
 	}
@@ -59,9 +59,14 @@ public class ExcelUtils {
 				String line;
 				while ((line = br.readLine()) != null) {
 					String[] data = line.split(";");
-					records.add(new ExcelRecord(data[0], data[5],
-							data[3].substring(0, data[3].length() - 3).replaceAll(" ", ""),
-							Double.parseDouble(data[7])));
+
+					String ean = data[0];
+					String amount = data[5];
+					String price = data[3].replaceAll(" ", "");
+					double pricePerUnit = Double.parseDouble(data[6]);
+					double totalPrice = Double.parseDouble(amount) * pricePerUnit;
+
+					records.add(new ExcelRecord(ean, amount, price, totalPrice));
 				}
 				writeFileFourInputs(records, KosmasModel.getInstance().getSettings().getPath(),
 						f.getName().replaceAll(".csv", ".xlsx"));
@@ -70,7 +75,8 @@ public class ExcelUtils {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			KosmasModel.getInstance().getFileNames().add(new RowRecord(f.getName().toUpperCase().replace(".CSV", ""), "", ""));
+			KosmasModel.getInstance().getFileNames()
+					.add(new RowRecord(f.getName().toUpperCase().replace(".CSV", ""), "", ""));
 		}
 	}
 
@@ -123,8 +129,11 @@ public class ExcelUtils {
 				String price = row.getCell(7).toString();
 				price = price.substring(0, price.length() - 2);
 
+				double pricePerunit = row.getCell(8).getNumericCellValue();
+				double totalPrice = Double.parseDouble(amountAsString) * pricePerunit;
+
 				records.add(new ExcelRecord(new BigDecimal(row.getCell(6).toString()).toPlainString(), amountAsString,
-						price));
+						price, totalPrice));
 			}
 			wb.close();
 
@@ -145,12 +154,11 @@ public class ExcelUtils {
 				String ean = "", amount = "", price = "";
 				while ((line = br.readLine()) != null) {
 					if (line.contains("Ks")) {
-						amount = line.substring(56, 59);
+						amount = line.substring(54, 59);
 					}
 					if (line.contains("0.09")) {
 						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
 						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24).replace(".00", "");
-
 					}
 					if (!amount.isEmpty() && !ean.isEmpty()) {
 						records.add(new ExcelRecord(ean, amount.replace(".0", ""), price));
