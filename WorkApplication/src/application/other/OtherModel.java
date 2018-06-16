@@ -42,4 +42,9 @@ public class OtherModel {
 		marco.convertMarcoDeliviryNoteToExcel(settings.getFromPath(), settings.getToPath());
 	}
 
+	public void handlePemicButton() {
+		PemicFileConverter pemic = new PemicFileConverter();
+		pemic.convertPemicDeliveryNoteToExcel();
+	}
+
 }

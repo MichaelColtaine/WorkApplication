@@ -53,13 +53,21 @@ public class EuromediaDownloader {
 	public void downloadSSB() {
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
+		handleGDPRPopup();
 		downloadFilesSSB();
 	}
 
 	public void downloadFlores() {
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		openMyDocuments();
+		handleGDPRPopup();
 		downloadFilesFlores();
+	}
+	
+	private void handleGDPRPopup() {
+		if(driver.findElements(By.xpath("/html/body/div[1]/div/a")).size() > 0) {
+			click(driver, By.xpath("/html/body/div[1]/div/a"));
+		}
 	}
 
 	public void end() {

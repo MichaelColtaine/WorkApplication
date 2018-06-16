@@ -33,6 +33,9 @@ public class OtherController {
 	private RadioButton marcoButton;
 
 	@FXML
+	private RadioButton pemicButton;
+
+	@FXML
 	private ProgressIndicator progress;
 
 	@FXML
@@ -54,6 +57,8 @@ public class OtherController {
 						handleGradaButton();
 					} else if (marcoButton.isSelected()) {
 						handleMarcoButton();
+					} else if (pemicButton.isSelected()) {
+						handlePemicButon();
 					}
 				}
 			}
@@ -64,6 +69,11 @@ public class OtherController {
 	public boolean isFolderEmpty() {
 		File file = new File(OtherModel.getInstance().getFromPath());
 		return file.listFiles().length == 0;
+	}
+
+	private void handlePemicButon() {
+		OtherModel.getInstance().handlePemicButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private void handleGradaButton() {

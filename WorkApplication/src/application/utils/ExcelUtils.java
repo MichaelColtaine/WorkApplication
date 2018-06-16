@@ -80,40 +80,7 @@ public class ExcelUtils {
 		}
 	}
 
-	// public void kosmasExcel() {
-	// File directory = new File(System.getProperty("user.dir") + File.separator +
-	// "temp" + File.separator);
-	// for (File f : directory.listFiles()) {
-	// InfoModel.getInstance().updateInfo("Přesouvám a přejmenovávám soubor " +
-	// f.getName());
-	// List<ExcelRecord> records = new ArrayList<ExcelRecord>();
-	// try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-	// String line;
-	// while ((line = br.readLine()) != null) {
-	// int index = line.indexOf("ks");
-	// String amount = line.substring(index + 9, index + 16);
-	// amount = amount.substring(0, amount.indexOf(".")).replaceAll(" ", "");
-	// String ean = line.substring(index + 81, index + 94);
-	// String price = line.substring(index + 44, index + 55).replace(".00", "");
-	// String pricePerUnit = line.substring(index + 37, index + 47).replaceAll(" ",
-	// "");
-	// double totalPrice = Double.parseDouble(pricePerUnit) *
-	// Integer.parseInt(amount);
-	// records.add(new ExcelRecord(ean, amount, price, totalPrice));
-	// writeFileFourInputs(records,
-	// KosmasModel.getInstance().getSettings().getPath(),
-	// f.getName().replaceAll(".txt", ".xlsx"));
-	// }
-	//
-	// } catch (FileNotFoundException e) {
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// KosmasModel.getInstance().getFileNames().add(new
-	// RowRecord(f.getName().replace(".txt", ""), "", ""));
-	// }
-	// }
+	
 
 	private List<ExcelRecord> readFileAlbatros(File file) {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();

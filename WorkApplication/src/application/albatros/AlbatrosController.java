@@ -62,7 +62,7 @@ public class AlbatrosController {
 	@FXML
 	void initialize() {
 		comboBox.getItems().removeAll(comboBox.getItems());
-		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20");
 		tableView.setPlaceholder(new Label(""));
 		fillListViewData();
 	}

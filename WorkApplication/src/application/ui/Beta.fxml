@@ -39,8 +39,8 @@
 				</ImageView>
 			</graphic>
 		</JFXButton>
-		<ProgressIndicator fx:id="progress" layoutX="200.0" layoutY="363.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
-      <HBox alignment="CENTER" layoutX="163.0" layoutY="346.0" prefHeight="17.0" prefWidth="175.0" spacing="20.0">
+		<ProgressIndicator fx:id="progress" layoutX="201.0" layoutY="395.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
+      <HBox alignment="CENTER" layoutX="163.0" layoutY="363.0" prefHeight="17.0" prefWidth="175.0" spacing="20.0">
          <children>
             <RadioButton fx:id="ssbButton" mnemonicParsing="false" selected="true" text="SSB" textFill="#f0f0f0">
                <toggleGroup>
