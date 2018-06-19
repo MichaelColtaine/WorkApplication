@@ -34,5 +34,8 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-scratchpad-3.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-collections4-4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jdbf.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/lib/jackson-core-2.7.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

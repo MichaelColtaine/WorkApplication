@@ -14,12 +14,10 @@ public class EuroModel {
 	private EuroSettings settings;
 	private ArrayList<RowRecord> records;
 
-
 	private EuroModel() {
 		this.euromedia = new EuromediaDownloader();
 		this.settings = new EuroSettings();
 		this.records = new ArrayList<>();
-	
 
 	}
 
@@ -29,8 +27,6 @@ public class EuroModel {
 		}
 		return INSTANCE;
 	}
-	
-	
 
 	public void startImportEuromedia() {
 		setLoginInfoEuro();
@@ -52,8 +48,8 @@ public class EuroModel {
 			System.out.println(f.getName());
 			f.delete();
 		}
-		for(File f : directory.listFiles()) {
-			if(f.getName().contains(".zip")) {
+		for (File f : directory.listFiles()) {
+			if (f.getName().contains(".zip")) {
 				f.delete();
 			}
 		}
@@ -99,7 +95,7 @@ public class EuroModel {
 	public void downloadFilesSSB() {
 		euromedia.downloadSSB();
 	}
-	
+
 	public void downloadFilesFlores() {
 		euromedia.downloadFlores();
 	}

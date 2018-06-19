@@ -36,8 +36,6 @@ public class BetaFileMover {
 		}
 	}
 
-
-
 	private String renameFile(String fullName) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(fullName.substring(fullName.length() - 3));

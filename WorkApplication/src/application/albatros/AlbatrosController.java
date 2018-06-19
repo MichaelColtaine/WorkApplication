@@ -112,6 +112,8 @@ public class AlbatrosController {
 				}
 			});
 			t1.start();
+		} else {
+			System.out.println("TEST");
 		}
 	}
 

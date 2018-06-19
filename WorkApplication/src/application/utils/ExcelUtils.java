@@ -62,7 +62,7 @@ public class ExcelUtils {
 
 					String ean = data[0];
 					String amount = data[5];
-					String price = data[3].replaceAll(" ", "");
+					String price = data[3].replaceAll(" ", "").replaceAll(".00", "");
 					double pricePerUnit = Double.parseDouble(data[6]);
 					double totalPrice = Double.parseDouble(amount) * pricePerUnit;
 
@@ -79,8 +79,6 @@ public class ExcelUtils {
 					.add(new RowRecord(f.getName().toUpperCase().replace(".CSV", ""), "", ""));
 		}
 	}
-
-	
 
 	private List<ExcelRecord> readFileAlbatros(File file) {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
@@ -112,6 +110,35 @@ public class ExcelUtils {
 		return records;
 	}
 
+	public void betaExcel2() {
+		List<ExcelRecord> records = new ArrayList<>();
+		File directory = new File(BetaModel.getInstance().getFromPath());
+		for (File f : directory.listFiles()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+				String line;
+
+				String ean = "", amount = "", price = "";
+				while ((line = br.readLine()) != null) {
+					int index = line.indexOf("Ks");
+					amount = line.substring(index + 10, index + 15).replaceAll(".0", "").replaceAll(" ", "");
+					ean = line.substring(index + 80, index + 93).replaceAll(" ", "");
+					price = line.substring(index + 17, index + 24);
+					records.add(new ExcelRecord(ean, amount, price.substring(0, price.length() - 2)));
+				}
+
+				writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+						f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "")
+								+ "xlsx");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			records.clear();
+			f.delete();
+		}
+	}
+
 	public void betaExcel() {
 		List<ExcelRecord> records = new ArrayList<>();
 		File directory = new File(BetaModel.getInstance().getFromPath());
@@ -120,6 +147,49 @@ public class ExcelUtils {
 				String line;
 				String ean = "", amount = "", price = "";
 				while ((line = br.readLine()) != null) {
+					System.out.println(line);
+					if (line.contains("Ks")) {
+						amount = line.substring(54, 59);
+					}
+					if (line.contains("0.09")) {
+						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
+						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24).replace(".00", "");
+					}
+
+					if (line.contains("0.08")) {
+						ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
+						price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24).replace(".00", "");
+					}
+
+					if (!amount.isEmpty() && !ean.isEmpty()) {
+						records.add(new ExcelRecord(ean, amount.replace(".0", ""), price));
+
+						ean = "";
+						amount = "";
+					}
+				}
+				writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+						f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "")
+								+ "xlsx");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			records.clear();
+			f.delete();
+		}
+	}
+
+	public void betaExcel3() {
+		List<ExcelRecord> records = new ArrayList<>();
+		File directory = new File(BetaModel.getInstance().getFromPath());
+		for (File f : directory.listFiles()) {
+			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+				String line;
+				String ean = "", amount = "", price = "";
+				while ((line = br.readLine()) != null) {
+					System.out.println(line);
 					if (line.contains("Ks")) {
 						amount = line.substring(54, 59);
 					}

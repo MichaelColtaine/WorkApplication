@@ -16,7 +16,7 @@ public class MainApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-
+		System.setProperty("http.agent", "Chrome");
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource(START_LOCATION));
 			root.setOnMousePressed(event -> setOffsets(event));

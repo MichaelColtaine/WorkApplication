@@ -75,7 +75,7 @@ public class HomeController {
 
 	@FXML
 	void handleInfoButton(ActionEvent event) {
-		loadScene("/application/ui/Info.fxml");
+		loadScene("/application/ui/Updater.fxml");
 	}
 	
 	@FXML

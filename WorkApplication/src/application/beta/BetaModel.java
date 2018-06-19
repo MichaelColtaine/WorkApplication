@@ -24,10 +24,8 @@ public class BetaModel {
 
 	public void moveAndRename() {
 		try {
-
 			mover.setFromDirectory(settings.getFromPath() + "\\");
 			mover.setToDirectory(settings.getToPath() + "\\");
-
 			mover.move();
 		} catch (Exception e) {
 			e.printStackTrace();

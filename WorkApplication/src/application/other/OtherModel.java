@@ -47,4 +47,9 @@ public class OtherModel {
 		pemic.convertPemicDeliveryNoteToExcel();
 	}
 
+	public void handleOmegaButton() {
+		OmegaFileConverter omega = new OmegaFileConverter();
+		omega.convertOmegaDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	}
+
 }

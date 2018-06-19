@@ -12,65 +12,44 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="473.0" prefWidth="500.0"
-	styleClass="right-background" stylesheets="@../main.css"
-	xmlns="http://javafx.com/javafx/8.0.141"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.other.OtherController">
+<AnchorPane fx:id="root" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.other.OtherController">
 	<children>
-		<Label graphicTextGap="15.0" text="Ostatní Flores"
-			textFill="#f0f0f0" AnchorPane.leftAnchor="25.0"
-			AnchorPane.topAnchor="0.0">
+		<Label graphicTextGap="15.0" text="Ostatní Flores" textFill="#f0f0f0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="0.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</Label>
-		<JFXButton fx:id="settingsButton" alignment="CENTER"
-			buttonType="RAISED" contentDisplay="TOP" layoutX="150.0"
-			layoutY="228.0" onAction="#handleSettingsButtonAction"
-			prefHeight="104.0" prefWidth="200.0" text="Nastavení"
-			textFill="#f0f0f0">
+		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="228.0" onAction="#handleSettingsButtonAction" prefHeight="104.0" prefWidth="200.0" text="Nastavení" textFill="#f0f0f0">
 			<font>
 				<Font size="14.0" />
 			</font>
 			<graphic>
-				<FontAwesomeIconView fill="#f0f0f0"
-					glyphName="WRENCH" size="24" wrappingWidth="25.0" />
+				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
 			</graphic>
 		</JFXButton>
-		<JFXButton fx:id="moveButton" alignment="CENTER"
-			buttonType="RAISED" contentDisplay="TOP" layoutX="150.0"
-			layoutY="96.0" onAction="#handleMoveButton" prefHeight="104.0"
-			prefWidth="200.0" text="Vytvořít  a přesunout Excel soubor"
-			textAlignment="CENTER" textFill="#f0f0f0" wrapText="true">
+		<JFXButton fx:id="moveButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="96.0" onAction="#handleMoveButton" prefHeight="104.0" prefWidth="200.0" text="Vytvořít  a přesunout Excel soubor" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true">
 			<font>
 				<Font size="14.0" />
 			</font>
 			<graphic>
-				<ImageView fitHeight="24.0" fitWidth="24.0"
-					pickOnBounds="true" preserveRatio="true">
+				<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../../images/icons8_Data_Transfer_50px.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</JFXButton>
-		<ProgressIndicator fx:id="progress" layoutX="200.0"
-			layoutY="393.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
-		<HBox alignment="CENTER" layoutX="102.0" layoutY="355.0"
-			prefHeight="17.0" prefWidth="297.0" spacing="20.0">
+		<ProgressIndicator fx:id="progress" layoutX="200.0" layoutY="393.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
+		<HBox alignment="CENTER" layoutX="53.0" layoutY="357.0" prefHeight="17.0" prefWidth="395.0" spacing="20.0">
 			<children>
-				<RadioButton fx:id="pemicButton" mnemonicParsing="false"
-					prefHeight="17.0" prefWidth="57.0" selected="true" text="Pemic"
-					textFill="#f0f0f0">
+				<RadioButton fx:id="pemicButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" selected="true" text="Pemic" textFill="#f0f0f0">
 					<toggleGroup>
 						<ToggleGroup fx:id="system" />
 					</toggleGroup>
 				</RadioButton>
-				<RadioButton fx:id="gradaButton" mnemonicParsing="false"
-					text="Grada" textFill="#f0f0f0" toggleGroup="$system" />
-				<RadioButton fx:id="marcoButton" mnemonicParsing="false"
-					text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
+				<RadioButton fx:id="gradaButton" mnemonicParsing="false" text="Grada" textFill="#f0f0f0" toggleGroup="$system" />
+				<RadioButton fx:id="marcoButton" mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
+            <RadioButton fx:id="omegaButton" mnemonicParsing="false" text="Omega/Kbely" textFill="#f0f0f0" toggleGroup="$system" />
 			</children>
 		</HBox>
 	</children>

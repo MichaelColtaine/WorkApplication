@@ -42,6 +42,9 @@ public class OtherController {
 	private RadioButton gradaButton;
 
 	@FXML
+	private RadioButton omegaButton;
+
+	@FXML
 	private ToggleGroup system;
 
 	@FXML
@@ -59,6 +62,8 @@ public class OtherController {
 						handleMarcoButton();
 					} else if (pemicButton.isSelected()) {
 						handlePemicButon();
+					} else if (omegaButton.isSelected()) {
+						handeOmegaButton();
 					}
 				}
 			}
@@ -69,6 +74,11 @@ public class OtherController {
 	public boolean isFolderEmpty() {
 		File file = new File(OtherModel.getInstance().getFromPath());
 		return file.listFiles().length == 0;
+	}
+
+	private void handeOmegaButton() {
+		OtherModel.getInstance().handleOmegaButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private void handlePemicButon() {

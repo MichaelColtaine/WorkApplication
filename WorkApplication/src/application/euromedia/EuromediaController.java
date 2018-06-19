@@ -76,7 +76,8 @@ public class EuromediaController implements Initializable {
 
 	private void fillCombobox() {
 		comboBox.getItems().removeAll(comboBox.getItems());
-		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20");
+		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+				"16", "17", "18", "19", "20");
 	}
 
 	@FXML
@@ -95,8 +96,20 @@ public class EuromediaController implements Initializable {
 				}
 			});
 			t1.start();
+		} else {
+			convertTempFilesWithoutDownloading();
 		}
 
+	}
+
+	private void convertTempFilesWithoutDownloading() {
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettigns().getPath());
+			}
+		});
+		t1.start();
 	}
 
 	@FXML
@@ -130,9 +143,7 @@ public class EuromediaController implements Initializable {
 				EuroModel.getInstance().downloadFilesFlores();
 				pause();
 				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettigns().getPath());
-
 			}
-
 		}
 		InfoModel.getInstance().updateInfo("Hotovo!");
 		fillListView();
