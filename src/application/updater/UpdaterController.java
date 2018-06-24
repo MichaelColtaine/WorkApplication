@@ -47,7 +47,7 @@ public class UpdaterController {
 		} else {
 			InfoModel.getInstance().updateInfo("Současná verze je aktuální!");
 		}
-		InfoModel.getInstance().updateInfo("Aktualizace ještě nebyla implementována.");
+
 	}
 
 	public void startApp() {

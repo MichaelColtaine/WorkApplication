@@ -3,8 +3,6 @@ package application.updater;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import application.infobar.InfoModel;
-
 /**
  * Used to track progress of OutputStream User
  * 
