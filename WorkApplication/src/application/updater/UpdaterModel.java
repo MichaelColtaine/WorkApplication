@@ -16,9 +16,9 @@ public class UpdaterModel {
 	private static UpdaterModel INSTANCE;
 	private UpdateInfo updater = new UpdateInfo();
 	private int currentVersion = 0;
-	private static final String ACCESS_TOKEN = "Mvam_rwrPU8AAAAAAAB2WWFrcxCL6L33QPqqZTfDwubtEQ8ixHArsw7sfjgF_qKU";
+	private static final String ACCESS_TOKEN = "Mvam_rwrPU8AAAAAAAB2YbsIiwwCyzBA1Cu73A1LZaNetAzMXtz454qSf9aYf70X";
 	private String downloadUpdateDirectory = System.getProperty("user.dir") + File.separator + "update" + File.separator
-			+ "update.7z";
+			+ "update.zip";
 
 	public UpdaterModel() {
 
@@ -39,16 +39,12 @@ public class UpdaterModel {
 		return this.currentVersion;
 	}
 
-	public String getDownloadUrl() {
-		return updater.getDownloadUrl();
-	}
-
 	public void download() {
 		DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
 		DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
 
 		try {
-			downloadFile(client, "/startFlores.7z", downloadUpdateDirectory);
+			downloadFile(client, "/update.zip", downloadUpdateDirectory);
 		} catch (DbxException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -21,6 +21,7 @@ public class FileChanger {
 
 	public static void unzip(File source, File destination) throws IOException {
 		byte[] buffer = new byte[1024];
+		System.out.println(source.getName());
 		FileInputStream fis = new FileInputStream(source);
 		ZipInputStream zis = new ZipInputStream(fis);
 		ZipEntry ze = zis.getNextEntry();

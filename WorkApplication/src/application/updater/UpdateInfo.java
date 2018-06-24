@@ -22,9 +22,7 @@ public class UpdateInfo {
 		return data.substring(data.indexOf("[version]") + 9, data.indexOf("[/version]"));
 	}
 
-	public String getDownloadUrl() {
-		return data.substring(data.indexOf("[url]") + 5, data.indexOf("[/url]"));
-	}
+	
 
 	private void getData(String adress) throws IOException {
 		URL url = new URL(adress);
