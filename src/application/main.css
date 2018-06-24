@@ -1,0 +1,62 @@
+.jfx-tab-pane .tab-header-background { 
+	-fx-background-color: #546E7A;
+}
+
+
+.jfx-snackbar-content{
+	-fx-background-radius: 25.0;
+	-fx-background-color: #1976D2 ;
+	-fx-text-alignment: center;
+}
+
+.jfx-snackbar-toast{
+	-fx-text-fill: #f0f0f0;
+	-fx-font-size:20.0;
+}
+
+
+.right-background {
+	-fx-background-color: #37474F;
+}
+
+.left-background {
+	-fx-background-color:  #263238;
+}
+
+.jfx-button {
+		-fx-background-radius: 25.0;
+		-fx-font-size: 13.0;
+		-fx-background-color: #263238;
+}
+
+.jfx-button:hover {
+	-fx-background-color: RED;
+}
+
+
+.jfx-button-leftmenu {
+	-fx-background-radius: 0.0;
+	-fx-font-size: 14.0;
+	-fx-background-color: #263238;
+	-fx-font-style:italic;
+}
+
+.jfx-button-leftmenu:hover {
+	-fx-background-color: RED;
+}
+
+.jfx-textfield{
+	-jfx-unfocus-color: #f0f0f0;
+	-jfx-focus-color: #f0f0f0;
+	-fx-prompt-text-fill: #f0f0f0;
+	-fx-highlight-fill: #303030;
+	-fx-text-fill:#f0f0f0;
+}
+
+.table-cell {
+-fx-alignment: BASELINE_CENTER;
+}
+
+.imageview:hover{
+	-fx-opacity:0.5;
+}
