@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
 import net.iryndin.jdbf.core.DbfRecord;
 import net.iryndin.jdbf.reader.DbfReader;
@@ -30,6 +31,7 @@ public class PemicFileConverter {
 	public void convertPemicDeliveryNoteToExcel() {
 		File fromDirectory = new File(OtherModel.getInstance().getFromPath());
 		for (File f : fromDirectory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Převádím " + f.getName());
 			if (f.getName().toUpperCase().equals("DL.DBF")) {
 				readFile(f);
 				f.delete();

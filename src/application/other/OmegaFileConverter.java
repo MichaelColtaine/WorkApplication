@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
 
 public class OmegaFileConverter {
@@ -21,6 +22,7 @@ public class OmegaFileConverter {
 	public void convertOmegaDeliveryListToExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
 		for (File f : fromDirectory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			writeFile(readOmegaFile(f), toDirectoryPath, f.getName());
 			f.delete();
 		}
@@ -47,8 +49,6 @@ public class OmegaFileConverter {
 				String ean = line.substring(index + 85, index + 98);
 				String amount = line.substring(index + 11, index + 14);
 				String price = line.substring(index + 51, index + 58);
-				System.out.println(ean + " " + amount + " " + price);
-				System.out.println(line);
 				records.add(new ExcelRecord(ean, amount, price.replace(".00", "")));
 			}
 		} catch (IOException e) {

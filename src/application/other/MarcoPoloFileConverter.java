@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
 
 public class MarcoPoloFileConverter {
@@ -23,6 +24,7 @@ public class MarcoPoloFileConverter {
 	public void convertMarcoDeliviryNoteToExcel(String fromPath, String toPath) {
 		createDirectoriesIfDontExist(fromPath, toPath);
 		for (File f : fromDirectory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			writeFile(readMarcoFile(f), toPath, f.getName());
 			f.delete();
 		}
@@ -43,7 +45,6 @@ public class MarcoPoloFileConverter {
 	private void writeFile(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet = workbook.createSheet();
-
 		createRowAndAddData(records, sheet);
 		resizeColumns(records, sheet);
 		convertTXTFileToExcel(workbook, toDirectoryPath, fileName);
@@ -69,7 +70,6 @@ public class MarcoPoloFileConverter {
 
 	private void convertTXTFileToExcel(Workbook workbook, String toDirectoryPath, String fileName) {
 		try {
-
 			FileOutputStream fileOut = new FileOutputStream(
 					toDirectoryPath + File.separator + fileName.toLowerCase().replace(".txt", ".xlsx"));
 
@@ -91,7 +91,8 @@ public class MarcoPoloFileConverter {
 				Collections.reverse(Arrays.asList(splittedLine));
 				String amount = splittedLine[4];
 				String price = splittedLine[3];
-				records.add(new ExcelRecord(ean.replaceAll("\"", ""), amount.replaceAll(".0000", ""), price.replaceAll(".0000", "")));
+				records.add(new ExcelRecord(ean.replaceAll("\"", ""), amount.replaceAll(".0000", ""),
+						price.replaceAll(".0000", "")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

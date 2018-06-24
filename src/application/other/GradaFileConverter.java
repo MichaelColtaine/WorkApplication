@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
 
 public class GradaFileConverter {
@@ -22,6 +23,7 @@ public class GradaFileConverter {
 	public void convertGradaDeliveryListToExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
 		for (File f : fromDirectory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			writeFile(readGradaFile(f), toDirectoryPath, f.getName());
 			f.delete();
 		}
