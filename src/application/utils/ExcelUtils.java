@@ -143,11 +143,11 @@ public class ExcelUtils {
 		List<ExcelRecord> records = new ArrayList<>();
 		File directory = new File(BetaModel.getInstance().getFromPath());
 		for (File f : directory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 				String line;
 				String ean = "", amount = "", price = "";
 				while ((line = br.readLine()) != null) {
-					System.out.println(line);
 					if (line.contains("Ks")) {
 						amount = line.substring(54, 59);
 					}
@@ -163,7 +163,6 @@ public class ExcelUtils {
 
 					if (!amount.isEmpty() && !ean.isEmpty()) {
 						records.add(new ExcelRecord(ean, amount.replace(".0", ""), price));
-
 						ean = "";
 						amount = "";
 					}

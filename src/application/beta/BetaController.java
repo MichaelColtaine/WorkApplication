@@ -86,9 +86,8 @@ public class BetaController {
 			InfoModel.getInstance().updateInfo("Mažu PDFka.");
 			if (f.getName().toLowerCase().contains(".pdf")) {
 				f.delete();
-				InfoModel.getInstance().updateInfo("Mažu PDFka..");
 			}
-			InfoModel.getInstance().updateInfo("Mažu PDFka....");
+			InfoModel.getInstance().updateInfo("PDFka smazána!");
 		}
 	}
 
