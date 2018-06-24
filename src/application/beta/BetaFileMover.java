@@ -3,6 +3,8 @@ package application.beta;
 import java.io.File;
 import java.io.IOException;
 
+import application.infobar.InfoModel;
+
 public class BetaFileMover {
 
 	private String fromDirectory, toDirectory;
@@ -28,6 +30,7 @@ public class BetaFileMover {
 		from = new File(fromDirectory);
 		for (File f : from.listFiles()) {
 			File newFile = new File(toDirectory + renameFile(f.getName().replaceAll(".txt", "")));
+			InfoModel.getInstance().updateInfo("Pracuju s " + newFile.getName());
 			if (newFile.exists()) {
 				System.out.println("File exists and is being removed and replaced");
 				newFile.delete();

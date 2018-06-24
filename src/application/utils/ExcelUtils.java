@@ -153,16 +153,19 @@ public class ExcelUtils {
 					}
 					if (line.contains("0.09")) {
 						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
-						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24).replace(".00", "");
+//						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24).replace(".00", "");
+						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24);
 					}
 
 					if (line.contains("0.08")) {
 						ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
-						price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24).replace(".00", "");
+//						price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24).replace(".00", "");
+						price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24);
 					}
 
 					if (!amount.isEmpty() && !ean.isEmpty()) {
-						records.add(new ExcelRecord(ean, amount.replace(".0", ""), price));
+					
+						records.add(new ExcelRecord(ean, amount.replace(".0", ""), price.substring(0,  price.length()-3)));
 						ean = "";
 						amount = "";
 					}
