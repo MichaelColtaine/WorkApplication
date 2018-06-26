@@ -36,10 +36,10 @@ public class UpdaterController {
 				@Override
 				public void run() {
 					progress.setVisible(true);
-					InfoModel.getInstance().updateInfo("Stahuju..");
+					InfoModel.getInstance().updateInfo("Stahuji..");
 					UpdaterModel.getInstance().download();
 					progress.setVisible(false);
-					startApp();
+					startUpdateApplication();
 					System.exit(1);
 				}
 			});
@@ -50,7 +50,7 @@ public class UpdaterController {
 
 	}
 
-	public void startApp() {
+	public void startUpdateApplication() {
 		try {
 			Process proc = Runtime.getRuntime().exec("java -jar update/SpUpdater.jar");
 		} catch (Exception e) {

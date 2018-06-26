@@ -11,11 +11,14 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.FileMetadata;
 
+import application.infobar.InfoModel;
+import javafx.application.Platform;
+
 public class UpdaterModel {
 
 	private static UpdaterModel INSTANCE;
 	private UpdateInfo updater = new UpdateInfo();
-	private int currentVersion = 1;
+	private int currentVersion = 2;
 	private static final String ACCESS_TOKEN = "Mvam_rwrPU8AAAAAAAB2YbsIiwwCyzBA1Cu73A1LZaNetAzMXtz454qSf9aYf70X";
 	private String downloadUpdateDirectory = System.getProperty("user.dir") + File.separator + "update" + File.separator
 			+ "update.zip";
@@ -65,8 +68,13 @@ public class UpdaterModel {
 
 		// Add a progress Listener
 		dl.download(new ProgressOutputStream(fOut, dl.getResult().getSize(), (long completed, long totalSize) -> {
-
 			System.out.println((completed * 100) / totalSize + " %");
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					InfoModel.getInstance().updateInfo((completed * 100) / totalSize + "%");
+				}
+			});
 
 		}));
 
