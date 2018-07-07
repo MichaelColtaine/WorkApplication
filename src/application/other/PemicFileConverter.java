@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class PemicFileConverter {
 
 		for (String fileName : files.keySet()) {
 			List<ExcelRecord> records = files.get(fileName);
-			writeFileThreeInputs(records, OtherModel.getInstance().getToPath(), fileName + ".xlsx");
+			writeFileFourInputs(records, OtherModel.getInstance().getToPath(), fileName + ".xlsx");
 		}
 
 	}
@@ -55,6 +56,20 @@ public class PemicFileConverter {
 				if (!files.containsKey(numberOfDeliveryNote)) {
 					files.put(numberOfDeliveryNote, new ArrayList<>());
 				}
+
+				int dph = rec.getBigDecimal("SAZBADPH").intValue();
+				double coef = chooseCoef(dph);
+
+				double buyPrice = rec.getBigDecimal("PRODCENA").doubleValue();
+				double basePrice = buyPrice * coef;
+
+				double totalPriceWithoutTax = buyPrice - basePrice;
+				// totalPriceWithoutTax = new BigDecimal(totalPriceWithoutTax).setScale(2,
+				// RoundingMode.HALF_UP)
+				// .doubleValue();
+				totalPriceWithoutTax = (new BigDecimal(totalPriceWithoutTax).doubleValue()
+						* rec.getBigDecimal("MNOZSTVI").doubleValue());
+
 				numberOfDeliveryNote = rec.getString("CISDOKL");
 				String ean = rec.getString("EAN");
 				String amount = rec.getString("MNOZSTVI").replaceAll(".00000", "");
@@ -66,15 +81,28 @@ public class PemicFileConverter {
 				} else {
 					currentPrice = actionPrice.toString();
 				}
-				files.get(numberOfDeliveryNote)
-						.add(new ExcelRecord(ean, amount, currentPrice.replaceAll(".00000", "")));
+
+				files.get(numberOfDeliveryNote).add(new ExcelRecord(ean, amount, currentPrice.replaceAll(".00000", ""),
+						new BigDecimal(totalPriceWithoutTax).setScale(2, RoundingMode.HALF_UP).doubleValue()));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void writeFileThreeInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
+	private double chooseCoef(int dph) {
+		double coef = 0;
+		if (dph == 10) {
+			coef = 0.0909;
+		} else if (dph == 15) {
+			coef = 0.1304;
+		} else if (dph == 21) {
+			coef = 0.1736;
+		}
+		return coef;
+	}
+
+	private void writeFileFourInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet = workbook.createSheet();
 		createAndFillRows(records, sheet);
@@ -88,6 +116,7 @@ public class PemicFileConverter {
 			Row row = sheet.createRow(i);
 			row.createCell(0).setCellValue(r.getEan());
 			row.createCell(1).setCellValue(r.getAmount());
+			row.createCell(2).setCellValue(r.getTotalPrice());
 			row.createCell(3).setCellValue(r.getPrice());
 			i++;
 		}
