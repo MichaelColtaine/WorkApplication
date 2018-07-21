@@ -23,11 +23,11 @@ public class OtherSettings {
 	}
 
 	public String getFromPath() {
-		return gradaPrefs.get("from", "root");
+		return gradaPrefs.get("from", "");
 	}
 
 	public String getToPath() {
-		return gradaPrefs.get("to", "root");
+		return gradaPrefs.get("to", "");
 	}
 
 }

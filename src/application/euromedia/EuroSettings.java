@@ -19,15 +19,15 @@ public class EuroSettings {
 	}
 
 	public String getPassword() {
-		return euroPrefs.get("password", "root");
+		return euroPrefs.get("password", "");
 	}
 
 	public String getId() {
-		return euroPrefs.get("id", "root");
+		return euroPrefs.get("id", "");
 	}
 
 	public String getPath() {
-		return euroPrefs.get("path", "root");
+		return euroPrefs.get("path", "");
 	}
 
 }

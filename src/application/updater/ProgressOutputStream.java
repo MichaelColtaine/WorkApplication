@@ -3,12 +3,6 @@ package application.updater;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * Used to track progress of OutputStream User
- * 
- * @author GOXR3PLUS
- *
- */
 public class ProgressOutputStream extends OutputStream {
 
 	private OutputStream underlying;

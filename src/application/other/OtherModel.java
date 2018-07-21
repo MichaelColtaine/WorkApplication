@@ -1,5 +1,7 @@
 package application.other;
 
+import application.utils.ExcelUtils;
+
 public class OtherModel {
 
 	private static OtherModel INSTANCE;
@@ -50,6 +52,11 @@ public class OtherModel {
 	public void handleOmegaButton() {
 		OmegaFileConverter omega = new OmegaFileConverter();
 		omega.convertOmegaDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	}
+
+	public void handlePrescoButton() {
+		ExcelUtils excel = new ExcelUtils();
+		excel.prescoExcel(settings.getFromPath(), settings.getToPath());
 	}
 
 }

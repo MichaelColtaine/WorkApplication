@@ -4,6 +4,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.HomeController">
 	<left>
@@ -20,38 +20,15 @@
 			<children>
 				<Pane prefHeight="55.0" prefWidth="200.0">
 					<children>
-						<HBox layoutX="12.0" layoutY="1.0" prefHeight="35.0" prefWidth="186.0">
-							<children>
-								<Label text="S" textFill="#f0f0f0" underline="true">
-									<font>
-										<Font name="System Italic" size="24.0" />
-									</font>
-									<graphic>
-										<ImageView fitHeight="32.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@../../images/icons8_Trolley_52px.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Label>
-								<Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="56.0" text="kladový " textFill="#f0f0f0">
-									<font>
-										<Font name="System Bold Italic" size="14.0" />
-									</font>
-								</Label>
-								<Label text="P" textFill="#f0f0f0" underline="true">
-									<font>
-										<Font name="System Italic" size="24.0" />
-									</font>
-								</Label>
-								<Label alignment="BOTTOM_LEFT" graphicTextGap="0.0" prefHeight="30.0" prefWidth="58.0" text="omocník" textFill="#f0f0f0">
-									<font>
-										<Font name="System Bold Italic" size="14.0" />
-									</font>
-								</Label>
-							</children>
-						</HBox>
       						<Pane layoutX="-4.0" layoutY="40.0" prefHeight="2.0" prefWidth="208.0" style="-fx-background-color: #37474F;" />
+                  <ImageView blendMode="LIGHTEN" fitHeight="150.0" fitWidth="200.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../../images/sp.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </ImageView>
 					</children>
 				</Pane>
 				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">

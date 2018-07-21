@@ -19,15 +19,15 @@ public class KosmasSettings {
 	}
 
 	public String getPassword() {
-		return kosmasPref.get("password", "root");
+		return kosmasPref.get("password", "");
 	}
 
 	public String getId() {
-		return kosmasPref.get("id", "root");
+		return kosmasPref.get("id", "");
 	}
 
 	public String getPath() {
-		return kosmasPref.get("path", "root");
+		return kosmasPref.get("path", "");
 	}
 
 }

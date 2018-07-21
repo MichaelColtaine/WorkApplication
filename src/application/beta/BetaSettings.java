@@ -25,11 +25,11 @@ public class BetaSettings {
 	}
 
 	public String getFromPath() {
-		return betaPrefs.get("from", "root");
+		return betaPrefs.get("from", "");
 	}
 
 	public String getToPath() {
-		return betaPrefs.get("to", "root");
+		return betaPrefs.get("to", "");
 	}
 
 }

@@ -45,6 +45,9 @@ public class OtherController {
 	private RadioButton omegaButton;
 
 	@FXML
+	private RadioButton prescoButton;
+
+	@FXML
 	private ToggleGroup system;
 
 	@FXML
@@ -63,7 +66,9 @@ public class OtherController {
 					} else if (pemicButton.isSelected()) {
 						handlePemicButon();
 					} else if (omegaButton.isSelected()) {
-						handeOmegaButton();
+						handleOmegaButton();
+					} else if (prescoButton.isSelected()) {
+						handlePrescoButton();
 					}
 				}
 			}
@@ -76,7 +81,12 @@ public class OtherController {
 		return file.listFiles().length == 0;
 	}
 
-	private void handeOmegaButton() {
+	private void handlePrescoButton() {
+		OtherModel.getInstance().handlePrescoButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
+	}
+
+	private void handleOmegaButton() {
 		OtherModel.getInstance().handleOmegaButton();
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}

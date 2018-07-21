@@ -19,14 +19,14 @@ public class AlbatrosSettings {
 	}
 
 	public String getPassword() {
-		return albatrosPrefs.get("password", "root");
+		return albatrosPrefs.get("password", "");
 	}
 
 	public String getId() {
-		return albatrosPrefs.get("id", "root");
+		return albatrosPrefs.get("id", "");
 	}
 
 	public String getPath() {
-		return albatrosPrefs.get("path", "root");
+		return albatrosPrefs.get("path", "");
 	}
 }

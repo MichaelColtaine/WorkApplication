@@ -27,7 +27,6 @@ public class HomeController {
 	@FXML
 	private ImageView minimize;
 
-
 	@FXML
 	private Label infoLabel;
 
@@ -77,11 +76,11 @@ public class HomeController {
 	void handleInfoButton(ActionEvent event) {
 		loadScene("/application/ui/Updater.fxml");
 	}
-	
+
 	@FXML
 	void handleOtherButton(ActionEvent event) {
 		loadScene("/application/ui/Other.fxml");
-//		System.out.println("TEST");
+		// System.out.println("TEST");
 	}
 
 	private void loadScene(String sceneName) {

@@ -110,6 +110,41 @@ public class ExcelUtils {
 		return records;
 	}
 
+	public void prescoExcel(String fromDirectoryPath, String toDirectoryPath) {
+		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
+		for (File f : fromDirectory.listFiles()) {
+			InfoModel.getInstance().updateInfo("Pracuju s " +f.getName());
+			writeFileTwoInputs(readPrescoFile(f), toDirectoryPath, f.getName());
+			f.delete();
+		}
+	}
+
+	private List<ExcelRecord> readPrescoFile(File file) {
+		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+		try {
+			Workbook wb = WorkbookFactory.create(file);
+			Sheet sheet = wb.getSheetAt(0);
+			sheet.removeRow(sheet.getRow(0));
+
+			for (Row row : sheet) {
+				if (row.getCell(1) == null) {
+					break;
+				}
+				String ean = row.getCell(1).toString();
+				int amount = (int) row.getCell(3).getNumericCellValue();
+				System.out.println(ean + " " + amount);
+				records.add(new ExcelRecord(ean, String.format("%d", amount)));
+			}
+			wb.close();
+
+		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
+				| IOException e) {
+			System.out.println("readFile in ExcelUtils");
+			e.printStackTrace();
+		}
+		return records;
+	}
+
 	public void betaExcel() {
 		List<ExcelRecord> records = new ArrayList<>();
 		File directory = new File(BetaModel.getInstance().getFromPath());
