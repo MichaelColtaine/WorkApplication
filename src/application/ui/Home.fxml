@@ -54,7 +54,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="16.0" onAction="#handleEuromediaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
+				<JFXButton fx:id="euromediaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="16.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Euromedia" textFill="#f0f0f0">
 					<VBox.margin>
 						<Insets />
 					</VBox.margin>
@@ -69,7 +69,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleKosmasButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
+				<JFXButton fx:id="kosmasButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kosmas" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
@@ -81,7 +81,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" layoutX="10.0" layoutY="154.0" onAction="#handleBetaButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta" textFill="#f0f0f0">
+				<JFXButton fx:id="betaButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" layoutX="10.0" layoutY="154.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Beta" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
@@ -93,7 +93,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-            <JFXButton fx:id="otherButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleOtherButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Ostatní Flores" textFill="#f0f0f0">
+            <JFXButton fx:id="otherButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Ostatní Flores" textFill="#f0f0f0">
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" />
                </padding>
@@ -105,7 +105,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="scannerButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleScannerButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Flores čtečka" textFill="#f0f0f0">
+            <JFXButton fx:id="scannerButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Flores čtečka" textFill="#f0f0f0">
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" />
                </padding>
@@ -118,7 +118,7 @@
                </graphic>
             </JFXButton>
             <Pane prefHeight="15.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
-				<JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleInfoButton" prefHeight="76.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
+				<JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="76.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>

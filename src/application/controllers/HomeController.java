@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -56,55 +57,65 @@ public class HomeController {
 
 	@FXML
 	void handleButtons(ActionEvent event) {
-//		String text = ((Button) event.getSource()ev
+		String text = ((Button) event.getSource()).getText();
+		closeConnection();
+		switch (text) {
+		case "Kalkulačka Rabatu":
+			handleRabatButton();
+			break;
+		case "Euromedia":
+			handleEuromediaButton();
+			break;
+		case "Distri/Albatros":
+			handleAlbatrosButton();
+			break;
+		case "Kosmas":
+			handleKosmasButton();
+			break;
+		case "Beta":
+			handleBetaButton();
+			break;
+		case "Ostatní Flores":
+			handleOtherButton();
+			break;
+		case "Flores čtečka":
+			handleScannerButton();
+			break;
+		case "O programu":
+			handleInfoButton();
+			break;
+		}
 	}
 
-	@FXML
-	void handleEuromediaButton(ActionEvent event) {
-		closeConnection();
+	private void handleEuromediaButton() {
 		loadScene("/application/ui/Euromedia.fxml");
 	}
 
-	@FXML
-	void handleAlbatrosButton(ActionEvent event) {
-		closeConnection();
+	private void handleAlbatrosButton() {
 		loadScene("/application/ui/Albatros.fxml");
 	}
 
-	@FXML
-	void handleRabatButton(ActionEvent event) {
-		closeConnection();
+	private void handleRabatButton() {
 		loadScene("/application/ui/Calc.fxml");
 	}
 
-	@FXML
-	void handleKosmasButton(ActionEvent event) {
-		closeConnection();
+	private void handleKosmasButton() {
 		loadScene("/application/ui/Kosmas.fxml");
 	}
 
-	@FXML
-	void handleBetaButton(ActionEvent event) {
-		closeConnection();
+	private void handleBetaButton() {
 		loadScene("/application/ui/Beta.fxml");
 	}
 
-	@FXML
-	void handleInfoButton(ActionEvent event) {
-		closeConnection();
+	private void handleInfoButton() {
 		loadScene("/application/ui/Updater.fxml");
 	}
 
-	@FXML
-	void handleOtherButton(ActionEvent event) {
-		closeConnection();
+	private void handleOtherButton() {
 		loadScene("/application/ui/Other.fxml");
-		// System.out.println("TEST");
 	}
 
-	@FXML
-	void handleScannerButton(ActionEvent event) {
-		closeConnection();
+	private void handleScannerButton() {
 		loadScene("/application/ui/Scanner.fxml");
 	}
 
