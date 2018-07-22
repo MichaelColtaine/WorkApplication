@@ -67,19 +67,11 @@ public class ScannerController {
 	private JFXButton settingsButton;
 
 	@FXML
-	private Button startButton;
-
-	@FXML
-	void handleStartButton() {
-		Server.getInstance().waitForResponse(serverInfoLabel, articles, dataForList);
-	}
-
-	@FXML
 	public void initialize() {
 		setupTable();
 		handleEditingOfAmountColumn();
 		refreshTableData();
-		serverInfoLabel.setText("Odpojeno");
+		Server.getInstance().waitForResponse(serverInfoLabel, articles, dataForList);
 		ipLabel.setText("IP adresa tohoto počítače " + getIp());
 	}
 

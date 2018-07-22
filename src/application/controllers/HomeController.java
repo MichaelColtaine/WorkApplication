@@ -81,7 +81,7 @@ public class HomeController {
 		case "Flores čtečka":
 			handleScannerButton();
 			break;
-		case "O programu":
+		case "O Programu":
 			handleInfoButton();
 			break;
 		}
