@@ -73,10 +73,12 @@ public class Server {
 			@Override
 			protected Void call() {
 				try {
-					ss = new ServerSocket(port);
-					ss.setReuseAddress(true);
+					// ss = new ServerSocket(port);
+					// ss.setReuseAddress(true);
 
 					while (true) {
+						ss = new ServerSocket(port);
+						ss.setReuseAddress(true);
 						System.out.println("Server is waiting for response");
 						changeLabel(label, "Připojení se zdařilo.");
 						s = ss.accept();
@@ -86,12 +88,16 @@ public class Server {
 						text = br.readLine();
 						serverArticles = convertStringToList(text);
 						createTable(articles, dataForList);
+						is.close();
+						s.close();
+						ss.close();
 					}
 				} catch (BindException e) {
 					changeLabel(label, "Připojení selhalo, port už je používán.");
-					System.out.println(e.getMessage() + " Thrown by " + e.getClass().getSimpleName());
+					System.out.println(e.getMessage() + " 1Thrown by " + e.getClass().getSimpleName());
 				} catch (IOException e) {
-					System.out.println(e.getMessage() + " Thrown by " + e.getClass().getSimpleName());
+					System.out.println(e.getMessage() + " 2Thrown by " + e.getClass().getSimpleName());
+
 				}
 				return null;
 			}
@@ -100,9 +106,7 @@ public class Server {
 	}
 
 	public static void closeAll() throws IOException {
-		if (s != null) {
-			s.close();
-		}
+
 		if (ss != null) {
 			ss.close();
 		}
@@ -111,6 +115,9 @@ public class Server {
 		}
 		if (is != null) {
 			is.close();
+		}
+		if (s != null) {
+			s.close();
 		}
 
 	}

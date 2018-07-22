@@ -28,7 +28,8 @@ import javafx.stage.StageStyle;
 
 public class ScannerController {
 
-	private ArrayList<Article> articles = new ArrayList<>();
+	// private ArrayList<Article> articles = new ArrayList<>();
+	private ArrayList<Article> articles = ScannerModel.getInstance().getArticles();
 	private ObservableList<Article> dataForList = FXCollections.observableArrayList();
 
 	@FXML

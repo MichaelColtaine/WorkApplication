@@ -22,8 +22,6 @@ public class UpdateInfo {
 		return data.substring(data.indexOf("[version]") + 9, data.indexOf("[/version]"));
 	}
 
-	
-
 	private void getData(String adress) throws IOException {
 		URL url = new URL(adress);
 		InputStream html = null;

@@ -1,8 +1,11 @@
 package application.scanner;
 
+import java.util.ArrayList;
+
 public class ScannerModel {
 
 	private ScannerSettings settings;
+	private ArrayList<Article> articles = new ArrayList<>();
 
 	public ScannerModel() {
 		this.settings = new ScannerSettings();
@@ -18,6 +21,10 @@ public class ScannerModel {
 
 	public ScannerSettings getSettings() {
 		return settings;
+	}
+
+	public ArrayList<Article> getArticles() {
+		return articles;
 	}
 
 }

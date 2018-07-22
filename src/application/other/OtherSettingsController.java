@@ -5,7 +5,6 @@ import java.io.File;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
-import application.beta.BetaModel;
 import application.euromedia.EuroModel;
 import application.utils.AppUtils;
 import javafx.event.ActionEvent;

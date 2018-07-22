@@ -2,8 +2,6 @@ package application.beta;
 
 import java.util.prefs.Preferences;
 
-import application.kosmas.KosmasSettings;
-
 public class BetaSettings {
 	Preferences betaPrefs;
 

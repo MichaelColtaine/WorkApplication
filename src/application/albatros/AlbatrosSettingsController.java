@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
-import application.euromedia.EuroModel;
 import application.utils.AppUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

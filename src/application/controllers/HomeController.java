@@ -33,9 +33,11 @@ public class HomeController {
 		close.setOnMouseClicked(event -> closeWindow());
 		minimize.setOnMouseClicked(event -> minimizeWindow());
 		InfoModel.getInstance().bindLabelToInfo(infoLabel);
+
 	}
 
 	private void closeWindow() {
+
 		closeConnection();
 		Stage root = (Stage) borderpane.getScene().getWindow();
 		root.close();
