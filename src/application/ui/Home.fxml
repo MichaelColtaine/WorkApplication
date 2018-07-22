@@ -31,7 +31,7 @@
                   </ImageView>
 					</children>
 				</Pane>
-				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleRabatButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
+				<JFXButton fx:id="rabatButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="15.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Kalkulačka Rabatu" textFill="#f0f0f0">
 					<graphic>
 						<FontAwesomeIconView fill="#f0f0f0" glyphName="CALCULATOR" size="20.0" textAlignment="CENTER" />
 					</graphic>
@@ -42,7 +42,7 @@
 						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 					</padding>
 				</JFXButton>
-				<JFXButton fx:id="albatrosButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleAlbatrosButton" prefHeight="77.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Distri/Albatros" textFill="#f0f0f0">
+				<JFXButton fx:id="albatrosButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="77.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Distri/Albatros" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
 					</padding>
@@ -105,7 +105,19 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <Pane prefHeight="7.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
+            <JFXButton fx:id="scannerButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleScannerButton" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Flores čtečka" textFill="#f0f0f0">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" />
+               </padding>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8_Barcode_Reader_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Pane prefHeight="15.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
 				<JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleInfoButton" prefHeight="76.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
@@ -118,7 +130,7 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-            <Pane prefHeight="7.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
+            <Pane prefHeight="15.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
 			</children>
 			<BorderPane.margin>
 				<Insets />

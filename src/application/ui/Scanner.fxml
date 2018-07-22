@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="501.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.scanner.ScannerController">
+	<children>
+		<Label graphicTextGap="15.0" layoutX="23.0" layoutY="5.0" text="Čtečka čárových kódu" textFill="#f0f0f0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
+			<font>
+				<Font size="24.0" />
+			</font>
+		</Label>
+		<VBox layoutX="25.0" layoutY="64.0" spacing="40.0" />
+		<TableView fx:id="table" focusTraversable="false" layoutX="290.0" layoutY="7.0" prefHeight="503.0" prefWidth="195.0">
+			<columns>
+				<TableColumn fx:id="eanColumn" editable="false" minWidth="78.0" prefWidth="102.0" resizable="false" sortable="false" text="EAN" />
+				<TableColumn fx:id="amountColumn" minWidth="75.0" prefWidth="97.0" resizable="false" sortable="false" text="MNOŽSTVÍ" />
+			</columns>
+		</TableView>
+		<Label layoutX="32.0" layoutY="137.0" text="Počet titulů:" textFill="#f0f0f0" />
+		<Label layoutX="32.0" layoutY="111.0" prefHeight="25.0" prefWidth="99.0" text="Celkové množství:" textFill="#f0f0f0" />
+		<JFXButton fx:id="exportButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="148.0" layoutY="480.0" onAction="#handleExportButton" prefHeight="35.0" prefWidth="129.0" text="Importovat excel" textFill="#f0f0f0">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<graphic>
+				<ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../../images/icons8_Data_Transfer_50px.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</JFXButton>
+		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="12.0" layoutY="480.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<graphic>
+				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
+			</graphic>
+		</JFXButton>
+		<Label fx:id="totalAmountOfRows" layoutX="136.0" layoutY="137.0" prefHeight="17.0" prefWidth="64.0" textFill="#f0f0f0" />
+		<Label fx:id="totalAmountOfBooks" layoutX="136.0" layoutY="115.0" prefHeight="17.0" prefWidth="81.0" textFill="#f0f0f0" />
+		<Button fx:id="removeButton" layoutX="290.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleRemoveButton" prefHeight="25.0" prefWidth="106.0" text="Odebrat řádek" />
+		<Button fx:id="removeAllButton" layoutX="392.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleRemoveAllButton" prefHeight="25.0" prefWidth="93.0" text="Odebrat vše" />
+		<Button fx:id="updateButton" layoutX="29.0" layoutY="163.0" mnemonicParsing="false" onAction="#handleUpdateButton" prefHeight="25.0" prefWidth="135.0" text="Aktualizovat počet" />
+		<TextField fx:id="input" alignment="BOTTOM_LEFT" layoutX="32.0" layoutY="64.0" onAction="#onEnter" prefHeight="25.0" prefWidth="232.0" promptText="Vlož ean">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</TextField>
+		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="282.0" prefHeight="25.0" prefWidth="260.0" textFill="#f0f0f0" />
+		<Label layoutX="24.0" layoutY="219.0" text="ČTEČKA" textFill="#f0f0f0">
+			<font>
+				<Font size="17.0" />
+			</font>
+		</Label>
+		<Label fx:id="ipLabel" layoutX="24.0" layoutY="251.0" prefHeight="17.0" prefWidth="220.0" textFill="#f0f0f0" />
+      <Button fx:id="startButton" layoutX="114.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleStartButton" text="Připojit k zařízení" />
+	</children>
+</AnchorPane>
