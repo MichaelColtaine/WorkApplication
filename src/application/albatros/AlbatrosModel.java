@@ -30,14 +30,29 @@ public class AlbatrosModel {
 		return INSTANCE;
 	}
 
-	public void startAlbatrosImport() {
+	public void startAlbatrosImport() throws InterruptedException {
 		setLoginInfo();
-		albatros.startSSB();
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				albatros.startSSB();
+			}
+		});
+		t1.start();
+		t1.join();
+
 	}
-	
-	public void startAlbatrosImportFlores() {
+
+	public void startAlbatrosImportFlores() throws InterruptedException {
 		setLoginInfo();
-		albatros.startFlores();
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				albatros.startFlores();
+			}
+		});
+		t1.start();
+		t1.join();
 	}
 
 	public List<RowRecord> getListOfNames() {
@@ -51,7 +66,7 @@ public class AlbatrosModel {
 		fileChanger.setOuputDirectory(AlbatrosModel.getInstance().getSettings().getPath());
 		for (File f : directory.listFiles()) {
 
-			InfoModel.getInstance().updateInfo("Přejmenovávám soubory");
+			InfoModel.getInstance().updateInfo(f.getName());
 			String fileName = f.getName().substring(f.getName().length() - 7);
 			String name = f.getName().substring(6, f.getName().length() - 4);
 			listOfNames.add(new RowRecord(name, fileName, "-38.00%"));

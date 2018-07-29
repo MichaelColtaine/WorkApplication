@@ -83,7 +83,7 @@ public class EuromediaController implements Initializable {
 	@FXML
 	void handleImportButtonAction(ActionEvent event) {
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
-			EuroModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
+			// EuroModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -91,6 +91,7 @@ public class EuromediaController implements Initializable {
 						startImport();
 					} catch (Exception e) {
 						InfoModel.getInstance().updateInfo("Import se nezdařil");
+						e.printStackTrace();
 						progress.setVisible(false);
 					}
 				}
@@ -106,7 +107,7 @@ public class EuromediaController implements Initializable {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettigns().getPath());
+				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
 			}
 		});
 		t1.start();
@@ -127,29 +128,45 @@ public class EuromediaController implements Initializable {
 	}
 
 	private void startImport() {
+		prepareForImport();
+		EuromediaWebScraper scapper;
+		int amount = Integer.parseInt(comboBox.getSelectionModel().getSelectedItem());
+		if (ssbButton.isSelected()) {
+			scapper = new EuromediaWebScraper("SSB");
+			scapper.setAmount(amount);
+			scapper.startDownloading();
+
+			changePdfToString();
+			FileChanger.changeAllEuroFilesSSB(EuroModel.getInstance().getSettings().getPath());
+		} else {
+			scapper = new EuromediaWebScraper("Flores");
+			scapper.setAmount(amount);
+			scapper.startDownloading();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("TEST");
+			FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
+			System.out.println("TEST2");
+		}
+		cleanUp();
+
+	}
+
+	private void prepareForImport() {
 		EuroModel.getInstance().deleteAllTempFiles();
 		progress.setVisible(true);
 		clearListView();
-		EuroModel.getInstance().startImportEuromedia();
-		EuroModel.getInstance().tryLogin();
-		if (EuroModel.getInstance().hasLoggedIn()) {
-			if (ssbButton.isSelected()) {
-				EuroModel.getInstance().downloadFilesSSB();
-				pause();
-				changePdfToString();
-				FileChanger.changeAllEuroFilesSSB(EuroModel.getInstance().getSettigns().getPath());
+	}
 
-			} else {
-				EuroModel.getInstance().downloadFilesFlores();
-				pause();
-				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettigns().getPath());
-			}
-		}
-		InfoModel.getInstance().updateInfo("Hotovo!");
+	private void cleanUp() {
 		fillListView();
-		EuroModel.getInstance().end();
 		progress.setVisible(false);
 		EuroModel.getInstance().deleteAllTempFiles();
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private void fillListView() {

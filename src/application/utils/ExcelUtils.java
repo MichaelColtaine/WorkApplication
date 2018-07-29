@@ -33,8 +33,9 @@ public class ExcelUtils {
 		for (File f : fromDirectory.listFiles()) {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(0, f.getName().length() - 3))
 					.append("xlsx");
+			InfoModel.getInstance().updateInfo(f.getName());
 			EuroModel.getInstance().getRecords()
-					.add(new RowRecord(sb.toString().substring(4, sb.toString().length() - 5), "", ""));
+					.add(new RowRecord(sb.toString().replaceAll(".xlsx", ""), "", ""));
 			writeFileFourInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
 		}
 	}
@@ -43,6 +44,7 @@ public class ExcelUtils {
 		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
 		for (File f : directory.listFiles()) {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
+			InfoModel.getInstance().updateInfo(f.getName());
 			AlbatrosModel.getInstance().getListOfNames()
 					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
 			writeFileFourInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(),
@@ -113,7 +115,7 @@ public class ExcelUtils {
 	public void prescoExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
 		for (File f : fromDirectory.listFiles()) {
-			InfoModel.getInstance().updateInfo("Pracuju s " +f.getName());
+			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			writeFileTwoInputs(readPrescoFile(f), toDirectoryPath, f.getName());
 			f.delete();
 		}

@@ -41,9 +41,9 @@ public class EuromediaSettingsController {
 
 	@FXML
 	void initialize() {
-		pathInput.setText(EuroModel.getInstance().getSettigns().getPath());
-		emailInput.setText(EuroModel.getInstance().getSettigns().getId());
-		passwordInput.setText(EuroModel.getInstance().getSettigns().getPassword());
+		pathInput.setText(EuroModel.getInstance().getSettings().getPath());
+		emailInput.setText(EuroModel.getInstance().getSettings().getId());
+		passwordInput.setText(EuroModel.getInstance().getSettings().getPassword());
 	}
 
 	@FXML

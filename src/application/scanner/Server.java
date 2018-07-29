@@ -3,6 +3,7 @@ package application.scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -16,9 +17,8 @@ import javafx.scene.control.Label;
 public class Server {
 
 	static ServerSocket ss;
-	static Socket s;
-	static InputStreamReader is;
-	static BufferedReader br;
+	static Socket socket;
+
 	String text;
 	ArrayList<ServerArticle> serverArticles;
 	int port = 8889;
@@ -34,68 +34,32 @@ public class Server {
 	public static Server getInstance() {
 		return LazyHolder.INSTANCE;
 	}
-
-	// public void waitForResponse(Label label, ArrayList<Article> articles,
-	// ObservableList<Article> dataForList) {
-	// final Task<Void> task = new Task<Void>() {
-	// @Override
-	// protected Void call() {
-	// try {
-	// ss = new ServerSocket(port);
-	// while (true) {
-	// System.out.println("Server is waiting for response");
-	// changeLabel(label, "Připojení se zdařilo.");
-	// s = ss.accept();
-	// System.out.println("Connected");
-	// is = new InputStreamReader(s.getInputStream());
-	// br = new BufferedReader(is);
-	// text = br.readLine();
-	// serverArticles = convertStringToList(text);
-	// createTable(articles, dataForList);
-	// }
-	// } catch (BindException e) {
-	// changeLabel(label, "Připojení selhalo, port už je používán. Změň číslo
-	// postu.");
-	// System.out.println(e.getMessage() + " Thrown by " +
-	// e.getClass().getSimpleName());
-	// } catch (IOException e) {
-	// System.out.println(e.getMessage() + " Thrown by " +
-	// e.getClass().getSimpleName());
-	// }
-	// return null;
-	// }
-	// };
-	// new Thread(task).start();
-	// }
-
+	// tento
 	public void waitForResponse(Label label, ArrayList<Article> articles, ObservableList<Article> dataForList) {
 		final Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() {
 				try {
-					// ss = new ServerSocket(port);
-					// ss.setReuseAddress(true);
+					ss = new ServerSocket(port);
+					ss.setReuseAddress(true);
 
 					while (true) {
-						ss = new ServerSocket(port);
-						ss.setReuseAddress(true);
 						System.out.println("Server is waiting for response");
-						changeLabel(label, "Připojení se zdařilo.");
-						s = ss.accept();
+						changeLabel(label, "Naslouchá k portu číslo: " + port);
+						socket = ss.accept();
 						System.out.println("Connected");
-						is = new InputStreamReader(s.getInputStream());
-						br = new BufferedReader(is);
-						text = br.readLine();
-						serverArticles = convertStringToList(text);
-						createTable(articles, dataForList);
-						is.close();
-						s.close();
-						ss.close();
+						try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+							text = br.readLine();
+							serverArticles = convertStringToList(text);
+							createTable(articles, dataForList);
+							changeLabel(label, "Konec spojení.");
+						}
 					}
 				} catch (BindException e) {
 					changeLabel(label, "Připojení selhalo, port už je používán.");
 					System.out.println(e.getMessage() + " 1Thrown by " + e.getClass().getSimpleName());
 				} catch (IOException e) {
+					changeLabel(label, "IO exception.");
 					System.out.println(e.getMessage() + " 2Thrown by " + e.getClass().getSimpleName());
 
 				}
@@ -105,19 +69,55 @@ public class Server {
 		new Thread(task).start();
 	}
 
+//	public void waitForResponse(Label label, ArrayList<Article> articles, ObservableList<Article> dataForList) {
+//		final Task<Void> task = new Task<Void>() {
+//			@Override
+//			protected Void call() {
+//				try {
+//					ss = new ServerSocket(port);
+//					ss.setReuseAddress(true);
+//
+//					while (true) {
+//						System.out.println("Server is waiting for response");
+//						changeLabel(label, "Naslouchá k portu číslo: " + port);
+//						socket = ss.accept();
+//						System.out.println("Connected to client");
+//						try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//								PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+//							out.print("TEST");
+//							out.flush();
+////							out.close();
+//							text = br.readLine();
+//							serverArticles = convertStringToList(text);
+//							createTable(articles, dataForList);
+//							changeLabel(label, "Konec spojení.");
+//						}
+//					}
+//
+//				} catch (BindException e) {
+//					changeLabel(label, "Připojení selhalo, port už je používán.");
+//					System.out.println(e.getMessage() + " 1Thrown by " + e.getClass().getSimpleName());
+//				
+//				} catch (IOException e) {
+//					changeLabel(label, "IO exception.");
+//					System.out.println(e.getMessage() + " 2Thrown by " + e.getClass().getSimpleName());
+//					e.printStackTrace();
+//				}
+//
+//				return null;
+//			}
+//		};
+//		new Thread(task).start();
+//	}
+
 	public static void closeAll() throws IOException {
 
 		if (ss != null) {
 			ss.close();
 		}
-		if (br != null) {
-			br.close();
-		}
-		if (is != null) {
-			is.close();
-		}
-		if (s != null) {
-			s.close();
+
+		if (socket != null) {
+			socket.close();
 		}
 
 	}
@@ -143,10 +143,6 @@ public class Server {
 		});
 	}
 
-	public String getText() {
-		return this.text;
-	}
-
 	public ArrayList<ServerArticle> getServerArticles() {
 		return this.serverArticles;
 	}
@@ -157,10 +153,6 @@ public class Server {
 		for (String s : rows) {
 			String[] temp = s.split("\\.");
 			articles.add(new ServerArticle(temp[0], temp[1]));
-		}
-
-		for (ServerArticle a : articles) {
-			System.out.println(a.getEan() + " " + a.getAmount());
 		}
 		return articles;
 	}

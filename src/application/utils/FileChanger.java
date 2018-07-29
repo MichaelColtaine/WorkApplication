@@ -8,11 +8,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import application.euromedia.EuroModel;
+import application.euromedia.EuromediaExcelConverter;
 
 public class FileChanger {
 
-	private static String FROM_DIRECTORY = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
-	private static ExcelUtils excel = new ExcelUtils();
+	private static String TEMP_DIRECOTORY = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
 
 	/*
 	 * This method unzips files so that they can be renamed and moved via the
@@ -21,7 +21,6 @@ public class FileChanger {
 
 	public static void unzip(File source, File destination) throws IOException {
 		byte[] buffer = new byte[1024];
-		System.out.println(source.getName());
 		FileInputStream fis = new FileInputStream(source);
 		ZipInputStream zis = new ZipInputStream(fis);
 		ZipEntry ze = zis.getNextEntry();
@@ -44,17 +43,12 @@ public class FileChanger {
 	 * directory that it takes as an argument. For example bob123 -> 123.txt
 	 */
 	public static void changeAllEuroFilesSSB(String toDirectory) {
-		File directory = new File(FROM_DIRECTORY);
+		File directory = new File(TEMP_DIRECOTORY);
 		StringBuilder sb = new StringBuilder();
 		for (File source : directory.listFiles()) {
 			sb.delete(0, sb.length());
-
-			if (source.getName().toLowerCase().contains("vyk")) {
-				sb.append(toDirectory).append(File.separator).append(source.getName().substring(12, 15)).append(".txt");
-			} else {
-				sb.append(toDirectory).append(File.separator).append(source.getName().substring(11, 14)).append(".txt");
-			}
-
+			sb.append(toDirectory).append(File.separator)
+					.append(source.getName().replaceAll(".zip", ".txt").substring(source.getName().length() - 7));
 			File destination = new File(sb.toString());
 			try {
 				unzip(source, destination);
@@ -63,31 +57,31 @@ public class FileChanger {
 			}
 		}
 	}
-	
+
 	public static void changeAllEuroFilesFlores(String toDirectory) {
-		File directory = new File(FROM_DIRECTORY);
+		File directory = new File(TEMP_DIRECOTORY);
 		StringBuilder sb = new StringBuilder();
 		for (File source : directory.listFiles()) {
 			sb.delete(0, sb.length());
-			if (source.getName().toLowerCase().contains("vyk")) {
-				sb.append(FROM_DIRECTORY).append(File.separator).append(source.getName().substring(0, 15)).append(".xls");
-			} else {
-				sb.append(FROM_DIRECTORY).append(File.separator).append(source.getName().substring(0, 14)).append(".xls");
-			}
+			sb.append(TEMP_DIRECOTORY).append(File.separator).append(source.getName().replaceAll("zip", "xls"));
+
+			System.out.println(sb.toString());
 			File destination = new File(sb.toString());
-		
+
 			try {
 				unzip(source, destination);
 			} catch (IOException e) {
 				System.out.println(e);
 			}
 		}
-		for(File f : directory.listFiles()) {
-			if(f.getName().contains(".zip")) {
+		for (File f : directory.listFiles()) {
+			if (f.getName().contains(".zip")) {
 				f.delete();
 			}
 		}
-		excel.euromediaExcel(FROM_DIRECTORY, EuroModel.getInstance().getSettigns().getPath());
+		EuromediaExcelConverter converter = new EuromediaExcelConverter();
+		converter.euromediaExcel(TEMP_DIRECOTORY, EuroModel.getInstance().getSettings().getPath());
+		System.out.println("TEST3");
 	}
 
 }

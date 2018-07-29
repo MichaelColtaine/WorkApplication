@@ -28,7 +28,6 @@ import javafx.stage.StageStyle;
 
 public class ScannerController {
 
-	// private ArrayList<Article> articles = new ArrayList<>();
 	private ArrayList<Article> articles = ScannerModel.getInstance().getArticles();
 	private ObservableList<Article> dataForList = FXCollections.observableArrayList();
 
@@ -181,9 +180,15 @@ public class ScannerController {
 	@FXML
 	void handleExportButton(ActionEvent event) {
 		if (table.getItems().size() > 0) {
-			ExcelUtils excel = new ExcelUtils();
-			excel.writeFileTwoInputs(table.getItems(), ScannerModel.getInstance().getSettings().getPath(),
-					"vratka.xlsx");
+			Thread t1 = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					ExcelUtils excel = new ExcelUtils();
+					excel.writeFileTwoInputs(table.getItems(), ScannerModel.getInstance().getSettings().getPath(),
+							"vratka.xlsx");
+				}
+			});
+			t1.start();
 			InfoModel.getInstance().updateInfo("Soubor byl exportován.");
 		} else {
 			InfoModel.getInstance().updateInfo("\t\tVratka je prázdná.");

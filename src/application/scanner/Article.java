@@ -28,10 +28,8 @@ public class Article {
 	}
 
 	public void editAmountValue(String newValue) {
-		System.out.println("Amount before : " + amount.get() + " counter " + counter);
 		this.amount.set(Integer.parseInt(newValue));
 		this.counter = Integer.parseInt(newValue);
-		System.out.println("Amount after : " + amount.get() + " counter " + counter);
 	}
 
 }

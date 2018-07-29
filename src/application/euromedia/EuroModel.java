@@ -10,12 +10,11 @@ import javafx.stage.Window;
 public class EuroModel {
 
 	private static EuroModel INSTANCE;
-	private EuromediaDownloader euromedia;
 	private EuroSettings settings;
 	private ArrayList<RowRecord> records;
 
 	private EuroModel() {
-		this.euromedia = new EuromediaDownloader();
+
 		this.settings = new EuroSettings();
 		this.records = new ArrayList<>();
 
@@ -28,24 +27,11 @@ public class EuroModel {
 		return INSTANCE;
 	}
 
-	public void startImportEuromedia() {
-		setLoginInfoEuro();
-		euromedia.start();
-	}
-
-	public boolean hasLoggedIn() {
-		return euromedia.hasLoggedIn();
-	}
-
-	private void setLoginInfoEuro() {
-		euromedia.setLoginInfo(settings.getId(), settings.getPassword());
-	}
-
 	public void deleteAllTempFiles() {
 		File directory = new File(System.getProperty("user.dir") + "\\temp\\");
 		createDirectoryifItDoesNotExists(directory);
 		for (File f : directory.listFiles()) {
-			System.out.println(f.getName());
+
 			f.delete();
 		}
 		for (File f : directory.listFiles()) {
@@ -64,10 +50,9 @@ public class EuroModel {
 	public void saveSettings(String path, String email, String password) {
 		settings.savePath(path);
 		settings.saveLoginInfo(email, password);
-		setLoginInfoEuro();
 	}
 
-	public EuroSettings getSettigns() {
+	public EuroSettings getSettings() {
 		return this.settings;
 	}
 
@@ -80,23 +65,4 @@ public class EuroModel {
 		return dc.showDialog(owner);
 	}
 
-	public void setQuantityOfItemsToDownload(String selectedItem) {
-		euromedia.downloadAmount(Integer.parseInt(selectedItem));
-	}
-
-	public void tryLogin() {
-		euromedia.tryToLogin();
-	}
-
-	public void end() {
-		euromedia.end();
-	}
-
-	public void downloadFilesSSB() {
-		euromedia.downloadSSB();
-	}
-
-	public void downloadFilesFlores() {
-		euromedia.downloadFlores();
-	}
 }

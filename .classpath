@@ -37,5 +37,8 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/lib/jackson-core-2.7.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3.jar" sourcepath="C:/Users/Micha/.sourceattacher/jsoup-1.11.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
