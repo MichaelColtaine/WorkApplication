@@ -17,7 +17,6 @@ public class SbkDownloader extends Downloader implements Runnable {
 	@Override
 	public void run() {
 		try {
-
 			if (element.text().contains("SBK")) {
 				String linkUrl = (element.attr("abs:href"));
 				byte[] bytes = Jsoup.connect(linkUrl).cookies(cookies).userAgent(USER_AGENT).referrer(loginFormUrl)
@@ -27,11 +26,8 @@ public class SbkDownloader extends Downloader implements Runnable {
 				fos.write(bytes);
 				fos.close();
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

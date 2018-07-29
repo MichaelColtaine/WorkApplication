@@ -39,46 +39,56 @@ public class EuromediaExcelConverter {
 			Sheet sheet = wb.getSheetAt(0);
 			sheet.removeRow(sheet.getRow(0));
 			for (Row row : sheet) {
-				Double convertAmountToDouble = Double
-						.parseDouble(new BigDecimal(row.getCell(11).toString()).toPlainString());
-				Integer convertAmountToInt = convertAmountToDouble.intValue();
-				String amountAsString = String.valueOf(convertAmountToInt);
-				String price = row.getCell(8).toString();
-				price = price.substring(0, price.length() - 2);
-				double pricePerUnit = row.getCell(9).getNumericCellValue();
-
-				double totalPrice = pricePerUnit * convertAmountToInt;
-				records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString,
-						price, totalPrice));
+				extractDataAndCreateExcelRecords(records, row);
 			}
 			wb.close();
-
 		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
 				| IOException e) {
-			System.out.println("readFile in ExcelUtils");
+			System.out.println("Exception thrown in readFile in ExcelUtils");
 			e.printStackTrace();
 		}
 		return records;
 	}
 
+	private void extractDataAndCreateExcelRecords(List<ExcelRecord> records, Row row) {
+		Double convertAmountToDouble = Double.parseDouble(new BigDecimal(row.getCell(11).toString()).toPlainString());
+		Integer convertAmountToInt = convertAmountToDouble.intValue();
+		String amountAsString = String.valueOf(convertAmountToInt);
+		String price = row.getCell(8).toString();
+		price = price.substring(0, price.length() - 2);
+		double pricePerUnit = row.getCell(9).getNumericCellValue();
+		double totalPrice = pricePerUnit * convertAmountToInt;
+		records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString, price,
+				totalPrice));
+	}
+
 	private void writeFileFourInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
-		Sheet sheet1 = workbook.createSheet();
+		Sheet sheet = workbook.createSheet();
+		createAndFillCells(records, sheet);
+		resizeColumns(records, sheet);
+		writeFile(workbook, toDirectoryPath, fileName);
+	}
 
+	private void createAndFillCells(List<ExcelRecord> records, Sheet sheet) {
 		int i = 0;
 		for (ExcelRecord r : records) {
-			Row row = sheet1.createRow(i);
+			Row row = sheet.createRow(i);
 			row.createCell(0).setCellValue(r.getEan());
 			row.createCell(1).setCellValue(r.getAmount());
 			row.createCell(3).setCellValue(r.getPrice());
 			row.createCell(2).setCellValue(r.getTotalPrice());
 			i++;
 		}
+	}
 
+	private void resizeColumns(List<ExcelRecord> records, Sheet sheet) {
 		for (int k = 0; k < records.size(); k++) {
-			sheet1.autoSizeColumn(k);
+			sheet.autoSizeColumn(k);
 		}
+	}
 
+	private void writeFile(Workbook workbook, String toDirectoryPath, String fileName) {
 		try {
 			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName);
 			workbook.write(fileOut);
@@ -87,7 +97,6 @@ public class EuromediaExcelConverter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void createDirectoriesIfDontExist(String fromDirectoryPath, String toDirectoryPath) {

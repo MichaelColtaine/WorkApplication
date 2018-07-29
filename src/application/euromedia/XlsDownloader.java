@@ -20,7 +20,6 @@ public class XlsDownloader extends Downloader implements Runnable {
 		try {
 			if (element.text().contains("XLS")) {
 				String linkUrl = (element.attr("abs:href"));
-				System.out.println(linkUrl);
 				byte[] bytes = Jsoup.connect(linkUrl).cookies(cookies).userAgent(USER_AGENT)
 						.referrer("https://vo.knizniweb.cz/moje-dokumenty/").ignoreContentType(true).maxBodySize(0)
 						.timeout(600000).execute().bodyAsBytes();

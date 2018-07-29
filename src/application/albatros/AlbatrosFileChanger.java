@@ -8,14 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class FileChanger {
+public class AlbatrosFileChanger {
 
 	File input;
 	String outputDirectory;
 	ArrayList<String> lines = new ArrayList<>();
 	ArrayList<String> newLines = new ArrayList<>();
 
-	public FileChanger() {
+	public AlbatrosFileChanger() {
 
 	}
 

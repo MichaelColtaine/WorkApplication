@@ -11,7 +11,7 @@ import com.jfoenix.controls.JFXButton;
 
 import application.RowRecord;
 import application.infobar.InfoModel;
-import application.utils.FileChanger;
+import application.utils.FileUnziper;
 import application.utils.NumberFinder;
 import application.utils.PdfWorker;
 import javafx.application.Platform;
@@ -83,7 +83,6 @@ public class EuromediaController implements Initializable {
 	@FXML
 	void handleImportButtonAction(ActionEvent event) {
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
-			// EuroModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -107,7 +106,8 @@ public class EuromediaController implements Initializable {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
+
+				EuroModel.getInstance().changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
 			}
 		});
 		t1.start();
@@ -129,30 +129,25 @@ public class EuromediaController implements Initializable {
 
 	private void startImport() {
 		prepareForImport();
-		EuromediaWebScraper scapper;
 		int amount = Integer.parseInt(comboBox.getSelectionModel().getSelectedItem());
+		InfoModel.getInstance().updateInfo("Začínám stahovat");
 		if (ssbButton.isSelected()) {
-			scapper = new EuromediaWebScraper("SSB");
-			scapper.setAmount(amount);
-			scapper.startDownloading();
-
+			startDownloading("SSB", amount);
 			changePdfToString();
-			FileChanger.changeAllEuroFilesSSB(EuroModel.getInstance().getSettings().getPath());
+			EuroModel.getInstance().changeAllEuroFilesSSB(EuroModel.getInstance().getSettings().getPath());
 		} else {
-			scapper = new EuromediaWebScraper("Flores");
-			scapper.setAmount(amount);
-			scapper.startDownloading();
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("TEST");
-			FileChanger.changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
-			System.out.println("TEST2");
+			startDownloading("Flores", amount);
+			waitForFilesToBeDownloaded();
+			EuroModel.getInstance().changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
 		}
 		cleanUp();
+	}
+
+	private void startDownloading(String type, int amount) {
+		EuromediaWebScraper scraper;
+		scraper = new EuromediaWebScraper(type);
+		scraper.setAmount(amount);
+		scraper.startDownloading();
 
 	}
 
@@ -218,7 +213,7 @@ public class EuromediaController implements Initializable {
 
 	private void pause() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

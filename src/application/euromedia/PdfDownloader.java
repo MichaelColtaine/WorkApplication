@@ -21,7 +21,6 @@ public class PdfDownloader extends Downloader implements Runnable {
 		try {
 			if (element.text().contains("PDF")) {
 				String linkUrl = (element.attr("abs:href"));
-				System.out.println(linkUrl);
 				byte[] bytes = Jsoup.connect(linkUrl).cookies(cookies).header("Accept-Encoding", "zip, deflate")
 						.userAgent(USER_AGENT).referrer(loginFormUrl).ignoreContentType(true).maxBodySize(0)
 						.timeout(600000).execute().bodyAsBytes();
