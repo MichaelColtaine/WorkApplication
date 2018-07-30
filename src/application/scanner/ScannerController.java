@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
 import application.infobar.InfoModel;
 import javafx.collections.FXCollections;
@@ -47,7 +48,7 @@ public class ScannerController {
 	@FXML
 	private Button removeAllButton;
 	@FXML
-	private Button updateButton;
+	private TextField nameTextField;
 	@FXML
 	private TableView<Article> table;
 	@FXML
@@ -71,7 +72,8 @@ public class ScannerController {
 		setupTable();
 		handleEditingOfAmountColumn();
 		refreshTableData();
-		Server.getInstance().waitForResponse(serverInfoLabel, articles, dataForList);
+		Server.getInstance().waitForResponse(serverInfoLabel, articles, dataForList, totalAmountOfRows,
+				totalAmountOfBooks);
 		ipLabel.setText("IP adresa tohoto počítače " + getIp());
 	}
 
@@ -183,9 +185,16 @@ public class ScannerController {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
+					String name = nameTextField.getText().replaceAll(" ", "");
+					StringBuilder sb = new StringBuilder();
+					if (name.length() == 0) {
+						sb.append("exportSP.xlsx");
+					} else {
+						sb.append(name).append(".xlsx");
+					}
 					ExcelUtils excel = new ExcelUtils();
 					excel.writeFileTwoInputs(table.getItems(), ScannerModel.getInstance().getSettings().getPath(),
-							"vratka.xlsx");
+							sb.toString());
 				}
 			});
 			t1.start();
@@ -196,10 +205,10 @@ public class ScannerController {
 
 	}
 
-	@FXML
-	void handleUpdateButton(ActionEvent event) {
-		updateInfo();
-	}
+	// @FXML
+	// void handleUpdateButton(ActionEvent event) {
+	// updateInfo();
+	// }
 
 	@FXML
 	void handleRemoveButton() {

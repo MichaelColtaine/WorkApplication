@@ -19,7 +19,6 @@ public class KosmasFileMover {
 	public void move() throws IOException {
 		File from = new File(fromDirectory);
 		for (File f : from.listFiles()) {
-			System.out.println(toDirectory);
 			File newFile = new File(toDirectory + renameFile(f.getName()));
 			if (newFile.exists()) {
 				newFile.delete();
@@ -30,22 +29,23 @@ public class KosmasFileMover {
 
 	private String renameFile(String fullName) {
 		StringBuilder sb = new StringBuilder();
-		String temp = fullName.toUpperCase().replace(".TXT", "");
+		String deliveryNoteName = fullName.toUpperCase().replace(".TXT", "");
 		fullName = fullName.toLowerCase().replace("-", "");
 		if (fullName.contains("f")) {
 			sb.append(fullName.substring(6));
-			fullName = fullName.substring(6);
 		} else if (fullName.contains("k")) {
 			sb.append(fullName.substring(6));
-			fullName = fullName.substring(6);
 		} else {
 			sb.append(fullName.substring(5));
-			fullName = fullName.substring(5);
 		}
-		fileNames.add(new RowRecord(temp, sb.toString(), "-38,00%"));
+		String temp = sb.toString();
+		if (temp.length() > 7) {
+			sb.delete(0, sb.toString().length());
+			sb.append(temp.substring(temp.length() - 7));
+		}
+		fileNames.add(new RowRecord(deliveryNoteName, sb.toString(), "-38,00%"));
 		return sb.toString();
 	}
-	
 
 	public void setDestinantionDirectory(String toDirectory) {
 		this.toDirectory = toDirectory + File.separator;

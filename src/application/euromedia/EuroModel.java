@@ -17,10 +17,8 @@ public class EuroModel {
 	private final File tempDirectory = new File(TEMP_DIRECOTORY);
 
 	private EuroModel() {
-
 		this.settings = new EuroSettings();
 		this.records = new ArrayList<>();
-
 	}
 
 	public static EuroModel getInstance() {
