@@ -7,6 +7,8 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -15,11 +17,11 @@ import javafx.scene.control.Label;
 
 public class Server {
 
-	static ServerSocket ss;
+	static ServerSocket serverScoket;
 	static Socket socket;
 
-	String text;
-	ArrayList<ServerArticle> serverArticles;
+	private String text, fileName;
+	ArrayList<ServerArticle> listOfArticlesFromClient;
 	int port = 8889;
 
 	private Server() {
@@ -41,20 +43,21 @@ public class Server {
 			@Override
 			protected Void call() {
 				try {
-					ss = new ServerSocket(port);
-					ss.setReuseAddress(true);
-
+					serverScoket = new ServerSocket(port);
+					serverScoket.setReuseAddress(true);
 					while (true) {
 						System.out.println("Server is waiting for response");
 						changeLabel(label, "Naslouchá k portu číslo: " + port);
-						socket = ss.accept();
+						socket = serverScoket.accept();
 						System.out.println("Connected");
 						try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 							text = br.readLine();
-							serverArticles = convertStringToList(text);
-							createTable(articles, dataForList, amountLabel, totalAmountOfBooks);
-							changeLabel(label, "Konec spojení.");
+							System.out.println("TEST");
+							listOfArticlesFromClient = convertStringToList(text);
 
+							createTable(articles, dataForList, amountLabel, totalAmountOfBooks);
+
+							changeLabel(label, "Konec spojení.");
 						}
 					}
 				} catch (BindException e) {
@@ -64,6 +67,8 @@ public class Server {
 					changeLabel(label, "IO exception.");
 					System.out.println(e.getMessage() + " 2Thrown by " + e.getClass().getSimpleName());
 
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				return null;
 			}
@@ -71,55 +76,10 @@ public class Server {
 		new Thread(task).start();
 	}
 
-	// public void waitForResponse(Label label, ArrayList<Article> articles,
-	// ObservableList<Article> dataForList) {
-	// final Task<Void> task = new Task<Void>() {
-	// @Override
-	// protected Void call() {
-	// try {
-	// ss = new ServerSocket(port);
-	// ss.setReuseAddress(true);
-	//
-	// while (true) {
-	// System.out.println("Server is waiting for response");
-	// changeLabel(label, "Naslouchá k portu číslo: " + port);
-	// socket = ss.accept();
-	// System.out.println("Connected to client");
-	// try (BufferedReader br = new BufferedReader(new
-	// InputStreamReader(socket.getInputStream()));
-	// PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
-	// out.print("TEST");
-	// out.flush();
-	//// out.close();
-	// text = br.readLine();
-	// serverArticles = convertStringToList(text);
-	// createTable(articles, dataForList);
-	// changeLabel(label, "Konec spojení.");
-	// }
-	// }
-	//
-	// } catch (BindException e) {
-	// changeLabel(label, "Připojení selhalo, port už je používán.");
-	// System.out.println(e.getMessage() + " 1Thrown by " +
-	// e.getClass().getSimpleName());
-	//
-	// } catch (IOException e) {
-	// changeLabel(label, "IO exception.");
-	// System.out.println(e.getMessage() + " 2Thrown by " +
-	// e.getClass().getSimpleName());
-	// e.printStackTrace();
-	// }
-	//
-	// return null;
-	// }
-	// };
-	// new Thread(task).start();
-	// }
-
 	public static void closeAll() throws IOException {
 
-		if (ss != null) {
-			ss.close();
+		if (serverScoket != null) {
+			serverScoket.close();
 		}
 
 		if (socket != null) {
@@ -133,14 +93,20 @@ public class Server {
 		articles.clear();
 		dataForList.clear();
 		int amount = 0;
-		for (ServerArticle a : serverArticles) {
+		for (ServerArticle a : listOfArticlesFromClient) {
 			Article article = new Article(a.getEan());
 			article.editAmountValue(a.getAmount());
 			articles.add(article);
 			amount += Integer.parseInt(a.getAmount());
 		}
 		dataForList.addAll(articles);
-		updateAmount(amountLabel, dataForList, totalAmountOfBooks, amount);
+		createFile(articles);
+		updateAmountLabels(amountLabel, dataForList, totalAmountOfBooks, amount);
+	}
+
+	private void createFile(ArrayList<Article> articles) {
+		ExcelUtils excel = new ExcelUtils();
+		excel.writeFileTwoInputs(articles, ScannerModel.getInstance().getSettings().getPath(), fileName);
 	}
 
 	private void changeLabel(Label label, String text) {
@@ -152,7 +118,7 @@ public class Server {
 		});
 	}
 
-	private void updateAmount(Label amountLabel, ObservableList<Article> dataForList, Label totalAmountOfBooks,
+	private void updateAmountLabels(Label amountLabel, ObservableList<Article> dataForList, Label totalAmountOfBooks,
 			int amount) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -164,13 +130,20 @@ public class Server {
 	}
 
 	public ArrayList<ServerArticle> getServerArticles() {
-		return this.serverArticles;
+		return this.listOfArticlesFromClient;
 	}
 
 	public ArrayList<ServerArticle> convertStringToList(String txt) {
 		ArrayList<ServerArticle> articles = new ArrayList<>();
 		String[] rows = txt.split(";");
+		fileName = rows[0] + ".xlsx";
+
+		boolean first = true;
 		for (String s : rows) {
+			if (first) {
+				first = false;
+				continue;
+			}
 			String[] temp = s.split("\\.");
 			articles.add(new ServerArticle(temp[0], temp[1]));
 		}

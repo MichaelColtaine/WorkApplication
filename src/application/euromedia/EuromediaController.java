@@ -106,11 +106,11 @@ public class EuromediaController implements Initializable {
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
-
 				EuroModel.getInstance().changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
 			}
 		});
 		t1.start();
+		
 	}
 
 	@FXML

@@ -200,7 +200,7 @@ public class ScannerController {
 			t1.start();
 			InfoModel.getInstance().updateInfo("Soubor byl exportován.");
 		} else {
-			InfoModel.getInstance().updateInfo("\t\tVratka je prázdná.");
+			InfoModel.getInstance().updateInfo("\t\tTabulka je prázdná.");
 		}
 
 	}

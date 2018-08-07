@@ -61,11 +61,15 @@ public class AlbatrosController {
 
 	@FXML
 	void initialize() {
+		setupComboboxAndTableview();
+		fillListViewData();
+	}
+
+	private void setupComboboxAndTableview() {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
 				"16", "17", "18", "19", "20");
 		tableView.setPlaceholder(new Label(""));
-		fillListViewData();
 	}
 
 	@FXML
@@ -114,7 +118,14 @@ public class AlbatrosController {
 			});
 			t1.start();
 		} else {
-			System.out.println("TEST");
+			Thread t1 = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					ExcelUtils exel = new ExcelUtils();
+					exel.albatrosExcel();
+				}
+			});
+			t1.start();
 		}
 	}
 

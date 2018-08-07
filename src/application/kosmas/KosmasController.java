@@ -62,15 +62,15 @@ public class KosmasController {
 
 	@FXML
 	void initialize() {
-		tableView.setPlaceholder(new Label(""));
-		fillCombobox();
+		fillComboboxAndTableview();
 		refreshData();
 	}
 
-	private void fillCombobox() {
+	private void fillComboboxAndTableview() {
 		comboBox.getItems().removeAll(comboBox.getItems());
 		comboBox.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
 				"16", "17", "18", "19", "20");
+		tableView.setPlaceholder(new Label(""));
 	}
 
 	private void refreshData() {
@@ -113,6 +113,14 @@ public class KosmasController {
 						e.printStackTrace();
 						InfoModel.getInstance().updateInfo("Import se nezdařil");
 					}
+				}
+			});
+			t1.start();
+		} else {
+			Thread t1 = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					moveFilesFlores();
 				}
 			});
 			t1.start();

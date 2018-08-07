@@ -34,8 +34,7 @@ public class ExcelUtils {
 			StringBuilder sb = new StringBuilder().append(f.getName().substring(0, f.getName().length() - 3))
 					.append("xlsx");
 			InfoModel.getInstance().updateInfo(f.getName());
-			EuroModel.getInstance().getRecords()
-					.add(new RowRecord(sb.toString().replaceAll(".xlsx", ""), "", ""));
+			EuroModel.getInstance().getRecords().add(new RowRecord(sb.toString().replaceAll(".xlsx", ""), "", ""));
 			writeFileFourInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
 		}
 	}
@@ -50,6 +49,7 @@ public class ExcelUtils {
 			writeFileFourInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(),
 					sb.toString());
 		}
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	public void kosmasExcel() {
@@ -80,6 +80,7 @@ public class ExcelUtils {
 			KosmasModel.getInstance().getFileNames()
 					.add(new RowRecord(f.getName().toUpperCase().replace(".CSV", ""), "", ""));
 		}
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private List<ExcelRecord> readFileAlbatros(File file) {

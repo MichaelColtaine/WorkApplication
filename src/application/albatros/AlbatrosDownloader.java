@@ -44,7 +44,7 @@ public class AlbatrosDownloader {
 		}
 
 	}
-	
+
 	public void startFlores() {
 		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
@@ -121,35 +121,19 @@ public class AlbatrosDownloader {
 	private void fetchURL() {
 		driver.get(websiteUrl);
 	}
-	
-	
+
 	private void login() {
 		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Distri");
 		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(loginId);
 		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys(loginPassword);
 		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
-	
 
 	private void openMyDocuments() {
 		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
 		driver.get("https://www.distri.cz/Customer/Detail");
 
 	}
-
-//	private void login() {
-//		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Distri");
-//		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(loginId);
-//		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys(loginPassword);
-//		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
-//	}
-//
-//	private void openMyDocuments() {
-//		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
-//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/button/div/div/div/span[1]"));
-//		click(driver, By.xpath("/html/body/div[4]/div/div/div[2]/div/ul/li[2]/a"));
-//
-//	}
 
 	private void downloadFilesSSB() {
 		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat dle nastavení']"));
@@ -162,7 +146,7 @@ public class AlbatrosDownloader {
 			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
 		}
 	}
-	
+
 	private void downloadFilesFlores() {
 		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat do Excelu']"));
 		Actions actions = new Actions(driver);
@@ -174,7 +158,6 @@ public class AlbatrosDownloader {
 			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
 		}
 	}
-
 
 	private void click(WebDriver driver, By location) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);

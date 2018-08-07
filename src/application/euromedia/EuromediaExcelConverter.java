@@ -30,6 +30,7 @@ public class EuromediaExcelConverter {
 			EuroModel.getInstance().getRecords().add(new RowRecord(sb.toString().replaceAll(".xlsx", ""), "", ""));
 			writeFileFourInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
 		}
+		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
 	private List<ExcelRecord> readFileEuromedia(File file) {
