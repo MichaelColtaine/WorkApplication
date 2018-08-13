@@ -58,13 +58,8 @@
 				<Font size="13.0" />
 			</font>
 		</TextField>
-		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="282.0" prefHeight="25.0" prefWidth="260.0" textFill="#f0f0f0" />
-		<Label layoutX="24.0" layoutY="219.0" text="ČTEČKA" textFill="#f0f0f0">
-			<font>
-				<Font size="17.0" />
-			</font>
-		</Label>
-		<Label fx:id="ipLabel" layoutX="24.0" layoutY="251.0" prefHeight="17.0" prefWidth="260.0" textFill="#f0f0f0" />
+		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="241.0" prefHeight="57.0" prefWidth="260.0" textFill="#f0f0f0" />
+		<Label fx:id="ipLabel" layoutX="24.0" layoutY="218.0" prefHeight="17.0" prefWidth="260.0" textFill="#f0f0f0" />
       <TextField fx:id="nameTextField" layoutX="32.0" layoutY="176.0" prefHeight="25.0" prefWidth="232.0" promptText="Vlož název souboru" />
 	</children>
 </AnchorPane>

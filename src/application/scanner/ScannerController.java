@@ -72,9 +72,9 @@ public class ScannerController {
 		setupTable();
 		handleEditingOfAmountColumn();
 		refreshTableData();
-		Server.getInstance().waitForResponse(serverInfoLabel, articles, dataForList, totalAmountOfRows,
+		Server.getInstance().listen(serverInfoLabel, articles, dataForList, totalAmountOfRows,
 				totalAmountOfBooks);
-		ipLabel.setText("IP adresa tohoto počítače " + getIp());
+		ipLabel.setText("IP adresa tohoto počítače: " + getIp());
 	}
 
 	private String getIp() {

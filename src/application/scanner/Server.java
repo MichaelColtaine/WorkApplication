@@ -7,8 +7,6 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -17,7 +15,7 @@ import javafx.scene.control.Label;
 
 public class Server {
 
-	static ServerSocket serverScoket;
+	static ServerSocket serverSocket;
 	static Socket socket;
 
 	private String text, fileName;
@@ -37,31 +35,28 @@ public class Server {
 	}
 
 	// tento
-	public void waitForResponse(Label label, ArrayList<Article> articles, ObservableList<Article> dataForList,
-			Label amountLabel, Label totalAmountOfBooks) {
+	public void listen(Label label, ArrayList<Article> articles, ObservableList<Article> dataForList, Label amountLabel,
+			Label totalAmountOfBooks) {
 		final Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() {
 				try {
-					serverScoket = new ServerSocket(port);
-					serverScoket.setReuseAddress(true);
+					serverSocket = new ServerSocket(port);
+					serverSocket.setReuseAddress(true);
 					while (true) {
-						System.out.println("Server is waiting for response");
-						changeLabel(label, "Naslouchá k portu číslo: " + port);
-						socket = serverScoket.accept();
+
+						changeLabel(label, "Server Online\nNaslouchá k portu číslo: " + port);
+						socket = serverSocket.accept();
 						System.out.println("Connected");
 						try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 							text = br.readLine();
-							System.out.println("TEST");
 							listOfArticlesFromClient = convertStringToList(text);
-
 							createTable(articles, dataForList, amountLabel, totalAmountOfBooks);
-
 							changeLabel(label, "Konec spojení.");
 						}
 					}
 				} catch (BindException e) {
-					changeLabel(label, "Připojení selhalo, port už je používán.");
+					changeLabel(label, "Server Offline\nPřipojení selhalo, port je již používán.");
 					System.out.println(e.getMessage() + " 1Thrown by " + e.getClass().getSimpleName());
 				} catch (IOException e) {
 					changeLabel(label, "IO exception.");
@@ -78,8 +73,8 @@ public class Server {
 
 	public static void closeAll() throws IOException {
 
-		if (serverScoket != null) {
-			serverScoket.close();
+		if (serverSocket != null) {
+			serverSocket.close();
 		}
 
 		if (socket != null) {
