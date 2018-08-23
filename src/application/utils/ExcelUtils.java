@@ -39,19 +39,6 @@ public class ExcelUtils {
 		}
 	}
 
-	public void albatrosExcel() {
-		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
-		for (File f : directory.listFiles()) {
-			StringBuilder sb = new StringBuilder().append(f.getName().substring(6));
-			InfoModel.getInstance().updateInfo(f.getName());
-			AlbatrosModel.getInstance().getListOfNames()
-					.add(new RowRecord(sb.toString().substring(0, sb.toString().length() - 5), "", ""));
-			writeFileFourInputs(readFileAlbatros(f), AlbatrosModel.getInstance().getSettings().getPath(),
-					sb.toString());
-		}
-		InfoModel.getInstance().updateInfo("Hotovo!");
-	}
-
 	public void kosmasExcel() {
 		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
 		for (File f : directory.listFiles()) {
@@ -83,35 +70,7 @@ public class ExcelUtils {
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
-	private List<ExcelRecord> readFileAlbatros(File file) {
-		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
-		try {
-			Workbook wb = WorkbookFactory.create(file);
-			Sheet sheet = wb.getSheetAt(0);
-			sheet.removeRow(sheet.getRow(0));
-			for (Row row : sheet) {
-				Double convertAmountToDouble = Double
-						.parseDouble(new BigDecimal(row.getCell(10).toString()).toPlainString());
-				Integer convertAmountToInt = convertAmountToDouble.intValue();
-				String amountAsString = String.valueOf(convertAmountToInt);
-				String price = row.getCell(7).toString();
-				price = price.substring(0, price.length() - 2);
 
-				double pricePerunit = row.getCell(8).getNumericCellValue();
-				double totalPrice = Double.parseDouble(amountAsString) * pricePerunit;
-
-				records.add(new ExcelRecord(new BigDecimal(row.getCell(6).toString()).toPlainString(), amountAsString,
-						price, totalPrice));
-			}
-			wb.close();
-
-		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
-				| IOException e) {
-			System.out.println("readFile in ExcelUtils");
-			e.printStackTrace();
-		}
-		return records;
-	}
 
 	public void prescoExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);

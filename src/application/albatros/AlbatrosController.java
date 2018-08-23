@@ -73,20 +73,6 @@ public class AlbatrosController {
 	}
 
 	@FXML
-	void handleSettingsButtonAction(ActionEvent event) {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("AlbatrosSettings.fxml"));
-			Stage stage = new Stage(StageStyle.UTILITY);
-			stage.setTitle("Nastavení Albatros");
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.showAndWait();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@FXML
 	void handleImportButtonAction(ActionEvent event) {
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
 			AlbatrosModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
@@ -101,7 +87,7 @@ public class AlbatrosController {
 							AlbatrosModel.getInstance().startAlbatrosImport();
 							AlbatrosModel.getInstance().changeAndMoveFile();
 						} else {
-							ExcelUtils exel = new ExcelUtils();
+							AlbatrosExcelConverter exel = new AlbatrosExcelConverter();
 							AlbatrosModel.getInstance().startAlbatrosImportFlores();
 							exel.albatrosExcel();
 						}
@@ -121,7 +107,7 @@ public class AlbatrosController {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					ExcelUtils exel = new ExcelUtils();
+					AlbatrosExcelConverter exel = new AlbatrosExcelConverter();
 					exel.albatrosExcel();
 				}
 			});
@@ -156,5 +142,19 @@ public class AlbatrosController {
 		tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("deliveryNote"));
 		tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("fileName"));
 		tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("rabat"));
+	}
+
+	@FXML
+	void handleSettingsButtonAction(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("AlbatrosSettings.fxml"));
+			Stage stage = new Stage(StageStyle.UTILITY);
+			stage.setTitle("Nastavení Albatros");
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

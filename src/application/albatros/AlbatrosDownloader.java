@@ -1,25 +1,31 @@
 package application.albatros;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import application.infobar.InfoModel;
 
 public class AlbatrosDownloader {
-	private String loginId, loginPassword, websiteUrl, downloadDirectory;
+	private String loginId = "dis06958pv", loginPassword = "vankovka", websiteUrl, downloadDirectory;
 	private WebDriver driver;
 	private ChromeOptions options;
 	private int rowCount;
@@ -32,7 +38,6 @@ public class AlbatrosDownloader {
 	}
 
 	public void startSSB() {
-		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
@@ -45,8 +50,15 @@ public class AlbatrosDownloader {
 
 	}
 
+	public String getPageSource() {
+		return driver.getPageSource();
+	}
+
+	public void quit() {
+		driver.quit();
+	}
+
 	public void startFlores() {
-		InfoModel.getInstance().updateInfo("Otevírám prohlížeč");
 		openBrowser();
 		manageBrowser();
 		fetchURL();
@@ -68,10 +80,10 @@ public class AlbatrosDownloader {
 	}
 
 	public void tryToLogin() {
+		InfoModel.getInstance().updateInfo("Přihlašuji se.");
 		hasLoggedIn = true;
 		login();
 		if (driver.getPageSource().contains("Neplatné přihlašovací údaje.")) {
-			InfoModel.getInstance().updateInfo("Nepodařilo se přihlásit");
 			hasLoggedIn = false;
 			driver.quit();
 		}
@@ -82,12 +94,13 @@ public class AlbatrosDownloader {
 		endDriver();
 	}
 
-	private void openBrowser() {
+	public void openBrowser() {
+		InfoModel.getInstance().updateInfo("Otevírám prohlížeč.");
 		String chromeDirectory = "chromedriver/chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", chromeDirectory);
 		changeOptions();
 		driver = new ChromeDriver(options);
-		driver.manage().window().setPosition(new Point(-2000, 0));
+		driver.manage().window().setPosition(new Point(2000, 0));
 	}
 
 	private void changeOptions() {
@@ -112,51 +125,93 @@ public class AlbatrosDownloader {
 		}
 	}
 
-	private void manageBrowser() {
+	public void manageBrowser() {
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
 
-	private void fetchURL() {
+	public void fetchURL() {
 		driver.get(websiteUrl);
 	}
 
 	private void login() {
-		InfoModel.getInstance().updateInfo("Přihlašuji se do portálu Distri");
 		driver.findElement(By.xpath("//*[@id=\"Email\"]")).sendKeys(loginId);
 		driver.findElement(By.xpath("//*[@id=\"Password\"]")).sendKeys(loginPassword);
 		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
 
-	private void openMyDocuments() {
-		InfoModel.getInstance().updateInfo("Otevírám dokumenty");
+	public void openMyDocuments() {
 		driver.get("https://www.distri.cz/Customer/Detail");
 
 	}
 
+	public WebDriver getDriver() {
+		return driver;
+	}
+
 	private void downloadFilesSSB() {
-		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat dle nastavení']"));
-		Actions actions = new Actions(driver);
 		for (int i = 0; i < rowCount; i++) {
-			InfoModel.getInstance().updateInfo("Stahuji soubory.   ");
-			actions.moveToElement(elements.get(i)).click().perform();
-			InfoModel.getInstance().updateInfo("Stahuji soubory..  ");
-			pause();
-			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
+
+			try {
+				URL url = new URL(listOfDownloadLinksSSB().get(i).getAttribute("href"));
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setRequestProperty("Cookie", getCookies());
+				String deliveryNoteName = getListOfAllDeliveryNoteNames().get(i);
+				InfoModel.getInstance().updateInfo("Stahuji " + deliveryNoteName);
+				Files.copy(con.getInputStream(), Paths.get(downloadDirectory + deliveryNoteName + ".txt"));
+			} catch (IOException ef) {
+				ef.printStackTrace();
+			}
 		}
 	}
 
-	private void downloadFilesFlores() {
-		List<WebElement> elements = driver.findElements(By.cssSelector("[title^='Exportovat do Excelu']"));
-		Actions actions = new Actions(driver);
-		for (int i = 0; i < rowCount; i++) {
-			InfoModel.getInstance().updateInfo("Stahuji soubory.   ");
-			actions.moveToElement(elements.get(i)).click().perform();
-			InfoModel.getInstance().updateInfo("Stahuji soubory..  ");
-			pause();
-			InfoModel.getInstance().updateInfo("Stahuji soubory... ");
+	private ArrayList<String> getListOfAllDeliveryNoteNames() {
+		ArrayList<String> names = new ArrayList<>();
+		String fullpage = driver.getPageSource();
+		String[] test = fullpage.split("</a></td><td class=\" text-right\">");
+		for (String s : test) {
+			String name = s.substring(s.length() - 14);
+			if (name.contains("VPT")) {
+				names.add(name);
+			}
+
 		}
+		return names;
+	}
+
+	private List<WebElement> listOfDownloadLinksSSB() {
+		return driver.findElements(By.cssSelector("[title^='Exportovat dle nastavení']"));
+	}
+
+	private void downloadFilesFlores() {
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < rowCount; i++) {
+			try {
+				URL url = new URL(listOfDownloadLinksFlores().get(i).getAttribute("href"));
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setRequestProperty("Cookie", getCookies());
+				String deliveryNoteName = getListOfAllDeliveryNoteNames().get(i);
+				InfoModel.getInstance().updateInfo("Stahuji " + deliveryNoteName);
+				Files.copy(con.getInputStream(), Paths.get(downloadDirectory + deliveryNoteName + ".xlsx"));
+			} catch (IOException ef) {
+				ef.printStackTrace();
+			}
+		}
+		long end = System.currentTimeMillis();
+		System.out.println(end - start);
+	}
+
+	private List<WebElement> listOfDownloadLinksFlores() {
+		return driver.findElements(By.cssSelector("[title^='Exportovat do Excelu']"));
+	}
+
+	private String getCookies() {
+		StringBuilder sb = new StringBuilder();
+		for (Cookie c : driver.manage().getCookies()) {
+			sb.append(c);
+		}
+		return sb.toString();
 	}
 
 	private void click(WebDriver driver, By location) {

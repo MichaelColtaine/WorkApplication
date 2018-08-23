@@ -102,31 +102,6 @@ public class EuromediaController implements Initializable {
 
 	}
 
-	private void convertTempFilesWithoutDownloading() {
-		Thread t1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				EuroModel.getInstance().changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
-			}
-		});
-		t1.start();
-		
-	}
-
-	@FXML
-	void handleSettingsButtonAction(ActionEvent event) {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("EuromediaSettings.fxml"));
-			Stage stage = new Stage(StageStyle.UTILITY);
-			stage.setTitle("Nastavení Euromedia");
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.showAndWait();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void startImport() {
 		prepareForImport();
 		int amount = Integer.parseInt(comboBox.getSelectionModel().getSelectedItem());
@@ -143,18 +118,18 @@ public class EuromediaController implements Initializable {
 		cleanUp();
 	}
 
+	private void prepareForImport() {
+		EuroModel.getInstance().deleteAllTempFiles();
+		progress.setVisible(true);
+		clearListView();
+	}
+
 	private void startDownloading(String type, int amount) {
 		EuromediaWebScraper scraper;
 		scraper = new EuromediaWebScraper(type);
 		scraper.setAmount(amount);
 		scraper.startDownloading();
 
-	}
-
-	private void prepareForImport() {
-		EuroModel.getInstance().deleteAllTempFiles();
-		progress.setVisible(true);
-		clearListView();
 	}
 
 	private void cleanUp() {
@@ -180,6 +155,17 @@ public class EuromediaController implements Initializable {
 			InfoModel.getInstance().updateInfo("Čekám na soubor!");
 			pause();
 		}
+	}
+
+	private void convertTempFilesWithoutDownloading() {
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				EuroModel.getInstance().changeAllEuroFilesFlores(EuroModel.getInstance().getSettings().getPath());
+			}
+		});
+		t1.start();
+
 	}
 
 	private void clearListView() {
@@ -234,6 +220,20 @@ public class EuromediaController implements Initializable {
 
 	private String getFileName(File file) {
 		return file.getName().substring(0, file.getName().length() - 4);
+	}
+
+	@FXML
+	void handleSettingsButtonAction(ActionEvent event) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("EuromediaSettings.fxml"));
+			Stage stage = new Stage(StageStyle.UTILITY);
+			stage.setTitle("Nastavení Euromedia");
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

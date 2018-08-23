@@ -61,14 +61,13 @@ public class AlbatrosModel {
 	}
 
 	public void changeAndMoveFile() {
-		String downloadPath = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
-		File directory = new File(downloadPath);
+		String tempDirectoryPath = System.getProperty("user.dir") + File.separator + "temp" + File.separator;
+		File directory = new File(tempDirectoryPath);
 		fileChanger.setOuputDirectory(AlbatrosModel.getInstance().getSettings().getPath());
 		for (File f : directory.listFiles()) {
-
 			InfoModel.getInstance().updateInfo(f.getName());
 			String fileName = f.getName().substring(f.getName().length() - 7);
-			String name = f.getName().substring(6, f.getName().length() - 4);
+			String name = f.getName().substring(3, f.getName().length() - 4);
 			listOfNames.add(new RowRecord(name, fileName, "-38.00%"));
 			fileChanger.changeFile(f, fileName);
 		}
