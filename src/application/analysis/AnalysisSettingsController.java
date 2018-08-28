@@ -1,6 +1,7 @@
-package application.scanner;
+package application.analysis;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -13,7 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-public class ScannerSettingsController {
+public class AnalysisSettingsController {
 
 	@FXML
 	private VBox root;
@@ -35,8 +36,11 @@ public class ScannerSettingsController {
 
 	@FXML
 	void initialize() {
-		pathInput.setText(ScannerModel.getInstance().getSettings().getPath());
+		pathInput.setText(AnalysisModel.getInstance().getSettings().getPath());
+
 	}
+
+	
 
 	@FXML
 	void handleFindPathButton(ActionEvent event) {
@@ -56,7 +60,7 @@ public class ScannerSettingsController {
 		if (!AppUtils.isDirectory(pathInput.getText())) {
 			errorLabel.setText("Složka neexistuje");
 		} else {
-			ScannerModel.getInstance().getSettings().savePath(pathInput.getText());
+			AnalysisModel.getInstance().getSettings().savePath(pathInput.getText());
 			closeWindow();
 		}
 	}

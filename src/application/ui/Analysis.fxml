@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="501.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.analysis.AnalysisController">
+	<children>
+		<Label graphicTextGap="15.0" layoutX="23.0" layoutY="5.0" text="Analýza " textFill="#f0f0f0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
+			<font>
+				<Font size="24.0" />
+			</font>
+		</Label>
+		<VBox layoutX="25.0" layoutY="64.0" spacing="40.0" />
+		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="90.0" layoutY="482.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<graphic>
+      				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
+			</graphic>
+		</JFXButton>
+		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="69.0" prefHeight="57.0" prefWidth="260.0" textFill="#f0f0f0" />
+		<Label fx:id="ipLabel" layoutX="24.0" layoutY="46.0" prefHeight="17.0" prefWidth="260.0" textFill="#f0f0f0" />
+      <Pane layoutX="54.0" layoutY="64.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="383.0" prefWidth="396.0">
+         <children>
+            <ImageView fitHeight="101.0" fitWidth="107.0" layoutX="148.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/icons8_Drop_Shipping_50px_1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="107.0" layoutY="268.0" text="Sem přetáhněte CSV soubor s analýzou" textFill="#f0f0f0" />
+            <Label fx:id="fileNameLabel" layoutX="107.0" layoutY="296.0" prefHeight="17.0" prefWidth="276.0" textFill="#f0f0f0" />
+         </children>
+      </Pane>
+      <JFXButton fx:id="deleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="284.0" layoutY="482.0" onAction="#handleDeleteButtonAction" prefHeight="35.0" prefWidth="129.0" text="Odstranit soubor" textFill="#f0f0f0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/icons8_Remove_50px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Label fx:id="databaseLabel" layoutX="297.0" layoutY="46.0" prefHeight="17.0" prefWidth="182.0" textFill="#f0f0f0" />
+	</children>
+</AnchorPane>

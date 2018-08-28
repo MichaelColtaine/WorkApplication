@@ -2,8 +2,11 @@ package application.controllers;
 
 import java.io.IOException;
 
+import application.analysis.DataReceiver;
+import application.analysis.DataSender;
+import application.analysis.DatabaseSender;
 import application.infobar.InfoModel;
-import application.scanner.Server;
+import application.scanner.ScannerServer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,9 +48,11 @@ public class HomeController {
 
 	private void closeConnection() {
 		try {
-			Server.closeAll();
+			ScannerServer.closeAll();
+			DataSender.closeAll();
+			DataReceiver.closeAll();
+			DatabaseSender.closeAll();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -76,6 +81,9 @@ public class HomeController {
 			break;
 		case "Beta":
 			handleBetaButton();
+			break;
+		case "Flores Analýza":
+			handleAnalysisButton();
 			break;
 		case "Ostatní Flores":
 			handleOtherButton();
@@ -119,6 +127,10 @@ public class HomeController {
 
 	private void handleScannerButton() {
 		loadScene("/application/ui/Scanner.fxml");
+	}
+
+	private void handleAnalysisButton() {
+		loadScene("/application/ui/Analysis.fxml");
 	}
 
 	private void loadScene(String sceneName) {

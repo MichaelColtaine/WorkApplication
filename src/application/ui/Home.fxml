@@ -20,7 +20,6 @@
 			<children>
 				<Pane prefHeight="55.0" prefWidth="200.0">
 					<children>
-      						<Pane layoutX="-4.0" layoutY="40.0" prefHeight="2.0" prefWidth="208.0" style="-fx-background-color: #37474F;" />
                   <ImageView blendMode="LIGHTEN" fitHeight="150.0" fitWidth="200.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@../../images/spdown.png" />
@@ -117,7 +116,18 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <Pane prefHeight="15.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
+            <JFXButton fx:id="AnalysisButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Flores Analýza" textFill="#f0f0f0">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" />
+               </padding>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/icons8_A_52px_1.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
 				<JFXButton fx:id="infoButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="76.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="O Programu" textFill="#f0f0f0">
 					<padding>
 						<Insets bottom="25.0" left="25.0" right="25.0" />
@@ -130,7 +140,6 @@
 						</ImageView>
 					</graphic>
 				</JFXButton>
-            <Pane prefHeight="15.0" prefWidth="200.0" style="-fx-background-color: #37474F;" />
 			</children>
 			<BorderPane.margin>
 				<Insets />

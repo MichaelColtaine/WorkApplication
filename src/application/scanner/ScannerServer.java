@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 
-public class Server {
+public class ScannerServer {
 
 	static ServerSocket serverSocket;
 	static Socket socket;
@@ -22,15 +22,15 @@ public class Server {
 	ArrayList<ServerArticle> listOfArticlesFromClient;
 	int port = 8889;
 
-	private Server() {
+	private ScannerServer() {
 
 	}
 
 	private static class LazyHolder {
-		static final Server INSTANCE = new Server();
+		static final ScannerServer INSTANCE = new ScannerServer();
 	}
 
-	public static Server getInstance() {
+	public static ScannerServer getInstance() {
 		return LazyHolder.INSTANCE;
 	}
 
@@ -44,9 +44,10 @@ public class Server {
 					serverSocket = new ServerSocket(port);
 					serverSocket.setReuseAddress(true);
 					while (true) {
-
 						changeLabel(label, "Server Online\nNaslouchá k portu číslo: " + port);
+
 						socket = serverSocket.accept();
+
 						System.out.println("Connected");
 						try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 							text = br.readLine();
@@ -54,6 +55,7 @@ public class Server {
 							createTable(articles, dataForList, amountLabel, totalAmountOfBooks);
 							changeLabel(label, "Konec spojení.");
 						}
+
 					}
 				} catch (BindException e) {
 					changeLabel(label, "Server Offline\nPřipojení selhalo, port je již používán.");
@@ -61,6 +63,7 @@ public class Server {
 				} catch (IOException e) {
 					changeLabel(label, "IO exception.");
 					System.out.println(e.getMessage() + " 2Thrown by " + e.getClass().getSimpleName());
+//					e.printStackTrace();
 
 				} catch (Exception e) {
 					e.printStackTrace();

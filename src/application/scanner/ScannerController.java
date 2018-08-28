@@ -72,7 +72,7 @@ public class ScannerController {
 		setupTable();
 		handleEditingOfAmountColumn();
 		refreshTableData();
-		Server.getInstance().listen(serverInfoLabel, articles, dataForList, totalAmountOfRows,
+		ScannerServer.getInstance().listen(serverInfoLabel, articles, dataForList, totalAmountOfRows,
 				totalAmountOfBooks);
 		ipLabel.setText("IP adresa tohoto počítače: " + getIp());
 	}
@@ -205,10 +205,6 @@ public class ScannerController {
 
 	}
 
-	// @FXML
-	// void handleUpdateButton(ActionEvent event) {
-	// updateInfo();
-	// }
 
 	@FXML
 	void handleRemoveButton() {
