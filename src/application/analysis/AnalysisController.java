@@ -1,18 +1,23 @@
 package application.analysis;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 import com.jfoenix.controls.JFXButton;
 
+import application.shared.ArticleRow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,44 +57,49 @@ public class AnalysisController {
 	@FXML
 	private Label databaseLabel;
 
-	private String data = "";
-
 	@FXML
 	public void initialize() {
 		ipLabel.setText("IP adresa tohoto poèítaèe: " + getIp());
-		DataSender.getInstance().listen(serverInfoLabel);
-		DataReceiver.getInstance().listen();
-
+		AnalysisSender.getInstance().listen(serverInfoLabel);
+		ExportReceiver.getInstance().listen(databaseLabel);
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				AnalysisModel.getInstance().setData(readDataFile());
+			}
+		});
+		t1.start();
 	}
 
-	private String loadDataOfAllBooks() {
-		String[] temp;
-		StringBuilder sb = new StringBuilder();
-		File file = new File(System.getProperty("user.dir") + File.separator + "data" + File.separator + "data.csv");
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "CP1250"))) {
+	private HashMap<String, ArticleRow> readDataFile() {
+		HashMap<String, ArticleRow> map = new HashMap<>();
+		File file = new File(System.getProperty("user.dir") + File.separator + "data" + File.separator + "data.xlsx");
 
-			String line = "";
-			while ((line = br.readLine()) != null) {
-
-				temp = line.split(",");
-				if (temp.length < 2) {
+		try {
+			Workbook wb = WorkbookFactory.create(file);
+			Sheet sheet = wb.getSheetAt(0);
+			sheet.removeRow(sheet.getRow(0));
+			for (Row row : sheet) {
+				try {
+					String ean = row.getCell(0).toString();
+					String name = row.getCell(1).toString();
+					map.put(ean, new ArticleRow(ean, name, "", "", "", "", "", "", ""));
+				} catch (NullPointerException e) {
+					System.out.println("Nullpointer, jedna bunka je prazdna. AnalysisController");
 					continue;
 				}
-
-				if (temp[1].length() > 30) {
-					String name = temp[1];
-					temp[1] = name.substring(0, 30);
-
-				}
-				sb.append(temp[0]).append(";").append(temp[1]).append(";").append("nic").append(";").append("nic")
-						.append(";").append("nic").append(";").append("nic").append(";").append("nic").append(";")
-						.append("nic").append(";").append("nic").append(";").append("~");
 			}
+			wb.close();
 
-		} catch (Exception e) {
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return sb.toString();
+		System.out.println("Data size " + map.size());
+		return map;
 	}
 
 	private String getIp() {
@@ -116,55 +126,54 @@ public class AnalysisController {
 	private void handleDrop(DragEvent event) {
 		files = event.getDragboard().getFiles();
 		fileNameLabel.setText("Vložen soubor " + files.get(0).getName());
-		AnalysisModel.getInstance().setData(createStringFromFile(files.get(0)));
+		AnalysisModel.getInstance().setAnalysis(readAnalysisFile(files.get(0)));
 	}
 
-	
+	private HashMap<String, ArticleRow> readAnalysisFile(File f) {
+		HashMap<String, ArticleRow> list = new HashMap<>();
+		try {
+			Workbook wb = WorkbookFactory.create(f);
+			Sheet sheet = wb.getSheetAt(0);
+			sheet.removeRow(sheet.getRow(0));
+			for (Row row : sheet) {
+				try {
+
+					String ean = row.getCell(0).toString();
+					String name = row.getCell(1).toString();
+					String sales = row.getCell(2).toString();
+					String amount = row.getCell(3).toString();
+					String price = row.getCell(4).toString();
+					String supplier = row.getCell(5).toString();
+					String lastSale = row.getCell(6).toString();
+					String lastDelivery = row.getCell(7).toString();
+					String deliveredAS = row.getCell(8).toString(); // 1512 = sale, 1514 = Consignment
+					list.put(ean, new ArticleRow(ean, name, sales, amount, price, supplier, lastSale, lastDelivery,
+							deliveredAS));
+				} catch (NullPointerException e) {
+					System.out.println("Nullpointer, jedna bunka je prazdna. AnalysisController");
+					continue;
+				}
+			}
+			wb.close();
+
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Analysis size" + list.size());
+		return list;
+	}
 
 	@FXML
 	private void handleDeleteButtonAction(ActionEvent event) {
 		if (files != null || !files.isEmpty()) {
-			AnalysisModel.getInstance().setData("");
+			AnalysisModel.getInstance().getData().clear();
 			files.clear();
 			fileNameLabel.setText("");
 		}
-	}
-
-	// it reads all the lines in file and converts them to string.
-	private String createStringFromFile(File f) {
-		StringBuilder sb = new StringBuilder();
-		boolean firstLine = true;
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), "CP1250"))) {
-			String line = "";
-			while ((line = br.readLine()) != null) {
-
-				// first line is just a header so we can skip it
-				if (firstLine) {
-					firstLine = false;
-					continue;
-				}
-
-				// Shortens book names (Too long names causes a bug)
-				String[] temp = line.split(";");
-				if (temp[1].length() > 30) {
-					String name = temp[1];
-					temp[1] = name.substring(0, 30);
-
-				}
-
-				StringBuilder tmp = new StringBuilder();
-				for (String s : temp) {
-					tmp.append(s).append(";");
-				}
-
-				sb.append(tmp.toString().toLowerCase()).append("~");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// System.out.println(sb.toString());
-		return sb.toString();
 	}
 
 	@FXML

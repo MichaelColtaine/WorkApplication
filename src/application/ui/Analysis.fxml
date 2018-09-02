@@ -26,8 +26,8 @@
       				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
 			</graphic>
 		</JFXButton>
-		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="69.0" prefHeight="57.0" prefWidth="260.0" textFill="#f0f0f0" />
-		<Label fx:id="ipLabel" layoutX="24.0" layoutY="46.0" prefHeight="17.0" prefWidth="260.0" textFill="#f0f0f0" />
+		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="69.0" prefHeight="57.0" prefWidth="213.0" textFill="#f0f0f0" />
+		<Label fx:id="ipLabel" layoutX="24.0" layoutY="46.0" prefHeight="17.0" prefWidth="243.0" textFill="#f0f0f0" />
       <Pane layoutX="54.0" layoutY="64.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="383.0" prefWidth="396.0">
          <children>
             <ImageView fitHeight="101.0" fitWidth="107.0" layoutX="148.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
@@ -35,7 +35,7 @@
                   <Image url="@../../images/icons8_Drop_Shipping_50px_1.png" />
                </image>
             </ImageView>
-            <Label layoutX="107.0" layoutY="268.0" text="Sem přetáhněte CSV soubor s analýzou" textFill="#f0f0f0" />
+            <Label layoutX="107.0" layoutY="268.0" text="Sem přetáhněte Excel soubor s analýzou" textFill="#f0f0f0" />
             <Label fx:id="fileNameLabel" layoutX="107.0" layoutY="296.0" prefHeight="17.0" prefWidth="276.0" textFill="#f0f0f0" />
          </children>
       </Pane>
@@ -51,6 +51,6 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="databaseLabel" layoutX="297.0" layoutY="46.0" prefHeight="17.0" prefWidth="182.0" textFill="#f0f0f0" />
+      <Label fx:id="databaseLabel" layoutX="240.0" layoutY="69.0" prefHeight="58.0" prefWidth="213.0" textFill="#f0f0f0" />
 	</children>
 </AnchorPane>

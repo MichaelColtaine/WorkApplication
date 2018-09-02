@@ -11,40 +11,45 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class AnalysisFileCreater {
+import application.shared.ExportArticle;
+
+public class ExportFileCreator {
 	private String path = AnalysisModel.getInstance().getSettings().getPath() + File.separator;
-	private String data;
-	private String[] returns, orders;
 
-	public AnalysisFileCreater(String data) {
+	public ExportFileCreator() {
 
-		this.data = data;
 	}
 
-	public void createExcelReturnsFile(String[] data) {
-		returns = data;
+	public void createFiles() {
+		if (!AnalysisModel.getInstance().getReturns().isEmpty()) {
+			createExcelReturnsFile();
+		}
+
+		if (!AnalysisModel.getInstance().getOrders().isEmpty()) {
+			createExcelOrdersFile();
+		}
+
+	}
+
+	public void createExcelReturnsFile() {
+
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet1 = workbook.createSheet();
 		createFirstRow(sheet1, "Vratka");
 		int i = 1;
-		for (String s : returns) {
-			String[] temp = s.split(";");
+		for (ExportArticle e : AnalysisModel.getInstance().getReturns()) {
 			Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue(temp[0]);
-			row.createCell(1).setCellValue(temp[1]);
-			row.createCell(2).setCellValue(temp[2]);
-			row.createCell(3).setCellValue(temp[3]);
-			row.createCell(4).setCellValue(temp[4]);
-			row.createCell(5).setCellValue(temp[5]);
-			row.createCell(6).setCellValue(temp[6]);
-			row.createCell(7).setCellValue(temp[7]);
-			row.createCell(8).setCellValue(temp[8]);
-			row.createCell(9).setCellValue(temp[9]);
+			row.createCell(0).setCellValue(e.getEan());
+			row.createCell(1).setCellValue(e.getName());
+			row.createCell(2).setCellValue(e.getSoldAmount());
+			row.createCell(3).setCellValue(e.getTotalAmount());
+			row.createCell(4).setCellValue(e.getPrice());
+			row.createCell(5).setCellValue(e.getSupplier());
+			row.createCell(6).setCellValue(e.getDateOfLastSale());
+			row.createCell(7).setCellValue(e.getDateOfLastDelivery());
+			row.createCell(8).setCellValue(e.getOrderOfLastDelivery());
+			row.createCell(9).setCellValue(e.getExportAmount());
 			i++;
-		}
-
-		for (int k = 0; k <= returns.length; k++) {
-			sheet1.autoSizeColumn(k);
 		}
 
 		try {
@@ -57,30 +62,24 @@ public class AnalysisFileCreater {
 		}
 	}
 
-	public void createExcelOrderFile(String[] data) {
-		orders = data;
+	public void createExcelOrdersFile() {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet1 = workbook.createSheet();
 		createFirstRow(sheet1, "Objednávka");
 		int i = 1;
-		for (String s : orders) {
-			String[] temp = s.split(";");
+		for (ExportArticle e : AnalysisModel.getInstance().getOrders()) {
 			Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue(temp[0]);
-			row.createCell(1).setCellValue(temp[1]);
-			row.createCell(2).setCellValue(temp[2]);
-			row.createCell(3).setCellValue(temp[3]);
-			row.createCell(4).setCellValue(temp[4]);
-			row.createCell(5).setCellValue(temp[5]);
-			row.createCell(6).setCellValue(temp[6]);
-			row.createCell(7).setCellValue(temp[7]);
-			row.createCell(8).setCellValue(temp[8]);
-			row.createCell(9).setCellValue(temp[9]);
+			row.createCell(0).setCellValue(e.getEan());
+			row.createCell(1).setCellValue(e.getName());
+			row.createCell(2).setCellValue(e.getSoldAmount());
+			row.createCell(3).setCellValue(e.getTotalAmount());
+			row.createCell(4).setCellValue(e.getPrice());
+			row.createCell(5).setCellValue(e.getSupplier());
+			row.createCell(6).setCellValue(e.getDateOfLastSale());
+			row.createCell(7).setCellValue(e.getDateOfLastDelivery());
+			row.createCell(8).setCellValue(e.getOrderOfLastDelivery());
+			row.createCell(9).setCellValue(e.getExportAmount());
 			i++;
-		}
-
-		for (int k = 0; k <= orders.length; k++) {
-			sheet1.autoSizeColumn(k);
 		}
 
 		try {
@@ -95,18 +94,9 @@ public class AnalysisFileCreater {
 	}
 
 	private String returnDate() {
-		StringBuilder sb = new StringBuilder();
-		// Calendar calendar = Calendar.getInstance();
-		// calendar.setTimeInMillis(mili);
-		// int year = calendar.get(Calendar.YEAR);
-		// int month = calendar.get(Calendar.MONTH);
-		// int day = calendar.get(Calendar.DAY_OF_MONTH);
-		// calendar.ti
 		DateFormat sdf = new SimpleDateFormat("dd-MM-YYYY_HH-MM-SS");
 		Date date = new Date();
 		System.out.println(sdf.format(date));
-
-		// return sb.toString();
 		return sdf.format(date).toString();
 	}
 
@@ -122,6 +112,7 @@ public class AnalysisFileCreater {
 		row.createCell(7).setCellValue("Datum posledního pøíjmu");
 		row.createCell(8).setCellValue("Øada posledního pøíjmu");
 		row.createCell(9).setCellValue(text);
+
 	}
 
 }

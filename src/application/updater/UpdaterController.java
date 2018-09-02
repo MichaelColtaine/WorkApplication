@@ -18,6 +18,9 @@ public class UpdaterController {
 
 	@FXML
 	private ProgressIndicator progress;
+	
+	@FXML 
+	private Label errorUpdate;
 
 	@FXML
 	void initialize() {

@@ -1,11 +1,18 @@
 package application.analysis;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import application.shared.ArticleRow;
+import application.shared.ExportArticle;
+
 public class AnalysisModel {
 
 	private AnalysisSettings settings;
-	private String dataAsString = "";
-	private String importedData = "";
-	private String books = "";
+	private HashMap<String, ArticleRow> data = new HashMap<>();
+	private HashMap<String, ArticleRow> analysis = new HashMap<>();
+	private ArrayList<ExportArticle> orders;
+	private ArrayList<ExportArticle> returns;
 
 	public AnalysisModel() {
 		this.settings = new AnalysisSettings();
@@ -23,29 +30,36 @@ public class AnalysisModel {
 		return settings;
 	}
 
-	public void setData(String data) {
-		this.dataAsString = data;
+	public void setData(HashMap<String, ArticleRow> data) {
+		this.data = data;
 	}
 
-	// holds analys data
-	public String getData() {
-		return dataAsString;
+	public HashMap<String, ArticleRow> getData() {
+		return data;
 	}
 
-	// holds all books data
-	public void setDatabase(String data) {
-		this.books = data;
+	public void setAnalysis(HashMap<String, ArticleRow> analysis) {
+		this.analysis = analysis;
 	}
 
-	public String getDatabase() {
-		return this.books;
+	public HashMap<String, ArticleRow> getAnalysis() {
+		return analysis;
 	}
 
-	public String getImportedData() {
-		return this.importedData;
+	public void setReturns(ArrayList<ExportArticle> returns) {
+		this.returns = returns;
 	}
 
-	public void setImportedData(String importedData) {
-		this.importedData = importedData;
+	public void setOrders(ArrayList<ExportArticle> orders) {
+		this.orders = orders;
 	}
+
+	public ArrayList<ExportArticle> getOrders() {
+		return this.orders;
+	}
+
+	public ArrayList<ExportArticle> getReturns() {
+		return this.returns;
+	}
+
 }

@@ -2,9 +2,8 @@ package application.controllers;
 
 import java.io.IOException;
 
-import application.analysis.DataReceiver;
-import application.analysis.DataSender;
-import application.analysis.DatabaseSender;
+import application.analysis.AnalysisSender;
+import application.analysis.ExportReceiver;
 import application.infobar.InfoModel;
 import application.scanner.ScannerServer;
 import javafx.event.ActionEvent;
@@ -49,9 +48,8 @@ public class HomeController {
 	private void closeConnection() {
 		try {
 			ScannerServer.closeAll();
-			DataSender.closeAll();
-			DataReceiver.closeAll();
-			DatabaseSender.closeAll();
+			AnalysisSender.closeAll();
+			ExportReceiver.closeAll();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

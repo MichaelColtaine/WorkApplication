@@ -31,7 +31,7 @@ public class UpdateInfo {
 		while (c != -1) {
 			c = html.read();
 			buffer.append((char) c);
-		}
+		} 
 		this.data = buffer.toString();
 	}
 

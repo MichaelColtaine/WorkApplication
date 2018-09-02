@@ -1,38 +1,37 @@
 package application.analysis;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
-import application.Model;
+import application.shared.ArticleRow;
+import application.shared.Message;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 
-public class DataSender {
+public class AnalysisSender {
 
 	static ServerSocket serverSocket;
 	static Socket socket;
 
 	int port = 9998;
 
-	private DataSender() {
+	public AnalysisSender() {
 
 	}
 
 	private static class LazyHolder {
-		static final DataSender INSTANCE = new DataSender();
+		static final AnalysisSender INSTANCE = new AnalysisSender();
 	}
 
-	public static DataSender getInstance() {
+	public static AnalysisSender getInstance() {
 		return LazyHolder.INSTANCE;
 	}
 
-	// tento
 	public void listen(Label label) {
 		final Task<Void> task = new Task<Void>() {
 			@Override
@@ -40,15 +39,21 @@ public class DataSender {
 				try {
 					serverSocket = new ServerSocket(port);
 					serverSocket.setReuseAddress(true);
+					System.out.println("Waiting for connection");
 					while (true) {
-						changeLabel(label, "Server Online\nNaslouchá k portu èíslo: " + port);
-						socket = serverSocket.accept();
+						changeLabel(label, "Server Analýzy Online\nNaslouchá k portu èíslo: " + port);
+						Socket socket = serverSocket.accept();
 						System.out.println("Connected");
-						try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
-							out.write(AnalysisModel.getInstance().getData());
-						} catch (NullPointerException e) {
-							e.printStackTrace();
+						ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+						Message outputMessage = new Message();
+
+						if (!AnalysisModel.getInstance().getAnalysis().isEmpty()) {
+							outputMessage.createAnalysis(AnalysisModel.getInstance().getAnalysis(),
+									AnalysisModel.getInstance().getData());
+							objectOutputStream.writeObject(outputMessage);
 						}
+
+						objectOutputStream.writeObject(outputMessage);
 					}
 				} catch (BindException e) {
 					changeLabel(label, "Server Offline\nPøipojení selhalo, port je již používán.");
