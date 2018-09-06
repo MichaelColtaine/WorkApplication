@@ -18,7 +18,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import application.RowRecord;
-import application.albatros.AlbatrosModel;
 import application.beta.BetaModel;
 import application.euromedia.EuroModel;
 import application.infobar.InfoModel;

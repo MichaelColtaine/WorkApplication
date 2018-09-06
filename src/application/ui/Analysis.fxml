@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,7 +36,7 @@
                   <Image url="@../../images/icons8_Drop_Shipping_50px_1.png" />
                </image>
             </ImageView>
-            <Label layoutX="107.0" layoutY="268.0" text="Sem přetáhněte Excel soubor s analýzou" textFill="#f0f0f0" />
+            <Label layoutX="107.0" layoutY="268.0" text="Sem přetáhněte CSV soubor s analýzou" textFill="#f0f0f0" />
             <Label fx:id="fileNameLabel" layoutX="107.0" layoutY="296.0" prefHeight="17.0" prefWidth="276.0" textFill="#f0f0f0" />
          </children>
       </Pane>
@@ -52,5 +53,7 @@
          </graphic>
       </JFXButton>
       <Label fx:id="databaseLabel" layoutX="240.0" layoutY="69.0" prefHeight="58.0" prefWidth="213.0" textFill="#f0f0f0" />
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="455.0" prefHeight="17.0" prefWidth="424.0" textAlignment="CENTER" textFill="RED" />
+      <ProgressIndicator fx:id="progressBar" layoutX="221.0" layoutY="427.0" prefHeight="57.0" prefWidth="62.0" visible="false" />
 	</children>
 </AnchorPane>

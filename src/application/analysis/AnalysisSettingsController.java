@@ -40,8 +40,6 @@ public class AnalysisSettingsController {
 
 	}
 
-	
-
 	@FXML
 	void handleFindPathButton(ActionEvent event) {
 		try {
