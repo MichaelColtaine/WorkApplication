@@ -50,8 +50,7 @@ public class AnalysisSender {
 						pb.setVisible(true);
 						if (!AnalysisModel.getInstance().getAnalysis().isEmpty()) {
 							InfoModel.getInstance().updateInfo("Posílám Analýzu...");
-							outputMessage.createAnalysis(AnalysisModel.getInstance().getAnalysis(),
-									AnalysisModel.getInstance().getData());
+							outputMessage.createAnalysis(AnalysisModel.getInstance().getAnalysis());
 						}
 						objectOutputStream.writeObject(outputMessage);
 						InfoModel.getInstance().updateInfo("Analýza odeslána");

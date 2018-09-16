@@ -58,5 +58,10 @@ public class OtherModel {
 		ExcelUtils excel = new ExcelUtils();
 		excel.prescoExcel(settings.getFromPath(), settings.getToPath());
 	}
+	
+	public void handlePortalButton() {
+		PortalConverter portal = new PortalConverter();
+		portal.convertPortalDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	}
 
 }

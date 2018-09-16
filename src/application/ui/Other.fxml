@@ -9,7 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="root" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.other.OtherController">
@@ -40,18 +40,23 @@
 			</graphic>
 		</JFXButton>
 		<ProgressIndicator fx:id="progress" layoutX="200.0" layoutY="393.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
-		<HBox alignment="CENTER" layoutX="19.0" layoutY="357.0" prefHeight="17.0" prefWidth="466.0" spacing="20.0">
-			<children>
+      <VBox layoutX="165.0" layoutY="353.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
+         <children>
 				<RadioButton fx:id="pemicButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" selected="true" text="Pemic" textFill="#f0f0f0">
-					<toggleGroup>
+               <toggleGroup>
 						<ToggleGroup fx:id="system" />
-					</toggleGroup>
+               </toggleGroup>
 				</RadioButton>
+            <RadioButton fx:id="portalButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" text="Portal" textFill="#f0f0f0" toggleGroup="$system" />
 				<RadioButton fx:id="gradaButton" mnemonicParsing="false" text="Grada" textFill="#f0f0f0" toggleGroup="$system" />
+         </children>
+      </VBox>
+      <VBox layoutX="236.0" layoutY="353.0" prefHeight="80.0" prefWidth="100.0" spacing="10.0">
+         <children>
 				<RadioButton fx:id="marcoButton" mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="prescoButton" mnemonicParsing="false" text="Presco" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="omegaButton" mnemonicParsing="false" text="Omega/Kbely" textFill="#f0f0f0" toggleGroup="$system" />
-			</children>
-		</HBox>
+         </children>
+      </VBox>
 	</children>
 </AnchorPane>

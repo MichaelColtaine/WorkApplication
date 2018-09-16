@@ -46,6 +46,8 @@ public class OtherController {
 
 	@FXML
 	private RadioButton prescoButton;
+	@FXML
+	private RadioButton portalButton;
 
 	@FXML
 	private ToggleGroup system;
@@ -69,6 +71,8 @@ public class OtherController {
 						handleOmegaButton();
 					} else if (prescoButton.isSelected()) {
 						handlePrescoButton();
+					} else if (portalButton.isSelected()) {
+						handlePortalButton();
 					}
 				}
 			}
@@ -103,6 +107,11 @@ public class OtherController {
 
 	private void handleMarcoButton() {
 		OtherModel.getInstance().handleMarcoButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
+	}
+
+	private void handlePortalButton() {
+		OtherModel.getInstance().handlePortalButton();
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
