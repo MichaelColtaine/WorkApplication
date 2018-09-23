@@ -68,7 +68,7 @@ public class AlbatrosModel {
 			InfoModel.getInstance().updateInfo(f.getName());
 			String fileName = f.getName().substring(f.getName().length() - 7);
 			String name = f.getName().substring(3, f.getName().length() - 4);
-			listOfNames.add(new RowRecord(name, fileName, "-38.00%"));
+			listOfNames.add(new RowRecord(name, fileName, ""));
 			fileChanger.changeFile(f, fileName);
 		}
 	}

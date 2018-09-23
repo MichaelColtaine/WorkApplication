@@ -6,8 +6,10 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.mtr.application.shared.ArticleRow;
+import com.mtr.application.shared.Message;
+
 import application.infobar.InfoModel;
-import application.shared.Message;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;

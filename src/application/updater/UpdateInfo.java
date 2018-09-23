@@ -10,12 +10,12 @@ public class UpdateInfo {
 
 	private String data = "";
 
-	public UpdateInfo() {
-		try {
+	public UpdateInfo() throws IOException {
+//		try {
 			getData(versionURL);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public String getLatestVersion() {

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import application.shared.ArticleRow;
-import application.shared.ExportArticle;
+import com.mtr.application.shared.ArticleRow;
+import com.mtr.application.shared.ExportArticle;
 
 public class AnalysisModel {
 

@@ -18,8 +18,8 @@ public class UpdaterController {
 
 	@FXML
 	private ProgressIndicator progress;
-	
-	@FXML 
+
+	@FXML
 	private Label errorUpdate;
 
 	@FXML
@@ -31,9 +31,17 @@ public class UpdaterController {
 	@FXML
 	void handleUpdateButton(ActionEvent event) {
 		int currentVersion = UpdaterModel.getInstance().getCurrentVersion();
-		int latestVersion = Integer.parseInt(UpdaterModel.getInstance().getLastestVersion());
-		System.out.println("currentVersion: " + currentVersion + " latestVersion: " + latestVersion);
+		try {
+			int latestVersion = Integer.parseInt(UpdaterModel.getInstance().getLastestVersion());
+			handleDownloading(currentVersion, latestVersion);
+		} catch (NullPointerException npe) {
+			handleDownloading(currentVersion, (currentVersion + 1));
+			npe.printStackTrace();
+		}
 
+	}
+
+	private void handleDownloading(int currentVersion, int latestVersion) {
 		if (currentVersion < latestVersion) {
 			Thread t1 = new Thread(new Runnable() {
 				@Override
@@ -50,7 +58,6 @@ public class UpdaterController {
 		} else {
 			InfoModel.getInstance().updateInfo("Současná verze je aktuální!");
 		}
-
 	}
 
 	public void startUpdateApplication() {

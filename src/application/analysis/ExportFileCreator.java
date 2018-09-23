@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import application.shared.ExportArticle;
+import com.mtr.application.shared.ExportArticle;
 
 public class ExportFileCreator {
 	private String path = AnalysisModel.getInstance().getSettings().getPath() + File.separator;
@@ -39,16 +39,23 @@ public class ExportFileCreator {
 		int i = 1;
 		for (ExportArticle e : AnalysisModel.getInstance().getReturns()) {
 			Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue(e.getEan());
-			row.createCell(1).setCellValue(e.getName());
-			row.createCell(2).setCellValue(e.getSoldAmount());
-			row.createCell(3).setCellValue(e.getTotalAmount());
-			row.createCell(4).setCellValue(e.getPrice());
-			row.createCell(5).setCellValue(e.getSupplier());
-			row.createCell(6).setCellValue(e.getDateOfLastSale());
-			row.createCell(7).setCellValue(e.getDateOfLastDelivery());
-			row.createCell(8).setCellValue(e.getOrderOfLastDelivery());
-			row.createCell(9).setCellValue(e.getExportAmount());
+			row.createCell(0).setCellValue(e.getRank());
+			row.createCell(1).setCellValue(e.getFirstCode());
+			row.createCell(2).setCellValue(e.getEan());
+			row.createCell(3).setCellValue(e.getName());
+			row.createCell(4).setCellValue(e.getSales());
+			row.createCell(5).setCellValue(e.getRevenue());
+			row.createCell(6).setCellValue(e.getStoredAmount());
+			row.createCell(7).setCellValue(e.getLocations());
+			row.createCell(8).setCellValue(e.getPrice());
+			row.createCell(9).setCellValue(e.getSupplier());
+			row.createCell(10).setCellValue(e.getAuthor());
+			row.createCell(11).setCellValue(e.getDateOfLastSale());
+			row.createCell(12).setCellValue(e.getDateOfLastDelivery());
+			row.createCell(13).setCellValue(e.getRealeaseDate());
+			row.createCell(14).setCellValue(e.getDeliveredAs());
+			row.createCell(15).setCellValue(e.getEshopRank());
+			row.createCell(16).setCellValue(e.getExportAmount());
 			i++;
 		}
 
@@ -69,16 +76,23 @@ public class ExportFileCreator {
 		int i = 1;
 		for (ExportArticle e : AnalysisModel.getInstance().getOrders()) {
 			Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue(e.getEan());
-			row.createCell(1).setCellValue(e.getName());
-			row.createCell(2).setCellValue(e.getSoldAmount());
-			row.createCell(3).setCellValue(e.getTotalAmount());
-			row.createCell(4).setCellValue(e.getPrice());
-			row.createCell(5).setCellValue(e.getSupplier());
-			row.createCell(6).setCellValue(e.getDateOfLastSale());
-			row.createCell(7).setCellValue(e.getDateOfLastDelivery());
-			row.createCell(8).setCellValue(e.getOrderOfLastDelivery());
-			row.createCell(9).setCellValue(e.getExportAmount());
+			row.createCell(0).setCellValue(e.getRank());
+			row.createCell(1).setCellValue(e.getFirstCode());
+			row.createCell(2).setCellValue(e.getEan());
+			row.createCell(3).setCellValue(e.getName());
+			row.createCell(4).setCellValue(e.getSales());
+			row.createCell(5).setCellValue(e.getRevenue());
+			row.createCell(6).setCellValue(e.getStoredAmount());
+			row.createCell(7).setCellValue(e.getLocations());
+			row.createCell(8).setCellValue(e.getPrice());
+			row.createCell(9).setCellValue(e.getSupplier());
+			row.createCell(10).setCellValue(e.getAuthor());
+			row.createCell(11).setCellValue(e.getDateOfLastSale());
+			row.createCell(12).setCellValue(e.getDateOfLastDelivery());
+			row.createCell(13).setCellValue(e.getRealeaseDate());
+			row.createCell(14).setCellValue(e.getDeliveredAs());
+			row.createCell(15).setCellValue(e.getEshopRank());
+			row.createCell(16).setCellValue(e.getExportAmount());
 			i++;
 		}
 
@@ -102,17 +116,23 @@ public class ExportFileCreator {
 
 	private void createFirstRow(Sheet sheet1, String text) {
 		Row row = sheet1.createRow(0);
-		row.createCell(0).setCellValue("EAN");
-		row.createCell(1).setCellValue("Název");
-		row.createCell(2).setCellValue("Prodeje");
-		row.createCell(3).setCellValue("StavSkladu");
-		row.createCell(4).setCellValue("DPC");
-		row.createCell(5).setCellValue("Dodavatel");
-		row.createCell(6).setCellValue("Datum posledního prodeje");
-		row.createCell(7).setCellValue("Datum posledního pøíjmu");
-		row.createCell(8).setCellValue("Øada posledního pøíjmu");
-		row.createCell(9).setCellValue(text);
-
+		row.createCell(0).setCellValue("Poøadí");
+		row.createCell(1).setCellValue("Kód");
+		row.createCell(2).setCellValue("Ean");
+		row.createCell(3).setCellValue("Název");
+		row.createCell(4).setCellValue("Prodej");
+		row.createCell(5).setCellValue("Obrat");
+		row.createCell(6).setCellValue("Stav skladu");
+		row.createCell(7).setCellValue("Lokace");
+		row.createCell(8).setCellValue("DPC");
+		row.createCell(9).setCellValue("Dodavatel");
+		row.createCell(10).setCellValue("Autor");
+		row.createCell(11).setCellValue("Datum posledního prodeje");
+		row.createCell(12).setCellValue("Datumm posledního pøíjmu");
+		row.createCell(13).setCellValue("Datum vydání");
+		row.createCell(14).setCellValue("Øada posledního pøíjmu");
+		row.createCell(15).setCellValue("Poøadí eshop");
+		row.createCell(16).setCellValue(text);
 	}
 
 }

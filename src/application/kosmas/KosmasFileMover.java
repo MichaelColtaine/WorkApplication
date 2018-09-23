@@ -43,7 +43,7 @@ public class KosmasFileMover {
 			sb.delete(0, sb.toString().length());
 			sb.append(temp.substring(temp.length() - 7));
 		}
-		fileNames.add(new RowRecord(deliveryNoteName, sb.toString(), "-38,00%"));
+		fileNames.add(new RowRecord(deliveryNoteName, sb.toString(), ""));
 		return sb.toString();
 	}
 

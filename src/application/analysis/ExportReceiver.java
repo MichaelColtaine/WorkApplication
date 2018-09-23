@@ -8,9 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import com.mtr.application.shared.ArticleRow;
+import com.mtr.application.shared.Message;
+
 import application.Model;
-import application.shared.ArticleRow;
-import application.shared.Message;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
