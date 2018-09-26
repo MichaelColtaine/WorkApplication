@@ -13,23 +13,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="501.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.scanner.ScannerController">
+<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="600.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.scanner.ScannerController">
 	<children>
 		<Label graphicTextGap="15.0" layoutX="23.0" layoutY="5.0" text="Čtečka čárových kódu" textFill="#f0f0f0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</Label>
-		<VBox layoutX="25.0" layoutY="64.0" spacing="40.0" />
-		<TableView fx:id="table" focusTraversable="false" layoutX="290.0" layoutY="7.0" prefHeight="503.0" prefWidth="195.0">
+		<VBox layoutX="77.0" layoutY="78.0" spacing="40.0" />
+		<TableView fx:id="table" focusTraversable="false" layoutX="342.0" layoutY="21.0" prefHeight="503.0" prefWidth="242.0">
 			<columns>
 				<TableColumn fx:id="eanColumn" editable="false" minWidth="78.0" prefWidth="102.0" resizable="false" sortable="false" text="EAN" />
 				<TableColumn fx:id="amountColumn" minWidth="75.0" prefWidth="97.0" resizable="false" sortable="false" text="MNOŽSTVÍ" />
 			</columns>
 		</TableView>
-		<Label layoutX="32.0" layoutY="137.0" text="Počet titulů:" textFill="#f0f0f0" />
-		<Label layoutX="32.0" layoutY="111.0" prefHeight="25.0" prefWidth="99.0" text="Celkové množství:" textFill="#f0f0f0" />
-		<JFXButton fx:id="exportButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="148.0" layoutY="480.0" onAction="#handleExportButton" prefHeight="35.0" prefWidth="129.0" text="Exportovat excel" textFill="#f0f0f0">
+		<Label layoutX="84.0" layoutY="151.0" text="Počet titulů:" textFill="#f0f0f0" />
+		<Label layoutX="84.0" layoutY="125.0" prefHeight="25.0" prefWidth="99.0" text="Celkové množství:" textFill="#f0f0f0" />
+		<JFXButton fx:id="exportButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="200.0" layoutY="494.0" onAction="#handleExportButton" prefHeight="35.0" prefWidth="129.0" text="Exportovat excel" textFill="#f0f0f0">
 			<font>
 				<Font size="14.0" />
 			</font>
@@ -41,7 +41,7 @@
 				</ImageView>
 			</graphic>
 		</JFXButton>
-		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="12.0" layoutY="480.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
+		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="64.0" layoutY="494.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
 			<font>
 				<Font size="14.0" />
 			</font>
@@ -49,17 +49,17 @@
 				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
 			</graphic>
 		</JFXButton>
-		<Label fx:id="totalAmountOfRows" layoutX="136.0" layoutY="137.0" prefHeight="17.0" prefWidth="64.0" textFill="#f0f0f0" />
-		<Label fx:id="totalAmountOfBooks" layoutX="136.0" layoutY="115.0" prefHeight="17.0" prefWidth="81.0" textFill="#f0f0f0" />
-		<Button fx:id="removeButton" layoutX="290.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleRemoveButton" prefHeight="25.0" prefWidth="106.0" text="Odebrat řádek" />
-		<Button fx:id="removeAllButton" layoutX="392.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleRemoveAllButton" prefHeight="25.0" prefWidth="93.0" text="Odebrat vše" />
-		<TextField fx:id="input" alignment="BOTTOM_LEFT" layoutX="32.0" layoutY="64.0" onAction="#onEnter" prefHeight="25.0" prefWidth="232.0" promptText="Vlož ean">
+		<Label fx:id="totalAmountOfRows" layoutX="188.0" layoutY="151.0" prefHeight="17.0" prefWidth="64.0" textFill="#f0f0f0" />
+		<Label fx:id="totalAmountOfBooks" layoutX="188.0" layoutY="129.0" prefHeight="17.0" prefWidth="81.0" textFill="#f0f0f0" />
+		<Button fx:id="removeButton" layoutX="342.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleRemoveButton" prefHeight="25.0" prefWidth="129.0" text="Odebrat řádek" />
+		<Button fx:id="removeAllButton" layoutX="471.0" layoutY="524.0" mnemonicParsing="false" onAction="#handleRemoveAllButton" prefHeight="25.0" prefWidth="113.0" text="Odebrat vše" />
+		<TextField fx:id="input" alignment="BOTTOM_LEFT" layoutX="84.0" layoutY="78.0" onAction="#onEnter" prefHeight="25.0" prefWidth="232.0" promptText="Vlož ean">
 			<font>
 				<Font size="13.0" />
 			</font>
 		</TextField>
-		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="241.0" prefHeight="57.0" prefWidth="260.0" textFill="#f0f0f0" />
-		<Label fx:id="ipLabel" layoutX="24.0" layoutY="218.0" prefHeight="17.0" prefWidth="260.0" textFill="#f0f0f0" />
-      <TextField fx:id="nameTextField" layoutX="32.0" layoutY="176.0" prefHeight="25.0" prefWidth="232.0" promptText="Vlož název souboru" />
+		<Label fx:id="serverInfoLabel" layoutX="76.0" layoutY="255.0" prefHeight="57.0" prefWidth="260.0" textFill="#f0f0f0" />
+		<Label fx:id="ipLabel" layoutX="76.0" layoutY="232.0" prefHeight="17.0" prefWidth="260.0" textFill="#f0f0f0" />
+      <TextField fx:id="nameTextField" layoutX="84.0" layoutY="190.0" prefHeight="25.0" prefWidth="232.0" promptText="Vlož název souboru" />
 	</children>
 </AnchorPane>

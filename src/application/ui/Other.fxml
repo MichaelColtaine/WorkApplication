@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="473.0" prefWidth="500.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.other.OtherController">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="600.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.other.OtherController">
 	<children>
 		<Label graphicTextGap="15.0" text="Ostatní Dodavatelé Flores" textFill="#f0f0f0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="0.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</Label>
-		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="228.0" onAction="#handleSettingsButtonAction" prefHeight="104.0" prefWidth="200.0" text="Nastavení" textFill="#f0f0f0">
+		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="199.0" layoutY="245.0" onAction="#handleSettingsButtonAction" prefHeight="104.0" prefWidth="200.0" text="Nastavení" textFill="#f0f0f0">
 			<font>
 				<Font size="14.0" />
 			</font>
@@ -27,7 +27,7 @@
 				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
 			</graphic>
 		</JFXButton>
-		<JFXButton fx:id="moveButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="150.0" layoutY="96.0" onAction="#handleMoveButton" prefHeight="104.0" prefWidth="200.0" text="Vytvořít  a přesunout Excel soubor" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true">
+		<JFXButton fx:id="moveButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="196.0" layoutY="108.0" onAction="#handleMoveButton" prefHeight="104.0" prefWidth="200.0" text="Vytvořít  a přesunout Excel soubor" textAlignment="CENTER" textFill="#f0f0f0" wrapText="true">
 			<font>
 				<Font size="14.0" />
 			</font>
@@ -39,8 +39,8 @@
 				</ImageView>
 			</graphic>
 		</JFXButton>
-		<ProgressIndicator fx:id="progress" layoutX="200.0" layoutY="393.0" prefHeight="50.0" prefWidth="100.0" visible="false" />
-      <VBox layoutX="165.0" layoutY="353.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
+		<ProgressIndicator fx:id="progress" layoutX="250.0" layoutY="499.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" visible="false" />
+      <VBox layoutX="214.0" layoutY="387.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
          <children>
 				<RadioButton fx:id="pemicButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" selected="true" text="Pemic" textFill="#f0f0f0">
                <toggleGroup>
@@ -51,7 +51,7 @@
 				<RadioButton fx:id="gradaButton" mnemonicParsing="false" text="Grada" textFill="#f0f0f0" toggleGroup="$system" />
          </children>
       </VBox>
-      <VBox layoutX="236.0" layoutY="353.0" prefHeight="80.0" prefWidth="100.0" spacing="10.0">
+      <VBox layoutX="287.0" layoutY="387.0" prefHeight="80.0" prefWidth="100.0" spacing="10.0">
          <children>
 				<RadioButton fx:id="marcoButton" mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="prescoButton" mnemonicParsing="false" text="Presco" textFill="#f0f0f0" toggleGroup="$system" />

@@ -62,7 +62,7 @@ public class BetaController {
 			public void run() {
 				ExcelUtils exel = new ExcelUtils();
 
-				if (isFolderEmpty()) {
+				if (isFolderEmpty()) { 
 					InfoModel.getInstance().updateInfo("Složka je prázdná!");
 				} else {
 					removeAllPdf();

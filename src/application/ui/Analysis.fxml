@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="501.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.analysis.AnalysisController">
+<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="600.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.analysis.AnalysisController">
 	<children>
 		<Label graphicTextGap="15.0" layoutX="23.0" layoutY="5.0" text="Analýza " textFill="#f0f0f0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</Label>
-		<VBox layoutX="25.0" layoutY="64.0" spacing="40.0" />
-		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="90.0" layoutY="482.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
+		<VBox layoutX="81.0" layoutY="58.0" spacing="40.0" />
+		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="146.0" layoutY="476.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
 			<font>
 				<Font size="14.0" />
 			</font>
@@ -27,9 +27,9 @@
       				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
 			</graphic>
 		</JFXButton>
-		<Label fx:id="serverInfoLabel" layoutX="24.0" layoutY="69.0" prefHeight="57.0" prefWidth="213.0" textFill="#f0f0f0" />
-		<Label fx:id="ipLabel" layoutX="24.0" layoutY="46.0" prefHeight="17.0" prefWidth="243.0" textFill="#f0f0f0" />
-      <Pane layoutX="54.0" layoutY="64.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="383.0" prefWidth="396.0">
+		<Label fx:id="serverInfoLabel" layoutX="80.0" layoutY="63.0" prefHeight="57.0" prefWidth="213.0" textFill="#f0f0f0" />
+		<Label fx:id="ipLabel" layoutX="80.0" layoutY="40.0" prefHeight="17.0" prefWidth="243.0" textFill="#f0f0f0" />
+      <Pane layoutX="110.0" layoutY="58.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="383.0" prefWidth="396.0">
          <children>
             <ImageView fitHeight="101.0" fitWidth="107.0" layoutX="148.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,7 +40,7 @@
             <Label fx:id="fileNameLabel" layoutX="107.0" layoutY="296.0" prefHeight="17.0" prefWidth="276.0" textFill="#f0f0f0" />
          </children>
       </Pane>
-      <JFXButton fx:id="deleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="284.0" layoutY="482.0" onAction="#handleDeleteButtonAction" prefHeight="35.0" prefWidth="129.0" text="Odstranit soubor" textFill="#f0f0f0">
+      <JFXButton fx:id="deleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="340.0" layoutY="476.0" onAction="#handleDeleteButtonAction" prefHeight="35.0" prefWidth="129.0" text="Odstranit soubor" textFill="#f0f0f0">
          <font>
             <Font size="14.0" />
          </font>
@@ -52,8 +52,8 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <Label fx:id="databaseLabel" layoutX="240.0" layoutY="69.0" prefHeight="58.0" prefWidth="213.0" textFill="#f0f0f0" />
-      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="455.0" prefHeight="17.0" prefWidth="424.0" textAlignment="CENTER" textFill="RED" />
-      <ProgressIndicator fx:id="progressBar" layoutX="221.0" layoutY="427.0" prefHeight="57.0" prefWidth="62.0" visible="false" />
+      <Label fx:id="databaseLabel" layoutX="296.0" layoutY="63.0" prefHeight="58.0" prefWidth="213.0" textFill="#f0f0f0" />
+      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="449.0" prefHeight="17.0" prefWidth="424.0" textAlignment="CENTER" textFill="RED" />
+      <ProgressIndicator fx:id="progressBar" layoutX="277.0" layoutY="421.0" prefHeight="57.0" prefWidth="62.0" visible="false" />
 	</children>
 </AnchorPane>

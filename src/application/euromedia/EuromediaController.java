@@ -214,7 +214,7 @@ public class EuromediaController implements Initializable {
 	}
 
 	private RowRecord getFilenameAndRabat(File file, Double rabat) {
-		return new RowRecord(getFileName(file), getFileName(file).substring(getFileName(file).length() - 3) + ".txt",
+		return new RowRecord(getFileName(file), getFileName(file).substring(getFileName(file).length() - 5) + ".txt",
 				String.format("-%.2f", rabat) + "%");
 	}
 

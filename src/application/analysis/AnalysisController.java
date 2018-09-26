@@ -117,39 +117,7 @@ public class AnalysisController {
 		}
 	}
 
-	// private HashMap<String, ArticleRow> readDataFile() {
-	// HashMap<String, ArticleRow> map = new HashMap<>();
-	// File file = new File(System.getProperty("user.dir") + File.separator + "data"
-	// + File.separator + "data.xlsx");
-	// try {
-	// Workbook wb = WorkbookFactory.create(file);
-	// Sheet sheet = wb.getSheetAt(0);
-	// sheet.removeRow(sheet.getRow(0));
-	// String name = "", ean = "";
-	// for (Row row : sheet) {
-	// try {
-	// ean = row.getCell(0).toString();
-	// name = row.getCell(1).toString();
-	// map.put(ean, new ArticleRow(ean, name, "", "", "", "", "", "", ""));
-	// } catch (NullPointerException e) {
-	// System.out.println("Nullpointer, jedna bunka je prazdna. readDataFile");
-	// continue;
-	// }
-	// }
-	// wb.close();
-	//
-	// } catch (EncryptedDocumentException e) {
-	// reset();
-	// e.printStackTrace();
-	// } catch (InvalidFormatException e) {
-	// reset();
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// reset();
-	// e.printStackTrace();
-	// }
-	// return map;
-	// }
+	
 
 	boolean isFirstLine = true;
 

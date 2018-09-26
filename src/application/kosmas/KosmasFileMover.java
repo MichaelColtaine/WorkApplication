@@ -31,17 +31,25 @@ public class KosmasFileMover {
 		StringBuilder sb = new StringBuilder();
 		String deliveryNoteName = fullName.toUpperCase().replace(".TXT", "");
 		fullName = fullName.toLowerCase().replace("-", "");
+
 		if (fullName.contains("f")) {
-			sb.append(fullName.substring(6));
-		} else if (fullName.contains("k")) {
-			sb.append(fullName.substring(6));
-		} else {
 			sb.append(fullName.substring(5));
+			// System.out.println(sb.toString());
+
+		} else if (fullName.contains("k")) {
+			sb.append(fullName.substring(5));
+		} else {
+			sb.append(fullName.substring(4));
 		}
 		String temp = sb.toString();
+
 		if (temp.length() > 7) {
+			System.out.println(temp + " " + temp.length());
 			sb.delete(0, sb.toString().length());
-			sb.append(temp.substring(temp.length() - 7));
+		
+			sb.append(temp.substring(temp.length() - 9)); // tady se mìni delka textu v listview
+			System.out.println(sb.toString());
+			
 		}
 		fileNames.add(new RowRecord(deliveryNoteName, sb.toString(), ""));
 		return sb.toString();

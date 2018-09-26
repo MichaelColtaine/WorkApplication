@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,24 +18,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import application.RowRecord;
 import application.beta.BetaModel;
-import application.euromedia.EuroModel;
 import application.infobar.InfoModel;
 import application.kosmas.KosmasModel;
 
 public class ExcelUtils {
 
 	private File fromDirectory, toDirectory;
-
-	public void euromediaExcel(String fromDirectoryPath, String toDirectoryPath) {
-		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
-		for (File f : fromDirectory.listFiles()) {
-			StringBuilder sb = new StringBuilder().append(f.getName().substring(0, f.getName().length() - 3))
-					.append("xlsx");
-			InfoModel.getInstance().updateInfo(f.getName());
-			EuroModel.getInstance().getRecords().add(new RowRecord(sb.toString().replaceAll(".xlsx", ""), "", ""));
-			writeFileFourInputs(readFileEuromedia(f), toDirectoryPath, sb.toString().replace("XLS_", ""));
-		}
-	}
 
 	public void kosmasExcel() {
 		File directory = new File(System.getProperty("user.dir") + File.separator + "temp" + File.separator);
@@ -68,8 +55,6 @@ public class ExcelUtils {
 		}
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
-
-
 
 	public void prescoExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
@@ -106,50 +91,126 @@ public class ExcelUtils {
 		return records;
 	}
 
+	// public void betaExcel() {
+	// List<ExcelRecord> records = new ArrayList<>();
+	// File directory = new File(BetaModel.getInstance().getFromPath());
+	// for (File f : directory.listFiles()) {
+	// InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
+	// try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+	// String line;
+	// String ean = "", amount = "", price = "";
+	// while ((line = br.readLine()) != null) {
+	// if (line.contains("Ks")) {
+	// amount = line.substring(54, 59);
+	// }
+	// if (line.contains("0.09")) {
+	// ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
+	// price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24);
+	// }
+	//
+	// if (line.contains("0.08")) {
+	// ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
+	// price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24);
+	// }
+	//
+	// if (!amount.isEmpty() && !ean.isEmpty()) {
+	// records.add(
+	// new ExcelRecord(ean, amount.replace(".0", ""), price.substring(0,
+	// price.length() - 3)));
+	// ean = "";
+	// amount = "";
+	// }
+	// }
+	// writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+	// f.getName().substring(0, f.getName().length() -
+	// 3).toUpperCase().replaceAll("CNTSV-", "")
+	// + "xlsx");
+	// } catch (FileNotFoundException e) {
+	// e.printStackTrace();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// records.clear();
+	// f.delete();
+	// }
+	// }
+
+	List<ExcelRecord> records = new ArrayList<>();
+
 	public void betaExcel() {
-		List<ExcelRecord> records = new ArrayList<>();
 		File directory = new File(BetaModel.getInstance().getFromPath());
 		for (File f : directory.listFiles()) {
-			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
-			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
-				String line;
-				String ean = "", amount = "", price = "";
-				while ((line = br.readLine()) != null) {
-					if (line.contains("Ks")) {
-						amount = line.substring(54, 59);
-					}
-					if (line.contains("0.09")) {
-						ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
-						// price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") -
-						// 24).replace(".00", "");
-						price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24);
-					}
-
-					if (line.contains("0.08")) {
-						ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
-						// price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") -
-						// 24).replace(".00", "");
-						price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24);
-					}
-
-					if (!amount.isEmpty() && !ean.isEmpty()) {
-
-						records.add(
-								new ExcelRecord(ean, amount.replace(".0", ""), price.substring(0, price.length() - 3)));
-						ean = "";
-						amount = "";
-					}
+			if (f.getName().toLowerCase().contains(".txt")) {
+				try {
+					handleBetaTxt(f);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
-						f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "")
-								+ "xlsx");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} else if (f.getName().toLowerCase().contains(".csv")) {
+				try {
+					handleBetaCsv(f);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+
 			records.clear();
 			f.delete();
+		}
+
+	}
+
+	private void handleBetaCsv(File f) throws IOException {
+		InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
+		boolean first = true;
+		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+			String line;
+			String ean = "", amount = "", price = "0";
+			while ((line = br.readLine()) != null) {
+				if(first == true) {
+					first = false;
+					continue;
+				}
+				String[] temp = line.split(";");
+				ean = temp[0].replaceAll("\"", "");
+				amount = temp[1];
+				price = temp[3];
+				
+				records.add(new ExcelRecord(ean, amount, price));
+			}
+			writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+					f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "") + "xlsx");
+		}
+	}
+
+	private void handleBetaTxt(File f) throws Exception {
+		InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
+		try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+			String line;
+			String ean = "", amount = "", price = "";
+			while ((line = br.readLine()) != null) {
+				if (line.contains("Ks")) {
+					amount = line.substring(54, 59);
+				}
+				if (line.contains("0.09")) {
+					ean = line.substring(line.indexOf("0.09") + 3, line.indexOf("0.09") + 16);
+					price = line.substring(line.indexOf("0.09") - 33, line.indexOf("0.09") - 24);
+				}
+
+				if (line.contains("0.08")) {
+					ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
+					price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24);
+				}
+
+				if (!amount.isEmpty() && !ean.isEmpty()) {
+					records.add(new ExcelRecord(ean, amount.replace(".0", ""), price.substring(0, price.length() - 3)));
+					ean = "";
+					amount = "";
+				}
+			}
+			writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+					f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "") + "xlsx");
 		}
 	}
 
@@ -222,39 +283,9 @@ public class ExcelUtils {
 		}
 	}
 
-	private List<ExcelRecord> readFileEuromedia(File file) {
-		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
-		try {
-			Workbook wb = WorkbookFactory.create(file);
-			Sheet sheet = wb.getSheetAt(0);
-			sheet.removeRow(sheet.getRow(0));
-			for (Row row : sheet) {
-				Double convertAmountToDouble = Double
-						.parseDouble(new BigDecimal(row.getCell(11).toString()).toPlainString());
-				Integer convertAmountToInt = convertAmountToDouble.intValue();
-				String amountAsString = String.valueOf(convertAmountToInt);
-				String price = row.getCell(8).toString();
-				price = price.substring(0, price.length() - 2);
-				double pricePerUnit = row.getCell(9).getNumericCellValue();
-
-				double totalPrice = pricePerUnit * convertAmountToInt;
-				records.add(new ExcelRecord(new BigDecimal(row.getCell(7).toString()).toPlainString(), amountAsString,
-						price, totalPrice));
-			}
-			wb.close();
-
-		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
-				| IOException e) {
-			System.out.println("readFile in ExcelUtils");
-			e.printStackTrace();
-		}
-		return records;
-	}
-
 	private void writeFileTwoInputs(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet1 = workbook.createSheet();
-
 		int i = 0;
 		for (ExcelRecord r : records) {
 			Row row = sheet1.createRow(i);
@@ -262,11 +293,9 @@ public class ExcelUtils {
 			row.createCell(1).setCellValue(r.getAmount());
 			i++;
 		}
-
 		for (int k = 0; k < records.size(); k++) {
 			sheet1.autoSizeColumn(k);
 		}
-
 		try {
 			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName);
 			workbook.write(fileOut);

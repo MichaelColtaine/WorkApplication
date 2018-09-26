@@ -71,7 +71,7 @@ public class EuroModel {
 		for (File source : tempDirectory.listFiles()) {
 			sb.delete(0, sb.length());
 			sb.append(toDirectory).append(File.separator)
-					.append(source.getName().replaceAll(".zip", ".txt").substring(source.getName().length() - 7));
+					.append(source.getName().replaceAll(".zip", ".txt").substring(source.getName().length() - 9));
 			File destination = new File(sb.toString());
 			FileUnziper.unzip(source, destination);
 		}
