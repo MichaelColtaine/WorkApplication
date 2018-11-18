@@ -3,10 +3,15 @@ package application.scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -51,7 +56,7 @@ public class ScannerServer {
 						System.out.println("Connected");
 						try (BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 							text = br.readLine();
-							listOfArticlesFromClient = convertStringToList(text);
+							listOfArticlesFromClient = convertReceivingData(text);
 							createTable(articles, dataForList, amountLabel, totalAmountOfBooks);
 							changeLabel(label, "Konec spojení.");
 						}
@@ -63,7 +68,7 @@ public class ScannerServer {
 				} catch (IOException e) {
 					changeLabel(label, "IO exception.");
 					System.out.println(e.getMessage() + " 2Thrown by " + e.getClass().getSimpleName());
-//					e.printStackTrace();
+					// e.printStackTrace();
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,6 +78,20 @@ public class ScannerServer {
 		};
 		new Thread(task).start();
 	}
+
+	@SuppressWarnings("unchecked")
+	private ArrayList<ServerArticle> convertReceivingData(String json) {
+		ArrayList<ServerArticle> list;
+		HashMap<String, ArrayList<ServerArticle>> nameAndList;
+		Gson gson = new Gson();
+		Type type = new TypeToken<HashMap<String, ArrayList<ServerArticle>>>() {
+		}.getType();
+		nameAndList = gson.fromJson(json, type);
+		fileName = (String) nameAndList.keySet().toArray()[0] + ".xlsx";
+		list = (ArrayList<ServerArticle>) nameAndList.values().toArray()[0];
+		return list;
+	}
+
 
 	public static void closeAll() throws IOException {
 
@@ -129,23 +148,6 @@ public class ScannerServer {
 
 	public ArrayList<ServerArticle> getServerArticles() {
 		return this.listOfArticlesFromClient;
-	}
-
-	public ArrayList<ServerArticle> convertStringToList(String txt) {
-		ArrayList<ServerArticle> articles = new ArrayList<>();
-		String[] rows = txt.split(";");
-		fileName = rows[0] + ".xlsx";
-
-		boolean first = true;
-		for (String s : rows) {
-			if (first) {
-				first = false;
-				continue;
-			}
-			String[] temp = s.split("\\.");
-			articles.add(new ServerArticle(temp[0], temp[1]));
-		}
-		return articles;
 	}
 
 }

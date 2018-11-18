@@ -54,7 +54,12 @@ public class AnalysisSender {
 							InfoModel.getInstance().updateInfo("Posílám Analýzu...");
 							outputMessage.createAnalysis(AnalysisModel.getInstance().getAnalysis());
 						}
+						
 						objectOutputStream.writeObject(outputMessage);
+//						for(String s : outputMessage.getAnalysis().keySet()) {
+//							System.out.println("TEST " + s);
+//						}
+//						System.out.println(outputMessage.getAnalysis().size());
 						InfoModel.getInstance().updateInfo("Analýza odeslána");
 						pb.setVisible(false);
 					}

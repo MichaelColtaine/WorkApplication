@@ -116,7 +116,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="AnalysisButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Flores Analýza" textFill="#f0f0f0">
+            <JFXButton fx:id="AnalysisButton" alignment="BOTTOM_LEFT" focusTraversable="false" graphicTextGap="22.0" onAction="#handleButtons" prefHeight="75.0" prefWidth="200.0" styleClass="jfx-button-leftmenu" text="Analýza" textFill="#f0f0f0">
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" />
                </padding>

@@ -8,7 +8,8 @@ public class ArticleRow implements Serializable {
 
 	private String rank = "", firstCode = "", ean = "", name = "", sales = "", sales2 = "", revenue = "",
 			storedAmount = "", supply = "", locations = "", price = "", dph = "", supplier = "", author = "",
-			dateOflastSale = "", dateOfLastDelivery = "", realeaseDate = "", deliveredAs = "", eshopRank = "";
+			dateOflastSale = "", dateOfLastDelivery = "", realeaseDate = "", deliveredAs = "", eshopRank = "",
+			analysisDate = "";
 
 	public ArticleRow() {
 
@@ -161,6 +162,14 @@ public class ArticleRow implements Serializable {
 	public void setEshopRank(String eshopRank) {
 		this.eshopRank = eshopRank;
 
+	}
+
+	public String getAnalysisDate() {
+		return this.analysisDate;
+	}
+
+	public void setAnalysisDate(String date) {
+		this.analysisDate = date;
 	}
 
 	public String getEshopRank() {

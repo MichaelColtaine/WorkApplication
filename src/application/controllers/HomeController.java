@@ -80,7 +80,7 @@ public class HomeController {
 		case "Beta":
 			handleBetaButton();
 			break;
-		case "Flores Analýza":
+		case "Analýza":
 			handleAnalysisButton();
 			break;
 		case "Ostatní Flores":

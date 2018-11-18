@@ -23,8 +23,8 @@
 		<VBox layoutX="77.0" layoutY="78.0" spacing="40.0" />
 		<TableView fx:id="table" focusTraversable="false" layoutX="342.0" layoutY="21.0" prefHeight="503.0" prefWidth="242.0">
 			<columns>
-				<TableColumn fx:id="eanColumn" editable="false" minWidth="78.0" prefWidth="102.0" resizable="false" sortable="false" text="EAN" />
-				<TableColumn fx:id="amountColumn" minWidth="75.0" prefWidth="97.0" resizable="false" sortable="false" text="MNOŽSTVÍ" />
+				<TableColumn fx:id="eanColumn" editable="false" minWidth="78.0" prefWidth="121.0" resizable="false" sortable="false" text="EAN" />
+				<TableColumn fx:id="amountColumn" minWidth="75.0" prefWidth="120.0" resizable="false" sortable="false" text="MNOŽSTVÍ" />
 			</columns>
 		</TableView>
 		<Label layoutX="84.0" layoutY="151.0" text="Počet titulů:" textFill="#f0f0f0" />

@@ -40,5 +40,7 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3.jar" sourcepath="C:/Users/Micha/.sourceattacher/jsoup-1.11.3-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-javadoc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-csv-1.6/commons-csv-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-csv-1.6/commons-csv-1.6-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
