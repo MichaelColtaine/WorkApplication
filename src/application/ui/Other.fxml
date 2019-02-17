@@ -56,6 +56,7 @@
 				<RadioButton fx:id="marcoButton" mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="prescoButton" mnemonicParsing="false" text="Presco" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="omegaButton" mnemonicParsing="false" text="Omega/Kbely" textFill="#f0f0f0" toggleGroup="$system" />
+            <RadioButton fx:id="albiButton" mnemonicParsing="false" text="Albi" textFill="#f0f0f0" toggleGroup="$system" />
          </children>
       </VBox>
 	</children>

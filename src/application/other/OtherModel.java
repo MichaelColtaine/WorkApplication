@@ -23,6 +23,11 @@ public class OtherModel {
 		grada.convertGradaDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
 	}
 
+	public void handleAlbiButton() {
+		AlbiFileConverter albi = new AlbiFileConverter();
+		albi.convertGradaDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	}
+
 	public OtherSettings getSettings() {
 		return this.settings;
 	}
@@ -58,7 +63,7 @@ public class OtherModel {
 		ExcelUtils excel = new ExcelUtils();
 		excel.prescoExcel(settings.getFromPath(), settings.getToPath());
 	}
-	
+
 	public void handlePortalButton() {
 		PortalConverter portal = new PortalConverter();
 		portal.convertPortalDeliveryListToExcel(settings.getFromPath(), settings.getToPath());

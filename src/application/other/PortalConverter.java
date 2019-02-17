@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.SplitMapUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -32,34 +33,96 @@ public class PortalConverter {
 			toDirectory.mkdirs();
 		}
 	}
+	// cte soubor ktery je rozdeleny po trech radcich
+//	private List<ExcelRecord> readPortalFile(File file) {
+//		ArrayList<ExcelRecord> records = new ArrayList<>();
+//		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+//			StringBuilder sb = new StringBuilder();
+//			String line = "";
+//			int counter = 1;
+//			while ((line = br.readLine()) != null) {
+//				if (counter == 3) {
+//					sb.append(line).append("\n");
+//					String ean = sb.toString().substring(110, 125).trim();
+//					String amount = sb.toString().substring(53, 60).replace(".0", "").trim();
+//					String price = sb.toString().substring(75, 90).trim().replace(".00", "");
+//					records.add(new ExcelRecord(ean, amount, price));
+//					sb.delete(0, sb.length());
+//					counter = 1;
+//					continue;
+//				} else {
+//					sb.append(line);
+//					counter++;
+//				}
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return records;
+//	}
 
 	private List<ExcelRecord> readPortalFile(File file) {
 		ArrayList<ExcelRecord> records = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			StringBuilder sb = new StringBuilder();
-			String line = "";
-			int counter = 1;
-			while ((line = br.readLine()) != null) {
-				if (counter == 3) {
-					sb.append(line).append("\n");
-					String ean = sb.toString().substring(110, 125).trim();
-					String amount = sb.toString().substring(53, 60).replace(".0", "").trim();
-					String price = sb.toString().substring(75, 90).trim().replace(".00", "");
-					records.add(new ExcelRecord(ean, amount, price));
-					sb.delete(0, sb.length());
-					counter = 1;
-					continue;
-				} else {
-					sb.append(line);
-					counter++;
-				}
+			if (getLineLength(file) > 69) {
+				handleReadingLongLineFile(br, records);
+			} else { // pokud je jeden radek rozdeleny na tri
+				handleReadingThreeLinesFile(br, records);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		return records;
+	}
+	
+	private int getLineLength(File file) {
+		int lineLength = 0;
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String line = br.readLine();
+			lineLength = line.length();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return lineLength;
+	}
+
+	private void handleReadingLongLineFile(BufferedReader br, ArrayList<ExcelRecord> records) throws IOException {
+		String line = "";
+		while ((line = br.readLine()) != null) {
+			String ean = line.substring(110, 142).replaceAll(" ", "");
+			String amount = line.substring(54, 60).replaceAll(" ", "").replaceAll(".0", "");
+			String price = line.substring(93, 103).replace(".00", "").replaceAll(" ", "");
+			records.add(new ExcelRecord(ean, amount, price));
+		}
+
+	}
+
+	private void handleReadingThreeLinesFile(BufferedReader br, ArrayList<ExcelRecord> records) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		int counter = 1;
+		String line;
+		while ((line = br.readLine()) != null) {
+			if (counter == 3) {
+				sb.append(line).append("\n");
+				String ean = sb.toString().substring(110, 125).trim();
+				String amount = sb.toString().substring(53, 60).replace(".0", "").trim();
+				String price = sb.toString().substring(75, 90).trim().replace(".00", "");
+				records.add(new ExcelRecord(ean, amount, price));
+				sb.delete(0, sb.length());
+				counter = 1;
+				continue;
+			} else {
+				sb.append(line);
+				counter++;
+			}
+		}
 	}
 
 	public void convertPortalDeliveryListToExcel(String fromDirectoryPath, String toDirectoryPath) {
