@@ -45,11 +45,19 @@ public class OtherController {
 	private RadioButton omegaButton;
 
 	@FXML
+	private RadioButton alpressButton;
+
+	@FXML
 	private RadioButton prescoButton;
 	@FXML
 	private RadioButton portalButton;
 	@FXML
 	private RadioButton albiButton;
+	
+	
+	@FXML
+	private RadioButton slovartButton;
+	
 	@FXML
 	private ToggleGroup system;
 
@@ -76,6 +84,10 @@ public class OtherController {
 						handlePortalButton();
 					} else if (albiButton.isSelected()) {
 						handleAlbiButton();
+					} else if (alpressButton.isSelected()) {
+						handleAlpressButton();
+					} else if(slovartButton.isSelected()) {
+						handleSlovartButton();
 					}
 				}
 			}
@@ -120,6 +132,16 @@ public class OtherController {
 
 	private void handleAlbiButton() {
 		OtherModel.getInstance().handleAlbiButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
+	}
+
+	private void handleAlpressButton() {
+		OtherModel.getInstance().handleAlpressButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
+	}
+	
+	private void handleSlovartButton() {
+		OtherModel.getInstance().handleSlovartButton();
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 

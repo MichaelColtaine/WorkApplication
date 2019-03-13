@@ -25,7 +25,7 @@ public class OtherModel {
 
 	public void handleAlbiButton() {
 		AlbiFileConverter albi = new AlbiFileConverter();
-		albi.convertGradaDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+		albi.convertAlbiDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
 	}
 
 	public OtherSettings getSettings() {
@@ -67,6 +67,16 @@ public class OtherModel {
 	public void handlePortalButton() {
 		PortalConverter portal = new PortalConverter();
 		portal.convertPortalDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	}
+
+	public void handleAlpressButton() {
+		AlpressFileConverter alpress = new AlpressFileConverter();
+		alpress.convertAlpressDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	}
+
+	public void handleSlovartButton() {
+		SlovartFileConverter slovart = new SlovartFileConverter();
+		slovart.convertAlpressDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
 	}
 
 }

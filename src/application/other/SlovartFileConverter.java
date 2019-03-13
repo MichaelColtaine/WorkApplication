@@ -2,11 +2,9 @@ package application.other;
 
 import java.io.BufferedReader;
 import java.io.File;
-
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +16,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
 
-public class AlbiFileConverter {
-
+public class SlovartFileConverter {
 	private File fromDirectory, toDirectory;
 
-	public void convertAlbiDeliveryListToExcel(String fromDirectoryPath, String toDirectoryPath) {
+	public void convertAlpressDeliveryListToExcel(String fromDirectoryPath, String toDirectoryPath) {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
 		for (File f : fromDirectory.listFiles()) {
 			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
-			writeFile(readAlbiFile(f), toDirectoryPath, f.getName());
+			writeFile(readSlovartFile(f), toDirectoryPath, f.getName());
 			f.delete();
 		}
 	}
@@ -43,17 +40,18 @@ public class AlbiFileConverter {
 		}
 	}
 
-	private List<ExcelRecord> readAlbiFile(File file) {
+	private List<ExcelRecord> readSlovartFile(File file) {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				String[] splittedLine = line.split(";");
-				String ean = splittedLine[0];
-				String amount = splittedLine[2];
-				String price = splittedLine[4].replaceAll(",", ".");
-				Double totalPrice = Double.parseDouble(amount) * Double.parseDouble(price);
-				records.add(new ExcelRecord(ean, amount, String.format("%.2f", totalPrice)));
+				String ean = line.substring(120, 140).trim().replace("0.0", "");
+				String price = line.substring(90, 100).trim().replace(".00", "");
+				int startIndex = line.toLowerCase().indexOf("ks");
+				String amount = line.substring(startIndex + 10, startIndex + 18).trim().replace(".0", "");
+
+				System.out.println(ean + " " + price + " " + amount);
+				records.add(new ExcelRecord(ean, amount, price));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -66,7 +64,7 @@ public class AlbiFileConverter {
 		Sheet sheet = workbook.createSheet();
 		createRowAndAddData(records, sheet);
 		resizeColumns(records, sheet);
-		createExcelFile(workbook, toDirectoryPath, fileName.replace(".csv", ".xlsx"));
+		createExcelFile(workbook, toDirectoryPath, fileName.toLowerCase().replace(".txt", ".xlsx"));
 	}
 
 	private void createRowAndAddData(List<ExcelRecord> records, Sheet sheet) {
@@ -75,7 +73,7 @@ public class AlbiFileConverter {
 			Row row = sheet.createRow(i);
 			row.createCell(0).setCellValue(r.getEan());
 			row.createCell(1).setCellValue(r.getAmount());
-			row.createCell(2).setCellValue(r.getPrice());
+			row.createCell(3).setCellValue(r.getPrice());
 			i++;
 		}
 	}
@@ -88,8 +86,7 @@ public class AlbiFileConverter {
 
 	private void createExcelFile(Workbook workbook, String toDirectoryPath, String fileName) {
 		try {
-			FileOutputStream fileOut = new FileOutputStream(
-					toDirectoryPath + File.separator + fileName.replace(".txt", ".xlsx"));
+			FileOutputStream fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName);
 			workbook.write(fileOut);
 			fileOut.close();
 			workbook.close();
@@ -97,5 +94,4 @@ public class AlbiFileConverter {
 			e.printStackTrace();
 		}
 	}
-
 }

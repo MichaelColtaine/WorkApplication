@@ -2,6 +2,7 @@ package application.other;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class OmegaFileConverter {
 			toDirectory.mkdirs();
 		}
 	}
-
+	// origo funguje
 	private List<ExcelRecord> readOmegaFile(File file) {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -55,6 +56,79 @@ public class OmegaFileConverter {
 			e.printStackTrace();
 		}
 		return records;
+	}
+	//
+
+//	private List<ExcelRecord> readOmegaFile(File file) {
+//		ArrayList<ExcelRecord> records = new ArrayList<>();
+//		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+//			if (getLineLength(file) > 76) {
+//				System.out.println("Long");
+//				handleReadingLongLineFile(br, records);
+//			} else { // pokud je jeden radek rozdeleny na dva
+//				System.out.println("SHORT");
+//				handleReadingTwoLinesFile(br, records);
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return records;
+//	}
+
+//	private void handleReadingLongLineFile(BufferedReader br, ArrayList<ExcelRecord> records) throws IOException {
+//		String line;
+//		while ((line = br.readLine()) != null) {
+//			int index = line.toLowerCase().indexOf(" ks ");
+//			String ean = line.substring(index + 85, index + 98);
+//			String amount = line.substring(index + 11, index + 14);
+//			String price = line.substring(index + 51, index + 58);
+//			records.add(new ExcelRecord(ean, amount, price.replace(".00", "")));
+//		}
+//	}
+
+//	private ArrayList<String> linesArray = new ArrayList<String>();
+
+//	private void handleReadingTwoLinesFile(BufferedReader br, ArrayList<ExcelRecord> records) throws IOException {
+//		StringBuilder sb = new StringBuilder();
+//		int counter = 0;
+//		String line;
+//		boolean isFirstLine = true;
+//		while ((line = br.readLine()) != null) {
+//
+////			if ("OMEGA".equals(line.substring(0, 5)) || isFirstLine) {
+////				linesArray.add(sb.toString());
+////				sb.delete(0, sb.length());
+////				isFirstLine = false;
+////				sb.append(line);
+////			} else {
+////				sb.append(line);
+////
+////			}
+//			
+//			sb.append(line);
+//
+//		}
+//		
+//		System.out.println(sb.toString());
+//
+////		linesArray.forEach((a) -> System.out.println(a));
+//	}
+
+	private int getLineLength(File file) {
+		int lineLength = 0;
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String line = br.readLine();
+			lineLength = line.length();
+			System.out.println(lineLength);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return lineLength;
 	}
 
 	private void writeFile(List<ExcelRecord> records, String toDirectoryPath, String fileName) {

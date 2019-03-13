@@ -40,7 +40,7 @@
 			</graphic>
 		</JFXButton>
 		<ProgressIndicator fx:id="progress" layoutX="250.0" layoutY="499.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="100.0" visible="false" />
-      <VBox layoutX="214.0" layoutY="387.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
+      <VBox layoutX="179.0" layoutY="387.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
          <children>
 				<RadioButton fx:id="pemicButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" selected="true" text="Pemic" textFill="#f0f0f0">
                <toggleGroup>
@@ -48,15 +48,21 @@
                </toggleGroup>
 				</RadioButton>
             <RadioButton fx:id="portalButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="57.0" text="Portal" textFill="#f0f0f0" toggleGroup="$system" />
+            <RadioButton fx:id="alpressButton" mnemonicParsing="false" text="Alpress" textFill="#f0f0f0" toggleGroup="$system" />
 				<RadioButton fx:id="gradaButton" mnemonicParsing="false" text="Grada" textFill="#f0f0f0" toggleGroup="$system" />
          </children>
       </VBox>
-      <VBox layoutX="287.0" layoutY="387.0" prefHeight="80.0" prefWidth="100.0" spacing="10.0">
+      <VBox layoutX="252.0" layoutY="387.0" prefHeight="80.0" prefWidth="100.0" spacing="10.0">
          <children>
 				<RadioButton fx:id="marcoButton" mnemonicParsing="false" text="MarcoPolo" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="prescoButton" mnemonicParsing="false" text="Presco" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="omegaButton" mnemonicParsing="false" text="Omega/Kbely" textFill="#f0f0f0" toggleGroup="$system" />
             <RadioButton fx:id="albiButton" mnemonicParsing="false" text="Albi" textFill="#f0f0f0" toggleGroup="$system" />
+         </children>
+      </VBox>
+      <VBox layoutX="352.0" layoutY="387.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
+         <children>
+            <RadioButton fx:id="slovartButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="84.0" text="Slovart" textFill="#f0f0f0" toggleGroup="$system" />
          </children>
       </VBox>
 	</children>

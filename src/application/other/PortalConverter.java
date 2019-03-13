@@ -33,35 +33,7 @@ public class PortalConverter {
 			toDirectory.mkdirs();
 		}
 	}
-	// cte soubor ktery je rozdeleny po trech radcich
-//	private List<ExcelRecord> readPortalFile(File file) {
-//		ArrayList<ExcelRecord> records = new ArrayList<>();
-//		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-//			StringBuilder sb = new StringBuilder();
-//			String line = "";
-//			int counter = 1;
-//			while ((line = br.readLine()) != null) {
-//				if (counter == 3) {
-//					sb.append(line).append("\n");
-//					String ean = sb.toString().substring(110, 125).trim();
-//					String amount = sb.toString().substring(53, 60).replace(".0", "").trim();
-//					String price = sb.toString().substring(75, 90).trim().replace(".00", "");
-//					records.add(new ExcelRecord(ean, amount, price));
-//					sb.delete(0, sb.length());
-//					counter = 1;
-//					continue;
-//				} else {
-//					sb.append(line);
-//					counter++;
-//				}
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return records;
-//	}
+
 
 	private List<ExcelRecord> readPortalFile(File file) {
 		ArrayList<ExcelRecord> records = new ArrayList<>();
