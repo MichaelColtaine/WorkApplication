@@ -69,7 +69,7 @@ public class PortalConverter {
 		String line = "";
 		while ((line = br.readLine()) != null) {
 			String ean = line.substring(110, 142).replaceAll(" ", "");
-			String amount = line.substring(54, 60).replaceAll(" ", "").replaceAll(".0", "");
+			String amount = line.substring(54, 60).replaceAll(" ", "").replaceAll("\\.0", "");
 			String price = line.substring(93, 103).replace(".00", "").replaceAll(" ", "");
 			records.add(new ExcelRecord(ean, amount, price));
 		}

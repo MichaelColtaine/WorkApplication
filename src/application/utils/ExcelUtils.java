@@ -140,6 +140,7 @@ public class ExcelUtils {
 	public void betaExcel() {
 		File directory = new File(BetaModel.getInstance().getFromPath());
 		for (File f : directory.listFiles()) {
+
 			if (f.getName().toLowerCase().contains(".txt")) {
 				try {
 					handleBetaTxt(f);
@@ -168,7 +169,7 @@ public class ExcelUtils {
 			String line;
 			String ean = "", amount = "", price = "0";
 			while ((line = br.readLine()) != null) {
-				if(first == true) {
+				if (first == true) {
 					first = false;
 					continue;
 				}
@@ -176,11 +177,13 @@ public class ExcelUtils {
 				ean = temp[0].replaceAll("\"", "");
 				amount = temp[1];
 				price = temp[3];
-				
+
 				records.add(new ExcelRecord(ean, amount, price));
 			}
+//			writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
+//					f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "") + "xlsx");
 			writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
-					f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "") + "xlsx");
+					f.getName().substring(0, f.getName().length() - 3) + "xlsx");
 		}
 	}
 
@@ -202,6 +205,11 @@ public class ExcelUtils {
 					ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
 					price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24);
 				}
+				
+				if(line.contains("0.01")) {
+					ean = line.substring(line.indexOf("0.01") + 3, line.indexOf("0.01") + 16);
+					price = line.substring(line.indexOf("0.01") - 33, line.indexOf("0.01") - 24);
+				}
 
 				if (!amount.isEmpty() && !ean.isEmpty()) {
 					records.add(new ExcelRecord(ean, amount.replace(".0", ""), price.substring(0, price.length() - 3)));
@@ -210,7 +218,7 @@ public class ExcelUtils {
 				}
 			}
 			writeFileThreeInputs(records, BetaModel.getInstance().getToPath(),
-					f.getName().substring(0, f.getName().length() - 3).toUpperCase().replaceAll("CNTSV-", "") + "xlsx");
+					f.getName().substring(0, f.getName().length() - 3) + "xlsx");
 		}
 	}
 

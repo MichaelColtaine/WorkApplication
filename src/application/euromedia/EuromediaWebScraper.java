@@ -36,6 +36,27 @@ public class EuromediaWebScraper {
 		this.filetype = filetype;
 	}
 
+	// public void startDownloading() {
+	// try {
+	// Connection.Response loginForm =
+	// Jsoup.connect(loginFormUrl).method(Connection.Method.GET)
+	// .userAgent(USER_AGENT).execute();
+	// Document loginDoc = loginForm.parse();
+	// cookies.putAll(loginForm.cookies());
+	// formData.put("loginId", username);
+	// formData.put("passwd", password);
+	// formData.put("url", "https://vo.knizniweb.cz/moje-dokumenty/dodaci-listy/");
+	// Connection.Response homepage =
+	// Jsoup.connect(loginActionUrl).cookies(cookies).data(formData)
+	// .method(Connection.Method.POST).userAgent(USER_AGENT).execute();
+	// Elements links = homepage.parse().select("a[href]");
+	// sortData(links);
+	// handleDownloading();
+	// } catch (IOException | InterruptedException e) {
+	// e.printStackTrace();
+	// }
+	// }
+
 	public void startDownloading() {
 		try {
 			Connection.Response loginForm = Jsoup.connect(loginFormUrl).method(Connection.Method.GET)
@@ -44,14 +65,22 @@ public class EuromediaWebScraper {
 			cookies.putAll(loginForm.cookies());
 			formData.put("loginId", username);
 			formData.put("passwd", password);
-			formData.put("url", "https://vo.knizniweb.cz/moje-dokumenty/dodaci-listy/");
+
+			downloadPosition();
+
+			handleDownloading();
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void downloadPosition() throws IOException {
+		for (int position = 0; position < amount; position = position + 20) {
+			formData.put("url", "https://vo.knizniweb.cz/moje-dokumenty/dodaci-listy/index$393.html?pos=" + position);
 			Connection.Response homepage = Jsoup.connect(loginActionUrl).cookies(cookies).data(formData)
 					.method(Connection.Method.POST).userAgent(USER_AGENT).execute();
 			Elements links = homepage.parse().select("a[href]");
 			sortData(links);
-			handleDownloading();
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -67,6 +96,9 @@ public class EuromediaWebScraper {
 
 	private void downloadSbkFiles(int amount) {
 		for (int i = 0; i < amount; i++) {
+			if (i >= listOfLinksForSbk.size()) {
+				break;
+			}
 			new Thread(new SbkDownloader(listOfLinksForSbk.get(i), USER_AGENT, loginFormUrl, tempPath, cookies))
 					.start();
 		}
@@ -74,6 +106,9 @@ public class EuromediaWebScraper {
 
 	private void downloadPdfFiles(int amount) {
 		for (int i = 0; i < amount; i++) {
+			if (i >= listOfLinksForPdf.size()) {
+				break;
+			}
 			new Thread(new PdfDownloader(listOfLinksForPdf.get(i), USER_AGENT, loginFormUrl, tempPath, cookies))
 					.start();
 		}
@@ -81,6 +116,9 @@ public class EuromediaWebScraper {
 
 	private void downloadXlsFiles(int amount) throws InterruptedException {
 		for (int i = 0; i < amount; i++) {
+			if (i >= listOfLinksForXls.size()) {
+				break;
+			}
 			Thread t1 = new Thread(
 					new XlsDownloader(listOfLinksForXls.get(i), USER_AGENT, loginFormUrl, tempPath, cookies));
 			t1.join();
@@ -95,6 +133,7 @@ public class EuromediaWebScraper {
 			} else if (e.text().contentEquals("SBK")) {
 				listOfLinksForSbk.add(e);
 			} else if (e.text().contentEquals("XLS")) {
+
 				listOfLinksForXls.add(e);
 			}
 			continue;

@@ -29,7 +29,9 @@ public class BetaFileMover {
 	public void move() throws IOException {
 		from = new File(fromDirectory);
 		for (File f : from.listFiles()) {
+			
 			File newFile = new File(toDirectory + renameFile(f.getName().replaceAll(".txt", "")));
+			System.out.println(newFile.getName());
 			InfoModel.getInstance().updateInfo("Pracuju s " + newFile.getName());
 			if (newFile.exists()) {
 				System.out.println("File exists and is being removed and replaced");
