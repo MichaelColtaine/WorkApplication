@@ -141,9 +141,13 @@ public class AlbatrosDownloader {
 		click(driver, By.xpath("/html/body/div[3]/div/div/div/div[2]/form/div[4]/div/input"));
 	}
 
+	// public void openMyDocuments() {
+	// driver.get("https://www.distri.cz/Customer/Detail");
+	//
+	// }
+
 	public void openMyDocuments() {
 		driver.get("https://www.distri.cz/Customer/Detail");
-
 	}
 
 	public WebDriver getDriver() {
@@ -185,7 +189,6 @@ public class AlbatrosDownloader {
 	}
 
 	private void downloadFilesFlores() {
-		long start = System.currentTimeMillis();
 		for (int i = 0; i < rowCount; i++) {
 			try {
 				URL url = new URL(listOfDownloadLinksFlores().get(i).getAttribute("href"));
@@ -198,8 +201,6 @@ public class AlbatrosDownloader {
 				ef.printStackTrace();
 			}
 		}
-		long end = System.currentTimeMillis();
-		System.out.println(end - start);
 	}
 
 	private List<WebElement> listOfDownloadLinksFlores() {

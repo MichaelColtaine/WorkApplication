@@ -46,8 +46,10 @@ public class AlbatrosExcelConverter {
 				String amountAsString = String.valueOf(convertAmountToInt);
 				String price = row.getCell(7).toString();
 				price = price.substring(0, price.length() - 2);
-				this.deliveryNoteName = row.getCell(1).toString().substring(3);
-
+				this.deliveryNoteName = row.getCell(1).toString();
+				
+				
+				
 				double pricePerunit = row.getCell(8).getNumericCellValue();
 				double totalPrice = Double.parseDouble(amountAsString) * pricePerunit;
 
