@@ -63,12 +63,12 @@
                   </JFXButton>
                   <HBox alignment="TOP_CENTER" spacing="20.0">
                      <children>
-                        <RadioButton fx:id="ssbButton" mnemonicParsing="false" selected="true" text="SSB" textFill="#f0f0f0">
+                        <RadioButton fx:id="ssbButton" mnemonicParsing="false" text="SSB" textFill="#f0f0f0">
                            <toggleGroup>
                               <ToggleGroup fx:id="system" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Flores" textFill="#f0f0f0" toggleGroup="$system" />
+                        <RadioButton mnemonicParsing="false" selected="true" text="Flores" textFill="#f0f0f0" toggleGroup="$system" />
                      </children>
                   </HBox>
             		<ProgressIndicator fx:id="progress" prefHeight="50.0" prefWidth="100.0" visible="false">
