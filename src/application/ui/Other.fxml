@@ -63,6 +63,7 @@
       <VBox layoutX="352.0" layoutY="387.0" prefHeight="80.0" prefWidth="70.0" spacing="10.0">
          <children>
             <RadioButton fx:id="slovartButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="84.0" text="Slovart" textFill="#f0f0f0" toggleGroup="$system" />
+            <RadioButton fx:id="herlitzButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="84.0" text="Herlitz" textFill="#f0f0f0" toggleGroup="$system" />
          </children>
       </VBox>
 	</children>

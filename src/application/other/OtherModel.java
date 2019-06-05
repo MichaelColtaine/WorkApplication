@@ -27,6 +27,10 @@ public class OtherModel {
 		AlbiFileConverter albi = new AlbiFileConverter();
 		albi.convertAlbiDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
 	}
+	public void handleHerlitzButton() {
+		HerlitzFileConverter herlitz = new HerlitzFileConverter();
+		herlitz.convertHerlitzDeliveryListToExcel(settings.getFromPath(), settings.getToPath());
+	} 
 
 	public OtherSettings getSettings() {
 		return this.settings;

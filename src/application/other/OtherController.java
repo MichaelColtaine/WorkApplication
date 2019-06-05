@@ -53,6 +53,8 @@ public class OtherController {
 	private RadioButton portalButton;
 	@FXML
 	private RadioButton albiButton;
+	@FXML
+	private RadioButton herlitzButton;
 	
 	
 	@FXML
@@ -88,6 +90,8 @@ public class OtherController {
 						handleAlpressButton();
 					} else if(slovartButton.isSelected()) {
 						handleSlovartButton();
+					} else if(herlitzButton.isSelected()) {
+						handleHertlitzButton();
 					}
 				}
 			}
@@ -132,6 +136,11 @@ public class OtherController {
 
 	private void handleAlbiButton() {
 		OtherModel.getInstance().handleAlbiButton();
+		InfoModel.getInstance().updateInfo("Hotovo!");
+	}
+	
+	private void handleHertlitzButton() {
+		OtherModel.getInstance().handleHerlitzButton();
 		InfoModel.getInstance().updateInfo("Hotovo!");
 	}
 
