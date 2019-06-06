@@ -6,13 +6,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import application.infobar.InfoModel;
@@ -26,8 +28,15 @@ public class AlbiFileConverter {
 		createDirectoriesIfDontExist(fromDirectoryPath, toDirectoryPath);
 		for (File f : fromDirectory.listFiles()) {
 			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
-			writeFile(readAlbiFile(f), toDirectoryPath, f.getName());
-			f.delete();
+			if (f.getName().contains(".csv")) {
+				writeFile(readAlbiFile(f), toDirectoryPath, f.getName());
+
+				f.delete();
+			} else {
+				System.out.println("XLS ALBI");
+				writeFile(readAlbiXLSFile(f), toDirectoryPath, f.getName());
+			}
+
 		}
 	}
 
@@ -61,12 +70,38 @@ public class AlbiFileConverter {
 		return records;
 	}
 
+	private List<ExcelRecord> readAlbiXLSFile(File file) {
+		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
+		try {
+			Workbook wb = WorkbookFactory.create(file);
+			Sheet sheet = wb.getSheetAt(0);
+			sheet.removeRow(sheet.getRow(0));
+			for (Row row : sheet) {
+				extractDataAndCreateExcelRecords(records, row);
+			}
+			wb.close();
+		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
+				| IOException e) {
+			System.out.println("Exception thrown in readFile in ExcelUtils");
+			e.printStackTrace();
+		}
+		return records;
+	}
+
+	private void extractDataAndCreateExcelRecords(List<ExcelRecord> records, Row row) {
+		String ean = row.getCell(6).toString();
+		String amount = row.getCell(1).toString().replaceAll("-", "");
+		String price = row.getCell(2).toString();
+		Double totalPrice = Double.parseDouble(amount) * Double.parseDouble(price);
+		records.add(new ExcelRecord(ean, amount.replace(".0", ""), String.format("%.2f", totalPrice)));
+	}
+
 	private void writeFile(List<ExcelRecord> records, String toDirectoryPath, String fileName) {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet = workbook.createSheet();
 		createRowAndAddData(records, sheet);
 		resizeColumns(records, sheet);
-		createExcelFile(workbook, toDirectoryPath, fileName.replace(".csv", ".xlsx"));
+		createExcelFile(workbook, toDirectoryPath, fileName);
 	}
 
 	private void createRowAndAddData(List<ExcelRecord> records, Sheet sheet) {
@@ -88,12 +123,19 @@ public class AlbiFileConverter {
 
 	private void createExcelFile(Workbook workbook, String toDirectoryPath, String fileName) {
 		try {
-			FileOutputStream fileOut = new FileOutputStream(
-					toDirectoryPath + File.separator + fileName.replace(".txt", ".xlsx"));
+
+			FileOutputStream fileOut = null;
+			if (fileName.contains(".xls")) {
+				fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName.replace(".xls", ".xlsx"));
+			} else {
+				fileOut = new FileOutputStream(toDirectoryPath + File.separator + fileName.replace(".csv", ".xlsx"));
+			}
 			workbook.write(fileOut);
 			fileOut.close();
 			workbook.close();
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 		}
 	}
