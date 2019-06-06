@@ -33,6 +33,7 @@ public class AlbiFileConverter {
 			} else {
 				writeFile(readAlbiXLSFile(f), toDirectoryPath, f.getName());	
 			}
+			f.delete();
 
 		}
 	}
