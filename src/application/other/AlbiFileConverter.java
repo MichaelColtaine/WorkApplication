@@ -30,11 +30,8 @@ public class AlbiFileConverter {
 			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			if (f.getName().contains(".csv")) {
 				writeFile(readAlbiFile(f), toDirectoryPath, f.getName());
-
-				f.delete();
 			} else {
-				System.out.println("XLS ALBI");
-				writeFile(readAlbiXLSFile(f), toDirectoryPath, f.getName());
+				writeFile(readAlbiXLSFile(f), toDirectoryPath, f.getName());	
 			}
 
 		}

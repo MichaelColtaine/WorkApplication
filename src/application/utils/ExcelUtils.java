@@ -33,11 +33,12 @@ public class ExcelUtils {
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 				String line;
 				while ((line = br.readLine()) != null) {
+			
 					String[] data = line.split(";");
 
 					String ean = data[0];
 					String amount = data[5];
-					String price = data[3].replaceAll(" ", "").replaceAll(".00", "");
+					String price = data[3].replaceAll(" ", "").replaceAll("\\.00", "");
 					double pricePerUnit = Double.parseDouble(data[6]);
 					double totalPrice = Double.parseDouble(amount) * pricePerUnit;
 
