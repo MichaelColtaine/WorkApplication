@@ -42,5 +42,11 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-csv-1.6/commons-csv-1.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-csv-1.6/commons-csv-1.6-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-beanutils-1.9.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-lang3-3.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-text-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/opencsv-4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

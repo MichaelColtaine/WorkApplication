@@ -18,7 +18,7 @@ public class UpdaterModel {
 
 	private static UpdaterModel INSTANCE;
 	private UpdateInfo updater;
-	private int currentVersion = 37;
+	private int currentVersion = 39;
 	private static final String ACCESS_TOKEN = "Mvam_rwrPU8AAAAAAAB2YbsIiwwCyzBA1Cu73A1LZaNetAzMXtz454qSf9aYf70X";
 	private String downloadUpdateDirectory = System.getProperty("user.dir") + File.separator + "update" + File.separator
 			+ "update.zip";

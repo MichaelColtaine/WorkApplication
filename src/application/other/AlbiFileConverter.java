@@ -2,10 +2,13 @@ package application.other;
 
 import java.io.BufferedReader;
 import java.io.File;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.opencsv.CSVReader;
 
 import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
@@ -29,12 +34,16 @@ public class AlbiFileConverter {
 		for (File f : fromDirectory.listFiles()) {
 			InfoModel.getInstance().updateInfo("Pracuju s " + f.getName());
 			if (f.getName().contains(".csv")) {
-				writeFile(readAlbiFile(f), toDirectoryPath, f.getName());
+				try {
+					writeFile(readAlbiFile(f), toDirectoryPath, f.getName());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
-				writeFile(readAlbiXLSFile(f), toDirectoryPath, f.getName());	
+				writeFile(readAlbiXLSFile(f), toDirectoryPath, f.getName());
 			}
 			f.delete();
-
 		}
 	}
 
@@ -50,21 +59,26 @@ public class AlbiFileConverter {
 		}
 	}
 
-	private List<ExcelRecord> readAlbiFile(File file) {
+
+
+	private List<ExcelRecord> readAlbiFile(File file) throws IOException {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				String[] splittedLine = line.split(";");
-				String ean = splittedLine[0];
-				String amount = splittedLine[2];
-				String price = splittedLine[4].replaceAll(",", ".");
-				Double totalPrice = Double.parseDouble(amount) * Double.parseDouble(price);
-				records.add(new ExcelRecord(ean, amount, String.format("%.2f", totalPrice)));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		InputStream is = new FileInputStream(file);
+		@SuppressWarnings("deprecation")
+		CSVReader reader = new CSVReader(new InputStreamReader(is), ';');
+
+		String[] record;
+
+		while ((record = reader.readNext()) != null) {
+			String ean = record[0];
+			String amount = record[2];
+			String price = record[4].replaceAll(",", ".");
+			Double totalPrice = Double.parseDouble(amount) * Double.parseDouble(price);
+			records.add(new ExcelRecord(ean, amount, String.format("%.2f", totalPrice)));
 		}
+
+		reader.close();
+
 		return records;
 	}
 
