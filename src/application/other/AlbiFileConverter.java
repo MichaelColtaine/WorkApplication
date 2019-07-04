@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 
 import application.infobar.InfoModel;
 import application.utils.ExcelRecord;
@@ -59,21 +63,28 @@ public class AlbiFileConverter {
 		}
 	}
 
-
-
 	private List<ExcelRecord> readAlbiFile(File file) throws IOException {
 		List<ExcelRecord> records = new ArrayList<ExcelRecord>();
 		InputStream is = new FileInputStream(file);
-		@SuppressWarnings("deprecation")
-		CSVReader reader = new CSVReader(new InputStreamReader(is), ';');
 
+		StringBuilder sb = new StringBuilder();
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			String line = "";
+			while ((line = br.readLine()) != null) {
+				sb.append(line.replace("&amp;", "")).append("\n");
+			}
+		}
+
+		CSVReader reader = new CSVReader(new StringReader(sb.toString()), ';', '\"', 0);
 		String[] record;
 
 		while ((record = reader.readNext()) != null) {
 			String ean = record[0];
 			String amount = record[2];
 			String price = record[4].replaceAll(",", ".");
+
 			Double totalPrice = Double.parseDouble(amount) * Double.parseDouble(price);
+
 			records.add(new ExcelRecord(ean, amount, String.format("%.2f", totalPrice)));
 		}
 
