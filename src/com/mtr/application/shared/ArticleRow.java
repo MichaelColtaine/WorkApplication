@@ -9,10 +9,18 @@ public class ArticleRow implements Serializable {
 	private String rank = "", firstCode = "", ean = "", name = "", sales = "", sales2 = "", revenue = "",
 			storedAmount = "", supply = "", locations = "", price = "", dph = "", supplier = "", author = "",
 			dateOflastSale = "", dateOfLastDelivery = "", realeaseDate = "", deliveredAs = "", eshopRank = "",
-			analysisDate = "";
+			analysisDate = "", dontOrder;
 
 	public ArticleRow() {
 
+	}
+
+	public String getDontOrder() {
+		return dontOrder;
+	}
+
+	public void setDontOrder(String dontOrder) {
+		this.dontOrder = dontOrder;
 	}
 
 	public String getRank() {

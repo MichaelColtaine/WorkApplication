@@ -6,6 +6,7 @@ import application.analysis.AnalysisSender;
 import application.analysis.ExportReceiver;
 import application.infobar.InfoModel;
 import application.scanner.ScannerServer;
+import auth.Authentication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,14 +33,13 @@ public class HomeController {
 
 	@FXML
 	private void initialize() {
+		loadScene("/application/ui/Updater.fxml");
 		close.setOnMouseClicked(event -> closeWindow());
 		minimize.setOnMouseClicked(event -> minimizeWindow());
 		InfoModel.getInstance().bindLabelToInfo(infoLabel);
-
 	}
 
 	private void closeWindow() {
-
 		closeConnection();
 		Stage root = (Stage) borderpane.getScene().getWindow();
 		root.close();
@@ -64,35 +64,41 @@ public class HomeController {
 	void handleButtons(ActionEvent event) {
 		String text = ((Button) event.getSource()).getText();
 		closeConnection();
-		switch (text) {
-		case "Kalkulačka Rabatu":
-			handleRabatButton();
-			break;
-		case "Euromedia":
-			handleEuromediaButton();
-			break;
-		case "Distri/Albatros":
-			handleAlbatrosButton();
-			break;
-		case "Kosmas":
-			handleKosmasButton();
-			break;
-		case "Beta":
-			handleBetaButton();
-			break;
-		case "Analýza":
-			handleAnalysisButton();
-			break;
-		case "Ostatní Flores":
-			handleOtherButton();
-			break;
-		case "Flores čtečka":
-			handleScannerButton();
-			break;
-		case "O Programu":
-			handleInfoButton();
-			break;
+		if (Authentication.getInstance().isBlocked()) {
+			InfoModel.getInstance().updateInfo("java.lang.RuntimeException");
+			throw new RuntimeException();
+		} else {
+			switch (text) {
+			case "Kalkulačka Rabatu":
+				handleRabatButton();
+				break;
+			case "Euromedia":
+				handleEuromediaButton();
+				break;
+			case "Distri/Albatros":
+				handleAlbatrosButton();
+				break;
+			case "Kosmas":
+				handleKosmasButton();
+				break;
+			case "Beta":
+				handleBetaButton();
+				break;
+			case "Analýza":
+				handleAnalysisButton();
+				break;
+			case "Ostatní Flores":
+				handleOtherButton();
+				break;
+			case "Flores čtečka":
+				handleScannerButton();
+				break;
+			case "O Programu":
+				handleInfoButton();
+				break;
+			}
 		}
+
 	}
 
 	private void handleEuromediaButton() {

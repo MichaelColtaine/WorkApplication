@@ -1,5 +1,6 @@
 package application;
 
+import auth.Authentication;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,6 +30,10 @@ public class MainApplication extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
 			primaryStage.show();
+
+			Authentication auth = new Authentication();
+
+			auth.check();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

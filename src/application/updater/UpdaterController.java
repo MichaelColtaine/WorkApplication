@@ -3,6 +3,7 @@ package application.updater;
 import com.jfoenix.controls.JFXButton;
 
 import application.infobar.InfoModel;
+import auth.Authentication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +13,9 @@ public class UpdaterController {
 
 	@FXML
 	private Label versionNumberLabel;
+
+	@FXML
+	private Label updateReadyInfoLabel;
 
 	@FXML
 	private JFXButton updateButton;
@@ -24,15 +28,22 @@ public class UpdaterController {
 
 	@FXML
 	void initialize() {
-		versionNumberLabel.setText(String.format("%d", UpdaterModel.getInstance().getCurrentVersion()));
-
+		int latestVersion = Authentication.getInstance().getLatestVersion();
+		int currentVersion = UpdaterModel.getInstance().getCurrentVersion();
+		if (latestVersion == 0) {
+			latestVersion = currentVersion;
+		}
+		versionNumberLabel.setText(String.format("%d", currentVersion));
+		if (latestVersion != UpdaterModel.getInstance().getCurrentVersion()) {
+			updateReadyInfoLabel.setText("Je dostupná nová aktualizace. Verze " + latestVersion);
+		}
 	}
 
 	@FXML
 	void handleUpdateButton(ActionEvent event) {
 		int currentVersion = UpdaterModel.getInstance().getCurrentVersion();
 		try {
-			int latestVersion = Integer.parseInt(UpdaterModel.getInstance().getLastestVersion());
+			int latestVersion = UpdaterModel.getInstance().getLastestVersion();
 			handleDownloading(currentVersion, latestVersion);
 		} catch (NullPointerException npe) {
 			handleDownloading(currentVersion, (currentVersion + 1));

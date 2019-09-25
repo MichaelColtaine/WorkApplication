@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import application.infobar.InfoModel;
 
 public class AlbatrosDownloader {
-	private String loginId = "dis06958pv", loginPassword = "vankovka", websiteUrl, downloadDirectory;
+	private String loginId = "", loginPassword = "", websiteUrl, downloadDirectory;
 	private WebDriver driver;
 	private ChromeOptions options;
 	private int rowCount;

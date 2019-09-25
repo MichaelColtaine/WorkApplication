@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
@@ -11,49 +12,104 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="600.0" styleClass="right-background" stylesheets="@../main.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.analysis.AnalysisController">
+<AnchorPane fx:id="root" prefHeight="573.0" prefWidth="600.0"
+	styleClass="right-background" stylesheets="@../main.css"
+	xmlns="http://javafx.com/javafx/8.0.141"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.analysis.AnalysisController">
 	<children>
-		<Label graphicTextGap="15.0" layoutX="23.0" layoutY="5.0" text="Analýza " textFill="#f0f0f0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
+		<Label graphicTextGap="15.0" layoutX="23.0" layoutY="5.0"
+			text="Analýza " textFill="#f0f0f0" AnchorPane.leftAnchor="24.0"
+			AnchorPane.topAnchor="0.0">
 			<font>
 				<Font size="24.0" />
 			</font>
 		</Label>
 		<VBox layoutX="81.0" layoutY="58.0" spacing="40.0" />
-		<JFXButton fx:id="settingsButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="146.0" layoutY="476.0" onAction="#handleSettingsButtonAction" prefHeight="35.0" prefWidth="129.0" text="Nastavení" textFill="#f0f0f0">
+		<JFXButton fx:id="settingsButton" alignment="CENTER"
+			buttonType="RAISED" contentDisplay="TOP" layoutX="58.0"
+			layoutY="477.0" onAction="#handleSettingsButtonAction"
+			prefHeight="35.0" prefWidth="129.0" text="Nastavení"
+			textFill="#f0f0f0">
 			<font>
 				<Font size="14.0" />
 			</font>
 			<graphic>
-      				<FontAwesomeIconView fill="#f0f0f0" glyphName="WRENCH" size="24" wrappingWidth="25.0" />
+				<FontAwesomeIconView fill="#f0f0f0"
+					glyphName="WRENCH" size="24" wrappingWidth="25.0" />
 			</graphic>
 		</JFXButton>
-		<Label fx:id="serverInfoLabel" layoutX="80.0" layoutY="63.0" prefHeight="57.0" prefWidth="213.0" textFill="#f0f0f0" />
-		<Label fx:id="ipLabel" layoutX="80.0" layoutY="40.0" prefHeight="17.0" prefWidth="243.0" textFill="#f0f0f0" />
-      <Pane layoutX="110.0" layoutY="58.0" onDragDropped="#handleDrop" onDragOver="#handleDragOver" prefHeight="383.0" prefWidth="396.0">
-         <children>
-            <ImageView fitHeight="101.0" fitWidth="107.0" layoutX="148.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/icons8_Drop_Shipping_50px_1.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="107.0" layoutY="268.0" text="Sem přetáhněte CSV soubor s analýzou" textFill="#f0f0f0" />
-            <Label fx:id="fileNameLabel" layoutX="107.0" layoutY="296.0" prefHeight="17.0" prefWidth="276.0" textFill="#f0f0f0" />
-         </children>
-      </Pane>
-      <JFXButton fx:id="deleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="TOP" layoutX="340.0" layoutY="476.0" onAction="#handleDeleteButtonAction" prefHeight="35.0" prefWidth="129.0" text="Odstranit soubor" textFill="#f0f0f0">
-         <font>
-            <Font size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/icons8_Remove_50px.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-      <Label fx:id="databaseLabel" layoutX="296.0" layoutY="63.0" prefHeight="58.0" prefWidth="213.0" textFill="#f0f0f0" />
-      <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="449.0" prefHeight="17.0" prefWidth="424.0" textAlignment="CENTER" textFill="RED" />
-      <ProgressIndicator fx:id="progressBar" layoutX="277.0" layoutY="421.0" prefHeight="57.0" prefWidth="62.0" visible="false" />
+		<Label fx:id="serverInfoLabel" layoutX="80.0" layoutY="63.0"
+			prefHeight="57.0" prefWidth="213.0" textFill="#f0f0f0" />
+		<Label fx:id="ipLabel" layoutX="80.0" layoutY="40.0"
+			prefHeight="17.0" prefWidth="243.0" textFill="#f0f0f0" />
+		<Pane layoutX="110.0" layoutY="58.0" onDragDropped="#handleDrop"
+			onDragOver="#handleDragOver" prefHeight="358.0" prefWidth="393.0">
+			<children>
+				<ImageView fitHeight="101.0" fitWidth="107.0"
+					layoutX="148.0" layoutY="126.0" pickOnBounds="true"
+					preserveRatio="true">
+					<image>
+						<Image url="@../../images/icons8_Drop_Shipping_50px_1.png" />
+					</image>
+				</ImageView>
+				<Label layoutX="107.0" layoutY="268.0"
+					text="Sem přetáhněte CSV soubor s analýzou" textFill="#f0f0f0" />
+				<Label fx:id="fileNameLabel" layoutX="107.0" layoutY="296.0"
+					prefHeight="17.0" prefWidth="276.0" textFill="#f0f0f0" />
+			</children>
+		</Pane>
+		<JFXButton fx:id="deleteButton" alignment="CENTER"
+			buttonType="RAISED" contentDisplay="TOP" layoutX="236.0"
+			layoutY="477.0" onAction="#handleDeleteButtonAction"
+			prefHeight="35.0" prefWidth="129.0" text="Odstranit soubor"
+			textFill="#f0f0f0">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<graphic>
+				<ImageView fitHeight="24.0" fitWidth="24.0"
+					pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../../images/icons8_Remove_50px.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</JFXButton>
+		<Label fx:id="databaseLabel" layoutX="296.0" layoutY="63.0"
+			prefHeight="58.0" prefWidth="213.0" textFill="#f0f0f0" />
+		<Label fx:id="errorLabel" alignment="CENTER"
+			contentDisplay="CENTER" layoutX="96.0" layoutY="449.0"
+			prefHeight="17.0" prefWidth="424.0" textAlignment="CENTER"
+			textFill="RED" />
+		<JFXButton fx:id="uploadFtpButton" alignment="CENTER"
+			buttonType="RAISED" contentDisplay="TOP" disable="true"
+			layoutX="403.0" layoutY="476.0"
+			onAction="#handleUploadFtpButtonAction" prefHeight="35.0"
+			prefWidth="129.0" text="Nahrát na FTP" textFill="#f0f0f0">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<graphic>
+				<ImageView fitHeight="27.0" fitWidth="104.0"
+					pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../../images/icons8_Data_Transfer_50px.png" />
+					</image>
+				</ImageView>
+			</graphic>
+		</JFXButton>
+		<ComboBox fx:id="comboBox" disable="true" layoutX="243.0"
+			layoutY="418.0" prefHeight="25.0" prefWidth="308.0"
+			promptText="Vyberte svoji prodejnu" />
+		<Label layoutX="36.0" layoutY="421.0"
+			text="Pro nahraní souboru na FTP  =&gt;" textFill="WHITE">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+		<ProgressIndicator fx:id="progressBar"
+			layoutX="38.0" layoutY="330.0" prefHeight="57.0" prefWidth="62.0"
+			visible="false" />
 	</children>
 </AnchorPane>

@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Objects;
 
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
+
 import com.jfoenix.controls.JFXButton;
 
+import application.Model;
 import application.RowRecord;
 import application.infobar.InfoModel;
 import application.utils.ExcelUtils;
+import auth.Authentication;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,6 +78,7 @@ public class AlbatrosController {
 
 	@FXML
 	void handleImportButtonAction(ActionEvent event) {
+
 		if (Objects.nonNull(comboBox.getSelectionModel().getSelectedItem())) {
 			AlbatrosModel.getInstance().setQuantityOfItemsToDownload(comboBox.getSelectionModel().getSelectedItem());
 			clearListView();
@@ -113,6 +118,7 @@ public class AlbatrosController {
 			});
 			t1.start();
 		}
+
 	}
 
 	private void clearListView() {

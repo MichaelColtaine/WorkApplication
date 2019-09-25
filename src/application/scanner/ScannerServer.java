@@ -25,7 +25,7 @@ public class ScannerServer {
 
 	private String text, fileName;
 	ArrayList<ServerArticle> listOfArticlesFromClient;
-	int port = 8889;
+	int port = 8899;
 
 	private ScannerServer() {
 
@@ -91,7 +91,6 @@ public class ScannerServer {
 		list = (ArrayList<ServerArticle>) nameAndList.values().toArray()[0];
 		return list;
 	}
-
 
 	public static void closeAll() throws IOException {
 
