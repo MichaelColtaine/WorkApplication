@@ -38,7 +38,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-examples-3.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-excelant-3.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-ooxml-3.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-ooxml-schemas-3.17.jar"/>
