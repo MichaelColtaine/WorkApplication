@@ -1,5 +1,7 @@
 package application.utils;
 
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
+
 public class NumberFinder {
 	/*
 	 * This class takes a string and finds a values we need to calculate rabat

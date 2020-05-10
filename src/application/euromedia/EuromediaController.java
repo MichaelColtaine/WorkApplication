@@ -191,8 +191,10 @@ public class EuromediaController implements Initializable {
 		for (File file : files.listFiles()) {
 			if (isPdf(file)) {
 				InfoModel.getInstance().updateInfo("Vypočítávám rabat pro " + file.getName());
+
 				Double rabat = calculateRabat(finder.findNumbers(worker.getText(file.getAbsolutePath()))[1],
 						finder.findNumbers(worker.getText(file.getAbsolutePath()))[0]);
+
 				EuroModel.getInstance().getRecords().add(getFilenameAndRabat(file, rabat));
 
 			}
@@ -212,6 +214,7 @@ public class EuromediaController implements Initializable {
 	}
 
 	private double calculateRabat(double first, double second) {
+		System.out.println(first + " " + second);
 		return (first - second) / (first * 0.01);
 	}
 
@@ -221,7 +224,7 @@ public class EuromediaController implements Initializable {
 	}
 
 	private String getFileName(File file) {
-		return file.getName().substring(0, file.getName().length() - 4);
+		return file.getName().substring(0, file.getName().length() - 4).replace("_cnf", "");
 	}
 
 	@FXML
