@@ -43,7 +43,7 @@ public class EuromediaExcelConverter {
 				extractDataAndCreateExcelRecords(records, row);
 			}
 			wb.close();
-		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
+		} catch (EncryptedDocumentException
 				| IOException e) {
 			System.out.println("Exception thrown in readFile in ExcelUtils");
 			e.printStackTrace();

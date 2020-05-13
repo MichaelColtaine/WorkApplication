@@ -33,7 +33,7 @@ public class ExcelUtils {
 			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
 				String line;
 				while ((line = br.readLine()) != null) {
-			
+
 					String[] data = line.split(";");
 
 					String ean = data[0];
@@ -84,8 +84,7 @@ public class ExcelUtils {
 			}
 			wb.close();
 
-		} catch (EncryptedDocumentException | org.apache.poi.openxml4j.exceptions.InvalidFormatException
-				| IOException e) {
+		} catch (EncryptedDocumentException | IOException e) {
 			System.out.println("readFile in ExcelUtils");
 			e.printStackTrace();
 		}
@@ -206,8 +205,8 @@ public class ExcelUtils {
 					ean = line.substring(line.indexOf("0.08") + 3, line.indexOf("0.08") + 16);
 					price = line.substring(line.indexOf("0.08") - 33, line.indexOf("0.08") - 24);
 				}
-				
-				if(line.contains("0.01")) {
+
+				if (line.contains("0.01")) {
 					ean = line.substring(line.indexOf("0.01") + 3, line.indexOf("0.01") + 16);
 					price = line.substring(line.indexOf("0.01") - 33, line.indexOf("0.01") - 24);
 				}

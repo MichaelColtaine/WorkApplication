@@ -34,7 +34,7 @@ public class UpdaterController {
 			latestVersion = currentVersion;
 		}
 		versionNumberLabel.setText(String.format("%d", currentVersion));
-		if (latestVersion != UpdaterModel.getInstance().getCurrentVersion()) {
+		if (latestVersion > UpdaterModel.getInstance().getCurrentVersion()) {
 			updateReadyInfoLabel.setText("Je dostupná nová aktualizace. Verze " + latestVersion);
 		}
 	}

@@ -2,30 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="src/" kind="src" path=""/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-io-2.6/commons-io-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-io-2.6/commons-io-2.6-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-io-2.6/commons-io-2.6-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-io-2.6/commons-io-2.6-tests.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-io-2.6/commons-io-2.6-test-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/phantomjsdriver-1.4.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jfoenix-8.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/controlsfx-8.40.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-commons-8.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-controls-8.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-emojione-2.2.7-2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-fontawesome-4.7.0-5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-glyphsbrowser-1.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-icons525-3.0.0-4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-materialdesignfont-1.7.22-4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-materialicons-2.2.0-5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-octicons-4.3.0-5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-weathericons-2.0.10-5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-8.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/client-combined-3.9.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/client-combined-3.9.1-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/controlsfx-8.40.15.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/libs/byte-buddy-1.7.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/libs/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/libs/commons-exec-1.3.jar"/>
@@ -35,23 +19,12 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/libs/httpcore-4.4.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/libs/okhttp-3.9.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/selenium/libs/okio-1.13.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/xmlbeans-2.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-excelant-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-ooxml-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-ooxml-schemas-3.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-3.17/poi-scratchpad-3.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jdbf.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/lib/jackson-core-2.7.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/dropbox-core-sdk-3.0.7/dropbox-core-sdk-3.0.7-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3.jar" sourcepath="C:/Users/Micha/.sourceattacher/jsoup-1.11.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jsooup/jsoup-1.11.3-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-csv-1.6/commons-csv-1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-csv-1.6/commons-csv-1.6-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-beanutils-1.9.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-collections-3.2.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-lang3-3.6.jar"/>
@@ -59,10 +32,24 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/commons-text-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/openCSV/opencsv-4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-net-3.6/commons-net-3.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-net-3.6/commons-net-3.6-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-net-3.6/commons-net-examples-3.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/java-json/java-json.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/pdfbox/pdfbox-2.0.19.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/pdfbox/fontbox-2.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jdbf.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jfoenix-9.0.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/controlsfx-9.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-commons-9.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-controls-9.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-fontawesome-4.7.0-11.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX11"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-4.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-ooxml-4.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-ooxml-schemas-4.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-scratchpad-4.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-excelant-4.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-math3-3.6.1/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-math3-3.6.1/commons-math3-3.6.1-tools.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-compress-1.20/commons-compress-1.20.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/xmlbeans-3.1.0/lib/xmlbeans-3.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

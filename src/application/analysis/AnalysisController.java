@@ -165,7 +165,6 @@ public class AnalysisController {
 		}
 	}
 
-	
 	private HashMap<String, ArticleRow> readAnalysisFile(File f) {
 		HashMap<String, ArticleRow> map = new HashMap<>();
 
@@ -203,9 +202,9 @@ public class AnalysisController {
 					String price = record[10];
 					String supplier = record[12];
 					String author = record[13];
-					
+
 					String dontOrder = record[14];
-					
+
 					String dateOfLastSale = record[15];
 					String dateOfLastDelivery = record[16];
 					String releaseDate = record[17];
@@ -228,8 +227,6 @@ public class AnalysisController {
 
 						suppliers.get(supplier).add(revenue);
 					}
-
-					
 
 					ArticleRow shared = new ArticleRow();
 
@@ -455,8 +452,7 @@ public class AnalysisController {
 			wb.close();
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
-		} catch (InvalidFormatException e) {
-			e.printStackTrace();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Objects;
 
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
-
 import com.jfoenix.controls.JFXButton;
 
 import application.Model;

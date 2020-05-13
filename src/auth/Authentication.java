@@ -8,7 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.prefs.Preferences;
 
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,10 +47,8 @@ public class Authentication {
 		try {
 			getInfo();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -64,7 +61,7 @@ public class Authentication {
 		con.setUseCaches(false);
 		JSONObject responseJson = createJsonObject(readResponse(con));
 		con.disconnect();
-		prefs.putInt(VERSION_NUMBER, responseJson.getInt("spVersion"));
+		prefs.putInt(VERSION_NUMBER, responseJson.getInt("updateVersion"));
 		prefs.putBoolean(IS_BLOCKED, responseJson.getBoolean("spBlocked"));
 	}
 

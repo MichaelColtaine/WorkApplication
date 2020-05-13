@@ -1,6 +1,5 @@
 package application.utils;
 
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 public class NumberFinder {
 	/*
