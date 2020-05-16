@@ -24,7 +24,7 @@ public class MainApplication extends Application {
 			root.setOnMouseDragged(event -> calculatePosition(primaryStage, event));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add("/application/main.css");
-			primaryStage.setTitle("Skladový pomocník");
+			primaryStage.setTitle("SkladovÃ½ pomocnÃ­k");
 			primaryStage.getIcons().add(new Image("/images/icons8_Trolley_52px.png"));
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);

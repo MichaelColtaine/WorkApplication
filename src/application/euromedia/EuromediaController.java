@@ -221,7 +221,7 @@ public class EuromediaController implements Initializable {
 	}
 
 	private String getFileName(File file) {
-		return file.getName().substring(0, file.getName().length() - 4);
+		return file.getName().substring(0, file.getName().length() - 4).replace("_cnf", "");
 	}
 
 	@FXML

@@ -18,21 +18,14 @@ import javafx.application.Platform;
 public class UpdaterModel {
 
 	private static UpdaterModel INSTANCE;
-	// private UpdateInfo updater; // stare zpusob ziskavani posledniho cisla verze
-	// aplikace z netu
-	private int currentVersion = 41;
+
+	private int currentVersion = 42;
 	private static final String ACCESS_TOKEN = "Mvam_rwrPU8AAAAAAAB2YbsIiwwCyzBA1Cu73A1LZaNetAzMXtz454qSf9aYf70X";
 	private String downloadUpdateDirectory = System.getProperty("user.dir") + File.separator + "update" + File.separator
 			+ "update.zip";
 
 	public UpdaterModel() {
-		// try {
-		// updater = new UpdateInfo();
-		// } catch (IOException e) {
-		// InfoModel.getInstance().updateInfo("Server nedostupný, stahovaní bez kontroly
-		// verze");
-		// e.printStackTrace();
-		// }
+
 	}
 
 	public static UpdaterModel getInstance() {
@@ -43,7 +36,6 @@ public class UpdaterModel {
 	}
 
 	public int getLastestVersion() {
-		// return updater.getLatestVersion();
 		return Authentication.getInstance().getLatestVersion();
 	}
 
@@ -58,7 +50,6 @@ public class UpdaterModel {
 		try {
 			downloadFile(client, "/update.zip", downloadUpdateDirectory);
 		} catch (DbxException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		;
