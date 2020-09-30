@@ -26,9 +26,37 @@ public class AlbatrosFileChanger {
 
 	public void changeFile(File f, String name) {
 		input = f;
-		read();
+		//read();
+		read2();
 		convertData();
 		write(name);
+	}
+
+	public void read2(){
+		String line = "";
+		lines.clear();
+		try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+			while ((line = br.readLine()) != null) {
+				String ean = findEan(line);
+				String shortenedString = shortenEan(ean);
+
+				if(shortenedString.length() > 0){
+					StringBuilder sb = new StringBuilder();
+					if(ean.length() == 14){
+						sb.append(shortenedString);
+						sb.append("  ");
+						line =line.replace(ean, sb.toString());
+					} else if(ean.length() == 13){
+						sb.append(shortenedString);
+						sb.append(" ");
+						line = line.replace(ean, sb.toString());
+					}
+				}
+				lines.add(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void read() {
@@ -67,6 +95,36 @@ public class AlbatrosFileChanger {
 			e.printStackTrace();
 		}
 
+	}
+
+
+	public  String findEan(String line){
+		int startIndex = 124;
+		int endIndex = 138;
+		return line.substring( startIndex, endIndex );
+	}
+
+	public  int getEanLength(String input){
+		int count = 0;
+		for(int i =0;  i < input.length(); i++){
+			if(input.charAt(i) != ' '){
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public  String shortenEan(String ean){
+		String shortenedString = null;
+		int eanLength = getEanLength(ean);
+		if(eanLength < 13){
+			shortenedString = "";
+		} else if(eanLength == 14) {
+			shortenedString = ean.substring(2, ean.length());
+		} else  if (eanLength == 13){
+			shortenedString = ean.substring(2, ean.length());
+		}
+		return shortenedString;
 	}
 
 }

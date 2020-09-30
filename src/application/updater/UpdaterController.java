@@ -44,6 +44,7 @@ public class UpdaterController {
 		int currentVersion = UpdaterModel.getInstance().getCurrentVersion();
 		try {
 			int latestVersion = UpdaterModel.getInstance().getLastestVersion();
+			System.out.println("Current: " + currentVersion + " latestVersion: " +latestVersion);
 			handleDownloading(currentVersion, latestVersion);
 		} catch (NullPointerException npe) {
 			handleDownloading(currentVersion, (currentVersion + 1));

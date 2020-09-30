@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="src/" kind="src" path=""/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -36,12 +36,7 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/pdfbox/pdfbox-2.0.19.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/pdfbox/fontbox-2.0.19.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jdbf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jfoenix-9.0.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/controlsfx-9.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-commons-9.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-controls-9.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-fontawesome-4.7.0-11.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX11"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-4.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-ooxml-4.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/poi-4.1.2/poi-ooxml-schemas-4.1.2.jar"/>
@@ -51,5 +46,17 @@
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-math3-3.6.1/commons-math3-3.6.1-tools.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/commons-compress-1.20/commons-compress-1.20.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/xmlbeans-3.1.0/lib/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/jfoenix-8.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/controlsfx-8.40.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-commons-8.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-controls-8.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-emojione-2.2.7-2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-fontawesome-4.7.0-5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-glyphsbrowser-1.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-icons525-3.0.0-4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-materialdesignfont-1.7.22-4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-materialicons-2.2.0-5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-octicons-4.3.0-5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Micha/Desktop/JavaLibraries/fontawesomefx-glyphsbrowser-1.3.0/lib/fontawesomefx-weathericons-2.0.10-5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
