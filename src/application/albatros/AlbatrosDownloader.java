@@ -1,11 +1,8 @@
 package application.albatros;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -26,12 +22,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.sun.javafx.image.impl.BaseByteToIntConverter;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import application.infobar.InfoModel;
 
@@ -56,7 +48,7 @@ public class AlbatrosDownloader {
 		if (hasLoggedIn) {
 			openMyDocuments();
 			downloadFilesSSB();
-			driver.quit();
+			quit();
 		}
 	}
 
@@ -75,8 +67,8 @@ public class AlbatrosDownloader {
 		tryToLogin();
 		if (hasLoggedIn) {
 			openMyDocuments();
-		 downloadFilesFlores();
-			driver.quit();
+			downloadFilesFlores();
+			quit();
 		}
 
 	}
@@ -95,13 +87,13 @@ public class AlbatrosDownloader {
 		login();
 		if (driver.getPageSource().contains("Neplatné přihlašovací údaje.")) {
 			hasLoggedIn = false;
-			driver.quit();
+			quit();
 		}
 	}
 
 	public void end() {
 		pause();
-		endDriver();
+		quit();
 	}
 
 	public void openBrowser() {
@@ -153,93 +145,7 @@ public class AlbatrosDownloader {
 
 	public void openMyDocuments() {
 		 driver.get("https://www.distri.cz/Customer/Detail");
-		//test();
-	}
-	// http://distri.cz/DeliveryNote/Download/55515463/?custom=True
-	// https://www.distri.cz/DeliveryNote/Download/72695546/?custom=True
-	// https://www.distri.cz/DeliveryNote/Download/72695520/?custom=True
-	// https://www.distri.cz/DeliveryNote/Download/72657073/?custom=True
-
-	private void test() {
-		driver.get("https://www.distri.cz/odata/DeliveryNote");
-		String pageSource = driver.getPageSource();
-
-		String[] object = pageSource.split(",");
-		List<String> ids = new ArrayList<>();
-		for (String s : object) {
-
-			if (s.contains("packages") || s.contains("deliveryType") || s.contains("\"value\":")) {
-				continue;
-			}
-			if (s.contains("\"id\":")) {
-				s = s.replace("{\"id\":", "");
-			
-				ids.add(s);
-			}
-		}
-
-		List<String> links = new ArrayList<>();
-		for (String id : ids) {
-			links.add(String.format("https://www.distri.cz/DeliveryNote/Download/%s/?custom=True", id));
-		}
 		
-		
-		List<String> downloadLinks = new ArrayList<>();
-		int last = links.size()-10;
-		
-		for(int i = last; i < links.size(); i++){
-			downloadLinks.add(links.get(i));
-		}
-		
-		System.out.println(downloadLinks.size());
-		
-		
-		
-		int number = 0;
-		for (String link : downloadLinks) {
-			System.out.println(link);
-			try {
-				URL url = new URL(link);
-				HttpURLConnection con = (HttpURLConnection) url.openConnection();
-				con.setRequestProperty("Cookie", getCookies());
-				String deliveryNoteName = number + "s";
-				number++;
-				InfoModel.getInstance().updateInfo("Stahuji " + deliveryNoteName);
-				Files.copy(con.getInputStream(), Paths.get(downloadDirectory + deliveryNoteName + ".xlsx"));
-			} catch (IOException ef) {
-				ef.printStackTrace();
-			}
-		}
-
-	}
-
-	private void scrollDown() {
-
-		Actions action = new Actions(driver);
-
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
-
-		action.sendKeys(Keys.PAGE_DOWN).build().perform();
-
-	}
-
-	private void setDropDownMenu() {
-
-		// click(driver,
-		// By.xpath("//*[@id=\"deliveryNotes_length\"]/label/span/span[1]/span"));
-		WebElement element = driver.findElement(By.xpath("//*[@id=\"deliveryNotes_length\"]/label/span/span[1]/span"));
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).click().perform();
-
-		WebElement element2 = driver
-				.findElement(By.xpath("//*[@id=\"select2-deliveryNotes_length-gs-result-ndyg-100\"]"));
-		Actions actions2 = new Actions(driver);
-		actions2.click(element2).perform();
 	}
 
 	public WebDriver getDriver() {
@@ -322,9 +228,6 @@ public class AlbatrosDownloader {
 		}
 	}
 
-	private void endDriver() {
-		driver.quit();
-	}
 
 	public void setLoginInfo(String loginId, String loginPassword) {
 		this.loginId = loginId;
