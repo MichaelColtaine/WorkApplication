@@ -6,9 +6,11 @@ public class RabatCalculator {
 	}
 
 	public String getResult(String priceAsString, String priceWithTaxesAsString) {
+		
+		
 		if (isLegitInput(priceAsString.trim()) && isLegitInput(priceWithTaxesAsString.trim())) {
-			Double price = changeComma(priceAsString);
-			Double priceWithTax = changeComma(priceWithTaxesAsString);
+			Double price = Double.valueOf(changeCommaAndRemoveWhiteSpaces(priceAsString));
+			Double priceWithTax = Double.valueOf(changeCommaAndRemoveWhiteSpaces(priceWithTaxesAsString));
 			Double result = calculate(price, priceWithTax);
 			if (isNegative(result)) {
 				return String.format("%.2f", result);
@@ -17,6 +19,8 @@ public class RabatCalculator {
 		}
 		return "";
 	}
+	
+	
 
 	private boolean isLegitInput(String s) {
 		return isANumber(s) && !s.isEmpty();
@@ -35,10 +39,9 @@ public class RabatCalculator {
 		return true;
 	}
 
-	private double changeComma(String input) {
+	private String changeCommaAndRemoveWhiteSpaces(String input) {
 		input = input.replaceAll(",", ".");
-		input = input.replaceAll(" ", "");
-		return Double.valueOf(input);
+		return input.replaceAll(" ", "");
 	}
 
 	private double calculate(Double price, Double priceWithTax) {
