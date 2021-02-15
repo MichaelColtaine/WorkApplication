@@ -48,7 +48,9 @@ public class ExportReceiver {
 						Socket socket = serverSocket.accept();
 						System.out.println("Connected");
 						ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+						System.out.println(objectInputStream.readObject());
 						Message inputMessage = (Message) objectInputStream.readObject();
+						
 						AnalysisModel.getInstance().setOrders(inputMessage.getOrders());
 						AnalysisModel.getInstance().setReturns(inputMessage.getReturns());
 						ExportFileCreator fileCreator = new ExportFileCreator();

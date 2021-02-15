@@ -32,88 +32,29 @@ public class ExportFileCreator {
 	}
 
 	public void createExcelReturnsFile() {
-
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet1 = workbook.createSheet();
 		createFirstRow(sheet1, "Vratka");
-		int i = 1;
+		int rowNumber = 1;
 		for (ExportArticle e : AnalysisModel.getInstance().getReturns()) {
-			Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue(e.getRank());
-			row.createCell(1).setCellValue(e.getFirstCode());
-			row.createCell(2).setCellValue(e.getEan());
-			row.createCell(3).setCellValue(e.getName());
-			row.createCell(4).setCellValue(e.getSales());
-			row.createCell(5).setCellValue(e.getRevenue());
-			row.createCell(6).setCellValue(e.getStoredAmount());
-			row.createCell(7).setCellValue(e.getLocations());
-			row.createCell(8).setCellValue(e.getPrice());
-			row.createCell(9).setCellValue(e.getSupplier());
-			row.createCell(10).setCellValue(e.getAuthor());
-			row.createCell(11).setCellValue(e.getDateOfLastSale());
-			row.createCell(12).setCellValue(e.getDateOfLastDelivery());
-			row.createCell(13).setCellValue(e.getRealeaseDate());
-			row.createCell(14).setCellValue(e.getDeliveredAs());
-			row.createCell(15).setCellValue(e.getEshopRank());
-			row.createCell(16).setCellValue(e.getExportAmount());
-			i++;
+			createRow(sheet1, rowNumber, e);
+			rowNumber++;
 		}
-
-		try {
-			FileOutputStream fileOut = new FileOutputStream(path + File.separator + "VR_" + returnDate() + ".xlsx");
-			workbook.write(fileOut);
-			fileOut.close();
-			workbook.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		createFile(workbook, "VR_");
 	}
-
+	
 	public void createExcelOrdersFile() {
 		Workbook workbook = new XSSFWorkbook();
 		Sheet sheet1 = workbook.createSheet();
 		createFirstRow(sheet1, "Objednávka");
-		int i = 1;
+		int rowNumber = 1;
 		for (ExportArticle e : AnalysisModel.getInstance().getOrders()) {
-			Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue(e.getRank());
-			row.createCell(1).setCellValue(e.getFirstCode());
-			row.createCell(2).setCellValue(e.getEan());
-			row.createCell(3).setCellValue(e.getName());
-			row.createCell(4).setCellValue(e.getSales());
-			row.createCell(5).setCellValue(e.getRevenue());
-			row.createCell(6).setCellValue(e.getStoredAmount());
-			row.createCell(7).setCellValue(e.getLocations());
-			row.createCell(8).setCellValue(e.getPrice());
-			row.createCell(9).setCellValue(e.getSupplier());
-			row.createCell(10).setCellValue(e.getAuthor());
-			row.createCell(11).setCellValue(e.getDateOfLastSale());
-			row.createCell(12).setCellValue(e.getDateOfLastDelivery());
-			row.createCell(13).setCellValue(e.getRealeaseDate());
-			row.createCell(14).setCellValue(e.getDeliveredAs());
-			row.createCell(15).setCellValue(e.getEshopRank());
-			row.createCell(16).setCellValue(e.getExportAmount());
-			i++;
+			createRow(sheet1, rowNumber, e);
+			rowNumber++;
 		}
-
-		try {
-
-			FileOutputStream fileOut = new FileOutputStream(path + File.separator + "OBJ_" + returnDate() + ".xlsx");
-			workbook.write(fileOut);
-			fileOut.close();
-			workbook.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		createFile(workbook,  "OBJ_");
 	}
-
-	private String returnDate() {
-		DateFormat sdf = new SimpleDateFormat("dd-MM-YYYY_HH-MM-SS");
-		Date date = new Date();
-		System.out.println(sdf.format(date));
-		return sdf.format(date).toString();
-	}
-
+	
 	private void createFirstRow(Sheet sheet1, String text) {
 		Row row = sheet1.createRow(0);
 		row.createCell(0).setCellValue("Poøadí");
@@ -134,5 +75,48 @@ public class ExportFileCreator {
 		row.createCell(15).setCellValue("Poøadí eshop");
 		row.createCell(16).setCellValue(text);
 	}
+
+	
+	private void createRow(Sheet sheet1, int rowNumber, ExportArticle e ){
+		Row row = sheet1.createRow(rowNumber);
+		row.createCell(0).setCellValue(e.getRank());
+		row.createCell(1).setCellValue(e.getFirstCode());
+		row.createCell(2).setCellValue(e.getEan());
+		row.createCell(3).setCellValue(e.getName());
+		row.createCell(4).setCellValue(e.getSales());
+		row.createCell(5).setCellValue(e.getRevenue());
+		row.createCell(6).setCellValue(e.getStoredAmount());
+		row.createCell(7).setCellValue(e.getLocations());
+		row.createCell(8).setCellValue(e.getPrice());
+		row.createCell(9).setCellValue(e.getSupplier());
+		row.createCell(10).setCellValue(e.getAuthor());
+		row.createCell(11).setCellValue(e.getDateOfLastSale());
+		row.createCell(12).setCellValue(e.getDateOfLastDelivery());
+		row.createCell(13).setCellValue(e.getRealeaseDate());
+		row.createCell(14).setCellValue(e.getDeliveredAs());
+		row.createCell(15).setCellValue(e.getEshopRank());
+		row.createCell(16).setCellValue(e.getExportAmount());
+	}
+	
+	private void createFile(Workbook workbook, String prefix){
+		try {
+			FileOutputStream fileOut = new FileOutputStream(path + File.separator + prefix + returnDate() + ".xlsx");
+			workbook.write(fileOut);
+			fileOut.close();
+			workbook.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	private String returnDate() {
+		DateFormat sdf = new SimpleDateFormat("dd-MM-YYYY_HH-MM-SS");
+		Date date = new Date();
+		System.out.println(sdf.format(date));
+		return sdf.format(date).toString();
+	}
+
 
 }
